@@ -4,7 +4,7 @@ all:
 	@echo call make index or make install directly
 
 index:
-	@ for i in * ; do \
+	@ for i in * ; do : \
 	; if test -f $$i/Makefile  \
 	; then $(MAKE) -C $$i index \
 	; elif test -f $$i/$$i.html  \

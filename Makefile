@@ -108,7 +108,7 @@ upload-user:
 	scp -rC . $(USER)@$(HTHOST):$(HTDOCS)
 
 
-mirror:
+mirrors:
 	@ for i in mirror/* ; do if test -f $$i/Makefile \
 	; then $(MAKE) -C $$i mirror \
 	; fi done

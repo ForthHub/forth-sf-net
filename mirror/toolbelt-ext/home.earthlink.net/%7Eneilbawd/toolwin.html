@@ -91,7 +91,7 @@ inevitable.
 </SMALL><BR>&nbsp;
 
 
-<BR><A HREF="toolbelt.txt"> <BIG>TEXT</BIG></A><BR>
+<BR><A HREF="toolwin.txt"> <BIG>TEXT</BIG></A><BR>
 
 
 <B><PRE></PRE></B><HR>
@@ -103,8 +103,7 @@ inevitable.
 IMMEDIATE so it can be inside definitions.
 <BR>
 </DL>
-<SMALL>Program Text 1 </SMALL><B><PRE>
-FALSE CONSTANT [VOID] IMMEDIATE
+<SMALL>Program Text 1 </SMALL><BR>&nbsp;<BR><B><PRE>FALSE CONSTANT [VOID] IMMEDIATE
 
 </PRE></B><HR>
 
@@ -156,8 +155,7 @@ definitions will be added to <I>name</I>'s list.
 <A HREF="fphuse.html"> FPH Common Usage</A>.
 
 </P>
-<SMALL>Program Text 2 </SMALL><B><PRE>
-\  NOT   [DEFINED]   [UNDEFINED]   C+!   EMPTY   VOCABULARY
+<SMALL>Program Text 2 </SMALL><BR>&nbsp;<BR><B><PRE>\  NOT   [DEFINED]   [UNDEFINED]   C+!   EMPTY   VOCABULARY
 
 </PRE></B><HR>
 
@@ -177,8 +175,7 @@ definitions will be added to <I>name</I>'s list.
 <DD>Store -1 at <I>addr</I>. See <B><CODE>OFF</CODE></B>.
 <BR>
 </DL>
-<SMALL>Program Text 3 </SMALL><B><PRE>
-\ : BOUNDS  ( str len -- str+len str )  OVER + SWAP ;
+<SMALL>Program Text 3 </SMALL><BR>&nbsp;<BR><B><PRE>\ : BOUNDS  ( str len -- str+len str )  OVER + SWAP ;
 
 \ : OFF  ( addr -- )  0 SWAP ! ;
 
@@ -211,8 +208,7 @@ counted string.
 string.
 <BR>
 </DL>
-<SMALL>Program Text 4 </SMALL><B><PRE>
-' +PLACE alias APPEND
+<SMALL>Program Text 4 </SMALL><BR>&nbsp;<BR><B><PRE>' +PLACE alias APPEND
 
 \ : APPEND              ( addr1 u addr2 -- )
 \     2DUP 2&gt;R  COUNT +  SWAP MOVE ( ) 2R&gt; C+! ;
@@ -262,8 +258,7 @@ string.
 </DL>
 <P>These should all be CODE definitions.
 </P>
-<SMALL>Program Text 5 </SMALL><B><PRE>
-: THIRD  ( x y z -- x y z x )  2 PICK ;
+<SMALL>Program Text 5 </SMALL><BR>&nbsp;<BR><B><PRE>: THIRD  ( x y z -- x y z x )  2 PICK ;
 
 : FOURTH ( w x y z -- w x y z w )  3 PICK ;
 
@@ -291,8 +286,7 @@ string.
 <I>p</I> is true.
 <BR>
 </DL>
-<SMALL>Program Text 6 </SMALL><B><PRE>
-: ANDIF  S" DUP IF DROP " EVALUATE ; IMMEDIATE
+<SMALL>Program Text 6 </SMALL><BR>&nbsp;<BR><B><PRE>: ANDIF  S" DUP IF DROP " EVALUATE ; IMMEDIATE
 
 : ORIF   S" DUP 0= IF DROP " EVALUATE ; IMMEDIATE
 
@@ -321,8 +315,7 @@ Called "cut-split" because "slash-split" is a tongue
 twister.
 <BR>
 </DL>
-<SMALL>Program Text 7 </SMALL><B><PRE>
-\ : SCAN           ( str len char -- str+i len-i )
+<SMALL>Program Text 7 </SMALL><BR>&nbsp;<BR><B><PRE>\ : SCAN           ( str len char -- str+i len-i )
 \     &gt;R  BEGIN  DUP WHILE  OVER C@ R@ -
 \         WHILE  1 /STRING  REPEAT THEN
 \     R&gt; DROP ;
@@ -360,8 +353,7 @@ twister.
 <DD>Skip over white space at start of string.
 <BR>
 </DL>
-<SMALL>Program Text 8 </SMALL><B><PRE>
-: IS-WHITE       ( char -- flag )  33 - 0&lt; ;
+<SMALL>Program Text 8 </SMALL><BR>&nbsp;<BR><B><PRE>: IS-WHITE       ( char -- flag )  33 - 0&lt; ;
 
 \ : TRIM           ( str len -- str len-i )
 \     BEGIN  DUP WHILE
@@ -388,8 +380,7 @@ twister.
 <DD>Check end of string.
 <BR>
 </DL>
-<SMALL>Program Text 9 </SMALL><B><PRE>
-: STARTS?  ( str len pattern len2 -- str len flag )
+<SMALL>Program Text 9 </SMALL><BR>&nbsp;<BR><B><PRE>: STARTS?  ( str len pattern len2 -- str len flag )
     DUP &gt;R  2OVER  R&gt; MIN  COMPARE 0= ;
 
 : ENDS?  ( str len pattern len2 -- str len flag )
@@ -413,8 +404,7 @@ twister.
 <DD>Test <I>char</I> for alphanumeric [A-Za-z0-9].
 <BR>
 </DL>
-<SMALL>Program Text 10 </SMALL><B><PRE>
-: IS-DIGIT  ( char -- flag )  [CHAR] 0 -  10 U&lt; ;
+<SMALL>Program Text 10 </SMALL><BR>&nbsp;<BR><B><PRE>: IS-DIGIT  ( char -- flag )  [CHAR] 0 -  10 U&lt; ;
 : IS-ALPHA  ( char -- flag )  32 OR  [CHAR] a -  26 U&lt; ;
 : IS-ALNUM  ( char -- flag )
     DUP IS-ALPHA  ORIF  DUP IS-DIGIT  THEN  NIP ;
@@ -457,8 +447,7 @@ twister.
 <DD>Negative of address units in a cell.
 <BR>
 </DL>
-<SMALL>Program Text 11 </SMALL><B><PRE>
- 8 CONSTANT #BACKSPACE-CHAR
+<SMALL>Program Text 11 </SMALL><BR>&nbsp;<BR><B><PRE> 8 CONSTANT #BACKSPACE-CHAR
 62 VALUE    #CHARS/LINE
 13 CONSTANT #EOL-CHAR
  9 CONSTANT #TAB-CHAR
@@ -490,8 +479,7 @@ TRUE 1 RSHIFT INVERT CONSTANT SIGN-BIT
 <DD>Promiscuous variable.
 <BR>
 </DL>
-<SMALL>Program Text 12 </SMALL><B><PRE>
-: SPLIT-NEXT-LINE   ( src . -- src' . str len )
+<SMALL>Program Text 12 </SMALL><BR>&nbsp;<BR><B><PRE>: SPLIT-NEXT-LINE   ( src . -- src' . str len )
     2DUP #EOL-CHAR SCAN  DUP &gt;R  1 /STRING  2SWAP R&gt; - ;
 
 : VIEW-NEXT-LINE  ( src . str len -- src . str len str2 len2 )
@@ -526,8 +514,7 @@ single-number literal.  (Adopted from Open Firmware.)
 <DD>Ignore the rest of the input stream.
 <BR>
 </DL>
-<SMALL>Program Text 13 </SMALL><B><PRE>
-: NEXT-WORD           ( -- str len )
+<SMALL>Program Text 13 </SMALL><BR>&nbsp;<BR><B><PRE>: NEXT-WORD           ( -- str len )
     BEGIN   BL WORD COUNT      ( str len)
         DUP IF EXIT THEN
         REFILL
@@ -565,8 +552,7 @@ single-number literal.  (Adopted from Open Firmware.)
 </DL>
 <P>These words should be tailored for your system.
 </P>
-<SMALL>Program Text 14 </SMALL><B><PRE>
-\ : FILE-CHECK    ( n -- )  THROW ;
+<SMALL>Program Text 14 </SMALL><BR>&nbsp;<BR><B><PRE>\ : FILE-CHECK    ( n -- )  THROW ;
 \ : MEMORY-CHECK  ( n -- )  THROW ;
 
 : FILE-CHECK      ( n -- )  ABORT" File Access Error " ;
@@ -596,8 +582,7 @@ by one cell.
 by one cell.
 <BR>
 </DL>
-<SMALL>Program Text 15 </SMALL><B><PRE>
-: ++  ( addr -- )  1 SWAP +! ;
+<SMALL>Program Text 15 </SMALL><BR>&nbsp;<BR><B><PRE>: ++  ( addr -- )  1 SWAP +! ;
 
 : @+  ( addr -- addr' x )  DUP CELL+ SWAP  @ ;
 
@@ -639,8 +624,7 @@ string.
 <DD>Rewind the file.
 <BR>
 </DL>
-<SMALL>Program Text 16 </SMALL><B><PRE>
-: 'th     ( n "addr" -- &amp;addr[n] )
+<SMALL>Program Text 16 </SMALL><BR>&nbsp;<BR><B><PRE>: 'th     ( n "addr" -- &amp;addr[n] )
     S" 2 LSHIFT " EVALUATE
     BL WORD COUNT EVALUATE
     S" + " EVALUATE
