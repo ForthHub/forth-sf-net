@@ -11,7 +11,7 @@ note:
   used less frequently than R'@ ../r-tick-fetch/index.html q.v.
 
 see-also:
-   ../r-tick-fetch to get the next value under the return stack
+   ../r-tick-fetch/index.html to get the next value under the return stack
 
    The canonic complement would be
 >  R"!
@@ -26,6 +26,6 @@ usage:
    word 2R@ 2R! enables handling of a 2VALUE on the return
    stack (guidod)
 
--- $Id: index-v.txt,v 1.4 2001/08/14 18:18:18 guidod Exp $
+-- $Id: index-v.txt,v 1.5 2001/08/15 15:38:51 guidod Exp $
 
 

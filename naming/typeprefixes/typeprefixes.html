@@ -1,0 +1,540 @@
+<html><title>type prefixes</title>
+<link rel=stylesheet type="text/css" media="screen" href="../../forth2.css">
+<body>
+
+<ul>
+<li> <a href="#history"> a bit of classic history </a> </li>
+<li> <a href="#shapeshifters"> when the shape shifters took over </a> </li>
+<li> <a href="#pointertypes"> the pointer types </a> </li>
+<li> <a href="#typepostfixes"> using type prefixes </a> </li>
+<li> <a href="#modified"> modified words </a> </li>
+<li> <a href="#typetracking"> if there were type tracking </a> </li>
+<li> <a href="#notes">  notes (from comp.lang.forth) </a> </li>
+</a>
+</ul>
+
+<h2> type prefixes </h2>
+
+<a name="history">
+<h4> a bit of classic history </h4>
+</a>
+
+<p><span class=justify>
+ When someone is going to reinvent forth, he will usually start out
+ with building a list of function calls that are called in order.
+ These functions are just addresses, and in forth these adresses
+ have been given a name to use. These simple scheme does not know
+ about any types that are attached to the names. And in fact, there
+ was no apparent need to stick it into the language - the stack
+ items are both used for numbers and adresses which we now call
+ cells, and anyway the items are just bitsets that are to be
+ computed by the forth-words and not the forth interpreter.
+</span></p>
+<p><span class=justify>
+ In the early days, there was not much a need to differentiate types
+ around operators - there were CHARS being 8-bit wide, and the
+ rest (now called CELLS) being 16-bit wide. And it was defined that
+ way across all platforms that Forth was supposed to run on. Since
+ 16-bit is a bit small for some numeric operations, the double-cell
+ arithmetics were invented (DCELLS) which are otherwise stored and
+ fetched with the two-cells operations. Up to here we have the "C"
+ prefix for chars, the "D" prefix for arithmetics on double-cells,
+ and a "2" prefix for storing two-cells - each of these are also
+ different by the bitsize of the item in question. The only exception
+ is the prefix "U" used for arithmetic operators that need to work
+ a bit different for signed and unsigned interpration of the bits.
+</span></p>
+<p><span class=justify>
+ And a bit later, the floating stack was invented - the float types
+ had been quite usually larger than the cell-type on many systems
+ so it was felt to not try to store them in cells or even double-cells
+ but to give them their own stack. The arithmetic operations for
+ these types were prefixed with an "F". As from other languages you
+ may know that floating point numbers can be implemented quite
+ differently in hardware - very early in computer history, the
+ twos-complement was the implementation variant of choice for the
+ signed integers but with floating points it was different. Very late
+ in the walk of time, the IEEE prescribed a floating point format
+ that silicon makers did adopt then. In forth, we like to refer to
+ these formats as "SF" and "DF" - single-precision IEEE floats and
+ double-precision IEEE floats. The "F" prefix stands for the native
+ variant - which may or may not be smaller or longer than DF but
+ atleast it is faster and at the width of the F-stack.
+</span></p>
+<p><span class=justify>
+ Everything looks good up to here - there are no superfluous prefixes
+ for operations - every operation does indeed have different
+ arithmetics or formatting characteristics. Exchanging a word by
+ a word with another prefix would have surely made for a different
+ result of the operation. It's clean and simple and it expects the
+ programmer to know what needs to be done and which operator to use
+ for just that.
+</span></p>
+
+<a name="shapeshifters">
+<h4> when the shape shifters took over </h4>
+</a>
+
+<p><span class=justify>
+ Looking at these classic days we see a problem - they defined their
+ operations to run on 16-bit hardware with stack items being just
+ that wide for both the natural numbers and memory adresses. But the
+ computer industry evolved, and soon the need came about to define
+ a forth system on top of 32-bit hardware. However, there were so
+ many forth programs all over the place, and the developers had a
+ need to support both 16-bit and 32-bit hardware for quite a time.
+ The solution to the problem was again simplicity - the items on
+ the parameter stack were now called CELLS that were either 16-bit
+ or 32-bit in these days. All arithmetics were supposed to use the
+ natural bit width of these stack items, and quite usually you
+ would store the cells in their natural size. Only for low-level
+ operations and hardware access there was a need to have operators
+ with a specific bitwidth - many people took over the prefixes
+ from assembler, where "W" stands for 16-bit and "L" stands for
+ 32-bit, generally seen as a tribute to m68k assembler.
+</span></p>
+<p><span class=justify>
+ Well, history did march on - and 64-bit hardware came into the
+ market making for a natural bitwidth of 64-bit for the parameter
+ stack, but atleast there were 64-bit items to be stored and
+ fetched into silicon around the forth program. Some took over
+ the "X" prefix, others chose "Q" and as a tribute to C the
+ prefix "LL" could be used. And some even invented a prefix to
+ handle half-size cells as it was relative to the cellwidth of
+ the local forth.
+</span></p>
+<p><span class=justify>
+ And cell-width was not the only area where the bit-width of
+ the type had to be made an implementation-dependent variable,
+ the new world of unicode as a printable character representation
+ came about, and it was also noted that there is hardware that
+ would be better off with a mininum access larger than 8-bit.
+ The forth-94 made it known that CHARS was again an implementation-
+ dependent variable - and people started to use "B" as prefix
+ for storage operators, and possibly again as a tribute to 68k
+ assembler or the term "byte" that we have known in CS for so long.
+</span></p>
+<p><span class=justify>
+ All these prefixes exhibit simple solutions that every computer
+ engineer does intuitivly accept - and which helps him to write
+ portable programs that detach their programs from the natural
+ bitsizes of CHARS and CELLS and FLOATS on the target hardware,
+ making it also possible to reach through into hardware access
+ with operations of a defined bitwidth. On the downside, we have
+ now a series of instances where different operator names would
+ target the exact same behaviour. You could replace some operators
+ and prefixes therein, and the program would be just the same,
+ but possibly more portable.
+</span></p>
+<p><span class=justify>
+ To summarize, a cell (with no prefix or "U" for an unsigned
+ variant) can have the same bitwidth of "W", "L" or "LL". And
+ a char (possibly with prefix "C") can have the same bitwidth
+ like "B" or "W". Likewise a float on the stack (with prefix
+ "F" for native float) can be represented as "SF" or "DF"
+ variants that used to stand for the IEEE formats - and possibly
+ the native float happens to <em>be</em> just an IEEE format.
+</span></p>
+
+<a name="pointertypes">
+<h4> the pointer types </h4>
+</a>
+
+<p><span class=justify>
+ But forth does not only deal with simple types and arithmetics
+ on them - there ar other types to consider. First of all, the
+ various forths came to create operations to work on arrays of
+ items. This was of course needed to handle atleast char strings
+ so that most of these operations work on char item if no other
+ type prefix has been given. More specifically, char strings in
+ memory were represented as charcounted arrays - the first char
+ was interpreted as an unsigned number representing the length
+ of valid items in the char array.
+</span></p>
+<p><span class=justify>
+ However, chars are not the only item that is to be handled
+ with array operators. Many forth systems just tokenize the
+ source code and the colon-words are therefore a series of
+ addresses - that is a series of cells. The same accounts
+ for arrays of floats, and to interface with the environment
+ there were often the optimization to store the items in
+ the size of that is used to store/fetch them into the
+ environment. Soon, all sorts of W and L variants of array
+ handling came up.
+</span></p>
+<p><span class=justify>
+ And an environment dependency does not need only to go into
+ the direction of hardware access - the influence of C has
+ made for a lot of functionality that expects strings formatted
+ as zero-terminated arrays as an argument. Since the prefix
+ "C" is already taken, many forthers used "Z" attached to
+ these operations. And if we do indeed talk about hardware
+ access, do not forget about the port-indices which can be
+ seen as a second type of memory that usually has just a smaller
+ bitwidth for address operations - which came to use often
+ a "P" prefix for fetch and store.
+</span></p>
+<p><span class=justify>
+ And since a charcount for char-arrays is a bit small in
+ many places, other memory formats came about that did again
+ need a prefix to have them atleast turned into a span-notation
+ referencing the plain char-array along with the decoded
+ length value. The variants of packed-strings used their own
+ prefix again, sometimes using the "S" that is otherwise known
+ from the span-notation, or they reused the "P" that does not
+ stand for "port" but "packed" in this context - happily there
+ is not much overlap between port store/fetch and packedstring
+ pack/unpack operations.
+</span></p>
+
+<a name="typepostfixes">
+<h4> using type prefixes </h4>
+</a>
+
+<p><span class=justify>
+ Looking back to the set of modifiers we can see that there
+ are more and more of them. And soon the programs become
+ hardly readable as the reader must know what each of these
+ one-char/two-char prefixes is supposed to flag and which
+ items will be handled by the operation. It is in fact much
+ better to write the name of the item in full length instead
+ of a one-char/two-char abbreviation of it.
+</span></p>
+<p><span class=justify>
+ From here, we can reverse design names for the series of
+ exact-bitwidth prefixes like B, W, L, LL and the C and D
+ of course. The B/W/L/Q/LL had name in assembler called
+ BYTE WORD LONG and QUAD/LONGLONG/LLONG - but you can see
+ the overlap with the traditional forth word WORD and the
+ general meaning of WORD as a name for functionality. The
+ newer interpretation for W comes from C/C++ as being a wide
+ char, often shorted to WCHAR over there. Since CHAR does
+ already exists as a long name for C, the two long names
+ WCHAR and BCHAR (basic-char /byte-char) can be derived
+ for exact-bitwidths. For fetch/store operations we do not
+ even need to consider unsigned variants of these.
+</span></p>
+<p><span class=justify>
+ These longer name can then be prepended to the operators
+ like PORT@/PORT! - of course it is not quite common to
+ define WCHAR@/WCHAR! but it is in fact nice to use the
+ longer prefixes for the array operations atleast. And
+ since we are already in the area of portability, more
+ hardware-dependent items came about with a different
+ real bitwidth that needed their own aliases for the
+ store and fetch operations atleast.
+</span></p>
+<p><span class=justify>
+ At the same time, it became simply a usual way to specify
+ /get/ and /set/ operations like if being a /store/ and /fetch/
+ onto simple types. And the addresses they worked on
+ originally were reinterpreted as /handles/ or /tokens/.
+ In the simple case, all these are still addresses and the
+ accessors are just aliases to their bitwidth operators. You
+ can see it as an extension to single-item accessors like
+ FLAGS@/FLAGS! or SOURCE@/SOURCE! or PARSE-AREA@/PARSE-AREA!
+ or RP@/RP! or SP@/SP! - into array-item accessors that want
+ an array-index like DATA@ CODE! and similar. What the arg
+ represents is not sure - and whether it is in fact an array.
+ And even it is is an array, you have to use CELL+ or CHARS
+ as /step/ and /scale/ operators to move between item
+ indexes in these arrays.
+</span></p>
+
+<a name="modified">
+<h4> modified words </h4>
+</a>
+
+<p><span class=justify>
+ As a result of the history, programmers are asked to not
+ use too short names for their accessors - just leave it by
+ the limited set of one-char/two-char type prefixes that we
+ have today, and do not extend them with yet another prefix
+ unless the type is of overall interest to be listed in a
+ table giving an overview. In the following description, the
+ term "B" does stand for the same - 8-bit - as is the same
+ for byte, basic char <em>and</em> smallest item of pointers.
+ It disregards somewhat unusual hardware though.
+</span></p>
+<table><tr><td>
+<br> ALLOT
+<br> ALLOTL
+<br> ALLOTW
+</td><td>
+ ALLOT defaults to , type modifier is suffixed, longname
+ suffixes are plural as in ALLOTKEYS. All these can be
+ replaced by a sequence of SCALE/ALLOT, e.g. CELLS ALLOT,
+ unless the allocation takes place in a different memory
+ space than the data dictionary.
+</td></tr><tr><td>
+<br> APPEND
+<br> APPENDZ
+<br> APPEND-CHAR
+<br> APPEND-CHARS
+</td><td>
+ the append word (to add items to an existing array) is
+ a good example where the prefix is a no go - ZAPPEND is
+ simply unreadable. Also it is a good example where the
+ plural form makes a difference - APPEND-CHAR takes one
+ item to add while APPEND-CHARS expects a series of items
+ to be added.
+</td></tr><tr><td>
+<br> FILL
+<br> FILLW / WFILL
+<br> FILLL / LFILL
+</td><td>
+ both variants have been seen, prefixed and postfix variants,
+ including hyphenated variants (W-FILL/L-FILL) since the triple&nbsp;L
+ does not read nicely. The prefix variant KEY-FILL will read as
+ modifying one item (the key) while the postfix variant is
+ more appriate for arrays, again in plural form like
+ FILLKEYS or FILL-KEYS. Similar operators should be alike
+ but the singular variant has been seen too, where
+ FILL-KEY is spoken as "fill with key", and still makes for
+ a real array operation.
+</td></tr><tr><td>
+<br> C@++
+<br> L@++
+<br> KEY@--
+</td><td>
+ these variants show again the prefix form - many forth words
+ take the name of their grammatical verb in english, and for
+ these grammatic rules, the verb should be before the object
+ (either following a (target-)subject or as an imperative).
+ Therefore the type-modifier is oten postfixed - whereas it
+ is otherwise common to prefix it especially for symbolic
+ word names like the postincrement words. The example of
+ KEY@-- will also tell you that it is no good to use the
+ abbreviate symbolic form of postincrement, @-, as it can
+ be easily misunderstood.
+</td></tr><tr><td>
+<br> CHAR+
+<br> CHARS
+<br> KEYS
+</td><td>
+ and the scalar and stepper variants - where each assumes
+ the format of a real array in memory. Both of these can
+ be based on the binary operators +/* when an item size
+ is known. However the natural form of just saying the
+ name of the type to get the size is not that easy to
+ use since CHAR (and WORD) have been taken already, and
+ many type names are also valid as method names. Where
+ CELL is quite common, you can often see the openboot-like
+ variant /CHAR as "sizeof char" (openboot had "/c+" and "/c*"
+ as over-abbreviated names for "char+" and "chars").
+ Another form is a prefix-plus like +CHAR which makes it
+ easy to define a sister definition -CHAR. Therefore,
+ <code>
+ <br> : CHAR+ /CHAR + ;
+ <br> : CHARS /CHAR * ;
+ </code>
+ but these can be a lot slower than their unary variants
+ that could transpose into optmized versions of CELL+
+ and CELLS that could be know to map to shift-left-3
+ scalings. Note: do never use the abbrev forms for these
+ as L* could be read as a special arithmetics like U/
+</tr></td></table>
+
+<a name="typetracking">
+<h4> if there were type tracking </h4>
+</a>
+
+<p><span class=justify>
+ Makeing the name of the words explicit makes it easy to read
+ forth sources - at any point it is strictly known the actual types
+ of the arguments around. At the same time, it lengthens the code
+ and has problems with portability - in order to provide full
+ portability for a specific item or formatted object, you would
+ have a need to define a complete series of word-names even in
+ the case that these map directly to optimized versions of
+ underlying simple types.
+</span></p>
+<p><span class=justify>
+ Many other languages choose the path of tracking the types of
+ the items involved in the operations - and modify the actual
+ call to the functionality that handles the <em>intended</em>
+ operation. Strong-typed languages like C++ will even care to
+ convert arguments on the fly, and handle complex objects at
+ the end of pointer values. Methods like appending/copying
+ or stepping or even allocation/deletion can be mapped to
+ local variants using the same word - even if the first try
+ had been to use a simple variant.
+</span></p>
+<p><span class=justify>
+ The problem would of course be that the user may end up in
+ a different word definition because of a type left by an
+ earlier operation - possibly a very slightly diffferent
+ item like the unsigned variant. On the one hand, these
+ languages like C/C++ offer conversion operations that are
+ even issued implicitly - which can make things even worse
+ (I've seen code trap inside an dynamic conversion). The
+ other way to come around is an explicit reinterpretation
+ of item's type in question - which could have been built
+ into forth indeed, so one could trust the type tracking
+ but in order to end up in a specific function, just add
+ a type-reinterpret marker before like:
+ <code><br> : PIPED?   INPUT@ (-> FILE) ISPIPE? ;
+ </code><br>
+ whereas we currently use only dynamic conversions like
+ <code><br> : PIPED?   INPUT@ INPUT>>FILE ISPIPE? ;
+ </code><br>
+ that could of course be again a NOOP.
+</span></p>
+<p><span class=justify>
+ However, there are a lot of problems with a typed variant
+ of forth - see strongforth as an example about how far
+ the traditional forth could be turned into a typed language.
+ Another way is a second layer on top of the forth that
+ handles the simple types - using a kind of object system
+ that an declare method names. The same method name can
+ end up in a different function with a thing called the
+ current object that stores information about the mapping
+ of method names to a functional definition. In this
+ scheme, it is not up to the interpreter to track the
+ types of the argument, but the type is attached to a
+ stored object - where late binding is quite common.
+</span></p>
+<p><span class=justify>
+ A real advantage of type tracking are warnings about
+ items that do not fit together. See the example above
+ and the case of
+ <code><br> : PIPED?   INPUT@ ISPIPE? ;
+ </code><br>
+ which may be correct on one system but may break on
+ another - silently. But forth will assume that the
+ programmer knows how much portability is needed, and
+ whether a NOOP but named reinterpretation call must
+ be inserted. Personally (guidod), I come to like the
+ C warnings at compile time.
+</span></p>
+
+<a name="notes">
+<h4> notes (from comp.lang.forth) </h4>
+</a>
+
+<pre>
+<b>
+Elizabeth D. Rather wrote:
+</b>
+<small>
+> The type marker U is universally used for an unsigned variant,
+> and the prefix N will often be used to modify a word to get
+> an additional counter-argument, like NDROP. The prefixes M and
+> T occur around mixing double and single type variants - which
+> are usually indicated with S and D prefixes.
+</small>
+M is mixed, all right, but T is triple -- like the intermediate
+result in M*/.  I don't believe S is used much, never in our practice.
+[...]
+<small>
+> L, UL - 32bit signed/unsigned - long number
+> X, UX - 64bit signed/unsigned - extra long number
+</small>
+Open Firmware specifies these, but they are not widely used today.
+I don't see them in Forth otherwise.
+[...]
+<small>
+> W, UW - 16bit signed/unsigned - wide char / word char
+> C, UC - either of B/UB or W/UW, depending on system - feels good?
+</small>
+Ask the internationalization folks!  Actually, although a signed
+or unsigned <em>byte</em> makes some sense (it could be a small number),
+signed or unsigned <em>characters</em> don't sound particularly useful.
+A character isn't a number.
+[...]
+<small>
+> Shall we make up a table of common usage of abbrev. type. prefxs?
+</small>
+I'm not wild about proliferating prefixes or extra operators
+unnecessarily.
+
+<b>
+Stephen Pelc wrote:
+</b>
+<small>
+> That's one of the proposals before the internationalization
+> group in the TC.
+</small>
+Peter Knaggs and I are the magnets for internationalisation and wide
+characters. The latest drafts are on the MPE web site in the downloads
+section.
+
+<small>
+>> W, UW - 16bit signed/unsigned - wide char / word char
+>> C, UC - either of B/UB or W/UW, depending on system - feels good?
+</small>
+Our current proposal is to add Bxxx operations where bytes/octets
+are required, the definition of character is left alone, and wide
+character words have their usual names with a W prefix. A few other
+words in the file word set need clarification because of their current
+dependency on character size rather than address units.
+
+<small>
+> Ask the internationalization folks!  Actually, although a signed
+> or unsigned_byte_ makes some sense (it could be a small number),
+> signed or unsigned _characters_ don't sound particularly useful.
+> A character isn't a number.
+</small>
+Defining whether characters are signed or not is *required*. Try
+writing COMPARE in high level code and you will need to use C@ which
+universally zero extends (from inspection of existing Forths). This
+means that all characters are by default unsigned when compared by
+means of Forth high level operators.
+
+Inspecting coded versions of COMPARE reveals that both signed and
+unsigned byte operators have been used. In practice this does not
+affect those who only use 7 bit characters (as per ANS) but it does
+affect those of us who *need* 8 bit characters.
+
+<b>
+Anton Ertl wrote:
+</b>
+<small>
+> F - just float, in between SF and DF, I'd say - right?
+</small>
+Native floats, whatever format.  E.g., iForth 1.08 as configured on
+our machine uses 80-bit floats and 1 FLOATS gives 12.
+
+<small>
+> Even more? What do you use so far as abbreviated type prefixes?
+> Shall we make up a table of common usage of abbrev. type. prefxs?
+</small>
+
+Here's what the tutorial in Gforth's manual says:
+
+|The following prefixes are often used for related operations on
+|different types:
+|
+|`(none)'
+|     signed integer
+|
+|`u'
+|     unsigned integer
+|
+|`c'
+|     character
+|
+|`d'
+|     signed double-cell integer
+|
+|`ud, du'
+|     unsigned double-cell integer
+|
+|`2'
+|     two cells (not-necessarily double-cell numbers)
+|
+|`m, um'
+|     mixed single-cell and double-cell operations
+|
+|`f'
+|     floating-point (note that in stack comments `f' represents flags,
+|     and `r' represents FP numbers).
+
+Except for U, C and F, this list is disjoint with yours.
+</pre>
+
+<hr>
+$Id: typeprefixes.html,v 1.1 2001/08/15 15:38:51 guidod Exp $
+
+</body></html>
+
