@@ -1,4 +1,9 @@
 title: POSTPONE
+status:
+
+ This page proposes a way to clarify one unclear place in ANS Forth.
+ It is not a part of ANS Forth.
+
 description:
 
  It is unclear how the POSTPONEd word behaves in the interpretation state.
