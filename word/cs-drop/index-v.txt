@@ -1,0 +1,54 @@
+title: CS-DROP
+description:
+  CS-DROP             "c-s-drop"
+
+  Interpretation: Interpretation semantics for this word are undefined.
+
+  Execution: ( C: orig|dest -- )
+
+  Remove the top element from the control-flow stack. An ambiguous condition exists if the top control-flow stack item is not an orig or dest.
+
+
+status: proposed for ANSI standardization, "seconded"
+
+--
+
+proposal:
+Add CS-DROP to TOOLS EXT
+
+Add the word CS-DROP to the Programming-Tools extension word set with the following specification:
+
+15.6.2.???? CS-DROP             "c-s-drop"      TOOLS EXT
+
+     Interpretation: Interpretation semantics for this word are undefined.
+
+     Execution: ( C: orig|dest -- )
+
+Remove the top element from the control-flow stack. An ambiguous condition exists if the top control-flow stack item is not an orig or dest.
+
+In this connection, modify "15.6.2.1015 CS-PICK" to be:
+
+15.6.2.1015   CS-PICK           "c-s-pick"   TOOLS EXT
+
+     Interpretation: Interpretation semantics for this word are undefined.
+
+      Execution:
+
+               ( C: origu|destu ... orig0|dest0 -- origu|destu ... orig0|dest0 origu|destu )
+               ( S: u -- )
+
+
+Remove u. Copy origu|destu to the top of the control-flow stack. An ambiguous condition exists if there are less than u+1 items, each of which shall be an orig or dest, on the
+control-flow stack before CS-PICK is executed.
+
+If the control-flow stack is implemented using the data stack, u shall be the topmost item on the data stack.
+
+An ambiguous condition exists if the same orig value is resolved multiple times.
+
+and extend "15.4.1.2 Ambiguous conditions":
+
+15.4.1.2 Ambiguous conditions
+
+- resolving the same orig value multiple times
+
+
