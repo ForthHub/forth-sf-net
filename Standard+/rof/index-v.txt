@@ -1,17 +1,14 @@
 title: Restrictions on Functionality
 definition:
-
   ~~~tag[b]tag~~~Restriction on Functionality:~~~tag[/b]tag~~~
   anything that prevents an ANS Forth program to run as
   expected on a Standard System (Subset) that provides
   all words used by the program.
 
 abbreviation:
-
  RoF = Restriction on Functionality
 
 description:
-
  An ANS Forth System may have extensions beyond the Standard.
  These extensions may impose additional Restrictions on Functionality.
 
@@ -19,7 +16,6 @@ description:
  from running on ANS Forth systems.
 
 Recommendation:
-
  It is recommended for system implementors to document all
  Restricions on Functionality and the circumstances when they
  apply, for example:
@@ -84,7 +80,6 @@ Examples-of-Restrictions-on-Functionality:
  the depth of stacks.
 
 discussion:
-
  It is the subject of an argument whether a system
  whose Restrictions on Functionality inevitably apply
  to all programs run on that system is standard-compliant.
@@ -100,6 +95,24 @@ discussion:
 > are consistent with the requirements of this Standard.
 
  but the word "consistent" still may be read in two ways.
+
+ The participants of the discussion tend to agree that
+ extensions whose use requires rewriting standard code
+ are inconsistent, but in fact, there are degrees of
+ consistency. In the first example above, IMO we should
+ label the system as an "ANS Forth System", but
+ immediately mention that in background tasks there is
+ only "ANS Forth System Subset".
+
+ Another argument has been about whether RoF's are Environmental
+ Restrictions (ER's). RoF's are restrictions, and are imposed by the
+ execution environment, but theree also is an opinion that
+ the term Environmental Restrictions must be reserved for
+ restrictions on values and ranges only. There is no formal
+ definition of ER's in the Standard: one may conclude that
+ restrictions on ranges and values are ER's, but it is not
+ stated that other kinds of restrictions imposed by the environment
+ do not count as ER's.
 
 page-written-by:
  Michael Gassanenko
