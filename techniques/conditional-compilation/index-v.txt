@@ -1,0 +1,131 @@
+title: Conditional compilation
+description:
+
+ So far, let this message be here. Probably later I will
+ write something better (mlg).
+
+
+ Subject: Re: Conditional compilation
+ Date: Fri, 26 Oct 2001 01:48:52 +0400
+ From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+ Organization: St.Petersburg University
+ Newsgroups: comp.lang.forth
+
+Jeff Penn wrote:
+>
+> I have been cleaning up an application which uses conditional compilation.
+> To avoid [IF]/[ELSE]/[THEN] from cluttering up source files I use a 'make'
+> file to compile the application:
+>
+> \ ** Options section **
+> TRUE  CONSTANT i
+> i 0=  CONSTANT j  \ i and j mutually exclusive
+> FALSE CONSTANT k
+>
+> \ ** Compilation section **
+>
+> [UNDEFINED] tools  [IF]  INCLUDE tools.4  [THEN]
+>
+> j  [IF]  INCLUDE appa.4  [THEN]
+>
+> i  [IF]  INCLUDE appi.4  INCLUDE appx.4
+> [ELSE]
+>   k  [IF]  INCLUDE appjk.4  INCLUDE appy.4
+>   [ELSE]   INCLUDE appj.4  INCLUDE appx.4
+>   [THEN]
+> [THEN]
+>
+> This clutters up the compilation section of the make file.
+>
+> Using a technique suggested in the "Forth Programmer's Handbook" I came up
+> with this:
+>
+> \ ** Options section **
+> TRUE               CONSTANT i  \ j if FALSE
+> FALSE i INVERT AND CONSTANT k
+>
+> : \def?   ( -- )  POSTPONE [DEFINED]  IF POSTPONE \ THEN  ; IMMEDIATE
+> : \-def?  ( -- )  POSTPONE [UNDEFINED]  IF POSTPONE \ THEN  ; IMMEDIATE
+>
+> : \i  ( -- )  i INVERT  IF  POSTPONE \  THEN  ; IMMEDIATE
+> : \j  ( -- )  i         IF  POSTPONE \  THEN  ; IMMEDIATE
+>
+> : \k   ( -- )  k INVERT  IF  POSTPONE \  THEN  ; IMMEDIATE
+> : \-k  ( -- )  k         IF  POSTPONE \  THEN  ; IMMEDIATE
+>
+> \ ** Compilation section **
+>
+> \def? tools  INCLUDE tools.4
+>
+> \j     INCLUDE appa.4
+>
+> \i     INCLUDE appi.4
+> \j \-k INCLUDE appj.4
+> \j \k  INCLUDE appjk.4
+>    \-k INCLUDE appx.4
+> \j \k  INCLUDE appy.4
+>
+> Which unclutters the compilation section, at the expense of the options
+> section.
+>
+> Is this more readable?.
+>
+> Is there a better way to define \i \j \k & \-k which isn't too complicated?.
+
+1) When I see \i , I think: is it skip-if-i-is-true,
+or is it do-if-i-is-true-else-skip ?
+
+I used names like board: and pc: .
+
+: OPTION
+     CREATE , IMMEDIATE DOES> @ 0= IF [COMPILE] \ THEN
+;
+
+FALSE OPTION pc:
+TRUE  OPTION brd:
+TRUE  OPTION dbg:
+
+More complicated:
+
+: OPTIONS
+    DUP OPTION 0= OPTION
+;
+
+FALSE OPTIONS pc:  ~pc:
+TRUE  OPTIONS brd: ~brd:
+TRUE  OPTIONS dbg: ~dbg:
+
+Or, alternatively:
+
+: ~
+    ' >BODY @ IF [COMPILE] \ THEN
+; IMMEDIATE
+
+  pc:  ~ dbg:     INCLUDE ...
+~ pc:  ~ dbg:     INCLUDE ...
+
+2) the notation like
+
+  pc:   dbg:     INCLUDE fn1
+  brd:  dbg:     INCLUDE fn2
+
+is indeed more readable.
+
+ -- --
+I used this scheme in real projects, and what followed
+things like dbg: was not INCLUDEs. There were magic numbers,
+code fragments, etc., but I do not remember any INCLUDEs.
+
+ -- --
+ disclaimer:
+I used definitions like
+
+ : pc: [COMPILE] \ ; IMMEDIATE
+ \ : pc:             ; IMMEDIATE
+
+and did not try the code that I posted here.
+
+Best regards, Michael Gassanenko
+ --
+the right question is half the answer
+
