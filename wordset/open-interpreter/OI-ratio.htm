@@ -1,0 +1,271 @@
+<html>
+<head>
+<!--- Translation from RTF performed by UnRTF, version 0.18.1 --->
+<!--- For information about this marvellous program, --->
+<!--- please go to http://www.geocities.com/tuorfa --->
+<!--- document uses ANSI character set --->
+<!--- font table contains 6 fonts total --->
+</head>
+<body><font face="Times New Roman"><font size=2><font color="#000000"><b>Document:</b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000"> The proposed Open Interpreter Wordset, </font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b><i>part 2 of 2 -- </i></b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000">"Rationale"</font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b><i><br>
+</i></b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b>Version: </b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000">2.3 -- 11 May 2002 </font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b><i><br>
+</i></b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b>Author: </b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000">M.L.Gassanenko, 1999</font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b><br>
+This file: </b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000">OI-ratio.doc, </font></font></font><font face="Times New Roman"><font size=2><font color="#000000"><b>First part:</b></font></font></font><font face="Times New Roman"><font size=2><font color="#000000"> OI-norma.doc<br>
+</font></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI The optional Open Interpreter Wordset<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.1 Introduction<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.2 Additional terms and notation<br>
+A.OI.2.1 Definition of terms and classes of Open Interpreter systems<br>
+A.OI.2.1.1 The five classes of Open Interpreter systems <br>
+</b></font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><br>
+</font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><i>Class 5. </i></font></font></font><font face="Times New Roman"><font size=3><font color="#000000">It is possible that real Class 5 systems will not be able to support the Open Interpreter Data Access and Code Access word sets without environmental restrictions. If hardware does not permit unaligned code pointers to be stored as return addresses, the executable code memory space is most likely larger than the readable code memory space. For example, code memory may consist of 64K 16-bit words, but only the first 32K words may be accessed as 64K read-only bytes. In this situation, the full implementation of the code memory data access functionality is just not possible.<br>
+<br>
+In general, it may be recommended to write new code for at least Class 3; Class 5 is probably not worth care unless there is a perspective of porting code to a Class 5 system.<br>
+<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.2.1.2 Definition of terms<br>
+A.OI.2.2 Notation<br>
+A.OI.2.2.1 Interpretation stack notation<br>
+</b></font></font></font><font face="Times New Roman"><font size=3>A word having the return stack effect<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( R:</font></font><font face="Times New Roman"><font size=3><i> i*x -- j*x</i></font></font><font face="Times New Roman"><font size=3> )<br>
+is assumed to have the following interpretation stack effect:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I:</font></font><font face="Times New Roman"><font size=3><i> i*x cp -- j*x cp </i></font></font><font face="Times New Roman"><font size=3>)<br>
+and vice versa, only words that do not change IP, the top interpretation stack item, may be adequately described by the return stack diagram.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.2.2.2 Stored data notation<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3 Additional usage requirements<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3.1 Data types<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+The data type </font></font><font face="Times New Roman"><font size=3><i>cp</i></font></font><font face="Times New Roman"><font size=3> denotes an unaligned code pointer (</font></font><font face="Times New Roman"><font size=3><i>ucp</i></font></font><font face="Times New Roman"><font size=3>) for Classes 1-4, and an aligned code pointer (</font></font><font face="Times New Roman"><font size=3><i>acp</i></font></font><font face="Times New Roman"><font size=3>) for Class 5, because unaligned code pointers cannot be represented in the return stack representation on systems of Class 5.<br>
+<br>
+The datatypes </font></font><font face="Times New Roman"><font size=3><i>acp</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>ucp</i></font></font><font face="Times New Roman"><font size=3> have two representations: the data stack one (</font></font><font face="Times New Roman"><font size=3><i>acp-s</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>ucp-s</i></font></font><font face="Times New Roman"><font size=3>, correspondingly) and the return stack one (</font></font><font face="Times New Roman"><font size=3><i>acp-r</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>ucp-r</i></font></font><font face="Times New Roman"><font size=3>). The symbol </font></font><font face="Times New Roman"><font size=3><i>acp</i></font></font><font face="Times New Roman"><font size=3> denotes </font></font><font face="Times New Roman"><font size=3><i>acp-s</i></font></font><font face="Times New Roman"><font size=3> on the data stack diagrams and </font></font><font face="Times New Roman"><font size=3><i>acp-r</i></font></font><font face="Times New Roman"><font size=3> on the return stack diagrams. This approach was chosen because </font></font><font face="Times New Roman"><font size=3><i>acp-s</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>acp-r </i></font></font><font face="Times New Roman"><font size=3>(</font></font><font face="Times New Roman"><font size=3><i>ucp-s</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>ucp-r</i></font></font><font face="Times New Roman"><font size=3>) are logically the same value.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3.2 Data type relationships<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+For Class 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><i>acp = a-addr =&gt; cp = ucp = addr.</i></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+For Class 2, the return stack representation of code pointers is different from the data stack representation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><i>acp-s = a-addr =&gt; cp-s = ucp-s = addr,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+acp-r =&gt; cp-r = ucp-r =&gt; x.</i></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+For Class 3, the code pointers are not necessarily data memory addresses.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><i>acp-s =&gt; cp-s = ucp-s =&gt; u,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+acp-r =&gt; cp-r = ucp-r =&gt; x.</i></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+For Class 4, the code pointers are not necessarily one-cell wide.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><i>acp-s =&gt; cp-s = ucp-s =&gt; i*x,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+acp-r =&gt; cp-r = ucp-r.</i></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+A system of Class 5 is a system of Class 4 with the environmental restriction that unaligned code pointers cannot be converted to the return stack representation. This restriction affects all words that accept or return the data type </font></font><font face="Times New Roman"><font size=3><i>cp.</i></font></font><font face="Times New Roman"><font size=3><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><i>cp-s = acp-s =&gt; ucp-s =&gt; i*x,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cp-r = acp-r =&gt; ucp-r.</i></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+The symbols </font></font><font face="Times New Roman"><font size=3><i>cp-s</i></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><i>cp-r</i></font></font><font face="Times New Roman"><font size=3> abovedenote </font></font><font face="Times New Roman"><font size=3><i>cp</i></font></font><font face="Times New Roman"><font size=3> in the data stack and return stack representations correspondingly.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3.3 Threaded code memory addresses<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+The standard does not require that the size (in bits) of one code memory address unit is not greater than the size of a character, but it is possible that systems on which it is not true will not be able to implement the Open Interpreter In-Line Data Access word set in a reasonably efficient way.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3.4 The executable code and the code interpreter<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+The key to understanding the return address manipulations is a dual view on the interpreter stack. The threaded code interpreter considers the return stack and the interpretation pointer (IP) as a single stack. The programmer manipulates only with the return stack, because IP changes while the programmer's code executes, and writing to IP will result in an immediate control transfer. On the other hand, this does not make a restriction: when we call an auxiliary procedure, the return stack becomes what the interpretation stack was. Any changes that have to be done with the interpretation stack, the auxiliary procedure does with the return stack. When the procedure exits, the interpretation stack becomes what the return stack was.<br>
+<br>
+The rule of thumb for writing code that changes the interpretation stack is: write code that does with the return stack what must be done with the interpretation stack; put this code into an auxiliary procedure. This procedure will do the required changes with the interpretation stack.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.3.5 Environmental queries<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.4 Additional documentation requirements</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.4.1 System documentation</b></font></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.4.1.1 Implementation-defined options</b></font></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.4.2 Program documentation</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+A program written for a standard system with environmental restrictions can run on a standard system. A standard system provides all of the functionality of the system with environmental restrictions, plus some additional functionality.<br>
+<br>
+A program written for an unstandard system cannot run on a standard system. The functionality of a standard system is just different from the functionality of the unstandard system for which the program is written. <br>
+<br>
+For example, if the system does not implement the word </font></font><font face="Courier New"><font size=3><b>/C@</b></font></font><font face="Times New Roman"><font size=3> , it is an environmental restriction. If the system allows in-line literal data only within the first 32K of code memory, it is an environmental restriction. A program aware of such peculiarities still can run on a standard system. But if the value returned by </font></font><font face="Courier New"><font size=3><b>RR@</b></font></font><font face="Times New Roman"><font size=3> points to the called compiled token instead of the next compiled token, the system is unstandard, and a program aware of this peculiarity cannot run on a standard system<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.5 Compliance and labeling</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.5.1 ANS Forth systems</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.5.2 ANS Forth programs</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6 Glossary<br>
+A.OI.6.1 The Open Interpreter words<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.1.0450</b></font></font></font><font face="Courier New"><font size=3><b> :</b></font></font><font face="Courier New"><font size=3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Arial"><font size=3><font color="#000000">"colon"&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI</font></font></font><font face="Courier New"><font size=3><br>
+</font></font><font face="Times New Roman"><font size=3><br>
+ </font></font><font face="Times New Roman"><font size=3><i>name </i></font></font><font face="Times New Roman"><font size=3>Execution: ( </font></font><font face="Times New Roman"><font size=3><i>i*x</i></font></font><font face="Times New Roman"><font size=3> --</font></font><font face="Times New Roman"><font size=3><i> j*x</i></font></font><font face="Times New Roman"><font size=3> ) ( I: </font></font><font face="Times New Roman"><font size=3><i>k*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>cp1 </i></font></font><font face="Times New Roman"><font size=3>-- </font></font><font face="Times New Roman"><font size=3><i>l*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp3</i></font></font><font face="Times New Roman"><font size=3> )<br>
+<br>
+1)<br>
+The initiation semantics of </font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> has the interpretation stack effect<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I : </font></font><font face="Times New Roman"><font size=3><i>cp1</i></font></font><font face="Times New Roman"><font size=3> -- </font></font><font face="Times New Roman"><font size=3><i>cp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp2</i></font></font><font face="Times New Roman"><font size=3> ). <br>
+The rest of execution semantics of </font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> has the interpretation stack effect <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I: </font></font><font face="Times New Roman"><font size=3><i>k*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>cp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp2</i></font></font><font face="Times New Roman"><font size=3> -- </font></font><font face="Times New Roman"><font size=3><i>l*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp3</i></font></font><font face="Times New Roman"><font size=3> ), <br>
+thus giving <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I: </font></font><font face="Times New Roman"><font size=3><i>k*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>cp1 </i></font></font><font face="Times New Roman"><font size=3>-- </font></font><font face="Times New Roman"><font size=3><i>l*x</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp3</i></font></font><font face="Times New Roman"><font size=3> ).<br>
+<br>
+2)<br>
+</font></font><font face="Times New Roman"><font size=3><i>cp1 </i></font></font><font face="Times New Roman"><font size=3>is not necessarily aligned because the word </font></font><font face="Times New Roman"><font size=3><font color="#000000"><b>OI.6.1.????</b></font></font></font><font face="Times New Roman"><font size=3><b> </b></font></font><font face="Courier New"><font size=3><b>RUSH</b></font></font><font face="Times New Roman"><font size=3> enables one to start a colon definition with an unaligned </font></font><font face="Times New Roman"><font size=3><i>cp1</i></font></font><font face="Times New Roman"><font size=3>. But if </font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> is invoked by the threaded code interpreter, </font></font><font face="Times New Roman"><font size=3><i>cp1</i></font></font><font face="Times New Roman"><font size=3> just cannot be unaligned.<br>
+<br>
+3)<br>
+If </font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> does not do return stack manipulations, its interpretation stack effect <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I: </font></font><font face="Times New Roman"><font size=3><i>acp1 </i></font></font><font face="Times New Roman"><font size=3>-- </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> ) <br>
+is a "sum" of the interpretation stack effects of:<br>
+</font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> initiation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I : </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> -- </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp2</i></font></font><font face="Times New Roman"><font size=3> ), <br>
+</font></font><font face="Times New Roman"><font size=3><i>name</i></font></font><font face="Times New Roman"><font size=3> body (IP changes while the body is being interpreted)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I : </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp2</i></font></font><font face="Times New Roman"><font size=3> -- </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp4</i></font></font><font face="Times New Roman"><font size=3> ), <br>
+and </font></font><font face="Courier New"><font size=3><font color="#000000"><b>EXIT</b></font></font></font><font face="Times New Roman"><font size=3> (or run-time semantics of </font></font><font face="Times New Roman"><font size=3><b>OI.6.1.0460 </b></font></font><font face="Courier New"><font size=3><font color="#000000"><b>;</b></font></font></font><font face="Times New Roman"><font size=3>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+( I : </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> </font></font><font face="Times New Roman"><font size=3><i>acp4</i></font></font><font face="Times New Roman"><font size=3> -- </font></font><font face="Times New Roman"><font size=3><i>acp1</i></font></font><font face="Times New Roman"><font size=3> ).<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.1.????</b></font></font></font><font face="Courier New"><font size=3><b> RUSH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b></font></font><font face="Arial"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI</font></font></font><font face="Courier New"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+The word </font></font><font face="Courier New"><font size=3><b>RUSH</b></font></font><font face="Times New Roman"><font size=3> allows to get rid of an extraneous return stack element. If the word </font></font><font face="Courier New"><font size=3><b>X</b></font></font><font face="Times New Roman"><font size=3> does return stack manipulations, then the interpretation stack elements are arguments to it. Execution of </font></font><font face="Courier New"><font size=3><b>X</b></font></font><font face="Times New Roman"><font size=3> from inside an auxiliary definition is different from execution of </font></font><font face="Courier New"><font size=3><b>X</b></font></font><font face="Times New Roman"><font size=3> without an auxiliary definition because one more return address makes the difference. The word </font></font><font face="Courier New"><font size=3><b>RUSH</b></font></font><font face="Times New Roman"><font size=3> allows an auxiliary definition to call </font></font><font face="Courier New"><font size=3><b>X</b></font></font><font face="Times New Roman"><font size=3> as if </font></font><font face="Courier New"><font size=3><b>X</b></font></font><font face="Times New Roman"><font size=3> was called in place of the auxiliary definition.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.2 The open interpreter extension words<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.2.????</b></font></font></font><font face="Courier New"><font size=3><b> RP@ </b></font></font><font face="Times New Roman"><font size=3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"r-p-fetch"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-EXT<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.2.????</b></font></font></font><font face="Courier New"><font size=3><b> RP!</b></font></font><font face="Courier New"><font size=3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"r-p-store"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-EXT<br>
+</font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><br>
+The purpose of these words is to provide non-local exits (which is required, for example, for a Prolog-like </font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><i>cut</i></font></font></font><font face="Times New Roman"><font size=3><font color="#000000"> statement). These words may be found on most (if not all) Forth systems.<br>
+<br>
+The value </font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><i>x</i></font></font></font><font face="Times New Roman"><font size=3><font color="#000000"> used by these words is traditionally called "return stack pointer".</font></font></font><font face="Times New Roman"><font size=3><br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>OI.6.2.????</b></font></font></font><font face="Courier New"><font size=3><b> R-SAVE-SYS</b></font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"r-save-sys"&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Times New Roman"><font size=3><font color="#000000"> </font></font></font><font face="Arial"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-EXT</font></font></font><font face="Times New Roman"><font size=3><font color="#000000"><br>
+</font></font></font><font face="Times New Roman"><font size=3><br>
+An implementation may keep data that control nesting structures in registers. For example, it may keep in registers do-loop parameters (count, limit) and the locals frame pointer (if not locals themselves). Therefore, a program that implements non-local exits using </font></font><font face="Courier New"><font size=3><b>RP!</b></font></font><font face="Times New Roman"><font size=3> shall save such information using </font></font><font face="Courier New"><font size=3><b>R-SAVE-SYS</b></font></font><font face="Times New Roman"><font size=3> before obtaining the return stack pointer with </font></font><font face="Courier New"><font size=3><b>RP@</b></font></font><font face="Times New Roman"><font size=3> and shall restore this information using </font></font><font face="Courier New"><font size=3><b>R-RESTORE-SYS</b></font></font><font face="Times New Roman"><font size=3> after changing the return stack pointer with </font></font><font face="Courier New"><font size=3><b>RP!</b></font></font><font face="Times New Roman"><font size=3>.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>OI.6.3 The Open Interpreter threaded code access words<br>
+</b></font></font></font><font face="Times New Roman"><font size=3><br>
+</font></font><font face="Times New Roman"><font size=3><font color="#000000">There is a wide class of applications that do not need dynamic code generation or run-time patching of generated code. Therefore, it may be quite resonable to introduce environmental restrictions on the use of words that write to code space, for example, requiring that these words are not used to patch finished definitions. Such system shall be labelled as "</font></font></font><font face="Times New Roman"><font size=3>Providing the Open Interpreter threaded code access</font></font><font face="Times New Roman"><font size=3><i> </i></font></font><font face="Times New Roman"><font size=3>word set with environmental restrictions", and the restrictions shall be documented.</font></font><font face="Times New Roman"><font size=3><font color="#000000"><br>
+<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.3.????</b></font></font></font><font face="Courier New"><font size=3><b> TOKEN, </b></font></font><font face="Courier New"><font size=3> </font></font><font face="Courier New"><font size=3><b>&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b></font></font><font face="Arial"><font size=3><font color="#000000">"token-comma"&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-CODE</font></font></font><font face="Courier New"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+The difference between </font></font><font face="Times New Roman"><font size=3><font color="#000000"><b>OI.6.3.????</b></font></font></font><font face="Times New Roman"><font size=3><b> </b></font></font><font face="Courier New"><font size=3><b>TOKEN,</b></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Times New Roman"><font size=3><font color="#000000"><b>6.2.0945 </b></font></font></font><font face="Courier New"><font size=3><b>COMPILE,</b></font></font><font face="Times New Roman"><font size=3> is that </font></font><font face="Courier New"><font size=3><b>COMPILE,</b></font></font><font face="Times New Roman"><font size=3> is allowed to do optimizations. If some word, say </font></font><font face="Courier New"><font size=3><font color="#000000"><b>TUCK</b></font></font></font><font face="Times New Roman"><font size=3> , is compiled with </font></font><font face="Courier New"><font size=3><b>TOKEN,</b></font></font><font face="Times New Roman"><font size=3> , the resulting compiled token is guaranteed to have the size of </font></font><font face="Courier New"><font size=3><font color="#000000"><b>1 TOKENS</b></font></font></font><font face="Times New Roman"><font size=3> and be decompiled (e.g. with the word </font></font><font face="Courier New"><font size=3><b>TOKEN&gt;</b></font></font><font face="Times New Roman"><font size=3>) as </font></font><font face="Courier New"><font size=3><font color="#000000"><b>TUCK</b></font></font></font><font face="Times New Roman"><font size=3> , while if the same word is compiled with </font></font><font face="Courier New"><font size=3><b>COMPILE,</b></font></font><font face="Times New Roman"><font size=3> , the compiled token may be of some different size and decompile, for example, as </font></font><font face="Courier New"><font size=3><font color="#000000"><b>SWAP OVER</b></font></font></font><font face="Times New Roman"><font size=3> , or may be non-decompileable.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.3.????</b></font></font></font><font face="Courier New"><font size=3><b> TOKEN&gt;</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Courier New"><font size=3><b> &nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b></font></font><font face="Arial"><font size=3><font color="#000000">"token-from"&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-CODE</font></font></font><font face="Courier New"><font size=3><br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.3.????</b></font></font></font><font face="Courier New"><font size=3><b> TOKEN+ &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</b></font></font><font face="Arial"><font size=3><font color="#000000">"token-plus"&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-CODE</font></font></font><font face="Courier New"><font size=3> <br>
+</font></font><font face="Times New Roman"><font size=3><br>
+The word </font></font><font face="Courier New"><font size=3><b>TOKEN+</b></font></font><font face="Times New Roman"><font size=3> is not necessarily equivalent to the phrase </font></font><font face="Courier New"><font size=3><font color="#000000"><b>1 TOKENS /XSWAP /+</b></font></font></font><font face="Times New Roman"><font size=3>. If the code memory address at the stack top points to a token compiled with </font></font><font face="Courier New"><font size=3><b>TOKEN,</b></font></font><font face="Times New Roman"><font size=3>, they are equivalent. But if the code memory address at the stack top points to a token compiled with </font></font><font face="Courier New"><font size=3><b>COMPILE,</b></font></font><font face="Times New Roman"><font size=3>, the word </font></font><font face="Courier New"><font size=3><b>TOKEN+</b></font></font><font face="Times New Roman"><font size=3> is allowed to add the size of that token instead of adding the standard size of a token.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.4 The Open Interpreter threaded code access extension words<br>
+<br>
+A.OI.6.5 The Open Interpreter in-line data access words</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Arial"><font size=3><font color="#000000"><b><br>
+A.OI.6.5.????</b></font></font></font><font face="Courier New"><font size=3><b> /@</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"slash-fetch"&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-INLINE<br>
+</font></font></font><font face="Times New Roman"><font size=3><br>
+If return addresses are one-cell wide, and code memory is data memory, but alignment requirements for compiled tokens and data memory cells are different, that is, aligned code pointers are not aligned addresses, then the system can implement only Class 3.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.5.????</b></font></font></font><font face="Courier New"><font size=3><b> /+</b></font></font><font face="Courier New"><font size=3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"slash-plus"&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-INLINE<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.5.????</b></font></font></font><font face="Courier New"><font size=3><b> /ALLOT</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"slash-allot"&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-INLINE<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.5.????</b></font></font></font><font face="Courier New"><font size=3><b> /GET</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"slash-get"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-INLINE<br>
+</font></font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.5.????</b></font></font></font><font face="Courier New"><font size=3><b> /PUT</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Times New Roman"><font size=3><font color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font></font></font><font face="Arial"><font size=3><font color="#000000">"slash-put"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+OI-INLINE<br>
+</font></font></font><font face="Times New Roman"><font size=3><br>
+Code memory address units may have different size than the data memory address units, and the phrase </font></font><font face="Courier New"><font size=3><b>1 CHARS /ALLOT</b></font></font><font face="Courier New"><font size=3> </font></font><font face="Courier New"><font size=3><b>1 CHARS /ALLOT</b></font></font><font face="Times New Roman"><font size=3> may give different results than the phrase </font></font><font face="Courier New"><font size=3><b>2 CHARS /ALLOT</b></font></font><font face="Times New Roman"><font size=3>.<br>
+<br>
+Since all the words </font></font><font face="Courier New"><font size=3><b>/ALLOT</b></font></font><font face="Times New Roman"><font size=3> and </font></font><font face="Courier New"><font size=3><b>/+</b></font></font><font face="Times New Roman"><font size=3> may perform alignment on a code memory address unit boundary, the data elements in code memory must be accessed in the same way as they have been allocated.<br>
+<br>
+</font></font><font face="Arial"><font size=3><font color="#000000"><b>A.OI.6.6 The Open Interpreter in-line data access extension words</b></font></font></font><font face="Times New Roman"><font size=3><b><br>
+</b></font></font><font face="Times New Roman"><font size=3><br>
+These words are meaningful only on Class 4 and Class 5 systems. On a Class 5 system, unaligned code pointers cannot be placed onto the return stack, and these are the only words that can do something with an unaligned code pointer.<br>
+</font></font><font face="Times New Roman"><font size=3><font color="#000000"><br>
+<br>
+</font></font></font><font face="Times New Roman"><font size=3><b><i>&lt;end of rationale&gt;<br>
+&lt;end of document&gt;<br>
+</i></b></font></font><font face="Times New Roman"><font size=3><br>
+</font></font></body>
+</html>

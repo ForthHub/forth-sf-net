@@ -1,0 +1,25 @@
+title: OPEN-INTERPRETER
+description:
+
+ This is Michael Gassanenko's proposal about standardization
+ of return address manipulation operators. This is also a paper
+ that had to be published in the last issue of Forth Dimensions,
+ but it seems that this issue has never been printed.
+
+ If you care about portability of return address manipulations,
+ you will most likely find out that Class 1 is too narrow while
+ Class 5 is ugly and unusable. This is because there is a compromise
+ between elegance and portability. Do not chase portability, instead
+ try to find a compromise that will be optimal for you.
+
+
+Proposed-normative-part:
+
+ http:OI-norma.htm
+
+Proposed-rationale:
+
+ http:OI-ratio.htm
+
+
+
