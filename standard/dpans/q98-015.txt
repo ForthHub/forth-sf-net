@@ -1,0 +1,346 @@
+Greg Bailey
+From:	Greg Bailey [greg@minerva.com]
+Sent:	Wed 14 Oct 98 11:14
+To:	'J14 Floor'
+Cc:	'ark-gvb'
+Subject:	NOTICE! RFI Q98-015 Recognized and Draft 0
+The following Request for Interpretation from Michael Gassanenko is
+recognized as Q0015.  Greg Bailey is assigned to draft the TC's response.
+Discussion on x3j14 list please.
+
+Chair has ruled that at least until the November meeting we should
+continue to process RFI's as we have during our dormancy.  Please
+treat this as an active matter on the floor and assume it is in order,
+reserving any arguments about RFI's per se until the meeting, in the
+interest of conserving mail traffic.
+
+In the interest of *further* conserving mail traffic, this message
+also constitutes Response Draft 0.  I have written what I think our
+intent was, but I could certainly be wrong and have accordingly
+factored the response so that the decision points are easy to find
+and change.  Bear in mind that all of this was a synthesis of what
+people were actually doing at the time.
+
+    Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+  ----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+  greg@minerva.com  |  Portland, OR  97204  US  |
+
+
+=================  Q98-015 RESPONSE DRAFT 0  =====================
+
+This document is produced by NCITS TC J14 as its clarification of
+questions raised about ANSI X3.215-1994, American National Standard
+for Information Systems - Programming Languages - Forth.
+
+The questions covered herein were raised by query
+
+Q98-015 regarding use of a fileid during its active use by INCLUDED
+
+There are four parts in this document:
+
+        1.  The original question as received.
+        2.  The TC's reply.
+        3.  The Letter Ballot issued by TC Chair.
+        4.  TC Chair's statement of ballot results.
+
+===============  1.  Q98-015 as received.  ===========================
+
+-----Original Message-----
+From:	mlg [SMTP:mlg@forth.org]
+Sent:	Wed 14 Oct 98 06:36
+To:	j14-chairs@minerva.com; mlg@forth.org
+Subject:	RFI: interference between INCLUDE-FILE and other file access words
+
+Document: RFI: interference between INCLUDE-FILE and other file access
+words
+Author: M.L.Gassanenko
+ID: MLG98-RFI002
+Comment: The above ID is introduced by me(MLG) for my own convenience,
+TC is free to use or not to use it.
+History: 1 Oct 1998 - created
+	 2 Oct 1998 - making it brief; added possible solutions
+	 5 Oct 1998 - formulated in terms used in the standard
+        13 Oct 1998 - minor changes (corrected misformulations)
+	14 Oct 1998 RFI sent to j14-chairs@minerva.com
+
+------ the question ----------------------------------------------------
+
+What must happen if file operations are used with the value returned
+by SOURCE-ID ?
+How INCLUDE-FILE and INCLUDED interfere with other file access words?
+
+In other words:
+>11.6.1.1718 INCLUDED 				FILE
+>	( i*x c-addr u -- j*x )
+> ...
+>Repeat until end of file: read a line from the file, fill the input
+>buffer from the contents of that line, set >IN to zero, and interpret.
+> ...
+
+Does the word "read" imply the functionality of READ-LINE ?
+At the conclusion of the operation ("read"), what the value returned
+by FILE-POSITION shall be?
+Are implementors allowed to let their systems read the whole file
+into a buffer?
+
+------------------------------------------------------------------------
+
+The ambiguity springs from the fact that INCLUDE-FILE may read lines
+one by one or load the whole file into a buffer and take the lines
+from there.
+
+I see several (currently, 5) possible variants of the answer, the best
+one IMHO is the 4th. Note that the variants 1-4 allow the use of buffers
+for the files being INCLUDEd, while the 5th does not.
+
+---- VARIANT 1
+----------------------------------------------------------------
+> 11.6.1.2218 SOURCE-ID 			source-i-d 	FILE
+>	( -- 0 | -1 | fileid )
+> ....
+Ambiguous conditions:
+- fileid is used with other file access operations
+- a program changes the file specified by fileid via a different file
+  identifier
+
+Rationale. The system implementors are free to read the source file
+line-by-line or to load it into a buffer (the whole file or a part of
+it). The position at which the file pointer will be, as well as the
+effects of changing it, are unpredictable in the general case.
+
+---- VARIANT 2
+----------------------------------------------------------------
+> 11.6.1.2218 SOURCE-ID 			source-i-d 	FILE
+>	( -- 0 | -1 | fileid )
+> ....
+Ambiguous conditions:
+- a program performs a file access operation on the file specified by
+  fileid using the current position of the file
+- a program changes the current position of the file specified by
+  fileid and does not restore it before the system attempts to refill
+  the input buffer
+- a program changes the file specified by fileid
+
+Rationale. The system implementors are free to read the source file
+line-by-line or to load it into a buffer (the whole file or a part of
+it). The position at which the file pointer will be, as well as the
+effects of changing it, are unpredictable in the general case.
+
+Note: the input buffer may be refilled at the end of line or due to
+execution of RESTORE-INPUT or other word temporary changing the input
+source.
+
+---- VARIANT 3
+----------------------------------------------------------------
+> 11.6.1.2218 SOURCE-ID 			source-i-d 	FILE
+>	( -- 0 | -1 | fileid )
+> ....
+Ambiguous conditions:
+- a program performs a file access operation on the file specified by
+  fileid using the current position of the file
+- a program changes the current position of the file specified by
+  fileid and does not restore it before the system attempts to refill
+  the input buffer.
+- a program changes the already existing portion of the file
+  specified by fileid
+- a program changes the file specified by fileid via a different file
+  identifier
+
+Rationale. The system implementors are free to read the source file
+line-by-line or to load it into a buffer (the whole file or a part of
+it). The position at which the file pointer will be, as well as the
+effects of changing it, are unpredictable in the general case.
+On the other hand, if new text is added to the end of file, the
+system stil can determine it and interpret the text.
+
+Note: the input buffer may be refilled at the end of line or due to
+execution of RESTORE-INPUT or other word temporary changing the input
+source.
+
+---- VARIANT 4
+----------------------------------------------------------------
+> 11.6.1.2218 SOURCE-ID 			source-i-d 	FILE
+>	( -- 0 | -1 | fileid )
+> ....
+The current position for the file identified by fileid will correspond
+to the beginning of the next source line (the line immediately following
+the system-defined enf-of-line indicator of the line being currently
+interpreted with the text interpreter).
+
+Ambiguous condition:
+- a program changes the line being currently interpreted in the file
+  specified by fileid.
+- a program changes the file specified by fileid via a different file
+  identifier
+
+Rationale. The system implementors are free to read the source file
+line-by-line or to load it into a buffer (the whole file or a part of
+it). In the latter case, the system must check if the fileid passed
+to the file access operations corresponds to one of the files being
+currently loaded (INCLUDEd), and behave as if the file was read
+line-by-line. If the program changes the file specified by fileid,
+the contents of the buffer must be adequately changed. Implementing
+a buffer for file loading is equivalent to implementing a cache.
+Reading/writing to the cached file bypassing this cache (e.g. by
+means of operating system of firmware) also leads to
+unpredictable results, but the only "standard" way of bypassing the
+cache is using two or more different file ideentifiers for the same
+file. The statement that changing the line being currently interpreted
+is ambiguous means that the systems (especially those that read files
+line-by-line) are allowed not to reload the current line when the file
+changes, but this may happen as a result of execution of SAVE-INPUT
+and RESTORE-INPUT.
+
+---- VARIANT 5
+----------------------------------------------------------------
+All what is written above is wrong (below ":" marks citations
+from  'variant 4'). We see in 11.6.1.1718 INCLUDED :
+
+>11.6.1.1718 INCLUDED 				FILE
+>	( i*x c-addr u -- j*x )
+> ...
+>Repeat until end of file: read a line from the file, fill the input
+>buffer from the contents of that line, set >IN to zero, and interpret.
+> ...
+
+The words "read a line" above mean "read as with READ-LINE", not
+"get somehow the next line into the input buffer, for example,
+pre-read the whole file into a buffer and then take a line from
+that buffer".
+This means that a standard system is not allowed to read the whole
+file into a buffer and then take lines from there. As a result,
+
+:The current position for the file identified by fileid will correspond
+:to the beginning of the next line (the line immediately following
+:the system-defined enf-of-line indicator of the line being currently
+:interpreted with the text interpreter).
+
+and two comditions
+:Ambiguous condition:
+:- a program changes the line being currently interpreted in the file
+:  specified by fileid.
+:- a program changes the file specified by fileid via a different file
+:  identifier
+should be, indeed, ambiguous. The first one is ambiguous because
+a standard system may or may not reload the current line when the file
+is changed and the words SAVE-INPUT and RESTORE-INPUT execute.
+The second one should be ambiguous because the result would depend
+on the operating system and loaded drivers.
+
+-------------------------------------------------------------------------------
+
+
+Note that variants 4 and 5 are equivalent.
+
+
+
+<end of RFI>
+
+PS I apologize for that it is long.
+
+===============  2.  TC Reply to Q0005.  ===========================
+
+This RFI raises several related questions.  Before addressing them,
+the following general remarks are relevant.
+
+The TC consciously revealed the fileid's involved in file based
+interpretation because this was common practice at the time and
+existing implementations had made the fileid or equivalent available
+for judicious application use.  Some uses are consistent with the
+intent of the Standard.  Others are not, and as always the standard
+has made no effort to enumerate every possible absurdity.
+
+For example, it is obvious that while the fileid given INCLUDE-FILE
+is certainly known to the application, it would be absurd for the
+application to use CLOSE-FILE on that fileid during its use by the
+interpreter, and the fact that the Standard does not explicitly
+forbid this action does not in any way diminish its absurdity.
+
+In this light the individual points are addressed as follows:
+
+> What must happen if file operations are used with the value returned
+> by SOURCE-ID ?
+
+Passive file operations such as FILE-POSITION and FILE-SIZE are
+appropriate.
+[I am positive we had this discussion.]
+
+Reading and repositioning operations are appropriate and were
+specifically envisioned by those who drafted the file word sets,
+although these activities are of course environmentally dependent
+upon having a file as the input source and in many cases (such as
+sequential files like tapes, or temporally disjoint files such as
+terminal devices, named pipes, or network connections) the very
+ability to reposition is environmentally dependent on the *type*
+of file.  It is recognized that the ability to perform these oper-
+ations constrains implementations, but such practices were common
+and hence no effort was made to prohibit them.
+[I am *pretty sure* this is what we intended.]
+
+Any type of modification operations on the file itself,  such as
+writing, resizing, or deletion, and on the fileid, such as closing,
+is either prima facie absurd (such as closing) or depends on "carnal
+knowledge" of the implementation and is hence environmentally depen-
+dent on things the Standard doesn't require that implementations
+document.  Furthermore the ability to write into a "file" is in
+itself environmentally dependent on the characteristics of the file
+and the way in which it was opened.  Such operations may be useful
+
+ut are not portable and are beyond the scope of the Standard.
+
+As a decision making example, it is without question a *useful*
+technique for one part of a program to inject source code into a
+named pipe while another part is interpreting from the other end
+of that pipe.  However a program that depends on operating system
+support for named pipes is certainly not standard!
+[I am *damn sure* about closing and reasonably confident of the rest.]
+
+> How INCLUDE-FILE and INCLUDED interfere with other file access words?
+>
+> In other words:
+> >11.6.1.1718 INCLUDED 				FILE
+> >	( i*x c-addr u -- j*x )
+> > ...
+> >Repeat until end of file: read a line from the file, fill the input
+> >buffer from the contents of that line, set >IN to zero, and interpret.
+> > ...
+>
+> Does the word "read" imply the functionality of READ-LINE ?
+
+Yes, that is exactly what it means.
+
+(11.6.1.2090, the definition of READ-LINE, is the only definition
+the standard offers for "reading a line from a file" and is by
+definition what the phrase cited above refers to.  "line" is
+defined in 2.1 in a way that is consistent with 11.6.1.2090.
+
+> At the conclusion of the operation ("read"), what the value returned
+> by FILE-POSITION shall be?
+
+Refer to 11.6.1.2090 READ-LINE which defines this value.
+
+> Are implementors allowed to let their systems read the whole file
+> into a buffer?
+
+Yes.  Many systems cache files in memory.
+
+> The ambiguity springs from the fact that INCLUDE-FILE may read lines
+> one by one or load the whole file into a buffer and take the lines
+> from there.
+
+There is no ambiguity.  An implementor may cache a file if desired
+but must implement file caching in such a way that it is still
+accessed through the normal file operators.  This is common practice
+throughout the computer industry.  Caching or any other optimization
+that is done in a transparent way is entirely consistent with the
+Standard.
+
+An ambiguity only arises if an implementor forgets that transparency
+is required of him, which would be an error since transparency is
+a paramount concern when conforming to standards or seeking portability.
+
+===============  3.  Letter Ballot.  ===============================
+
+===============  4.  Results of Letter Ballot.  ====================
+
+====================================================================

@@ -1,0 +1,88 @@
+<html><head><title>A99-027</title>
+<meta name="filename" value="a99-027.txt">
+<p>
+This document is produced by NCITS TC J14 as its clarification of questions
+raised about ANSI X3.215-1994, American National Standard for Information
+Systems - Programming Languages - Forth.
+</p><p>
+The questions covered herein were raised by query
+</p><p>
+Q99-027, regarding compilation while in Interpretation state.
+</p><p>
+There are two parts in this document:
+<ol>
+        <li><a href="#query">  The original question as received. </a>
+        <li><a href="#reply">  The TC's reply. </a>
+</ol>
+
+<h2><a name="query"> Q99-027 as received.  </a></h2>
+<pre><small>
+From:	Philip Preston [philip@preston20.freeserve.co.uk]
+Sent:	Sat 17 Oct 98 14:44
+To:	greg@minerva.com
+Subject:	RFI
+</small></pre>
+<blockquote>
+<p>
+Request for interpretation:
+</p><p>
+Recent discussions on comp.lang.forth indicate there is a body of opinion
+which holds that one or both the following are implied by the ANSI Forth
+Standard:
+</p><ol>
+  <li> It is an ambiguous condition for a program to perform compilation
+       semantics in the interpretation state.
+
+  <li> It is an ambiguous condition for a program to append semantics to the
+       current definition in the interpretation state.
+</ol><p>
+For the avoidance of confusion could you please adjudicate on whether either
+or both of these propositions are correct?
+</p><p>
+Note:  "Performing compilation semantics" and "appending semantics to the
+current definiton" frequently occur together but it is possible to have
+either one without the other, hence the need to distinguish between them.
+</p><p>
+For example:
+</p><pre>
+: (S   POSTPONE ( ; IMMEDIATE
+</pre><p>
+Execution of (S involves performing the compilation semantics of ( but does
+not involve appending semantics to the current definition.
+</p><pre>
+: APPEND-DUP   ['] DUP COMPILE, ;
+</pre><p>
+Execution of APPEND-DUP involves appending the execution semantics of DUP to
+the current definition but does not involve performing compilation
+semantics.
+</p><p>
+Thank you,
+</p><p>
+Philip Preston.
+20 Warren Streeet, London W1P 5DD, U.K.
+</p><p>
+</blockquote>
+<h2><a name="reply">  TC Reply to Q99-027.  </a></h2>
+<p>
+The answer to question (1.) is Yes.
+</p><p>
+The answer to question (2.) is Yes.
+</p><p>
+Brief discussion:
+</p><p>
+The TC recognizes that the terminology it used in 1994 to circumscribe
+the usage of the Forth compiler by a standard program has led to some
+significant misinterpretations of TC intent.  The above answers state
+the intent of the TC.  The TC has plans to modify its terminology in
+an effort to avoid future misinterpretations of this sort.
+</p><p>
+Since that plan exists, the TC does not wish to split hairs about the
+meaning of "compilation semantics" at this time, expecting that issue
+to become moot when that plan is implemented.  The TC does, however,
+with to state categorically that its original intent was to make it
+clear that standard programs without environmental dependencies shall
+not assume access to functions specific to the Forth compiler except
+while actually in the compilation state.  This remains the intent of
+the TC today.
+</p><p>
+</body></html>

@@ -1,0 +1,330 @@
+This document is produced by TC X3J14 as its clarification of questions
+raised about ANSI X3.215-1994, American National Standard for Information
+Systems - Programming Languages - Forth.
+
+The questions covered herein were raised by query
+
+Q0006, regarding Writing to Input Buffers.
+
+There are four parts in this document:
+
+        1.  The original question as received.
+        2.  The TC's reply.
+        3.  The Letter Ballot issued by TC Chair.
+        4.  TC Chair's statement of ballot results.
+
+===============  1.  Q0006 as received.  ===========================
+
+Subject: Q0006 Request Recognized
+To: X3J14@minerva.com
+Date: Thu, 05 Oct 95 09:23:38 PDT
+
+The following query has been assigned number Q0005.
+   - Greg Bailey, by direction  950913 0159Z
+-----------------------------------------------------------------
+
+Request from TC member Jonah Thomas (Jet.Thomas@minerva.com)
+
+Here's a question about the Standard:
+
+When is it allowed to write into input buffers?
+
+On the surface this is simple:  "A program shall not write into the
+input buffer."
+
+But what about this:
+
+{
+: CHANGE-TEXT S"  WORDS .S " S" ROT SWAP MOVE" EVALUATE ;
+
+ .S .S .S .S .S SOURCE DROP CHANGE-TEXT .S
+}
+
+Our input buffer starts out with
+
+ .S .S .S .S .S SOURCE DROP CHANGE-TEXT .S
+
+When it executes CHANGE-TEXT it has ( ca ) the buffer address on the
+stack.  CHANGE-TEXT first provides a string ( ca ca' u ) then another
+string ( ca ca' u ca" u") and then evaluates the second string.  The
+original buffer is now not the input buffer, now the 2nd string is
+the read-only input buffer.  It does ROT ( ca' u ca ) SWAP ( ca' ca u)
+MOVE and moves the first string into the original input buffer, which now
+reads
+
+ WORDS .S .S .S .S SOURCE DROP CHANGE-TEXT .S
+
+Then it reverts to the changed input buffer and does the final .S .
+
+I say that even if this is legal, it's bad practice.  If you want to
+alter an input buffer, better to copy it into your own private area and
+change it however you like and then do EVALUATE .
+
+My question is whether this _is_ legal, and why or why not.
+
+I originally interpreted a previous dpANS document as saying that the
+user input buffer, the one pointed to by the obsolescent TIB and #TIB ,
+is read-only.  That makes a different kind of sense to me.  In some
+systems it could be a read-only pipe from some other process, or it could
+be some special hardware read-only buffer.  It makes sense to me that the
+user input buffer should never be modified by a standard program.
+
+So I can see 4 obvious choices, with perhaps others also available:
+
+1.  The current input buffer is read-only; strings which are not the
+current input buffer may be written to unless they're read-only for some
+other reason.
+
+2.  The current input buffer is read-only as is the user input buffer;
+any region of allotted memory is read/write except while it is the input
+buffer.
+
+3.  Any region of memory that is EVALUATEd is forever after read-only.
+
+4.  Any region of memory that is EVALUATEd is read-only until the
+evaluation is complete -- either by evaluation until the parse area is
+empty and return from EVALUATE or EXIT found in the evaluated string, or
+QUIT or ABORT performed before evaluation is finished, or if an ambiguous
+condition exists due to the code evaluated.
+
+
+I don't like #3, since I sometimes want to evaluate text that's in block
+buffers or file buffers.  #4 could take a lot of figuring to tell whether
+it's being violated or not.  I like #1, but it seems to allow some
+atrocious practices in standard code.  #2 has the further problem that
+there is no way for a program to tell whether an address is in the
+read-only user input buffer, except with SOURCE-ID or TIB , both of which
+are in an optional extension wordset.
+
+Any ideas?
+
+
+===============  2.  TC Reply to Q0006.  ===========================
+
+From: Elizabeth Rather
+Subject: Q0006R, Writing to Input Buffers, Official Response
+To: X3J14 Technical Committee
+Cc: lbarra@itic.nw.dc.us
+Date: Mon, 19 Feb 96 14:09
+
+
+Doc#:  X3J14/Q0006R
+Reference Doc#:  X3.215.1994 ANS Forth
+Date:  February 19, 1996
+Title: Response to Request for Interpretation Q0006, Writing to Input Buffers
+
+Q0006:  When is it allowed to write into input buffers?
+-------------------------------------------------------
+Request from TC member Jonah Thomas (Jet.Thomas@minerva.com)
+>
+>Here's a question about the Standard:
+>
+>When is it allowed to write into input buffers?
+>
+
+When a standard program receives the address and length of the
+'input buffer' from the word  SOURCE  it *must* treat this infor-
+mation as though it describes a read-only region of memory.
+
+This is one of the conditions that must be met in order to compose
+code whose processing of 'input buffers' is independent of the
+physical and logical characteristics of the diverse 'input sources'
+described in the Standard.
+
+It is logically possible for an application to alter the 'input
+buffer' supplied to  EVALUATE  while that 'input buffer' is being
+processed.  This possibility exists as a special case because the
+application actually "owns" and has full control over the buffer
+in question.  As owner of the buffer, and both producer and con-
+sumer of the data it contains, the application can alter this
+buffer and manipulate  >IN  with deterministic results, assuming
+that it knows the buffer to exist in physically writable memory.
+
+The Standard does not describe this possibility because the
+implied coding methods constitute a special case which is only
+usable with  EVALUATE  and can lead to the development of source
+language syntax which is not processable from other 'input sources.'
+
+
+Relevant text from the Standard:
+--------------------------------
+
+"6.1.1360  EVALUATE
+    ... Make the string described ... both the
+        'input source' and 'input buffer' ..."
+
+"6.1.2216  SOURCE
+    ... c-addr is the address of, and u is the number of
+    characters in, the 'input buffer'."
+
+"2.1 Definitions of Terms
+    'input source':  The device, file, block, or other entity
+        that supplies characters to refill the 'input buffer'.
+    'input buffer':  A region of memory containing the sequence
+        of characters from the input source that is currently
+        accessible to a program."
+
+"3.3.3.5  Input buffers
+    The address, length, and content of the 'input buffer' may be
+        transient.  A program shall not write into the 'input
+        buffer'.  ... the 'input buffer' is either ... or a buffer
+        specified by  EVALUATE .  ...  An ambiguous condition
+        exists if a program modifies the contents of the 'input
+        buffer'."
+
+
+Discussion of Technical Committee Intent
+----------------------------------------
+
+QUERY and TIB have been deprecated because while some systems have
+a discrete *place* called TIB that is exclusively used for storing
+the results of QUERY, other existing systems actually use TIB as a
+handle for the current line being interpreted from a file.  While
+applications exist making either assumption, these applications can
+obviously not work properly on both sorts of systems in general.
+
+Storing into 'input buffers' is disallowed because we permit input
+sources to nest indefinitely and it is not practical for systems
+that conserve resources to guarantee unique concurrent addressability
+of all nested input sources, nor is it practical to create separate
+save areas for all current input buffers just in case someone stored
+into one of them.  The TC specifically intends that, when input is
+coming from refreshable sources, implementations may refresh their
+buffers on un-nesting to conserve resources, and that when logically
+possible implementations may use transient, shared buffers (as is
+common practice with  LOAD  on multiprogrammed systems.)  Therefore,
+the results of storing into input buffers is stated as ambiguous,
+and may even be physically disallowed, as in the case of interpreting
+source from read only memory mapped files in some operating systems.
+
+For similar reasons the address returned by  SOURCE  is transient,
+and there is specifically no guarantee that any 'input buffer' other
+than *the* (current) 'input buffer' is addressable at any time, nor
+that this address be valid after nesting or un-nesting.  (Indeed,
+in classical multiprogrammed systems the address returned by
+SOURCE is no longer valid after using WORD .)
+
+The TC expects all Systems to process buffers provided by  EVALUATE
+in place.  This is logically necessary, in our view, since there are
+no upper limits on the lengths of these buffers.  Since it is seman-
+tically permissible to describe more than half of addressable memory
+in an EVALUATE  string it is not in general *possible* to copy such a
+string elsewhere and address it consistently with the definition
+of  SOURCE .
+
+Systems are not allowed to alter the contents of 'input buffers' pro-
+vided through  EVALUATE .  At the same time, applications are respon-
+sible for guaranteeing that the buffers they provide to  EVALUATE  are
+static in both address and content until the  EVALUATE  has completed.
+
+EVALUATE is a special case since the input buffer is literally
+the area of memory provided to EVALUATE and is as such static.
+The application "owns" the memory it occupies, and the mechanism
+for messaging the interpreter via >IN (as well as the syntax of
+Forth) implies no prefetching or preprocessing of input buffers
+is necessary or appropriate.
+
+Given these conditions, it *is* deterministic for an application to
+store (with great care) into EVALUATE buffers that it knows to be
+active, although such methods pertain exclusively to EVALUATE and
+certainly not to any other input stream source.
+
+However, as the Standard is written, any program that does this is
+not a standard program.
+
+------------------
+
+It has been brought to the TC's attention that there exists at least
+one implementation which moves an EVALUATE string to a separate work
+area for processing.  As a separate but related question we have
+been asked whether a system which does this, and which therefore
+fails John Hayes' test suite, is compliant.  (The test in question
+fails if the buffer address and length returned by SOURCE occurring
+in an EVALUATE string differ from the address and length of the
+argument provided to EVALUATE.)
+
+The system in question is definitely not compliant since both the
+letter of the standard and the intent of the TC are that EVALUATE
+strings be processed in place.  The fact that John's test suite is
+able to detect the deviation confirms its visibility to application
+code, assuming that any such code ever makes such a comparison.
+
+The ambiguity documented for storing into 'input buffers' serves to
+mitigate the seriousness of this noncompliance since any program
+which stores into an active EVALUATE string is environmentally depen-
+dent on the system's resolution of the ambiguity.  Nevertheless, the
+Standard clearly states that the EVALUATE string *is* the 'input
+buffer' (by definition a region of memory), and that SOURCE returns
+the address and length of this region of memory.  This is an unquali-
+fied promise to people writing standard programs, and any system
+which breaks that promise must document its nonstandard implemen-
+tations of EVALUATE and SOURCE.
+
+
+===============  3.  Letter Ballot.  ===============================
+
+X3 Subgroup Letter Ballot
+Authorized by X3 Procedures - Distributed by X3 Subgroup X3J14
+Project: X3J14, ANS Forth
+Doc#:  X3J14/LB017
+Reference Doc#s:  X3J14/Q0006R, X3.215.1994 ANS Forth
+Date:  February 19, 1996
+Title:  Response to Request for Interpretation Q0006, Writing to Input Buffers
+Ballot Period:  30 Days
+Ballot Closes NOON DATE:  March 21, 1996
+Respond to:  greg@minerva.com
+        or:  Elizabeth D. Rather, Chair
+             FORTH, Inc.
+             111 N. Sepulveda Blvd.  Suite 300
+             Manhattan Beach, CA  90266
+             (310) 372-8493    FAX (310) 318-7130
+             erather@forth.com
+
+Statement:
+    Document X3J14/Q0006R contains a proposed Response to Request for
+    Interpretation Q0006.
+
+Question:
+    Do you agree that this response represents the intended interpretation of
+    X3.215.1994 ANS Forth?
+
+
+/------------------------  begin response area----------------------\
+|
+|  YES____ NO____ ABSTAIN____
+|
+|  Signature:  [not required for email ballots]
+|  Name:
+|  Organization:
+|
+|  Explanation (REQUIRED for NO or ABSTAIN votes):
+|    <none>
+\------------------------  end response area  ----------------------/
+
+INSTRUCTIONS:
+Please return the entire letter ballot with your response _either_ by email
+to greg@minerva.com _or_ by regular mail or fax or email to me at the above
+address, before the closing date & time.
+
+   If replying electronically PLEASE edit only within the response area
+   indicated above, inserting any explanatory text in place of <none>.
+   Any changes made outside that area will likely be overlooked.
+
+All TC members must vote.  Failure to vote in two consecutive ballots may
+cause you to lose your voting rights in X3J14.
+
+Thank you for your participation.
+
+Elizabeth D. Rather, Chair, X3J14
+
+
+===============  4.  Results of Letter Ballot.  ====================
+
+Letter ballot 17 closed at noon March 21 with the following results:
+
+        Y  N  A NV
+LB17:  12, 0, 1, 1
+
+Abstention from John Hayes.
+
+====================================================================

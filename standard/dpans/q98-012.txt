@@ -1,0 +1,136 @@
+Greg Bailey
+From:	Greg Bailey [greg@minerva.com]
+Sent:	Sat 10 Oct 98 20:12
+To:	'J14 Floor'
+Cc:	Ray Duncan (E-mail); 'ark-gvb'
+Subject:	NOTICE! RFI Q98-012 Recognized
+The following Request for Interpretation from Michael Gassanenko is
+recognized as Q0012.  Ray Duncan is assigned to draft the TC's response.
+Discussion on x3j14 list please.
+
+Ray is fortunate enough to get two consecutive RFI's for obvious
+reasons.  He is not being singled out for abuse simply because he
+copped out on us and hid for several years.  Hell no, absolutely
+no way would a thought like that cross one's mind ;-)  However
+since my son Axel was born last Dec 15th and should not have appeared
+till the end of Jan, I would be the last to begrudge Ray his real
+occupation but do hope he has time to address Michael's perfectly
+interesting RFI's.
+
+Chair has ruled that at least until the November meeting we should
+continue to process RFI's as we have during our dormancy.  Please
+treat this as an active matter on the floor and assume it is in order,
+reserving any arguments about RFI's per se until the meeting, in the
+interest of conserving mail traffic.
+
+    Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+  ----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+  greg@minerva.com  |  Portland, OR  97204  US  |
+
+-----Original Message-----
+From:	Michael L. Gassanenko [SMTP:mlg@post.tepkom.ru]
+Sent:	Mon 05 Oct 98 09:17
+To:	ansforth@minerva.com
+Subject:	RFI: when RESTORE-INPUT must and must not try to restore input
+
+Document: RFI: when RESTORE-INPUT must and must not try to restore input
+Author: M.L.Gassanenko
+ID: MLG98-RFI003
+Comment: The above ID is introduced by me(MLG) for my own convenience, TC is free to use or not to use it.
+History: 01 Oct 1998 - created (sparated from MLG98-RFI001)
+	 05 Oct 1998 - minor changes
+	 05 Oct 1998 - sent to ansforth@minerva.com
+
+-----
+>6.2.2148 RESTORE-INPUT 					CORE EXT
+>	( xn ... x1 n -- flag )
+>Attempt to restore the input source specification to the state described
+>by x1 through xn. flag is true if the input source specification cannot
+>be so restored.
+>
+>An ambiguous condition exists if the input source represented by the
+>arguments is not the same as the current input source.
+>
+>See: A.6.2.2182 SAVE-INPUT
+-----
+
+When I read the standard I expected RESTORE-INPUT to work in all cases
+where it in possible, in particular, in the case that the parameters
+x1..xn describe a string to be interpreted via EVALUATE . But I found
+that GForth 0.3.0 first tests if the current situation may be considered
+an ambiguous condition, and only then attempts to restore the input
+source specification:
+
+>see restore-input
+>: restore-input
+>  6 <> -12 and throw source-id <> -12 and throw >tib ! >r loadfile @ 0<>
+>  IF     loadfile @ reposition-file throw
+>  ELSE   linestart ! blk ! sourceline# i <> blk @ 0= and loadfile @ 0= and
+>         IF     drop rdrop true EXIT
+>         THEN
+>  THEN
+>  r> loadline ! >in ! false ; ok
+
+This behaviour definitely follows the letter of the standard, but I do
+not believe that it follows its intention:
+
+>Attempt to restore the input source specification to the state described
+>by x1 through xn. flag is true if the input source specification cannot
+>be so restored.
+
+We see "attempt to restore the input source specification", not "check
+if it is allowed not to restore the specification, and, if it is so,
+perform implementation-defined actions; otherwise do attempt to restore
+the specification".
+
+I think there is no reason to not even attempt to restore the input
+source which is a string in memory, or a block, or an open file being
+interpreted by INCLUDED or INCLUDE-FILE , provided that the programmer
+takes care to avoid crushing the system.
+
+----- MY PROPOSAL -------
+
+Extend the definition of RESTORE-INPUT to be:
+
+>6.2.2148 RESTORE-INPUT
+>CORE EXT
+>	( xn ... x1 n -- flag )
+>Attempt to restore the input source specification to the state described
+>by x1 through xn. flag is true if the input source specification cannot
+>be so restored.
+
+If the input source has been modified (e.g. a memory string or a block),
+its contents are not restored.
+
+Ambiguous conditions:
+
+- the input source represented by the arguments is not the same as the
+  current input source, unless the input source represented by the
+  arguments is:
+	- a string (to be interpreted via EVALUATE)
+	- an open file which interpretation via INCLUDED or INCLUDE-FILE
+	  has began but has not finished, with the fileid used by these words
+	- a block assuming the same mapping of blocks onto files
+	  as the current input source specification.
+
+- the input source represented by the arguments specifies a block and
+  assumes a different mapping of blocks onto files than the current
+  input source
+
+- the input source represented by the arguments is a file that has been
+  overwritten
+
+- the input source represented by the arguments is a block which has been
+  modified but not marked with UPDATE , and/or the functionality of neither
+  EMPTY-BUFFERS nor SAVE-BUFFERS has been performed.
+
+- a standard word that temporarily establishes a new input source
+  tries to restore the original input source when the current input
+  source is different from the input source established by the word,
+  unless both input sources are strings in memory or both input sources
+  are blocks assuming the same mapping of blocks on files.
+  (see EVALUATE , INCLUDE-FILE , INCLUDED , LOAD )
+
+
+----- END OF MY PROPOSAL -------
+<end of RFI>

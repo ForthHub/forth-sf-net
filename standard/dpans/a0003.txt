@@ -1,0 +1,495 @@
+This document is produced by TC X3J14 as its clarification of questions
+raised about ANSI X3.215-1994, American National Standard for Information
+Systems - Programming Languages - Forth.
+
+The questions covered herein were raised by query
+
+Q0003, regarding usage rules for defining words centering on various
+        wordlist actions occurring between CREATE and DOES>.
+
+There are four parts in this document:
+
+        1.  The original question as received.
+        2.  The TC's reply.
+        3.  The Letter Ballot issued by TC Chair.
+        4.  TC Chair's statement of ballot results.
+
+===============  1.  Q0003 as received.  ===========================
+
+The following query has been assigned number Q0003 and has been
+tentatively assigned to Jack Woehr for drafting a response.
+- Greg Bailey, by direction  950509 1900Z
+-----------------------------------------------------------------
+
+Subject: Defining words, search order and wordlists.
+To: ANSForth@minerva.com
+From: aph@oclc.org (Andrew Houghton)
+Date: Tue, 9 May 95 11:09:48 -0400
+Message-Id: <9505091520.AA26898@fssun09.dev.oclc.org>
+Received: from oclc.org by med3.minerva.com ; Tue,  9 May 1995 08:25 PDT
+Content-Type: text
+>From aph Tue May  9 11:09:48 0400 1995 remote from oclc.org
+Return-Path: <aph@oclc.org>
+Received: from next30-06 (next30-06.dev.oclc.org) by fssun09.dev.oclc.org
+  (4.1/SMI-4.1) id AA26898; Tue, 9 May 95 11:20:56 EDT
+Received: by next30-06 (NX5.67d/NX3.0X) id AA00583; Tue, 9 May 95 11:09:48 -0400
+Received: by NeXT.Mailer (1.100)
+Received: by NeXT Mailer (1.100)
+Content-Length: 7015
+
+I'm not sure whether doing the following is legal ANS FORTH so I was
+looking for someone to provide an interpretation as to whether it is
+legal and if not why not.
+
+Here is my problem.  Define the following:
+
+  \ Add selx to search order and make new definitions go into selx.
+: set-current-wordlist  ( selx -- )
+  >r get-order 1+ r> swap set-order definitions ;
+
+  \ Fill wordlist with default definitions.
+: fill-wordlist  ( n n n -- )
+  s" constant a" evaluate
+  s" constant b" evaluate
+  s" constant c" evaluate ;
+
+  \ Create new wordlist with default definitions.
+: create-wordlist  ( -- )
+  create
+    wordlist set-current-wordlist
+    1 2 3 fill-wordlist
+  does>            ( body -- )
+    set-current-wordlist ;
+
+
+  \ Create new wordlist with default definitions, revised.
+: create-wl  ( -- )
+  wordlist dup set-current-wordlist
+  1 2 3 fill-wordlist
+  previous definitions
+  create
+    dup , set-current-wordlist
+  does>      ( body -- )
+    @ set-current-wordlist ;
+
+
+I believe that the above words set-current-wordlist and fill-wordlist by
+themselves conform to the standard.  My problem lies with the word
+create-wordlist.  Create-wordlist tries to create a defining word which
+creates a wordlist, adds the newly created wordlist to the search order,
+set the current definitions to go into the newly created wordlist, then
+fills the wordlist with some common definitions.
+
+When the word create-wordlist is executed (ie. create-wordlist abc) it
+produces a new (ie. abc) which PFE, an ANS FORTH, is marked in the
+dictionary as a variable -- not a defining word and c in the newly
+created wordlist is marked in its dictionary as a defining word -- not
+a constant!  As far as I can tell from the standard, this could be a
+result of does> (section 6.1.1250) replacing the execution semantics of
+the most recent definition, ie. abc which was defined by create, and the
+fact that fill-wordlist creates new definitions.  It seems that section
+"3.4.5 Compilation" of the standard may apply somehow as well.
+
+The standard seems unclear to me when it says that: "does> replaces the
+execution semantics of the most recent definition."  I would have expected
+it to use the term "current definition" from "2.1 Definitions of terms."
+But again whether its "recent definition" or "current definition" it really
+says to me: "replaces the execution semantics of the most recent/current
+definition [in the most recent/current definition's wordlist]".  Note I
+added the bracketed item to show what the standard implies to me.  However
+it is clear that PFE, an ANS FORTH, implies "in the current wordlist where
+definitions are being placed."
+
+It's unclear in the standard, to me, which one is correct.  Given the
+ambiguity I rewrote the word create-wordlist and it appears as the word
+create-wl.  The new word create-wl now creates the wordlist fills it with
+the common definitions and restores the previous wordlist.  Then create-wl
+
+*creates* the defining word.  This seems to work for PFE but may not work
+for other ANS implementations.  However, this points out another possible
+problem with the definitions of create-wordlist and create-wl.
+
+The newly preceived problem is that both words change the search order before
+the does> is done.  It seems to me that sections 16.3.3 and A.16.3.3 say that
+this produces an ambiguous condition.  Is this correct?  Does 16.3.3 refer
+to when the word create-wordlist is being compiled or the word being defined
+by create-wordlist?
+
+My final question is: "Is it possible to portably create a defining word
+which creates a wordlist, fills that wordlist with definitions and then
+switches the search order to that wordlist with the current ANS standard?"
+
+-----
+The following sections from the ANS standard, which I thought were
+relevant to the problem, are quoted below for your convience:
+
+2.1 Definitions of terms
+
+ambiguous condition:
+
+  A circumstance for which this Standard does not prescribe a specific
+  behavior for Forth systems and programs.
+
+
+  Ambiguous conditions include such things as the absence of a needed
+  delimiter while parsing, attempted access to a nonexistent file, or
+  attempted use of a nonexistent word. An ambiguous condition also exists
+  when a Standard word is passed values that are improper or out of range.
+
+
+current definition:
+
+  The definition whose compilation has been started but not yet ended.
+
+
+defining word:
+
+  A Forth word that creates a new definition when executed.
+
+
+definition:
+
+  A Forth execution procedure compiled into the dictionary.
+
+
+dictionary:
+
+  An extensible structure that contains definitions and associated
+  data space.
+
+
+3.4.5 Compilation
+
+A program shall not attempt to nest compilation of definitions.
+
+
+During the compilation of the current definition, a program shall
+not execute any defining word, :NONAME, or any definition that
+allocates dictionary data space. The compilation of the current
+definition may be suspended using [ (left-bracket) and resumed
+using ] (right-bracket). While the compilation of the current
+definition is suspended, a program shall not execute any defining
+word, :NONAME, or any definition that allocates dictionary data space.
+
+
+6.1.1250  DOES>
+
+does CORE
+
+
+Interpretation: Interpretation semantics for this word are undefined.
+
+
+Compilation: ( C: colon-sys1 -- colon-sys2 )
+
+
+Append the run-time semantics below to the current definition. Whether
+or not the current definition is rendered findable in the dictionary by
+the compilation of DOES> is implementation defined. Consume colon-sys1
+and produce colon-sys2. Append the initiation semantics given below to
+the current definition.
+
+
+Run-time: ( -- ) ( R: nest-sys1 -- )
+
+
+Replace the execution semantics of the most recent definition, referred
+to as name, with the name execution semantics given below. Return control
+to the calling definition specified by nest-sys1. An ambiguous condition
+exists if name was not defined with CREATE or a user-defined word that
+calls CREATE.
+
+
+Initiation: ( i*x -- i*x a-addr ) ( R: -- nest-sys2 )
+
+
+Save implementation-dependent information nest-sys2 about the calling
+definition. Place name's data field address on the stack. The stack
+effects i*x represent arguments to name.
+
+
+name Execution: ( i*x -- j*x )
+
+
+Execute the portion of the definition that begins with the initiation
+semantics appended by the DOES> which modified name. The stack effects
+i*x and j*x represent arguments to and results from name, respectively.
+
+
+16.3.3 Finding definition names
+
+An ambiguous condition exists if a program changes the compilation word
+list during the compilation of a definition or before modification of the
+behavior of the most recently compiled definition with ;CODE, DOES>, or
+IMMEDIATE.
+
+
+A.16.3.3 Finding definition names
+
+In other words, the following is not guaranteed to work:
+
+
+: FOO  ... [ ... SET-CURRENT ] ... RECURSE ... ;  IMMEDIATE
+
+RECURSE, ; (semicolon), and IMMEDIATE may or may not need information
+stored in the compilation word list.
+
+
+===============  2.  TC Reply to Q0003.  ===========================
+
+From: Elizabeth D. Rather
+Subject: Q0003R, Wordlists, Official Response
+To: X3J14 Technical Committee
+Cc: lbarra@itic.nw.dc.us
+Date: Wed, 31 May 95 17:03:44 PDT
+Doc#:  X3J14/Q0003R
+Reference Doc#:  X3.215.1994 ANS Forth
+Date:  May 16, 1995
+Title: Response to Request for Interpretation Q0003, Clarification of Wordlists
+
+Abstract: No definition can be added to the dictionary between CREATE and
+DOES>.  Changing compilation wordlist between CREATE and DOES> is
+ambiguous.
+
+X3.215-1994_KEYWORD_LIST:
+        Core Word Set
+        CREATE 6.1.1000 DOES> 6.1.1250
+        Search Order Word Set
+        DEFINITIONS 16.6.1.1180 GET-ORDER 16.6.1.1647 SET-ORDER 16.6.1.2197
+        Terms:
+                Ambiguous condition 2.1
+                Compilation word list 16.6.1.2195
+X3.215-1994_KEYWORD_LIST;
+Author: Jack Woehr
+
+> Here is my problem.  Define the following:
+>
+>   \ Add selx to search order and make new definitions go into selx.
+> : set-current-wordlist  ( selx -- )
+>   >r get-order 1+ r> swap set-order definitions ;
+
+        set-current-wordlist is standard Forth in the given context,
+i.e. as a definition commenced while the system is interpretive
+mode. Note that it has a dependency on the SEARCH-ORDER Word Set with
+Extensions.
+
+        Incidentally, the Technical Committee encourages the use of
+uppercase for Standard words in clarification queries submitted to
+X3J14.
+
+>   \ Fill wordlist with default definitions.
+> : fill-wordlist  ( n n n -- )
+>   s" constant a" evaluate
+>   s" constant b" evaluate
+>   s" constant c" evaluate ;
+
+        fill-wordlist is standard Forth in the given context.
+
+>   \ Create new wordlist with default definitions.
+> : create-wordlist  ( -- )
+>   create
+>     wordlist set-current-wordlist
+>     1 2 3 fill-wordlist
+>   does>            ( body -- )
+>     set-current-wordlist ;
+
+        This definition of create-wordlist is erroneous as later
+noted by its author: the wordlist-id is not preserved so that
+the body address returned by words can be dereferenced to
+the (should have been) stored wordlist-id for set-current wordlist.
+
+        But this flaw conceals the definition's intent, to effect
+CREATE, change the compilation wordlist, add definitions, then return
+to the original compilation wordlist and effect DOES>. This is not
+Standard Forth.
+
+         Words cannot be added to the dictionary between the action of
+DOES> and the most recent action of CREATE. DOES> modifies a word
+created by CREATE. DOES> modifies the most recent definition. Thus
+there can have been no new definition added to the dictionary which
+was not created by CREATE immediately prior to a DOES>. Note that
+DOES> is found in the Core word set and never modified later in the
+Standard when the concept of multiple compilation wordlists is
+introduced.
+
+        Although the Standard does not preclude implementations using
+multiple wordlists from having "most recent" definitions in each
+wordset, the definition of DOES> is not extended to provide for
+multiple wordlists, and makes no provision for other than a single
+"most recent" definition.  The clear intent of the Standard is that
+words cannot be added to the dictionary between the action of DOES>
+and the most recent action of CREATE.
+
+        (Also note that the execution of WORDLIST may consume data
+space, altering the address returned by HERE. The portable program
+must avoid executing WORDLIST between CREATE and the execution of
+ , "comma" that saves the wordlist ID in the body of the created
+definition. Otherwise, the CREATE'd, DOES>'d entity at runtime will
+point at space which subsequently might have been used for the
+WORDLIST.)
+
+        The following was suggested as an improvement the the original
+definition of create-wordlist.
+
+>   \ Create new wordlist with default definitions, revised.
+> : create-wl  ( name< > -- )
+>   wordlist dup set-current-wordlist
+>   1 2 3 fill-wordlist
+>   previous definitions
+>   create
+>     dup , set-current-wordlist
+>   does>      ( body -- )
+>     @ set-current-wordlist ;
+
+        This definition create-wl at runtime changes the compilation
+wordlist [16.6.1.2195] between CREATE [6.1.1000] and DOES> [6.1.1250].
+The Forth Standard, 16.3.3 para 4:
+
+"An ambiguous condition exists if a program changes the compilation
+word list during the compilation of a definition or before modi-
+fication of the behavior of the most recently compiled definition
+with ;CODE DOES> or IMMEDIATE."
+
+        Therefore, while not "non-Standard", the amended definition
+create-wl exhibits a platform dependency on the particular resolution
+of the ambiguity selected by the hosting Standard System, if create-wl
+is to execute deterministically.
+
+> My final question is: "Is it possible to portably create a defining word
+> which creates a wordlist, fills that wordlist with definitions and then
+> switches the search order to that wordlist with the current ANS standard?"
+
+        Yes.
+
+        : SET-CURRENT-WORDLIST ( my_wid --) \ as above
+                >R GET-ORDER 1+ R> ( -- widn wid1 n my_wid)
+                SWAP SET-ORDER DEFINITIONS ( --)
+        ;
+
+        : 78-VOCABULARY ( "name< >" my_wid --)
+                CREATE ,        ( --)
+                DOES> ( self  --) \ runtime
+                        @       ( -- my_wid)
+                        SET-CURRENT-WORDLIST    ( --)
+        ;
+
+        : CREATE-WORDLIST ( "name< >" --)
+                WORDLIST DUP 78-VOCABULARY ( -- wid)
+                SET-CURRENT-WORDLIST ( --)
+                fill-wordlist \ _vide supra_
+                PREVIOUS DEFINITIONS
+        ;
+
+From the point of view of CREATE-WORDLIST at runtime, 78-VOCABULARY is
+atomic. Its work is done before the change in search order occurs for
+the first time. Good factoring avoids a grey area of the Standard.
+
+        Greg Bailey notes that during the mailing list discussion of
+this issue, he erroneously posted using VARIABLE where CREATE was
+intended. Greg regrets any confusion thus caused.
+
+Elizabeth D. Rather             "Forth-based products and
+FORTH, Inc.                      Services for real-time
+111 N. Sepulveda Blvd. #300      applications since 1973"
+Manhattan Beach, CA  90266
+(800) 55FORTH or (310) 372-8493
+FAX (310) 318-7130
+
+
+===============  3.  Letter Ballot.  ===============================
+
+From: Elizabeth D. Rather
+Subject: LB014, RE Q0003, Wordlists
+To: X3J14 Technical Committee
+Cc: lbarra@itic.nw.dc.us
+Date: Wed, 31 May 95 17:03:36 PDT
+X3 Subgroup Letter Ballot
+Authorized by X3 Procedures - Distributed by X3 Subgroup X3J14
+Project: X3J14, ANS Forth
+Doc#:  X3J14/LB014
+Reference Doc#s:  X3J14/Q0003R, X3.215.1994 ANS Forth
+Date:  May 31, 1995
+Title: Response to Request for Interpretation Q0003, Wordlists
+Ballot Period:  30 Days
+Ballot Closes NOON DATE:  June 30, 1995
+Respond to:  greg@minerva.com
+        or:  Elizabeth D. Rather, Chair
+             FORTH, Inc.
+             111 N. Sepulveda Blvd.  Suite 300
+             Manhattan Beach, CA  90266
+             (310) 372-8493    FAX (310) 318-7130
+             erather@forth.com
+
+Statement:
+    Document X3J14/Q0003R contains a proposed Response to Request for
+    Interpretation Q0003.
+
+Question:
+    Do you agree that this response represents the intended interpretation of
+    X3.215.1994 ANS Forth?
+
+
+/------------------------  begin response area----------------------\
+|
+|  YES____ NO____ ABSTAIN____
+|
+|  Signature:  [not required for email ballots]
+|  Name:
+|  Organization:
+|
+|  Explanation (REQUIRED for NO or ABSTAIN votes):
+|    <none>
+\------------------------  end response area  ----------------------/
+
+INSTRUCTIONS:
+Please return the entire letter ballot with your response _either_ by email
+to greg@minerva.com _or_ by regular mail, fax or email to me at the above
+address, before the closing date & time.
+
+   If replying electronically PLEASE edit only within the response area
+   indicated above, inserting any explanatory text in place of <none>.
+   Any changes made outside that area will likely be overlooked.
+
+All TC members must vote.  Failure to vote in two consecutive ballots may
+cause you to lose your voting rights in X3J14.
+
+Thank you for your participation.
+
+Elizabeth D. Rather, Chair, X3J14
+
+Elizabeth D. Rather             "Forth-based products and
+FORTH, Inc.                      Services for real-time
+111 N. Sepulveda Blvd. #300      applications since 1973"
+Manhattan Beach, CA  90266
+(800) 55FORTH or (310) 372-8493
+FAX (310) 318-7130
+
+
+===============  4.  Results of Letter Ballot.  ====================
+
+From: Elizabeth D. Rather
+Subject: LBs 14 & 15
+To: X3J14 Technical Committee
+Cc: l.barra@itic.nw.dc.us
+Date: Fri, 07 Jul 95 12:05:04 PDT
+Letter ballots 14 [and 15] closed at noon July 1 with the following results:
+
+        Y  N  A NV
+LB14:  12, 0, 0, 3
+
+[...]
+
+Thank you for your participation.
+
+Regards,
+Elizabeth D. Rather, Chair X3J14
+
+Elizabeth D. Rather             "Forth-based products and
+FORTH, Inc.                      Services for real-time
+111 N. Sepulveda Blvd. #300      applications since 1973"
+Manhattan Beach, CA  90266
+(800) 55FORTH or (310) 372-8493
+FAX (310) 318-7130
+
+
+====================================================================

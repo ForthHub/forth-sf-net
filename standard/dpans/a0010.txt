@@ -1,0 +1,173 @@
+This document is produced by NCITS TC J14 as its clarification of questions
+raised about ANSI X3.215-1994, American National Standard for Information
+Systems - Programming Languages - Forth.
+
+The questions covered herein were raised by query
+
+Q0010, regarding the status of the word  QUERY .
+
+There are two parts in this document:
+
+        1.  The original question as received.
+        2.  The TC's reply.
+
+===============  1.  Q0010 as received.  ===========================
+
+From:     Greg Bailey [greg@minerva.com]
+Sent:     Tue 11 Feb 97 15:37
+To:       'x3j14@minerva.com'
+Cc:       'Anton.Ertl@minerva.com'
+Subject:  Q0010 Request Recognized
+
+The following Request for Interpretation from Anton Ertl is recognized
+as Q0010.  Greg Bailey is assigned to draft the TC's response.  Discussion
+on x3j14 list please.
+
+    Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+  ----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+  greg@minerva.com  |  Portland, OR  97204  US  |
+
+>-----Original Message-----
+>From:     anton@mips.complang.tuwien.ac.at
+>Sent:     Sat 18 Jan 97 05:34
+>To:       x3j14@minerva.com
+>Subject:  RFI: Interaction of INCLUDE-FILE and QUERY
+>
+>From the standard:
+>
+>6.2.2040 QUERY
+>..
+>Make the user input device the input source. Receive input into the
+>terminal input buffer, replacing any previous contents. Make the
+>result, whose address is returned by TIB, the input buffer. Set >IN to
+>zero.
+>
+>11.6.1.1717 INCLUDE-FILE
+>..
+>Remove fileid from the stack. Save the current input source
+>specification, including the current value of SOURCE-ID. Store fileid
+>in SOURCE-ID. Make the file specified by fileid the input
+>source. Store zero in BLK. Other stack effects are due to the words
+>included.
+>
+>Repeat until end of file: read a line from the file, fill the input
+>buffer from the contents of that line, set >IN to zero, and interpret.
+>
+>Text interpretation begins at the file position where the next file
+>read would occur.
+>
+>When the end of the file is reached, close the file and restore the
+>input source specification to its saved value.
+>..
+>
+>
+>Similar wording can also be found in 11.6.1.1718 INCLUDED
+>
+>My question is: what happens, if I include a file, and while it is
+>being included, QUERY is executed (e.g., because the text
+>interpreter encounters "QUERY" in interpretation state).
+>
+>What seems clear to me, is: the user types in a line, and the text
+>interpreter interprets that line. If refill is executed during that
+>interpretation, the user has to type in another line.
+>
+>What's not so clear to me is, what happens when the text interpreter
+>reaches the end of the line input by the user? The wording above seems
+>to imply that the TIB stays the input buffer, that the user input
+>device stays the input source (which plays a role in the case REFILL
+>is executed), and that INCLUDE-FILE now reads from the file into the
+>TIB and interprets that. This also implies that INCLUDE-FILE cannot
+>use REFILL for reading from the file.
+>
+>Is this really the correct interpretation of the standard? If not,
+>what is the correct interpretation?
+>
+>- anton
+
+===============  2.  TC Reply to Q0010.  ===========================
+
+The first citation from the standard above, 6.2.2040 (the definition
+of QUERY), omits the most important sentence in that section.
+This sentence renders the remaining implementation discussion above
+irrelevant.  The sentence reads:
+
+   "NOTE:  THIS WORD IS OBSOLESCENT AND IS INCLUDED AS A CONCESSION
+           TO EXISTING IMPLEMENTATIONS."
+
+In section 1.4.2, "Obsolescent features", the following explains the
+meaning of this designation:
+
+   "This Standard adopts certain words and practices that cause some
+   previously used words to become obsolescent.  Although retained
+   here because of their widespread use, their use in new implemen-
+   tations or new programs is discouraged, because they may be with-
+   drawn from future revisions of the Standard."
+
+A definition of QUERY is included in Core Extensions because a strong
+majority of the TC felt that its existence should be recognized and
+documented.  However it was equally strongly felt that this function
+should be clearly marked as obsolescent for two major reasons.
+
+First, it was clear from the beginning of this effort that QUERY was
+a problem for serious standardization because the version documented
+in FORTH-79 and later was merely a factor in certain primitive system
+implementations.  It was not structured, in the sense that for example
+LOAD is structured.  LOAD saves the interpreter state vector, alters
+that state vector to reference a new source, interprets that source to
+exhaustion, and then restores the interpreter state vector with the
+saved values.  QUERY, on the other hand, *destroys* previously existing
+interpreter state vector, reads input, alters the state vector, and then
+does nothing about interpreting the results.
+
+Among the many things not specified by FORTH-79 or -83 about QUERY
+were the implications of its use on outstanding but not restored LOAD
+nests.  Our review of those systems whose implementors kindly provided
+the TC with documentation showed divergence in this area, and particularly
+among those systems that had extended the interpreter to access stream
+or line oriented source files.  As should be obvious, any implementor
+should have asked himself the same sorts of questions as did Anton above
+and they did not all come up with the same answers.
+
+It was clear that QUERY as defined could be practically and safely used
+in only a narrow set of circumstances and that the consequences of its
+use outside those circumstances varied widely between systems.  The TC
+declined to *define* these circumstances.  Instead we defined QUERY in
+its classical terms, to make it clear to both implementors and users that
+we were *not* trying to "fix" QUERY, thus allowing implementors and users
+to employ that word in whatever ways they might have found useful if they
+so desired.  QUERY has been "broken" for a long time; the designation of
+obsolescence simply recognizes this fact.
+
+A second, and stronger, reason for declaring QUERY to be obsolete
+is that one of the very first assignments the TC voted for itself
+was to unify the divergent source interpretation practices that had
+developed among implementations.  The TC did so by synthesizing the
+common practices into a coherent structure which included only
+nestable interpretation mechanisms.  The TC then addressed the
+robustness demanded by industrial users represented on the TC
+through introduction of CATCH/THROW exception handling.  To achieve
+the desired robustness it was logically necessary to bind the
+exception handling and interpreter state vector management
+mechanisms together, as required by section 9.3.6, which rendered
+an unstructured mechanism such as  QUERY  irreconcilably incompatible
+with the architecture of ANS Forth.
+
+Since there *is* no "correct" way to integrate this obsolete word
+with the rest of the interpretation structure described in the
+Standard, any more than there was ever a "correct" way to integrate
+it with  LOAD , implementations are not required to integrate it in
+any particular way if indeed they choose to support it at all.
+
+There is also no particular benefit to inventing new ways of
+integrating QUERY.  The TC included QUERY only to help during
+migration of existing applications to systems supporting this
+Standard, and the TC has explicitly given notice in 1.4.2 above
+that this word is a candidate for deletion.  When the TC reviews
+this Standard for revision in the future, it is a *certainty* that
+the deletion of the set of words identified in section 1.4.2 will
+appear on its agenda.
+
+The TC intends that ACCEPT and EVALUATE be used to interpret text
+from user input devices in new software, as noted in A.6.2.2040.
+
+====================================================================

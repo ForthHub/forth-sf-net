@@ -1,0 +1,52 @@
+<html><head><title>Q0009</title>
+<meta name="filename" value="q0009.txt">
+</head><body>
+<p>
+The following Request for Interpretation from Bernd Paysan is recognized
+as Q0009.  Loring Craymer has volunteered to draft a TC reponse.
+Discussion on x3j14 list please.
+<br />
+- Greg
+</p>
+<hr />
+Bernd Paysan wrote on Tue, 04 Jun 96 07:31:47 PDT
+<a href=dpans6.htm#6.1.0450>:</a>
+<blockquote>
+<p>
+  IMHO the confusion about this topic has reached a point where I need an
+  <b>official</b> statement.
+<p>
+  Problem summary: <a href="dpansf.htm">POSTPONE</a>
+  appends compilation semantics to a word.
+  Compilation semantics, reading the words of the standard, is what is
+  done when the text interpreter encounters a word in compilation state.
+  Nothing in the standard prevents you executing words with compilation
+  semantics from <a href="dpansf.htm">POSTPONE</a>
+  in interpretation state (it does not say that it
+  is ambiguous, so it looks like it is defined through the standard).
+<p>
+  Opinions: Elizabeth Rather says that compilation semantics requires to be
+  in compilation state. Anton Ertl says that the standard doesn't say this,
+  and he insists in that <a href="dpansf.htm">POSTPONE</a>
+  allows to use the compilation semantics in
+  interpretation state.
+<p>
+  Conclusion: If Anton is right, it is not allowed to make standard words
+  state smart (<tt>state @ IF &lt;compilation semantics&gt;
+                         ELSE &lt;interpretation semantics&gt; THEN</tt>).
+  While the standard only requires <a href="dpansf.htm">S&quot;</a>
+  (file wordset) and  <a href="dpansf.htm">TO</a> to be used
+  in interpretation and compilation state (with special
+  compilation behaviour), it's useful to have other standard words
+  state-smart (e.g. <a href="dpansf.htm">.&quot;</a>),
+  and all these words even cause more problems
+  (<tt>POSTPONE TO</tt> is undefined, and the standard only seems
+   to have forgotten <a href="dpansf.htm">S&quot;</a>).
+<p>
+<pre> Bernd Paysan <small>
+   "Late answers are wrong answers!"
+   http://www.informatik.tu-muenchen.de/~paysan/
+   </small></pre>
+</blockquote>
+
+</body></html>

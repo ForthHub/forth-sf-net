@@ -1,0 +1,73 @@
+<html><head><title>Q0008</title>
+<meta name="filename" value="q0008.txt">
+</head><body>
+
+<p width="80%">
+The following Request for Interpretation from Anton Ertl is recognized
+as Q0008.  Loring Craymer is assigned to draft the TC's response, please
+acknowledge to me, Loring.  Discussion on x3j14 list please.
+<br />
+- Greg
+</p>
+<hr />
+<a name="question">
+Anton Ertl wrote on  Mon, 13 May 1996 19:24:15 +0200 (MET DST)
+<a href=dpans6.htm#6.1.0450>:</a>
+<blockquote>
+<p>
+ The definition of "execution token" and of some words related to
+ execution tokens appears unclear to me.
+</p>
+<pre>
+   <a href="dpans2.htm#2.1">2.1</a> Definitions of terms
+   ...
+       execution token:
+         A value that identifies the execution semantics of a definition.
+
+   <a href="dpans6.htm#6.1.0070">6.1.0070</a> '
+   tick CORE
+   ( &lt;spaces&gt;name -- xt )
+
+   Skip leading space delimiters. Parse name delimited by a space. Find name and
+   return xt, the execution token for name. An ambiguous condition exists if
+   name is not found.
+
+   When interpreting, ' xyz EXECUTE is equivalent to xyz.
+</pre>
+<p>
+ The last sentence indicates that the value returned by ' identifies
+ the interpretation semantics, not the execution semantics.
+</p>
+<p>
+ If an implementation does define an interpretation semantics for a
+ word like "<a href="dpansf.htm">COMPILE,</a>"
+ (e.g., performing a -14 <a href="dpansf.htm">THROW</a>), is
+<pre>
+ ' COMPILE, EXECUTE
+</pre>
+ required to perform these interpretation semantics rather than the
+ execution semantics? What about other (system- or user-defined) words
+ with differing execution and interpretation semantics?
+</p>
+ <pre>
+   <a href="dpans6.htm#6.1.1550">6.1.1550</a> FIND
+   CORE
+   ( c-addr -- c-addr 0 | xt 1 | xt -1 )
+
+   Find the definition named in the counted string at c-addr. If the definition
+   is not found, return c-addr and zero. If the definition is found, return its
+   execution token xt. If the definition is immediate, also return one (1),
+   otherwise also return minus-one (-1). For a given string, the values returned
+   by <a href="dpans6.htm#6.1.1550">FIND</a> while compiling may differ from those returned while not compiling.
+</pre>
+<p>
+ Does this mean that <a href="dpans6.htm#6.1.1550">FIND</a>
+  can return a different xt when compiling than
+ when interpreting? If yes, what execution semantics do these xts
+ identify?
+<p>
+<p>
+ - anton
+</p>
+</blockquote>
+</pre></body></html>

@@ -1,0 +1,107 @@
+Greg Bailey
+From:	Greg Bailey [greg@minerva.com]
+Sent:	Sat 10 Oct 98 20:01
+To:	'J14 Floor'
+Cc:	Ray Duncan (E-mail); 'ark-gvb'
+Subject:	NOTICE! RFI Q98-011 Recognized
+The following Request for Interpretation from Michael Gassanenko is
+recognized as Q0011.  Ray Duncan is assigned to draft the TC's response.
+Discussion on x3j14 list please.
+
+Chair has ruled that at least until the November meeting we should
+continue to process RFI's as we have during our dormancy.  Please
+treat this as an active matter on the floor and assume it is in order,
+reserving any arguments about RFI's per se until the meeting, in the
+interest of conserving mail traffic.
+
+    Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+  ----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+  greg@minerva.com  |  Portland, OR  97204  US  |
+
+-----Original Message-----
+From:	Michael L. Gassanenko [SMTP:mlg@post.tepkom.ru]
+Sent:	Mon 05 Oct 98 09:16
+To:	ansforth@minerva.com
+Subject:	RFI: The way to indicate errors in case of an ambiguous conditios
+
+Document: RFI: The way to indicate errors in case of ambiguous conditions
+Author: M.L.Gassanenko
+ID: MLG98-RFI001
+Comment: The above ID is introduced by me(MLG) for my own convenience, TC is free to use or not to use it.
+History: 30 Sep 1998 - created
+	 01 Oct 1998 - file access words affected; formulated proposal 2
+			proposal 2 moved to a separate RFI (MLG98-RFI003)
+	 02 Oct 1998 - making it brief
+	 05 Oct 1998 - sent to ansforth@minerva.com
+
+---
+>6.2.2148 RESTORE-INPUT 				CORE EXT
+>	( xn ... x1 n -- flag )
+>Attempt to restore the input source specification to the state described
+>by x1 through xn. flag is true if the input source specification cannot
+>be so restored.
+>
+>An ambiguous condition exists if the input source represented by the
+>arguments is not the same as the current input source.
+>
+>See: A.6.2.2182 SAVE-INPUT
+---
+>ambiguous condition:
+>
+>A circumstance for which this Standard does not prescribe a specific
+>behavior for Forth systems and programs.
+>
+>Ambiguous conditions include such things as the absence of a needed
+>delimiter while parsing, attempted access to a nonexistent file, or
+>attempted use of a nonexistent word. An ambiguous condition also
+>exists when a Standard word is passed values that are improper
+>or out of range.
+---
+>3.4.4	Possible actions on an ambiguous condition
+>When an ambiguous condition exists, a system may take one or more of
+>the following actions:
+>  - ignore and continue;
+>  - display a message;
+>  - execute a particular word;
+>  - set interpretation state and begin text interpretation;
+>  - take other implementation-defined actions;
+>  - take implementation-dependent actions.
+>The response to a particular ambiguous condition need not be the
+>same under all circumstances.
+--
+
+In case that "the input source represented by the arguments is not
+the same as the current input source", GForth 0.3.0 throws exception
+-12 instead of returning a non-zero flag, which (the latter) one can
+expect reading the specification of RESTORE-INPUT. The letter
+of the standard allows this, but I am not sure that this is what was
+intended by the TC.
+
+Indeed, any standard word returning a flag (like RESTORE-INPUT or
+file access words) is allowed to indicate an error in two ways:
+returning a non-zero result code (flag), or throwing an exception.
+
+!!!!!!>>
+The most unpleasant thing is that code that works handling all
+errors on a system with *no* exception wordset may not work on a
+system *with* the exception wordset. For example, a hexadecimal
+browser processing the "goto location" command may crash throwing
+the exception -36 (invalid file position) even if it worked ok on
+a system with no exception mechanism.
+<<!!!!!!
+
+
+----- PROPOSAL ---------------------------------------------------
+My proposal is to specify in the standard that:
+
+Standard words shall not throw exceptions when they can report
+error conditions by returning a flag or result code.
+
+------END OF PROPOSAL --------------------------------------------
+
+Where to add this: probably, "3.4.4	Possible actions on an
+ambiguous condition" is a good place for it, although someone might
+suggest a better place.
+
+
+<end of RFI>

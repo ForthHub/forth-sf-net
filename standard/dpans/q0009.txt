@@ -1,0 +1,52 @@
+From: Greg Bailey <greg@minerva.com>
+Subject: Q0009 Request Recognized
+To: Bernd Paysan
+Cc: x3j14@minerva.com
+Date: Mon, 10 Jun 96 11:40
+
+The following Request for Interpretation from Bernd Paysan is recognized
+as Q0009.  Loring Craymer has volunteered to draft a TC reponse.
+Discussion on x3j14 list please.
+
+- Greg
+--------------------------
+Bernd Paysan wrote on Tue, 04 Jun 96 07:31:47 PDT  :
+
+> IMHO the confusion about this topic has reached a point where I need an
+> _official_ statement.
+>
+> Problem summary: POSTPONE appends compilation semantics to a word.
+> Compilation semantics, reading the words of the standard, is what is
+> done when the text interpreter encounters a word in compilation state.
+> Nothing in the standard prevents you executing words with compilation
+> semantics from POSTPONE in interpretation state (it does not say that it
+> is ambiguous, so it looks like it is defined through the standard).
+>
+> Opinions: Elizabeth Rather says that compilation semantics requires to be
+> in compilation state. Anton Ertl says that the standard doesn't say this,
+> and he insists in that POSTPONE allows to use the compilation semantics in
+> interpretation state.
+>
+> Conclusion: If Anton is right, it is not allowed to make standard words
+> state smart (state @ IF <compilation semantics> ELSE <interpretation
+> semantics> THEN). While the standard only requires S" (file wordset) and
+> TO to be used in interpretation and compilation state (with special
+> compilation behaviour), it's useful to have other standard words
+> state-smart (e.g. ."), and all these words even cause more problems
+> (POSTPONE TO is undefined, and the standard only seems to have forgotten
+> S").
+>
+> Bernd Paysan
+> "Late answers are wrong answers!"
+> http://www.informatik.tu-muenchen.de/~paysan/
+>
+>
+
+
+    Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+  ----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+  greg@minerva.com  |  Portland, OR  97204  US  |
+
+
+
+

@@ -1,0 +1,92 @@
+>From clem Mon May 13 21:21:03 PDT 1996 remote from vivo.matrixsys.com
+Date: Mon, 13 May 96 21:21:03 PDT
+From: Greg Bailey <greg@minerva.com>
+Sender: Greg Bailey <clem@vivo.matrixsys.com>
+Subject: Q0008 Request Recognized
+To: anton@mips.complang.tuwien.ac.at
+Cc: x3j14@minerva.com
+X-Mailer: Chameleon - TCP/IP for Windows by NetManage, Inc.
+Message-ID: <Chameleon.4.01.2.960513212503.clem@vivo.matrixsys.com>
+MIME-Version: 1.0
+Received: from vivo.matrixsys.com by med3.minerva.com	; Mon, 13 May 1996 18:27 PDT
+Content-Type: TEXT/PLAIN; CHARSET=ISO-8859-1
+Content-Length: 2933
+
+The following Request for Interpretation from Anton Ertl is recognized
+as Q0008.  Loring Craymer is assigned to draft the TC's response, please
+acknowledge to me, Loring.  Discussion on x3j14 list please.
+
+- Greg
+--------------------------
+
+>>From anton Mon May 13 19:24:15 +0200 1996 remote from mips.complang.tuwien.ac.at
+>Received: from mips.complang.tuwien.ac.at by med3.minerva.com	; Mon, 13 May 1996 10:27 PDT
+>Received: from a0.complang.tuwien.ac.at by mips.complang.tuwien.ac.at; (5.65v3.2/1.1.8.2/21Sep95-0129PM)
+>	id AA18425; Mon, 13 May 1996 19:24:21 +0200
+>Received: by a0.complang.tuwien.ac.at; (5.65v3.2/1.1.8.2/21Sep95-0112PM)
+>	id AA13376; Mon, 13 May 1996 19:24:15 +0200
+>From: Anton Ertl <anton@complang.tuwien.ac.at>
+>Message-Id: <9605131724.AA13376@a0.complang.tuwien.ac.at>
+>Subject: RFI: execution tokens
+>To: ansforth@minerva.com
+>Date: Mon, 13 May 1996 19:24:15 +0200 (MET DST)
+>Reply-To: anton@mips.complang.tuwien.ac.at
+>X-Mailer: ELM [version 2.4 PL25]
+>Mime-Version: 1.0
+>Content-Transfer-Encoding: 8bit
+>Content-Type: text/plain; charset=ISO-8859-1
+>Content-Length: 1599
+>
+>The definition of "execution token" and of some words related to
+>execution tokens appears unclear to me.
+>
+>  2.1 Definitions of terms
+>  ...
+>      execution token:
+>        A value that identifies the execution semantics of a definition.
+>
+>  6.1.0070 '
+>  tick CORE
+>  ( <spaces>name -- xt )
+>
+>  Skip leading space delimiters. Parse name delimited by a space. Find name and
+>  return xt, the execution token for name. An ambiguous condition exists if
+>  name is not found.
+>
+>  When interpreting, ' xyz EXECUTE is equivalent to xyz.
+>
+>The last sentence indicates that the value returned by ' identifies
+>the interpretation semantics, not the execution semantics.
+>
+>If an implementation does define an interpretation semantics for a
+>word like "COMPILE," (e.g., performing a -14 THROW), is
+>
+>' COMPILE, EXECUTE
+>
+>required to perform these interpretation semantics rather than the
+>execution semantics? What about other (system- or user-defined) words
+>with differing execution and interpretation semantics?
+>
+>  6.1.1550 FIND
+>  CORE
+>  ( c-addr -- c-addr 0 | xt 1 | xt -1 )
+>
+>  Find the definition named in the counted string at c-addr. If the definition
+>  is not found, return c-addr and zero. If the definition is found, return its
+>  execution token xt. If the definition is immediate, also return one (1),
+>  otherwise also return minus-one (-1). For a given string, the values returned
+>  by FIND while compiling may differ from those returned while not compiling.
+>
+>Does this mean that FIND can return a different xt when compiling than
+>when interpreting? If yes, what execution semantics do these xts
+>identify?
+>
+>- anton
+>
+
+  Greg Bailey     |  ATHENA Programming, Inc  |  503-295-7703  |
+----------------  |  310 SW 4th Ave  Ste 530  |  fax 295-6935  |
+greg@minerva.com  |  Portland, OR  97204  US  |
+
+
+

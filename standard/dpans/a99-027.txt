@@ -1,0 +1,78 @@
+This document is produced by NCITS TC J14 as its clarification of questions
+raised about ANSI X3.215-1994, American National Standard for Information
+Systems - Programming Languages - Forth.
+
+The questions covered herein were raised by query
+
+Q99-027, regarding compilation while in Interpretation state.
+
+There are two parts in this document:
+
+        1.  The original question as received.
+        2.  The TC's reply.
+
+===============  1.  Q99-027 as received.  ===========================
+
+From:	Philip Preston [philip@preston20.freeserve.co.uk]
+Sent:	Sat 17 Oct 98 14:44
+To:	greg@minerva.com
+Subject:	RFI
+
+Request for interpretation:
+
+Recent discussions on comp.lang.forth indicate there is a body of opinion
+which holds that one or both the following are implied by the ANSI Forth
+Standard:
+
+  1. It is an ambiguous condition for a program to perform compilation
+semantics in the interpretation state.
+
+  2. It is an ambiguous condition for a program to append semantics to the
+current definition in the interpretation state.
+
+For the avoidance of confusion could you please adjudicate on whether either
+or both of these propositions are correct?
+
+Note:  "Performing compilation semantics" and "appending semantics to the
+current definiton" frequently occur together but it is possible to have
+either one without the other, hence the need to distinguish between them.
+For example:
+
+: (S   POSTPONE ( ; IMMEDIATE
+Execution of (S involves performing the compilation semantics of ( but does
+not involve appending semantics to the current definition.
+
+: APPEND-DUP   ['] DUP COMPILE, ;
+Execution of APPEND-DUP involves appending the execution semantics of DUP to
+the current definition but does not involve performing compilation
+semantics.
+
+Thank you,
+
+Philip Preston.
+20 Warren Streeet, London W1P 5DD, U.K.
+
+===============  2.  TC Reply to Q99-027.  ===========================
+
+The answer to question (1.) is Yes.
+
+The answer to question (2.) is Yes.
+
+Brief discussion:
+
+The TC recognizes that the terminology it used in 1994 to circumscribe
+the usage of the Forth compiler by a standard program has led to some
+significant misinterpretations of TC intent.  The above answers state
+the intent of the TC.  The TC has plans to modify its terminology in
+an effort to avoid future misinterpretations of this sort.
+
+Since that plan exists, the TC does not wish to split hairs about the
+meaning of "compilation semantics" at this time, expecting that issue
+to become moot when that plan is implemented.  The TC does, however,
+with to state categorically that its original intent was to make it
+clear that standard programs without environmental dependencies shall
+not assume access to functions specific to the Forth compiler except
+while actually in the compilation state.  This remains the intent of
+the TC today.
+
+====================================================================
