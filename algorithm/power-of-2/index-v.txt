@@ -1,0 +1,9 @@
+title: power-of-2?
+description:
+
+: POWER-OF-2? ( u -- f )
+  DUP 1- AND 0=
+;
+
+leave true if there are 0 or 1 set bits in u.
+
