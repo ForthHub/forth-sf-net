@@ -7,7 +7,7 @@ description:
 
         The term CLS is used in MPE/ProForth, pfe and win32for.
         gforth/bigforth uses PAGE to clear the screen and set
-        the cursor to the homeposition.
+        the cursor to the homeposition. (paysan)
 
 example-implementation:
         gforth does...
@@ -25,4 +25,4 @@ cls-note:
         that previous lines are erased rather than scrolled up.
         (guidod)
 
---- $Id: index-v.txt,v 1.1 2001/08/14 17:58:59 guidod Exp $
+--- $Id: index-v.txt,v 1.2 2001/08/14 18:18:18 guidod Exp $

@@ -9,7 +9,7 @@ description:
   the same synopsis as PLACE which does build a counted string
   from the stringspan at the destination
 
-  On 12-Aug-2001, ../../person/Guido.Draheim did ask which
+  On 12-Aug-2001, Guido Draheim did ask which
   name would be better, and the most prominent answer came
   from Neil Bawd which does slightly recommend to use +PLACE
   instead of the old (and more common) APPEND.
@@ -56,4 +56,4 @@ Coos Haak wrote:
   APPEND was listed in both ../../mirror/comus and
   ../../mirror/toolbelt.
 
---- $Id: index-v.txt,v 1.1 2001/08/14 17:58:59 guidod Exp $
+--- $Id: index-v.txt,v 1.2 2001/08/14 18:18:18 guidod Exp $

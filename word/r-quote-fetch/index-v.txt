@@ -9,3 +9,23 @@ description:
 
 note:
   used less frequently than R'@ ../r-tick-fetch/index.html q.v.
+
+see-also:
+   ../r-tick-fetch to get the next value under the return stack
+
+   The canonic complement would be
+>  R"!
+>  ( x0 -- ) ( R: x1 x2 x3 -- x0 x2 x3 )
+
+usage:
+   The words R@ R'@ R"@ and R! R'! R"@ can simulate
+   three LOCALS living on the return stack. This is often
+   enough (plus two or three items on the data stack) and
+   it does not have the overhead for implicit ROOM/DROP and
+   a framepointer that is needed for real locals. Plus the
+   word 2R@ 2R! enables handling of a 2VALUE on the return
+   stack (guidod)
+
+-- $Id: index-v.txt,v 1.4 2001/08/14 18:18:18 guidod Exp $
+
+
