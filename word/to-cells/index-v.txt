@@ -1,4 +1,4 @@
-title: >CELLS
+title: &gt;CELLS
 description:
  >CELLS              "to-cells"
  ( n1 -- n2 )
@@ -26,18 +26,18 @@ implementation:
  One of the possible implementations is:
 
 ~~~tag[pre]tag~~~
-1 CELLS DUP 1- AND                      [IF]~~~
+1 CELLS DUP 1- AND                          [IF]~~~
                                             ~~~
 : >CELLS                                    ~~~
     [ 1 CELLS ] LITERAL /                   ~~~
 ;                                             ~~~
-                                        [ELSE]~~~
+                                            [ELSE]~~~
 : >CELLS                                                ~~~
     [ 1 CELLS                                             ~~~
-    ] 2/ [ 2/ DUP 1 > [IF] 0 >IN ! [THEN] \ do not reformat! ~~~
+    ] 2/ [ 2/ DUP 1 > [IF] 0 >IN ! [THEN]   \ do not reformat! ~~~
     DROP ]                                                   ~~~
 ;                                                            ~~~
-                                        [THEN]               ~~~
+                                            [THEN]               ~~~
 ~~~tag[/pre]tag~~~
 Please, note that the phrase [IF] 0 >IN ! [THEN] implements
 a loop.
