@@ -1,0 +1,62 @@
+title: case conversion
+
+specification-1:
+
+Reserve the following names for the following functionality:
+
+ CHAR>LOWER ( c1 -- c2 ) "char-to-lower"
+    Convert character to lowercase.
+
+ CHAR>UPPER ( c1 -- c2 )  "char-to-upper"
+    Convert character to uppercase.
+
+ All these words may be locale-dependent.
+
+discussion-1:
+
+ The name CHAR>UPPER is also known under the names UPC and toupper
+ (the latter beig the name of the corresponding C function).
+
+description-2:
+
+ The comp.lang.froth community completely failed to agree on the
+ following proposal:
+
+rejected-proposal:
+
+ Reserve the following names for the following functionalities, allowing
+ the people to choose the version they prefer:
+
+ STRING->LOWER ( c-addr len -- ) "string-into-lower" "string-dash-to-lower"
+    Convert the string at c-addr of len characters to lowercase.
+
+ STRING->UPPER ( c-addr len -- ) "string-into-upper" "string-dash-to-upper"
+    Convert the string at c-addr of len characters to uppercase.
+
+ S>LOWER ( c-adr len -- c-addr len )
+    Convert the string at c-addr of len characters to lowercase.
+
+ S>UPPER ( c-adr len -- c-addr len )
+    Convert the string at c-addr of len characters to uppercase.
+
+ All these words may be locale-dependent.
+
+discussion-2:
+
+ There have been the following arguments:
+
+ 1. If we convert a string to uppercase, in 90% of cases we need
+    its address and length after that
+
+ 2. It is important that conversion words have a same stack effect
+    compatible with NOOP, that is, that conversion words may be
+    painlessly and straightforwardly commented out or replaced by NOOP.
+
+ 3. The stack effect ( addr len -- adr len ) violates an important
+    principle that words consume their arguments.
+
+ 4. We need only one pair of string case conversion words.
+
+
+ Page written-by:
+   mlg (who prefers the ( addr len -- addr len ) stack effect)
