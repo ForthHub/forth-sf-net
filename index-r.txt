@@ -10,7 +10,20 @@ with its advantages and disadvantages.
 OTOH, there is a requirement that the
 proposals may be published here only after
 they are discussed in the comp.lang.forth
-newsgroup. (mlg)
+newsgroup.
+
+This project does not release code.
+Instead, it releases specifications
+of Forth words.
+
+In theory, this project can become a complement
+or an alternative to the ANS Forth standard,
+whatever the community needs, but only after
+investment of an amount of labour comparable to
+that spent on the ANSI standard. Anyway, if you
+feel that the ANS/ISO Forth standard should be
+improved, here's a way how and a place where
+to reach this goal. (mlg)
 
 This site is provided as a webspace to be
 used on usenet' comp.lang.forth. It is
