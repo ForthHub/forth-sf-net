@@ -1,0 +1,95 @@
+title: whether the "dual xt" approach is allowed
+description:
+
+ What the "dual xt" approach is: some words have different execution
+ tokens (xt's) for compilation and interpretation actions ("semantics").
+ One of possible implementations is to place compiling words into
+ a separate word list and change the search order when the state changes
+ so that compiling words are visible during compilation and invisible
+ dutng interpretation.
+
+ FIND is allowed by the standard to return different xt's in compilation
+ and interpretation states, while SEARCH-WORDLIST is not.
+
+ From this we conclude that systems that use the dual-xt approach
+ cannot implement the SEARCH word set.
+
+ In other words, the approach where compilation and interpretation
+ actions are two branches of one routine is "more compliant" than
+ the approach where compilation and interpretation action are
+ two routines.
+
+details:
+
+ SEARCH-WORDLIST does not depend on STATE. So it must return the same xt
+ for  S" TO" FORTH-WORDLIST  in both states.
+
+ So compiling words (including S" and TO ) have only one xt in a system
+ that supports the SEARCH word set.
+
+ The words like IF may be invisible in compilation state, but such systems
+ cannot implement the SEARCH word set in the ANS-compliant way.
+ No surprize: such systems use word lists for system purposes and
+ if the programmer also uses this mechanism, what he does may
+ interfere with what the system does (like return stack
+ manipulations may interfere with what the inner interpreter does).
+
+cited-message:
+
+>Subject: Re: (postpone babble: using postpone in interpret-mode to compile      compile-only words)
+>Date: Mon, 08 Apr 2002 17:08:14 +0400
+>From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+>Newsgroups: comp.lang.forth
+
+Guido Draheim wrote:
+>
+> Es schrieb "Elizabeth D. Rather":
+> >
+[...]
+>
+> WAIT A SECOND! so if tick, and FIND, and SEARCH-WORDLIST all return just
+> the interpretation semantics, and let them throw on compile-only words,
+> one can not use them to build ones own outer interpreter out of that.
+> That breaks with all traditions - do many systems adopt this? If gforth
+> does things differently, that's not uncommon, and here I see you do
+> endorse it, as a personal opinion, or just as a valid interpretation of
+> ans forth?
+
+SEARCH-WORDLIST has to classify each "compile-only" (so zu sagen) word
+as either immediate or non-immediate.
+
+If it's there, it must find it; then, it returns -1 or 1 depending
+on whether it's immediate or not.
+
+(Well, I [myself] think it was meant 1 means that the word must be processed
+(by the interpreter) as immediate and -1 means that it must be processed
+as non-immediate.)
+
+SEARCH-WORDLIST does not depend on STATE. So it must return the same xt
+for  S" TO" FORTH-WORDLIST  in both states.
+
+So S" and TO have only one xt in a system that supports the SEARCH word set.
+
+The words like IF may be invisible in compilation state, but such systems
+cannot implement the SEARCH word set in the ANS-compliant way.
+No surprize: such systems use word lists for system purposes and
+if the programmer also uses this mechanism, this may
+interfere with what the system does (like return stack
+manipulations may interfere with what the inner interpreter does).
+
+-- the sig (long) --
+
+The ANS Forth standard is like a compass: it shows directions
+to the North and South Poles, but most people have nothing
+to do at the poles.
+
+When you realize that you don't need neither portability across
+the whole range of ANS-compliant systems, nor to go to the pole,
+you also realize that what you will do and where you will go
+looking at the compass or into the standard is your responsibility.
+
+In addition, when you try to reach absolute portability,
+ANS Forth works no much better than the compass near the pole.
+
+-- end of sig --
+
