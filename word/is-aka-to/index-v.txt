@@ -1,0 +1,52 @@
+title: IS
+description:
+  A synonym of TO .
+
+notes:
+
+The reason behind the requirement that TO and IS are the same is
+as follows:
+
+1. Both words express the idea of assignment. It is possible
+that children of DEFER and children of VALUE require different
+methods of assignment. But this is implementation details.
+The application programmer must be allowed to think in such
+terms as "assignment" and "use". If we require the programmer
+to remember each time whether he(she) meant "write to the jump
+instruction destination" or "write to the mov instruction operand",
+we burden his(her) human memory, a very limited resource.
+So, even if children of DEFER and children of VALUE require
+different methods of assignment, the right method must be chosed
+by the computer rather than the human.
+
+2. There is existing application code written for systems
+where TO and IS are the same. It cannot be ported to
+systems where TO and IS are different. But the code written
+for systems where TO and IS are different can be ported
+to systems where TO and IS are the same.
+
+There are two more considerations:
+
+3. the compiler complexity does not suffer: if TO and IS were
+different, the compiler would have to report an error
+in the case of using IS on a wrong word (rather than
+silently generate code that crashes), so checking the type
+of the word is necessary anyway.
+
+4. The requirement that TO and IS are synonyms does not
+prevent anybody from developing a style where choice between
+TO and IS underlines some aspects that are considered important.
+
+We are aware of at least three approaches to choosing
+between the names TO and IS. They are:
+
+1) use TO with values and IS with deferred words;
+
+2) always use IS to avoid confusion between words like
+>NUMBER and identically pronounced phrases like TO NUMBER
+and 2 NUMBER ;
+
+3) use IS for long-term assignments (including those that
+are unlikely to be changed at all), use TO for short-term assignments.
+
+
