@@ -1,0 +1,9 @@
+title: 	Blandest
+website:
+	http://www.geocities.com/forthlinks
+now-local:
+	../../website/forthlinks
+e-mail:
+        blandest /at/ shaw ca
+--- $Id: index-v.txt,v 1.1 2002/01/16 07:36:08 guidod Exp $
+
