@@ -108,7 +108,10 @@ upload-user:
 	scp -rC . $(USER)@$(HTHOST):$(HTDOCS)
 
 
-
+mirror:
+	@ for i in mirror/* ; do if test -f $$i/Makefile \
+	; then $(MAKE) -C $$i mirror \
+	; fi done
 
 # -------------------------------------------------------------------
 # different approach: choose "make install" to put the wealth
@@ -172,7 +175,7 @@ install :
 	; then FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
 	; echo "(cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT)" \
 	;       (cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT) \
-	; fi ; done
+	; fi ; done ; true
 
 DISTNAME=forth-repository
 DATECODE=%Y%m%d
