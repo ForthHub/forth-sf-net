@@ -51,6 +51,25 @@ define VARIABLE X . What do you think, which character will be in
 the byte at address X after execution of 'abcd X ! ?
 The answer is that this depends on the platform.
 
+one-more-approach:
+ASCII c
 
+ASCII is a state-smart word that leaves the character code
+on the data stack when invoked in the interpretation state
+and compiles that code as a literal when invoked in the
+compilation state.
 
+ Origin : Forth-83. Widely adopted since.
 
+one-more-approach:
+
+: CH> ( "c" -- c )  SOURCE >IN @ TUCK > >R + C@ R> 0= OR 1 >IN +! ;
+
+ ( "c" -- c )
+
+  Obtain the next character from the input stream.
+  Advance >IN by one character.
+  Return -1 (the value with all bits set) in the case of end-of-line.
+
+The word CH> is useful inside user definitions and in the interpretation
+state. (It does not compile a char as a literal in compilation state.)
