@@ -30,10 +30,10 @@ it: # install while being on shell.sf.net
 	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then : \
 	; echo "chgrp -R forth $$i" \
 	;       chgrp -R forth $$i \
-	; echo "chmod -R g+w $$i" \
-	;       chmod -R g+w $$i \
-	; echo "chmod -R a+r $$i" \
-	;       chmod -R a+r $$i \
+	; echo "chmod -R g+w   $$i" \
+	;       chmod -R g+w   $$i \
+	; echo "chmod -R a+r   $$i" \
+	;       chmod -R a+r   $$i \
 	; fi fi done ; true
 
 direct: # a shortcut for building on shell.sourceforge.net itself.
@@ -88,10 +88,10 @@ perms:
 	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then : \
 	; echo "chgrp -R forth $$i" \
 	;       chgrp -R forth $$i \
-	; echo "chmod -R g+w $$i" \
-	;       chmod -R g+w $$i \
-	; echo "chmod -R a+r $$i" \
-	;       chmod -R a+r $$i \
+	; echo "chmod -R g+w   $$i" \
+	;       chmod -R g+w   $$i \
+	; echo "chmod -R a+r   $$i" \
+	;       chmod -R a+r   $$i \
 	;   for j in `find $$i -name CVS` ; do : \
 	;   test ! -f $$j/Entries || rm $$j/Entries \
 	;   test ! -f $$j/Repository || rm $$j/Repository \
