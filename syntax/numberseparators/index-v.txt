@@ -1,5 +1,11 @@
 title: Number Separator Characters
 description:
+ ANS Forth specifies that '.' (dot) must be used in both double
+ numbers and floating-point numbers, whatever notation is accepted
+ in the country where the program is used. In addition, there is
+ no way to separate groups of characters, for example, can you
+ determine from the first sight whether fffffff is a 32-bit value
+ with all bits set?
 
  DP-CHAR ( -- a-addr )
  A variable, stores ASCII value of double number separator.
@@ -13,6 +19,13 @@ description:
  A variable, stores ASCII value of the separator that is ignored.
  'NU' stands for 'not used'.
  Default: '_'
+
+Examples:
+ hex fff_ffff is clearly different from ffff_ffff
+
+ after the assignment CHAR , FP-CHAR !
+ 123,4 denotes a floating-point number while
+ 123.4 is a double number.
 
 original-messages:
  From: sfp@mpeltd.demon.co.uk (Stephen Pelc)
