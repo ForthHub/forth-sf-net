@@ -1,0 +1,44 @@
+title: HEADER words
+document-status: incomplete
+status: unstandard
+where-usable:
+  mostly in debugging/testing code, for the convenience of porting programmers
+
+description:
+
+>HEAD ( xt -- h-id )
+
+ Return h-id, the "header identifier" of a wordlist entry that
+ corresponds to xt. (Note 1: an xt may correspond to 0, 1 or many headers).
+ (Note 2: on most systems, nfa (name field address) may serve as h-id,
+ but in some exotic cases it is better to use some other value as h-id).
+
+HEAD> ( h-id -- xt )
+
+ Obtain the execution token for the word list entry identified by h-id.
+ (Note: on some systems (e.g. gForth) multiple execution tokens correspond
+ to a word list entry (compilation & interpretation actions)).
+
+H>#NAME ( h-id -- addr len )
+
+ Return address and length of a string that contains the name.
+ If FOO is defined,
+ ' FOO >HEAD H>#NAME TYPE
+ should print FOO .
+ The word H>#NAME is allowed to store the name in a buffer whose contents
+ become invalid after the next invokation of H>#NAME .
+
+HFLAGS! ( x h-id -- )
+
+HFLAGS@ ( h-id -- x )
+        NB: the meaning of bits other than &IMMEDIATE and &HIDDEN
+        is system-defined (e.g. name length & one reserved bit).
+&IMMEDIATE ( -- x ) single bit
+&HIDDEN ( -- x ) single bit; this name is reserved for this use
+H>NEXT>H ( h-id -- h-id' ) h-id' describes
+          the next-in-chain word list header. When h-id identified
+          the last-in-chain header, h-id' is zero.
+          There is no guarantee that all word list entries
+          belong to a single chain.
+
+
