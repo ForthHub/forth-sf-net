@@ -1,0 +1,35 @@
+title: Forth FAQ
+internet-url:
+	http://www.forth.org/faq.jhtml
+	ftp://ftp.forth.org/pub/Forth/FAQ
+	http://www.faqs.org/faqs/computer-lang/forth-faq
+
+the-parts:
+	./general info
+	./online resources
+	Forth ./vendors
+	Forth ./systems
+	Forth ./books
+	Forth user ./groups
+	about ./ANSForth
+
+some-quotes:
+	from ./systems
+	Forth is probably one of the most ported languages.  The number of
+	implementations I have been able to note in these pages is nothing
+	short of staggering. [...] Please note that listings marked with
+	a "?" are known to be wrong, and need to be corrected or removed.
+
+	from ./ANSForth
+	General discussion and comment on the standard should be directed
+	though the usenet news group:
+	<comp.lang.forth>
+	A separate mail list has been established for more formal
+	announcements [...] <ansforth@minerva.com>
+
+	from ./online
+	WWW Servers
+	These sites are primarily Forth-oriented.  Some are very product
+	specific, while others are more for general programming interest.
+
+--- $Id: index-v.txt,v 1.1 2000/11/01 11:32:10 guidod Exp $
