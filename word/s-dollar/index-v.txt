@@ -16,8 +16,10 @@ description:
  literal.
 
 note:
- the name for the text-printins analog of S$ is .$ ,
+ The name for the text-printins analog of S$ is .$ ,
  the word that returns a counted string should be called C$ .
+ The word PARSE-S$ may be used for parsing strings at run-time,
+ for example, when analysing config files.
 
 implementation:
  \ Match delimiters for string
@@ -30,11 +32,16 @@ implementation:
     DUP                         \ use same character for all others
   ENDCASE
 ;
-: S$ ( <char1>ccc<char2> -- addr u)
+ \ run-time routine for string parsing
+: PARSE-S$ ( <char1>ccc<char2> -- addr u)
   SOURCE >IN @ MIN +          \ address of 1st character
   C@ (S-DELIM)                \ determine second delimiter
     1 >IN +!                  \ bump past first  delimiter
   PARSE                       \ parse to  second delimiter
+;
+ \ parse string; if compiling, compile it as a literal.
+: S$ ( <char1>ccc<char2> -- addr u)
+  PARSE-S$
   STATE @ IF ( compiling)
     POSTPONE SLITERAL      \ include parsed string in definition
   THEN
@@ -49,7 +56,7 @@ implementation:
 
 authors:
  The following people contributed to the discussion:
- Tom Zegub, Jos v.d.Ven, Michael Gassanenko
+ Tom Zegub, Jos v.d.Ven, Michael Gassanenko, Ruvim Pinka
 
 discussion-archive:
  brief: http://www.forth.org.ru/~mlg/Misc/String-with-generic-delimiters.txt
