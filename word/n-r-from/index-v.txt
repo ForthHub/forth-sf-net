@@ -19,11 +19,11 @@ Implementation:
 
 \ Pop n+1 elements from the return stack.
 : NR> ( S: -- xn .. x1 n ) ( R: x1 .. xn n -- )
- R> R> SWAP >R DUP
- BEGIN DUP
- WHILE R> R> SWAP >R -ROT 1-
- REPEAT
- DROP
+    R> R> SWAP >R DUP
+    BEGIN DUP
+    WHILE R> R> SWAP >R -ROT 1-
+    REPEAT
+    DROP
 ; \ COMPILE-ONLY
 
 This implementation assumes presence of a single-cell return address
@@ -34,10 +34,10 @@ BTW, R> R> SWAP >R is the same as 2R> >R , so you may prefer:
 
 \ Pop n+1 elements from the return stack.
 : NR> ( S: -- xn .. x1 n ) ( R: x1 .. xn n -- )
- R> R> SWAP >R DUP
- BEGIN DUP
- WHILE 2R> >R -ROT 1-
- REPEAT
- DROP
+    2R> >R DUP
+    BEGIN DUP
+    WHILE 2R> >R -ROT 1-
+    REPEAT
+    DROP
 ; \ COMPILE-ONLY
 

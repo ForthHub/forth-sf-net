@@ -20,11 +20,11 @@ Implementation:
 
 \ Push n+1 elements on the return stack.
 : N>R ( S: xn .. x1 n -- ) ( R: -- x1 .. xn n )
- DUP
- BEGIN DUP
- WHILE ROT R> SWAP >R >R 1-
- REPEAT
- DROP R> SWAP >R >R
+    DUP
+    BEGIN DUP
+    WHILE ROT R> SWAP >R >R 1-
+    REPEAT
+    DROP R> SWAP >R >R
 ; \ COMPILE-ONLY
 
 This implementation assumes presence of a single-cell return address
@@ -35,11 +35,11 @@ BTW, R> SWAP >R >R is the same as R> 2>R , so you may prefer:
 
 \ Push n+1 elements on the return stack.
 : N>R ( S: xn .. x1 n -- ) ( R: -- x1 .. xn n )
- DUP
- BEGIN DUP
- WHILE ROT R> 2>R 1-
- REPEAT
- DROP R> SWAP >R >R
+    DUP
+    BEGIN DUP
+    WHILE ROT R> 2>R 1-
+    REPEAT
+    DROP R> 2>R
 ; \ COMPILE-ONLY
 
 
