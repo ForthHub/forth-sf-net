@@ -1,0 +1,71 @@
+title: /STRING
+question:
+ can /STRING return a negative value?
+
+brief-answer:
+ yes
+
+more-detailed-question:
+
+> 17.6.1.0245   /STRING    "slash-string"                      STRING
+> ( c-addr1 u1 n -- c-addr2 u2 )
+> Adjust the character string at c-addr1 by n characters.  The resulting
+> character string, specified by c-addr2 u2, begins at c-addr1 plus n
+> characters and is u1 minus n characters long.
+
+  What happens when n>u1, that is,
+  what u2 must be when u1 minus n is less than zero?
+
+  ( Elko Tchernev:)
+>  There is a very big controversy - the u2 that /STRING returns is an
+>  _unsigned_ number. All string words use an unsigned length. Therefore,
+>  if in some case /STRING returns an -1, it is actually the MAXINT.
+
+longer-answer:
+ it may be (and has been) argued what the standard was intended to mean,
+ but the newsgroup has (almost?) reached a consensus that in a good
+ system /STRING must return u1-n, even if it is negative.
+
+fully-detailed-answer:
+
+ There have been two opinions.
+
+ 1. ( Michael Gassanenko:)
+
+ The words "plus" and "minus" in 17.6.1.0245 mean the functionalities of
+ 6.1.0120 + "plus" and 6.1.0160 - "minus" respectively. There indeed is
+ an ambiguous condition when /STRING returns negative length, but it is
+ ambiguous only because when we interpret bits that represent a negative
+ number as an unsigned number, the result depends on the number of bits
+ in a cell.
+
+ 2. ( Anton Ertl:)
+
+> /STRING has the stack effect
+>
+> ( c-addr1 u1 n -- c-addr2 u2 )
+>
+> So if n>u1, the result is undefined (since u2 cannot be <0).  If you
+> want to check if /STRING underflows, you have to do it on the input
+> operands, if you want your program to be standard:
+>
+> 2dup u< over 0< 0= and if
+>   ... \ deal with underflow
+> else
+>   /string
+> then
+>
+> or somesuch.
+>
+> Nonetheless, I believe that, in a high-quality implementation
+>
+> ( c-addr u ) n /STRING -n /STRING
+>
+> should produce c-addr u for any n.  I.e., that the /STRING
+> implementation of Gforth, SwiftForth, and VFX is the better one (and
+> it's also faster).
+
+page-written-by:
+ mlg
+
+
