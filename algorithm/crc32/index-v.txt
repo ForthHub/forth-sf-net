@@ -4,5 +4,5 @@ description:
 
  ./crc32-16b.txt
  ./crc32-32b.txt
-
+ ./crc32-bit.txt
 

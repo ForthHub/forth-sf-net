@@ -1,0 +1,104 @@
+title: CRC-32 bit-by-bit
+
+description:
+
+ This code is especially useful for hardware guys
+
+implementation:
+
+0 VALUE pbyte
+0 VALUE pbit
+
+\ least significant bit first
+$001 CONSTANT mask0
+: next-mask
+  2*
+;
+
+: ptr! ( addr -- )
+  mask0 TO pbit TO pbyte
+;
+: getbit ( -- 0/1 )
+  pbyte C@ pbit AND 0<> 1 AND
+  pbit next-mask TO pbit
+  pbit $ff AND 0= IF pbyte 1+ TO pbyte mask0 TO pbit THEN
+;
+: bitdump
+  SWAP ptr!
+  8 * 0
+  ?DO
+      I $1f AND 0= IF CR THEN
+      I 3 AND 0= IF SPACE THEN
+      I 7 AND 0= IF SPACE THEN
+      getbit U.
+  LOOP
+;
+
+
+   $EDB88320 CONSTANT CRC-POLYNOMIAL
+
+   : bit-step
+           DUP  1 AND
+           getbit XOR
+           IF
+               1 RSHIFT  CRC-POLYNOMIAL XOR
+           ELSE
+               1 RSHIFT
+           THEN
+   ;
+
+   : CRC32                       ( addr u -- crc' )
+       SWAP ptr!
+       -1 SWAP
+       8 * 0 ?DO ( crc) bit-step  LOOP  INVERT
+   ;
+
+((
+   basic polynomial:
+
+     0    4    C    1    1    D    B    7
+   1 0000 0100 1100 0001 0001 1101 1011 0111
+
+   reflected polynomial:
+
+   1110 1101 1011 1000 1000 0011 0010 0000 1
+   e    d     b   8    8    3    2    0
+
+   some brief description:
+   Name   : "CRC-32"
+   Width  : 32
+   Poly   : 04C11DB7
+   Init   : FFFFFFFF
+   RefIn  : True
+   RefOut : True
+   XorOut : FFFFFFFF
+   Check  : CBF43926
+
+  CHECK
+  This field is not strictly part of the definition, and, in
+  the event of an inconsistency between this field and the other
+  field, the other fields take precedence. This field is a check
+  value that can be used as a weak validator of implementations of
+  the algorithm. The field contains the checksum obtained when the
+  ASCII string "123456789" is fed through the specified algorithm
+  (i.e. 313233... (hexadecimal) ).
+
+
+  There's a magic constant:
+
+: tt ( addr len -- )
+  2>R 2R@ CRC32 2R@ + ! 2R> 4 + CRC32 U.
+;
+
+S" 123456789" tt
+2144df1c  ok[Hex]
+S" 123" tt
+2144df1c  ok[Hex]
+HEX S" hello,world!" tt
+2144df1c  ok[Hex]
+S" l;kjdsafjklgjk'lkjgfkl'lkjsdgf!" tt
+2144df1c  ok[Hex]
+
+))
+
+
