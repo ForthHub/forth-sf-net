@@ -1,0 +1,99 @@
+Subject: Withdrawal of obsolescent features
+
+Submitted by:  Greg Bailey, Athena Programming
+
+_____________________________P R O P O S A L ___________________________
+
+
+Modify the Standard as follows:
+
+   Remove the following obsolescent words, and all references
+   thereto, from the Standard:
+
+      #TIB   CONVERT   EXPECT   FORGET   QUERY   SPAN   TIB
+
+Justification for consideration of proposal:
+
+   Agenda item a:  Implements intent of TC (as expressed in 1.4.2.)
+   Agenda item b:  Resolves an issue raised in Request For
+                Interpretation Q0010.
+
+Rationale:
+
+   These words were marked as obsolescent in the first edition of the
+   Standard for the reasons that their functions were widely
+   conflicted in existing implementations, or that their functions
+   were not reconcilable with the architecture of the Standard.
+
+   At the time, the TC intended to withdraw these words in the future
+   barring compelling evidence that this would cause problems.  Fair
+   warning of this intention was published in section 1.4.2.
+
+   Since X3.215-1994 was published, the TC has received no messages
+   arguing for reinstatement of any of these words nor arguing against
+   their withdrawal.  Indeed, the only discourse involving any of them
+   has occurred in the form of a Request For Interpretation (Q/A0010)
+   from an implementor who was uncomfortable with the TC's decision
+   against prescribing the implementation details of QUERY.  This issue
+   will become moot when QUERY has been withdrawn.
+
+   Since conditions have developed as anticipated by the TC, it is
+   therefore proposed that the TC act as it intended by withdrawing
+   these seven features.
+
+
+
+
+J14/98-013 Vote Tally Summary as closed on 11/12/98
+===================================================
+   A=Active  O=Observer
+   -1 missed one letter ballot, should vote.
+   -2 missed two letter ballots, must vote.
+      (successive meetings and quarters <80% while active)
+   +0 Declared intent, should vote, vote won't count.
+   +1 Declared & 1 vote, should vote, vote counts.
+
+   Entity                        Principal              Vote
+   -------------------           -------------------    -------------------
+A  ATHENA Programming, Inc.      Greg Bailey            Y
+A  FirmWorks                     Mitch Bradley          Y
+A  self                          Don Colburn            Y
+A  Mephistopheles Systems Design David Harralson        Y
+A  JHU/APL                       John Hayes             -
+A  NASA Goddard SFC              James Rash             Y
+A  FORTH, Inc.                   Elizabeth D. Rather    Y
+A  self                          John Rible             Y
+A  Patriot Scientific Corp       George Shaw            Y
+A  JAX RCFB                      Jack Woehr             Y
+A  LenZ Computer Consulting      Leonard Zettel         Y
+
+-1 self                          Loring Craymer         -
+-1 Nomadic Software              John K. Stevenson      Y
+
++1 Taygeta Scientific, Inc.      Skip Carter            Y
++1 Laboratory Microsystems, Inc  Ray Duncan             Y
++1 SPIIRAN                       Michael Gassanenko     N
++1 Bournemouth University        Peter Knaggs           Y
++1 MicroProcessor Engineering    Stephen Pelc           Y
+
++0 self                          Jonah Thomas           Y
++0 JWK International Corp        Larry Forsley          Y
+===========================================================================
+
+Comments:
+
+Mitch Bradley:  Down the hatch!
+
+Michael Gassanenko:
+   I vote against withdrawal of TIB and #TIB .  IMHO Forth
+   needs write access to input source parameters. (The
+   motivation is that target compilers need it.) TIB and
+   #TIB do not adequately solve this problem, but their
+   existence suggests an "almost portable" solution.
+   If we withdraw TIB and #TIB , and do not introduce some
+   other means to redirect the input source without starting
+   interpretation, the situation becomes worse.
+   OTOH, if there was e.g. SOURCE! ( addr len -- ), I would
+   vote for removal of all obsolete words.
+
+

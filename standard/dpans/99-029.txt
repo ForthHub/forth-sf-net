@@ -1,0 +1,259 @@
+Subject:  Implement Q0001
+
+Submitted by:  Mitch Bradley
+
+
+_____________________P R O P O S A L _______________________
+
+Proposal 99-029:
+
+In the definitive text for "11.6.1.2090 READ-LINE":
+
+a) Replace the second and third paragraphs as follows:
+
+Old:
+
+If the operation succeeded, flag is true and ior is zero. If a line
+terminator was received before u1 characters were read, then u2 is
+the number of characters, not including the line terminator, actually
+read (0 <= u2 <= u1 ). When u1 = u2 the line terminator has yet to
+be reached.
+
+If the operation is initiated when the value returned by FILE-POSITION
+is equal to the value returned by FILE-SIZE for the file identified by
+fileid, flag is false, ior is zero, and u2 is zero. If ior is
+non-zero, an exception occurred during the operation and ior is the
+implementation-defined I/O result code.
+
+New:
+
+"ior" is an error indicator.  If ior is zero, no error occurred during
+the operation of READ-LINE, and the values of flag and u2 are as
+defined below .  If ior is nonzero, an error occurred, ior is the
+implementation-defined I/O result code, and both flag and u2 are
+undefined.  An end-of-file condition is not considered to be an error
+in this context.
+
+"flag" is an end-of-file indicator.  As indicated above, its value
+is defined only if ior is zero.  If flag is false, the file was positioned
+at the end of the file (i.e. the values that would have been returned
+by FILE-POSITION and FILE-SIZE are equal) just prior to the execution
+of READ-LINE, and u2 is zero.  Otherwise flag is true and the value of
+u2 is as defined below.
+
+"u2" is the number of non-delimiter characters that were transferred
+into the buffer.  If u2 is equal to u1, then u1 non-delimiter
+characters were transferred into the buffer, but the process of
+handling this line is not yet complete, and additional calls to
+READ-LINE will be necessary to either read any additional characters
+of that line or to determine that there were none.  If u2 is nonzero
+and less than u1, then u2 non-delimiter characters, constituting the
+entire line (or the entire remainder thereof, if the previous call
+to READ-LINE returned u1), were transferred into the buffer.  If u2
+is zero and flag is zero, the line (or the remainder thereof, if the
+previous call to READ-LINE returned u1) was empty.
+
+For a system where lines are ordinarily terminated by a sequence of one
+or more delimiter characters, the lack of such a delimiter sequence at
+the end of the last line of the file shall not be treated as an error
+condition.  When applied to such a line, READ-LINE shall read the
+characters of that line, as above, and the next call to READ-LINE after
+all the characters have been read shall return the end-of-file
+indication.
+
+The following table summarizes the valid combinations of the return
+values and their meanings (X means undefined):
+
+ u2       flag   ior       Meaning
+ ----     ----   ---       -------
+ 0<u2<u1  true   zero      The entire line (or remainder) was read
+
+ 0        true   zero      A blank line (or remainder) was read
+
+ u1       true   zero      The first u1 characters of the line in the
+                           file were read into the buffer, and subsequent
+                           calls to READ-LINE will return the remainder
+                           of the line.
+
+ 0        false  zero      No characters were read because the
+                           end of the file was encountered
+
+ X        X      nonzero   An error occurred.
+
+
+b) Replace the last paragraph as follows:
+
+Old:
+
+At the conclusion of the operation, FILE-POSITION returns the next file
+position after the last character read.
+
+New:
+
+At the conclusion of the operation, FILE-POSITION indicates the character
+within the file to which the next call to READ-LINE will apply.  If u2
+is less than u1, the file position will be after any implementation-defined
+line-delimiter characters for the line that was read.  If u2 is equal to u1,
+the file position will be just after the last non-delimiter that was
+transferred into the buffer; in the case where the line contained exactly u1
+characters, the file position just after the READ-LINE that returns u2=u1
+will be just before any line-delimiter characters, and the file position will
+not be advanced past those delimiters until the next READ-LINE .
+
+
+
+========================================================================
+
+The original paragraph starting with "flag":
+
+"flag" is an end-of-file indicator.  As indicated above, its value
+is defined only if ior is zero.  If flag is true, the file was positioned
+at the end of the file (i.e. the values that would have been returned
+by FILE-POSITION and FILE-SIZE are equal) just prior to the execution
+of READ-LINE, and u2 is zero.  Otherwise flag is false and the value of
+u2 is as defined below.
+
+========================================================================
+
+AMENDMENTS for typos & cosmetics during balloting, accepted by author
+as friendly:
+
+1.  Interchange uses of "true" and "false" in the paragraph
+    that starts with '"flag" is an end-of-file indicator.'
+    Flag is true except when at end of file, as the current
+    Standard reads and as is shown in the table.
+
+========================================================================
+
+
+
+
+
+_________________ E N D  P R O P O S A L ___________________
+
+Subject:	LB 99-029 Summary
+
+J14 Voting Status & Eligibility
+===============================
+   A=Active  O=Observer
+   a- or o- Declared intent, should vote, vote won't count.
+   Aw Membership in warning status, termination possible
+   Tw Terminated with warning, reinstatement may be possible.
+   Ar Terminated by ITIC but requalified by fresh participation
+
+   Entity                        Principal           Vote
+   -------------------           ------------------  ----
+A  ATHENA Programming, Inc.      Greg Bailey         Y
+A  Bournemouth University        Peter Knaggs        Y
+A  (Colburn) self                Don Colburn         Y
+A  Colour Vision Systems         Charles Esson       Y
+A  Digalog Corporation           Dean Sanderson      ---
+A  FirmWorks                     Mitch Bradley       ---
+A  FORTH, Inc.                   Elizabeth Rather    Y
+A  JAX RCFB                      Jack Woehr          Y
+Ar JWK International Corp        Larry Forsley       ---
+A  LenZ Computer Consulting      Leonard Zettel      abs
+A  Mephistopheles Systems Design David Harralson     Y
+A  MicroProcessor Engineering    Stephen Pelc        Y
+Ar NASA Goddard SFC              Bob Caffrey         ---
+A  Nomadic Software              John K. Stevenson   ---
+A  Patriot Scientific Corp       George Shaw         ---
+A  (Rible) self                  John Rible          Y
+A  Sun Microsystems, Inc.        Michael Milendorf   Y
+A  Taygeta Scientific, Inc.      Skip Carter         No
+
+Tw Laboratory Microsystems, Inc  Ray Duncan         (Y)
+Tw SPIIRAN                       Michael Gassanenko (Y)
+Tw (Thomas) self                 Jonah Thomas
+
+  18 Active voting members.
+   6 Quorum for meeting (1/3 eligible, minimum 4)
+  12 Votes required to pass all 2/3 voting membership motions.
+
+Notes: 1. There were two ballots in 1Q99, and none in 2Q99.  Chair has
+          indicated that ballots 29 and followers, closing in July, are
+          3Q99 ballots.  Consequently, no member missed any ballots in
+          the second quarter and so voting records are all reset as of
+          the start of third quarter.
+
+       2. There are as of 5 Jun 99 some discrepancies with dues payments
+          which may if not resolved terminate voting status for one or
+          more members.  In this event, quorum and passage requirements
+          will be adjusted before closure of any active ballot.
+
+       3. Those terminated by ITIC may begin requalification by partici-
+          pating as prescribed for new members.========================================================================
+
+AMENDMENTS for typos & cosmetics during balloting, accepted by author
+as friendly:
+
+1.  Interchange uses of "true" and "false" in the paragraph
+    that starts with '"flag" is an end-of-file indicator.'
+    Flag is true except when at end of file, as the current
+    Standard reads and as is shown in the table.
+
+========================================================================
+
+
+Results:  10/1/1/6
+
+Comments:
+
+John Rible:
+
+   There is a mis-match between the text and the table in this
+   proposal, noted below.  [The words "true" and "false" are
+   interchanged from their correct positions in the paragraph
+   starting with '"flag" is an end-of-file indicator.'] [Mitch
+   accepted this as a friendly amendment.]
+
+   John says with vote:  I assume the text/table mismatch for
+   'flag' is resolved in favor of the text. The text is pretty
+   wordy, and some might be better in the Annex, but I don't
+   want to work on it.
+
+   [Greg observation:  It has to be the other way, i.e. the table
+   is correct and the text is wrong; the current standard is
+   as shown in the table & this proposal is not supposed to be
+   that substantive.]
+
+Skip Carter:
+
+   This proposal makes READ-LINE needlessly complicated and the
+   proposed change to FILE-POSITION would cripple the handling
+   of binary files.
+
+   Skip clarification of latter point:
+
+   By referencing the effect/results of FILE-POSITION relative
+   to READ-LINE as opposed to READ-FILE, FILE-POSITION becomes an
+   inherently text file oriented operation.  In a binary file there
+   is no meaning to the concept of line-delimiters which the new
+   wording also references.
+
+   [Mitch observation:  I'm confused about this statement.  The
+   text that refers to FILE-POSITION is in the context of the
+   definition of READ-LINE .  My model of the world is that
+   READ-LINE is inherently concerned with text files; my under-
+   standing of binary files is that they are not structured in
+   terms of lines, so the application of READ-LINE to binary
+   files is meaningless.]
+
+Dave Harralson:
+
+   Remove "implementation defined" from "implementation defined
+   line-delimiter characters" in the last paragraph.  I do not
+   think there is a way to define the line delimiter characters
+   for READ-LINE and the application will have to depend on
+   READ-LINE or lower level OS to parse these characters.
+
+Len Zettel:
+
+   Can't see anything wrong technically, but badly needs more
+   wordsmitihng.  My apologies for not attending to that earlier.
+
+Peter Knaggs:
+
+   I am not totally happy with the wording of the "ior"
+   paragraph, but am prepared to let the it though.
+

@@ -1,0 +1,185 @@
+Subject:  Implement Q0006
+
+Submitted by:  Greg Bailey
+
+
+_____________________P R O P O S A L _______________________
+
+Proposal 99-030:
+
+a) Add a new rationale section as follows:
+
+==================================================================
+
+A.3.3.3.5 Input Buffers
+
+When a standard program receives the address and length of the
+'input buffer' from the word  SOURCE  it *must* treat this infor-
+mation as though it describes a read-only region of memory.
+
+This is one of the conditions that must be met in order to compose
+code whose processing of 'input buffers' is independent of the
+physical and logical characteristics of the diverse 'input sources'
+described in the Standard.
+
+It is logically possible for an application to alter the 'input
+buffer' supplied to  EVALUATE  while that 'input buffer' is being
+processed.  This possibility exists as a special case because the
+application actually "owns" and has full control over the buffer
+in question.  As owner of the buffer, and both producer and con-
+sumer of the data it contains, the application can alter this
+buffer and manipulate  >IN  with deterministic results, assuming
+that it knows the buffer to exist in physically writable memory.
+
+The Standard does not describe this possibility because the
+implied coding methods constitute a special case which is only
+usable with  EVALUATE  and can lead to the development of source
+language syntax which is not processable from other 'input sources.'
+
+QUERY and TIB have been deprecated because while some systems have
+a discrete *place* called TIB that is exclusively used for storing
+the results of QUERY, other existing systems actually use TIB as a
+handle for the current line being interpreted from a file.  While
+applications exist making either assumption, these applications can
+obviously not work properly on both sorts of systems in general.
+
+Storing into 'input buffers' is disallowed because we permit input
+sources to nest indefinitely and it is not practical for systems
+that conserve resources to guarantee unique concurrent addressability
+of all nested input sources, nor is it practical to create separate
+save areas for all current input buffers just in case someone stored
+into one of them.  The TC specifically intends that, when input is
+coming from refreshable sources, implementations may refresh their
+buffers on un-nesting to conserve resources, and that when logically
+possible implementations may use transient, shared buffers (as is
+common practice with  LOAD  on multiprogrammed systems.)  Therefore,
+the results of storing into input buffers is stated as ambiguous,
+and may even be physically disallowed, as in the case of interpreting
+source from read only memory mapped files in some operating systems.
+
+For similar reasons the address returned by  SOURCE  is transient,
+and there is specifically no guarantee that any 'input buffer' other
+than *the* (current) 'input buffer' is addressable at any time, nor
+that this address be valid after nesting or un-nesting.  (Indeed,
+in classical multiprogrammed systems the address returned by
+SOURCE is no longer valid after using WORD .)
+
+The TC expects all Systems to process buffers provided by  EVALUATE
+in place.  This is logically necessary, in our view, since there are
+no upper limits on the lengths of these buffers.  Since it is seman-
+tically permissible to describe more than half of addressable memory
+in an EVALUATE  string it is not in general *possible* to copy such a
+string elsewhere and address it consistently with the definition
+of  SOURCE .
+
+Systems are not allowed to alter the contents of 'input buffers' pro-
+vided through  EVALUATE .  At the same time, applications are respon-
+sible for guaranteeing that the buffers they provide to  EVALUATE  are
+static in both address and content until the  EVALUATE  has completed.
+
+EVALUATE is a special case since the input buffer is literally
+the area of memory provided to EVALUATE and is as such static.
+The application "owns" the memory it occupies, and the mechanism
+for messaging the interpreter via >IN (as well as the syntax of
+Forth) implies no prefetching or preprocessing of input buffers
+is necessary or appropriate.
+
+Given these conditions, it *is* deterministic for an application to
+store (with great care) into EVALUATE buffers that it knows to be
+active, although such methods pertain exclusively to EVALUATE and
+certainly not to any other input stream source.
+
+However, any program that does this is not a standard program.
+
+------------------
+
+It has been brought to the TC's attention that there exists at least
+one implementation which moves an EVALUATE string to a separate work
+area for processing.  As a separate but related question we have
+been asked whether a system which does this, and which therefore
+fails John Hayes' test suite, is compliant.  (The test in question
+fails if the buffer address and length returned by SOURCE occurring
+in an EVALUATE string differ from the address and length of the
+argument provided to EVALUATE.)
+
+The system in question is definitely not compliant since both the
+letter of the standard and the intent of the TC are that EVALUATE
+strings be processed in place.  The fact that John's test suite is
+able to detect the deviation confirms its visibility to application
+code, assuming that any such code ever makes such a comparison.
+
+The ambiguity documented for storing into 'input buffers' serves to
+mitigate the seriousness of this noncompliance since any program
+which stores into an active EVALUATE string is environmentally depen-
+dent on the system's resolution of the ambiguity.  Nevertheless, the
+Standard clearly states that the EVALUATE string *is* the 'input
+buffer' (by definition a region of memory), and that SOURCE returns
+the address and length of this region of memory.  This is an unquali-
+fied promise to people writing standard programs, and any system
+which breaks that promise must document its nonstandard implemen-
+tations of EVALUATE and SOURCE.
+
+_________________ E N D  P R O P O S A L ___________________
+
+Subject:	LB 99-030 Summary
+
+J14 Voting Status & Eligibility
+===============================
+   A=Active  O=Observer
+   a- or o- Declared intent, should vote, vote won't count.
+   a+ or o+ First vote received, next vote counts.
+   Aw Membership in warning status, termination possible
+   Tw Terminated with warning, reinstatement may be possible.
+   Ar Terminated by ITIC but requalified by fresh participation
+
+   Entity                        Principal           Vote
+   -------------------           ------------------  ----
+A  ATHENA Programming, Inc.      Greg Bailey         Y
+A  Bournemouth University        Peter Knaggs        Y
+A  (Colburn) self                Don Colburn         Y
+A  Colour Vision Systems         Charles Esson       abs
+A  Digalog Corporation           Dean Sanderson      ---
+A  FirmWorks                     Mitch Bradley       Y
+A  FORTH, Inc.                   Elizabeth Rather    Y
+A  JAX RCFB                      Jack Woehr          Y
+Ar JWK International Corp        Larry Forsley       ---
+a+ Laboratory Microsystems, Inc  Ray Duncan          Y
+A  LenZ Computer Consulting      Leonard Zettel      Y
+A  Mephistopheles Systems Design David Harralson     Y
+A  MicroProcessor Engineering    Stephen Pelc        Y
+Ar NASA Goddard SFC              Bob Caffrey         ---
+A  Nomadic Software              John K. Stevenson   ---
+A  Patriot Scientific Corp       George Shaw         ---
+A  (Rible) self                  John Rible          Y
+a+ SPIIRAN                       Michael Gassanenko  ---
+A  Sun Microsystems, Inc.        Michael Milendorf   Y
+A  Taygeta Scientific, Inc.      Skip Carter         ---
+
+Tw (Thomas) self                 Jonah Thomas
+
+  20 Active voting members.
+   7 Quorum for meeting (1/3 eligible, minimum 4)
+  14 Votes required to pass all 2/3 voting membership motions.
+
+Notes: 1. There were two ballots in 1Q99, and none in 2Q99.  Chair has
+          indicated that ballots 29 and followers, closing in July, are
+          3Q99 ballots.  Consequently, no member missed any ballots in
+          the second quarter and so voting records are all reset as of
+          the start of third quarter.
+
+       2. There are as of 5 Jun 99 some discrepancies with dues payments
+          which may if not resolved terminate voting status for one or
+          more members.  In this event, quorum and passage requirements
+          will be adjusted before closure of any active ballot.
+
+       3. Those terminated by ITIC may begin requalification by partici-
+          pating as prescribed for new members.
+========================================================================
+
+Results:  12/0/1/7
+
+Comments:
+
+Michael Milendorf:  THE TEXT IS NOT ENOUGH FORMAL AND CONCISE
+
+

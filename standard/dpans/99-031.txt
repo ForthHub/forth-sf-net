@@ -1,0 +1,106 @@
+Subject:  Implement Q0002
+
+Submitted by:  Mitch Bradley
+
+
+_____________________P R O P O S A L _______________________
+
+Proposal 99-031:
+
+Replace the definitive text for "16.6.1.2197 SET-ORDER" as follows:
+
+Old:
+
+Set the search order to the word lists identified by widn ... wid1.
+Subsequently, word list wid1 will be searched first, and word list
+widn searched last. If n is zero, empty the search order. If n is
+minus one, set the search order to the implementation-defined minimum
+search order. The minimum search order shall include the words
+FORTH-WORDLIST and SET-ORDER. A system shall allow n to be at least
+eight.
+
+New:
+
+Set the search order to the sequence of word lists identified by widn ... wid1.
+Subsequently, word list wid1 will be searched first, and word list
+widn searched last. If n is zero, empty the search order. If n is
+minus one, set the search order to the implementation-defined minimum
+search order. The minimum search order shall include the words
+FORTH-WORDLIST and SET-ORDER. A system shall allow n to be at least
+eight.
+
+If the sequence widn ... wid1 contains duplicate entries, the search
+order shall reflect such duplications to the extent that a subsequent
+use of GET-ORDER shall return the same sequence widn ... wid1 that was
+passed to SET-ORDER .  (This stipulation makes it possible to use
+SET-ORDER and GET-ORDER to implement the semantics of 16.6.2.0715 ALSO
+and 16.6.2.2037 PREVIOUS.)  A system is permitted, but not required,
+to optimize the implementation of FIND so that such duplications do
+not increase FIND's execution time since, during a single execution of
+FIND , if a given definition is not located during the first search of
+a particular word list, it will not be located during a redundant
+search of the same word list.
+
+_________________ E N D  P R O P O S A L ___________________
+
+Subject:	LB 99-031 Summary
+
+J14 Voting Status & Eligibility
+===============================
+   A=Active  O=Observer
+   a- or o- Declared intent, should vote, vote won't count.
+   a+ or o+ First vote received, next vote counts.
+   Aw Membership in warning status, termination possible
+   Tw Terminated with warning, reinstatement may be possible.
+   Ar Terminated by ITIC but requalified by fresh participation
+
+   Entity                        Principal           Vote
+   -------------------           ------------------  ----
+A  ATHENA Programming, Inc.      Greg Bailey         Y
+A  Bournemouth University        Peter Knaggs        Y
+A  (Colburn) self                Don Colburn         Y
+A  Colour Vision Systems         Charles Esson       Y
+A  Digalog Corporation           Dean Sanderson      ---
+A  FirmWorks                     Mitch Bradley       Y
+A  FORTH, Inc.                   Elizabeth Rather    Y
+A  JAX RCFB                      Jack Woehr          Y
+Ar JWK International Corp        Larry Forsley       ---
+Ar Laboratory Microsystems, Inc  Ray Duncan          Y
+A  LenZ Computer Consulting      Leonard Zettel      Y
+A  Mephistopheles Systems Design David Harralson     Y
+A  MicroProcessor Engineering    Stephen Pelc        Y
+Ar NASA Goddard SFC              Bob Caffrey         ---
+A  Nomadic Software              John K. Stevenson   ---
+A  Patriot Scientific Corp       George Shaw         ---
+A  (Rible) self                  John Rible          Y
+a+ SPIIRAN                       Michael Gassanenko  Y
+A  Sun Microsystems, Inc.        Michael Milendorf   Y
+A  Taygeta Scientific, Inc.      Skip Carter         ---
+
+Tw (Thomas) self                 Jonah Thomas
+
+  20 Active voting members.
+   7 Quorum for meeting (1/3 eligible, minimum 4)
+  14 Votes required to pass all 2/3 voting membership motions.
+
+Notes: 1. There were two ballots in 1Q99, and none in 2Q99.  Chair has
+          indicated that ballots 29 and followers, closing in July, are
+          3Q99 ballots.  Consequently, no member missed any ballots in
+          the second quarter and so voting records are all reset as of
+          the start of third quarter.
+
+       2. There are as of 5 Jun 99 some discrepancies with dues payments
+          which may if not resolved terminate voting status for one or
+          more members.  In this event, quorum and passage requirements
+          will be adjusted before closure of any active ballot.
+
+       3. Those terminated by ITIC may begin requalification by partici-
+          pating as prescribed for new members.
+========================================================================
+
+Results:  14/0/0/6
+
+Comments:
+
+
+

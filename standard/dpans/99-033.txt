@@ -1,0 +1,156 @@
+Subject:  Clarify unstated SEARCH boundary conditions.
+
+Submitted by:  Charles Esson
+
+
+_____________________P R O P O S A L _______________________
+
+Proposal 99-033:
+
+Replace:
+17.6.1.2191 SEARCH
+STRING
+
+        ( c-addr1 u1 c-addr2 u2 -- c-addr3 u3 flag )
+
+Search the string specified by c-addr1 u1 for the string specified by
+c-addr2 u2. If flag is true, a match was found at c-addr3 with u3
+characters remaining. If flag is false there was no match and c-addr3 is
+
+c-addr1 and u3 is u1.
+
+With:
+
+17.6.1.2191 SEARCH
+STRING
+
+ ( c-addr1 u1 c-addr2 u2 -- c-addr3 u3 flag )
+
+Search the string specified by c-addr1 u1 ( the searched string) for the
+first occurrence of the string specified by c-addr2 u2 ( the find
+string). The search is to start from c-addr1. If flag is true, a string
+matching the find string was found starting at c-addr3 with u3
+characters remaining in the searched string (c-addr1+u1 always equals
+c-addr3+u3). If flag is false no match was found and c-addr3 is c-addr1
+and u3 is u1.
+
+If u2 is zero (i.e. the find string is null), then flag is true, c-addr3
+is c-addr1, and u3 is u1 (as if a match were found at the beginning of
+the searched string). If u1 is zero (i.e. the searched string is null),
+and  u2 is nonzero (i.e. the find string is not null), flag is false,
+c-addr3 is c-addr1, and u3 is u1 (as if there were no match).
+
+_________________ E N D  P R O P O S A L ___________________
+
+
+Subject:	LB 99-033 Summary
+
+J14 Voting Status & Eligibility
+===============================
+   A=Active  O=Observer
+   a- or o- Declared intent, should vote, vote won't count.
+   a+ or o+ First vote received, next vote counts.
+   Aw Membership in warning status, termination possible
+   Tw Terminated with warning, reinstatement may be possible.
+   Ar Terminated by ITIC but requalified by fresh participation
+
+   Entity                        Principal           Vote
+   -------------------           ------------------  ----
+A  ATHENA Programming, Inc.      Greg Bailey         Y
+A  Bournemouth University        Peter Knaggs        Y
+A  (Colburn) self                Don Colburn         Y
+A  Colour Vision Systems         Charles Esson       Y
+A  Digalog Corporation           Dean Sanderson      ---
+A  FirmWorks                     Mitch Bradley       Y
+A  FORTH, Inc.                   Elizabeth Rather    Y
+A  JAX RCFB                      Jack Woehr          Y
+Ar JWK International Corp        Larry Forsley       ---
+Ar Laboratory Microsystems, Inc  Ray Duncan          Y
+A  LenZ Computer Consulting      Leonard Zettel      Y
+A  Mephistopheles Systems Design David Harralson     Y
+A  MicroProcessor Engineering    Stephen Pelc        Y
+Ar NASA Goddard SFC              Bob Caffrey         ---
+A  Nomadic Software              John K. Stevenson   ---
+A  Patriot Scientific Corp       George Shaw         ---
+A  (Rible) self                  John Rible          Y
+Ar SPIIRAN                       Michael Gassanenko  Y
+A  Sun Microsystems, Inc.        Michael Milendorf   No
+A  Taygeta Scientific, Inc.      Skip Carter         ---
+
+Tw (Thomas) self                 Jonah Thomas
+
+  20 Active voting members.
+   7 Quorum for meeting (1/3 eligible, minimum 4)
+  14 Votes required to pass all 2/3 voting membership motions.
+
+Notes: 1. There were two ballots in 1Q99, and none in 2Q99.  Chair has
+          indicated that ballots 29 and followers, closing in July, are
+          3Q99 ballots.  Consequently, no member missed any ballots in
+          the second quarter and so voting records are all reset as of
+          the start of third quarter.
+
+       2. There are as of 5 Jun 99 some discrepancies with dues payments
+          which may if not resolved terminate voting status for one or
+          more members.  In this event, quorum and passage requirements
+          will be adjusted before closure of any active ballot.
+
+       3. Those terminated by ITIC may begin requalification by partici-
+          pating as prescribed for new members.
+========================================================================
+
+Results:  13/1/0/6
+
+Comments:
+
+Mitch Bradley:  I do not like the use of the phrase "is to" in the third
+    line of the definition of "SEARCH", because I don't think it is good
+    English.  I'm not going to make a big deal about it though.
+
+Dave Harralson:  Need to address the case u1=u2=0  [Greg comment: It does,
+    all cases in which u2=0 are treated the same.]
+
+Michael G:  Spaces must be inserted in formulas like c-addr1+u1 : they read
+    as "c minus addr1 plus u1" instead of "c-addr1 plus u1".  c-addr1  +  u1
+    would be less confusing.  I vote "yes" because spaces are editor's job.
+
+Michael Milendorf:
+
+               THE PROPOSAL IN GENERAL IS FINE, BUT IT CREATES
+               AN AMBIGUITY. IT WOULD BE BETTER IF I POINTED IT
+               OUT DURING THE DISCUSSION PERIOD. THE SECOND
+               PARAGRAPH STARTING FROM (If u2 is zero ... )
+               IS AMBIGUOUS BECAUSE IT PRESENTS 2 ALTERNATIVE
+               PATHS (CHECKING FOR U1=0 FIRST, OR CHECKING FOR U2=0
+               FIRST) AN IMPLEMENTOR IS FREE TO CHOOSE. THEREFORE
+               2 DIFFERENT IMPLEMENTATIONS OF "STRING" MAY
+               RESULT IN DIFFERENT EFFECTS. THE DESCRIPTION
+               MUST BE CLEAR IN WHO IS BEING CHECKED AGAINST
+               ZERO *FIRST*: U1 OR U2. THERE IS NO USE OF TRYING
+               TO FIX AN EXISTING AMBIGUITY BY PRESENTING A
+               NEW ONE, THEREFORE I SUGGEST TO IMPROVE THE
+               SECOND PARAGRAPH AND RESUBMIT THE PROPOSAL.
+
+               [Greg observation:  As with Dave's comment, the
+               above is simply untrue.  The second paragraph
+               identifies the following cases:
+
+                  a.  u2=0
+                  b.  u2 nonzero and u1 zero
+                  c.  All others (specifically, u1 nonzero).
+
+               Case (a) exists regardless of the value of u1.
+               There is no intersection between the sets a and b.
+               There is no intersection between any pair of these
+               three sets.  Hence it makes no difference what is
+               tested first, and there is no ambiguity.  Several
+               people have read this proposal in a hurry and have
+               missed "and u2 is nonzero" in the second sentence
+               of the second paragraph, but this definitely makes
+               the cases of the first and second sentences mutually
+               exclusive.]
+
+Peter Knaggs:
+           __Note that u1, u2 and u3 will have to be replaced by
+>          __len1, len2, and len3 at a later date (assuming the
+>          __widechar proposal is adopted)________________________
+
