@@ -8,4 +8,7 @@ while the word SET is not a special symbol, at least visually.
 
 Since we care first of all about code, we must choose SOMETHING! .
 
---- $Id: index-v.txt,v 1.1 2001/08/16 02:32:50 guidod Exp $
+In addition, a match for SET-SOMETHING is GET-SOMETHING, these two
+words are different by only one letter. So the characters "ET-" carry
+no information.
+
