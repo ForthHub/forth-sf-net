@@ -13,6 +13,7 @@ index:
 
 IGNORED= echo ' :'
 # IGNORED= :
+STDDISTFILES=index-r.txt index-l.txt index-r.htm index-l.htm index.header
 install:
 	@ TOPDIR=$(TOPDIR) ; test -z "$$TOPDIR" && TOPDIR=`pwd`"/.." \
 	; for i in * ; do : \
@@ -22,6 +23,11 @@ install:
 	; test ! -f $$i/IGNORE.TXT || continue \
 	; test ! -f %%i/IGNORE.TXT || continue \
 	; echo ======= $$i ========= \
+	; for f in $(STDDISTFILES) ; do : \
+	; if test -f $$f \
+	; then echo cp $$f $(DESTDIR)$(FORTHDOC)/$$f \
+	;           cp $$f $(DESTDIR)$(FORTHDOC)/$$f \
+	; fi ; done \
 	; for f in `find $$i` ; do : \
 	; case $$f \
 	in */CVS/*|*/CVS|*~|*.bak) $(IGNORED) $$f \
