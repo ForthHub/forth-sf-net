@@ -1,0 +1,32 @@
+Documents on standards made by an
+expert group are usually strictly
+copyrighted. To get the official
+standard you will need to pay for
+the expenses of the long and hard
+standardization process.
+
+Many standard groups publish their
+drafts for public review before
+pushing them through the various
+levels of standard branding, e.g.
+those from ANSI ETSI IEEE or ISO.
+
+Subdirectories may contain these
+draft documents or an overview
+excerpt of a forth-related stand-
+ardization document. Keep in mind
+that these are not the official
+and final documents - only the
+real documents are authoritive.
+
+The ones here are however close
+enough to provide a database of
+factual information related to
+discussions about standards on
+news:comp.lang.forth - they can
+be link-referenced in messages
+there. Note that all of standard-
+ization groups on forth-like
+languages are generally known to
+be represented on c.l.f. with
+members closely reading that NG.
