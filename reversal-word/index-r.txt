@@ -3,5 +3,8 @@ suggestions about how words
 reversal to standard words
 should be named.
 
-
+We do not want to recognize these
+words as commonly used; we just
+want to make the life of those
+who re-invents them easier.
 

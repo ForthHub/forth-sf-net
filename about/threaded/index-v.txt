@@ -1,8 +1,12 @@
 title: threaded code categories
-From: Fox@UltraTechnology.com
-Newsgroups: comp.lang.forth
-Date: Tue, 10 Oct 2000 17:35:16 GMT
-<pre>
+
+description:
+
+[the notes in brackets are from mlg]
+
+ From: Fox@UltraTechnology.com
+ Newsgroups: comp.lang.forth
+ Date: Tue, 10 Oct 2000 17:35:16 GMT
 
 I think we are using the terms differently.  I am using the
 definitions that have traditionally been used in Forth:
@@ -20,6 +24,14 @@ or memory location is needed for the indirect reference.
 STC, Subroutine Threaded Code, CALL/RET mechanism is used
 to thread code.  Colon definitions use CALL/RET.
 
+[STCI, Subroutine Threaded Code with Inlining. For long
+definitions, a CALL instruction is compiled,
+for example, CALL ' READ-LINE ( and READ-LINE is a procedure
+that ends with a RET ), whereas for simple definitions
+corresponding instruction sequences are generated,
+for example, ADD reg, # 1 for 1+
+and MOV reg, [reg] for @ -- mlg]
+
 Native Code, STC and native code inlining may be combined
 with loop unrolling, peephole optimizations, or register
 allocation.
@@ -27,6 +39,11 @@ allocation.
 TTC, Token Threaded Code, execution tokens use an indexed jump
 table or some other mechanism to represent Forth words with
 fewer bits.
+
+[Some people distinguish variations of token-threaded code:
+the table may contain jump instructions or pointers, and the
+thing pointed to may be either an instruction or the address
+of a routine. -- mlg]
 
 BTC, Bit Threaded Code, similar to Direct or Indirect Threaded
 code but where DOCOLON is represented by a single bit in the
@@ -67,8 +84,8 @@ Threaded and Native Code was about 4 to 1.  A wider
 application of inlining or of loop unrolling may make
 native code larger in search of higher speed.
 
-</pre>
+
 ---
 - Jeff Fox   UltraTechnology
 - www.UltraTechnology.com
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $
+--- $Id: index-v.txt,v 1.2 2001/10/31 07:36:54 mlg-r Exp $
