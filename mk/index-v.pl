@@ -99,7 +99,7 @@ if (not length $title)
 
 print "<head><title>".$title."</title>\n";
 print "<meta name=\"generator\" content=\"$0\" date=\"".(scalar localtime)."\" />\n";
-print "<link rev=\"derived-from\" content=\"$F\" />\n";
+print "<link rel=\"derived-from\" href=\"$F\" />\n";
 if (-f "$where.css")
 {
   print "<link rel=\"stylesheet\" media=\"screen\" href=\"$where.css\" />\n";
