@@ -59,9 +59,9 @@ implementation:
     ROT - >R -  ( a l a-sa ) ( r: sl-l )
     R@ <>  R@ 0< OR
     IF
-	R> DROP SOURCE!
+        R> DROP SOURCE!
     ELSE
-	2DROP R> >IN !
+        2DROP R> >IN !
     THEN
 ;
 \ if sl-l = a-sa , that is, sl+sa = a+l,
