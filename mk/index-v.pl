@@ -41,7 +41,12 @@ s{ (</dt>) ((?:.(?!</?(?:dt|hr|dl)\b))*.) }
     $b =~ s{\"} {\&quot;}gs;
     $b =~ s{\~\~\~tag\[} {\<}gs;
     $b =~ s{\]tag\~\~\~} {\>}gs;
+    $b =~ s{\~\~\~\n\r} {\<quasibr\>}gm;
+    $b =~ s{\~\~\~\r\n} {\<quasibr\>}gm;
+    $b =~ s{\~\~\~\n} {\<quasibr\>}gm;
+    $b =~ s{\~\~\~\r} {\<quasibr\>}gm;
     $b =~ s{$} {"<br>".$1 }gme;
+    $b =~ s{\<quasibr\>} {\n}gm;
     $a."<dd><tt>".$b."</tt></dd>".$c
     }gsex;
 
@@ -63,7 +68,7 @@ s{ ([\.\/]+)([\w\.\/\~\-]+) }
 }gmex;
 
 # and look for these too...
-s{ (\$Id: index-v.pl,v 1.6 2001/06/09 15:27:55 mlg Exp $]+ \$) }
+s{ (\$Id: index-v.pl,v 1.7 2001/06/09 17:04:52 mlg Exp $]+ \$) }
 { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) }
 { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
