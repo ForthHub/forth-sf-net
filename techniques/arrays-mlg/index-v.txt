@@ -18,17 +18,19 @@ Main-idea:
  : []^ ( index base -- addr ) SWAP CELLS + ;
 
  \ Example of use:
- CREATE bar 10 , 20 , 30 , 40 , ~~~tag[font color=green]tag~~~--> ok[Dec]
+ CREATE bar 10 , 20 , 30 , 40 , ~~~tag[font color=#c00000]tag~~~--> ok[Dec]
 ~~~tag[/font]tag~~~
-3 bar [] .              ~~~tag[font color=green]tag~~~-->40  ok[Dec]~~~tag[/font]tag~~~
-0 bar [] .              ~~~tag[font color=green]tag~~~-->10  ok[Dec]~~~tag[/font]tag~~~
-123 3 bar []!           ~~~tag[font color=green]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
-3 bar [] .              ~~~tag[font color=green]tag~~~-->123  ok[Dec]~~~tag[/font]tag~~~
-1 3 bar []^ +!          ~~~tag[font color=green]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
-3 bar [] .              ~~~tag[font color=green]tag~~~-->124  ok[Dec]~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=#c00000]tag~~~-->40  ok[Dec]~~~tag[/font]tag~~~
+0 bar [] .              ~~~tag[font color=#c00000]tag~~~-->10  ok[Dec]~~~tag[/font]tag~~~
+123 3 bar []!           ~~~tag[font color=#c00000]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=#c00000]tag~~~-->123  ok[Dec]~~~tag[/font]tag~~~
+1 3 bar []^ +!          ~~~tag[font color=#c00000]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=#c00000]tag~~~-->124  ok[Dec]~~~tag[/font]tag~~~
 </spanforth>
  The advantage of this method is that, like in C, pointers may be used
  in place of arrays.
+
+ (See also the "extended idea" section below.)
 
 FAQ:
  Q: Why []^ ?
@@ -41,10 +43,12 @@ FAQ:
     think about fetch operations rather than about array elements.
 
  Q: Why not &[] ?
- A: I use & for bit masks, e.g. &immediate
+ A: I use & for bit masks, e.g. &immediate . In principle, this name
+    is not bad, but the name []^ is already in use.
 
  Q: I would do this differently
- A: First see if you approach may be extended to differently-sized data.
+ A: First see if you approach may be extended to differently-sized data
+    (see the next section).
     At second, please, do not redefine the names defined here.
     These words were invented about in 1994, they were published,
     and now they are used by unpredictable number of people.
