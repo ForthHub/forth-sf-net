@@ -87,7 +87,15 @@ install:
 	@ if test -n "$(DISTFILES)" ; then : \
 	;    echo cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
 	;         cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
-	; fi
+	; fi \
+	; true
+	@ if test ! -d $(DESTDIR)$(FORTHDOC)/mk ; then : \
+	; echo mkdir $(DESTDIR)$(FORTHDOC)/mk \
+	;      mkdir $(DESTDIR)$(FORTHDOC)/mk \
+	; fi \
+	; echo cp 'mk/*.*' $(DESTDIR)$(FORTHDOC)/mk \
+	;      cp  mk/*.*  $(DESTDIR)$(FORTHDOC)/mk \
+	; true
 	@ TOPDIR="$(TOPDIR)" ; test -z "$$TOPDIR" && TOPDIR=`pwd` \
 	; for i in $(SUBDIRS) ; do : \
 	; echo mkdir $(DESTDIR)$(FORTHDOC)/$$i \

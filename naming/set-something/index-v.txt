@@ -1,0 +1,11 @@
+title: SET-SOMETHING vs SOMETHING!
+description:
+SET-SOMETHING better looks in the manual page,
+but in real code SOMETHING! looks better.
+
+This is because ! and @ are special symbols easily distinguished by the eye,
+while the word SET is not a special symbol, at least visually.
+
+Since we care first of all about code, we must choose SOMETHING! .
+
+--- $Id: index-v.txt,v 1.1 2001/08/16 02:32:50 guidod Exp $

@@ -80,7 +80,7 @@ s{ ([\.\/]+)([\w\.\/\~\-]+) }
 }gmex;
 
 # and look for these too...
-s{ (\$Id: index-v.pl,v 1.11 2001/06/28 14:15:19 guidod Exp $]+ \$) }
+s{ (\$ Id : [^\$]+ \$) }
 { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) }
 { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
@@ -98,9 +98,13 @@ if (not length $title)
 print "<head><title>".$title."</title>\n";
 print "<meta name=\"generator\" content=\"$0\" date=\"".(scalar localtime)."\" />\n";
 if (-f "$where.css")
-{ print "<link rel=\"stylesheet\" media=\"screen\" href=\"../$where.css\" />\n"; }
-elsif (-f "../forth.css")
-{ print "<link rel=\"stylesheet\" media=\"screen\" href=\"../../forth.css\" />\n"; }
+{
+  print "<link rel=\"stylesheet\" media=\"screen\" href=\"$where.css\" />\n";
+}
+elsif (-f "../../forth2.css")
+{
+  print "<link rel=\"stylesheet\" media=\"screen\" href=\"../../forth2.css\" />\n";
+}
 print "</head><body>\n";
 print $text;
 print $html_footer;

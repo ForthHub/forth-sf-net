@@ -52,13 +52,13 @@ install:
 	; then echo $(MAKE) -C $(DESTDIR)$(FORTHDOC)/$$i index \
 	;   $(MAKE) -C $(DESTDIR)$(FORTHDOC)/$$i index TOPDIR=$$TOPDIR \
 	; elif test -f $(DESTDIR)$(FORTHDOC)/$$i/$$i.html  \
-	; then echo $$i/$$i.html '->' $$i/index.html \
+	; then echo $$i: $$i.html '->' index.html \
 	; (cd $(DESTDIR)$(FORTHDOC)/$$i && $(LN_S) $$i.html index.html) \
 	; elif test -f $(DESTDIR)$(FORTHDOC)/$$i/$$i.htm  \
-	; then echo $$i/$$i.htm '->' $$i/index.html \
+	; then echo $$i: $$i.htm '->' index.html \
 	; (cd $(DESTDIR)$(FORTHDOC)/$$i && $(LN_S) $$i.htm index.html) \
 	; elif test -f $(DESTDIR)$(FORTHDOC)/$$i/index-v.txt  \
-	; then echo $$i/index-v.txt '->' $(DESTDIR)$(FORTHDOC)/$$i/index.html \
+	; then echo $$i: index-v.txt '->' index.html \
 	; (cd $(DESTDIR)$(FORTHDOC)/$$i \
 	&& perl $(TOPDIR)/mk/index-v.pl index-v.txt >index.html) \
 	; fi \
