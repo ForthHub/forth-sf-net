@@ -13,5 +13,5 @@ Ambiguous conditions:
 
 - execution of a definition begins before the definition is finished
 
-See also: HIDE ../hide/index.html
+See: HIDE ../hide/index.html
 
