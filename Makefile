@@ -143,5 +143,5 @@ dist:
 	; echo "(cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)" \
 	;       (cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
-	; echo "bzip2 -9k $$PKG.tar ; gzip -9 $$PKG.tar" \
-	; bzip2 -9 --keep $$PKG.tar ; gzip -9 $$PKG.tar
+	; echo "bzip2 -9k $$PKG.tar ; gzip -9 -f $$PKG.tar" \
+	; bzip2 -9 --keep $$PKG.tar ; gzip -9 -f $$PKG.tar
