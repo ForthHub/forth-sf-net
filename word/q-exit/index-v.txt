@@ -1,0 +1,12 @@
+title: ?EXIT
+description:
+  ?EXIT
+  ( true -- ) ( I: ra ip -- ra )
+  ( false -- ) ( I: ra ip -- ra ip )
+
+  (Notation note: "I:" is the interpretation stack label,
+  the return stack and the interpretation pointer (IP) on top.)
+
+  ?EXIT is quivalent to IF EXIT THEN . Very common.
+
+
