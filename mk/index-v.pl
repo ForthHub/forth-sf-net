@@ -88,6 +88,7 @@ my $html_footer =
     ."<sup><s>".$ENV{USER}."</s></sup>"
     ."\n</small></p>";
 
+s{([^\240\040])\240([^\240\040])}{\1\040\2}gs;
 s{\240}{\&nbsp;}gs;
 
 my $text = $_;
