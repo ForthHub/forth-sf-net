@@ -1,0 +1,58 @@
+title: Backtracking (by mlg)
+description:
+
+: ENTER ( addr -- )
+  >R
+;
+: PRO ( -- )
+   R> R> >L ENTER LDROP
+;
+: CONT ( i*x -- j*x )
+   L> >R  R@ ENTER  R> >L
+;
+
+Continuation: for a called word, it is the address of the residue
+of the calling procedure's code.
+
+PRO is a prologue of a backtrackable word.
+It moves the continuation address from the return stack to the L-stack.
+When the definition is exited, the continuation address is removed from
+the L-stack.
+
+CONT (a.k.a. YIELD ) calls the continuation. The stack effect ( i*x -- j*x )
+is due to execution of the continuation. For the time of executing
+the continuation, its address is temporarily removed from the L-stack.
+
+
+Examples:
+
+: generate-numbers (  --> i --  -->  )
+   PRO 20 0 DO I CONT LOOP
+;
+: filter-even ( i --> i --  -->  )
+  PRO DUP 2 MOD 0= IF CONT ELSE DROP THEN
+;
+: filter-3*n ( i --> i --  -->  )
+  PRO DUP 3 MOD 0= IF CONT ELSE DROP THEN
+;
+
+: t1
+    generate-numbers .
+;
+
+: t2
+    generate-numbers filter-even filter-3*n .
+;
+
+
+t1
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  ok[Dec]
+t2
+0 6 12 18  ok[Dec]
+
+
+
+author: mlg
+http://www.forth.org.ru/~mlg
+
+
