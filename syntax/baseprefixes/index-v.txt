@@ -1,5 +1,18 @@
-title: Number conversion in OTA
+title: Number conversion prefixes in OTA & other systems
 description:
+The comp.lang.forth newsgroup has agreed on the following base prefixes:
+~~~tag[pre]tag~~~
+Prefix  Conversion base     Example
+%       Binary              %10101010
+#       Decimal             #-13579
+$       Hex                 $FE00
+~~tag[/pre]tag~~~
+
+ Some Forth systems use & for decimal (it's ok to have
+ both # and & for decimal) and a prefix for the octal base
+ is not needed.
+
+description-2:
 > ... OTA input number conversion may be directed to convert a
 > particular number in a particular base, specified by a prefix character
 > from Table 9. Following such a conversion, BASE remains unchanged from
