@@ -13,5 +13,5 @@ e-mail:
 -	tzimmer at tmqaustin.com
 -	zforth at ix.netcom.com
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $ ((guidod's private notes))
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:53 guidod Exp $ ((guidod's private notes))
 

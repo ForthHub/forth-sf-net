@@ -12,5 +12,5 @@ forth:
 	sadly there is not too much information here but you can
 	always ask ../../from/Elizabeth.D.Rather
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:23 guidod Exp $ ((guidod's notes))
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:23 guidod Exp $ ((guidod's notes))
 

@@ -7,5 +7,5 @@ e-mail:
 	duz at sol-3.de
 languages:
 	(DE) ++ (EN) ++ ...
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $ ((guidod's private notes))
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:52 guidod Exp $ ((guidod's private notes))
 

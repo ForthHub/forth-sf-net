@@ -26,7 +26,7 @@ s{ (\./)([\w\.\/\~\-]+\.html) } {
     " <a href=\"$1$2\"> ".$2." </a> " }gmex;
 s{ (\./)([\w\.\/\~\-]+\.txt) } {
     " <a href=\"$1$2\"> ".$2." </a> " }gmex;
-s{ (\$Id: index-people.pl,v 1.1 2000/10/26 07:41:23 guidod Exp $]+ \$) } { "<small><tt>".$1."</small></tt>" }gmex;
+s{ (\$Id: index-people.pl,v 1.1.1.1 2000/10/26 07:41:23 guidod Exp $]+ \$) } { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) } { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
 
 s{ (<dd><ul>) ((?:.(?!</?(?:dd|dt|dl)>))*.) (</?(?:dt|dl)>) } { $1.$2."</ul></dd>".$3 }gsex;

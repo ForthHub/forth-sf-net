@@ -32,7 +32,7 @@ title: forthcode for list-handling
 > -David
 
 ---
-$Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $
+$Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:34 guidod Exp $
 ---
 here's also a longer answer from roelft <postbus@bmbcon2.demon.nl>
 <pre>

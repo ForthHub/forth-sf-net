@@ -1,4 +1,4 @@
 title: Tom Novelli
 internet-url:
 	http://retro.tunes.org/~tcn/
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:53 guidod Exp $

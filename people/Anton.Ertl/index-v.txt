@@ -13,6 +13,6 @@ e-mail:
 	anton at mips.complang.tuwien.ac.at
 languages:
 	(DE) ++ (EN) ++ ...
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:52 guidod Exp $
 	((guidod's private notes))
 

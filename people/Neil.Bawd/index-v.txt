@@ -19,5 +19,5 @@ comments:
 distinguish them by their postings, also taken that the two
 use the same mail address. Use Neil Bawd and in singular.))
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $  ((guidod's notes))
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:53 guidod Exp $  ((guidod's notes))
 

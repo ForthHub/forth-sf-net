@@ -5,4 +5,4 @@ written-by:
 	 by Tom Zimmer and Andrew McKewan.
 	../../from/Tom.Zimmer
 	../../from/Andrew.McKewan
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:22 guidod Exp $

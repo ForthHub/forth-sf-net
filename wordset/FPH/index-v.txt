@@ -11,5 +11,5 @@ internet-url:
  http://www.forth.com/Content/Handbook/Handbook.html
  - ../../from/Elizabeth.D.Rather and ../../from/Edward.K.Conklin
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:25 guidod Exp $
 

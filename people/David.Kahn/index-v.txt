@@ -1,4 +1,4 @@
 title: David Kahn
 internet-url:
 	http://playground.sun.com/~dmk/dmk.html
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:52 guidod Exp $

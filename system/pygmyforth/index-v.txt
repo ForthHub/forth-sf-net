@@ -21,4 +21,4 @@ description:
  me, is fetch a byte, store a byte, and call a subroutine.
  Everything else can be done in high-level Forth on the host.
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+--- $Id: index-v.txt,v 1.1.1.1 2000/10/26 07:41:22 guidod Exp $
