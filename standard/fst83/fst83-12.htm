@@ -1,5 +1,7 @@
 <html><head><title>FORTH-83 STANDARD - REQUIRED WORD SET</title>
 <meta name="keywords" content="forth,forth-83,standard">
+<meta name="source" content="$Source: /mnt/p1/work/forth.repo/forthhub/forth-sf-net/../forth-sf-net.cvs/forth-repository/standard/fst83/fst83-12.htm,v $">
+<meta name="date" content="$Date: 2001/07/13 11:40:20 $">
 <link rel=stylesheet type="text/css" media="screen" href="forth.css">
 </head><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
 
@@ -25,34 +27,191 @@
 
 
           Nucleus layer <a name="nucleus.layer"></a>
-
-               !  *  */  */MOD  +  +!  -  /  /MOD  0&lt;  0=  0>  1+  1-  2+
-               2-  2/  &lt;  =  &gt;  &gt;R  ?DUP  @  ABS  AND  C!  C@  CMOVE
-               CMOVE&gt;  COUNT  D+  D&lt;  DEPTH  DNEGATE  DROP  DUP  EXECUTE
+</pre><!--
+               !  *  */  */MOD  +  +!  -  /  /MOD  0<  0=  0>  1+  1-  2+
+               2-  2/  <  =  >  >R  ?DUP  @  ABS  AND  C!  C@  CMOVE
+               CMOVE>  COUNT  D+  D<  DEPTH  DNEGATE  DROP  DUP  EXECUTE
                EXIT  FILL  I  J  MAX  MIN  MOD  NEGATE  NOT  OR  OVER  PICK
-               R&gt;  R@  ROLL  ROT  SWAP  U&lt;  UM*  UM/MOD  XOR
-
-
+               R>  R@  ROLL  ROT  SWAP  U<  UM*  UM/MOD  XOR
+--><table cellpadding=0><tr><td><tt>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<tt></td><td><tt>
+<a href="#store">                  !</a>&nbsp;
+<a href="#times">                  *</a>&nbsp;
+<a href="#times-divide">          */</a>&nbsp;
+<a href="#times-divide-mod">   */MOD</a>&nbsp;
+<a href="#plus">                   +</a>&nbsp;
+<a href="#plus-store">            +!</a>&nbsp;
+<a href="#minus">                  -</a>&nbsp;
+<a href="#divide">                 /</a>&nbsp;
+<a href="#divide-mod">          /MOD</a>&nbsp;
+<a href="#zero-less">          0&lt;</a>&nbsp;
+<a href="#zero-equal">            0=</a>&nbsp;
+<a href="#zero-greater">       0&gt;</a>&nbsp;
+<a href="#one-plus">              1+</a>&nbsp;
+<a href="#one-minus">             1-</a>&nbsp;
+<a href="#two-plus">              2+</a>&nbsp;
+<br>
+<a href="#two-minus">             2-</a>&nbsp;
+<a href="#two-divide">            2/</a>&nbsp;
+<a href="#less-than">           &lt;</a>&nbsp;
+<a href="#equals">                 =</a>&nbsp;
+<a href="#greater-than">        &gt;</a>&nbsp;
+<a href="#to-r">               &gt;R</a>&nbsp;
+<a href="#question-dupe">       ?DUP</a>&nbsp;
+<a href="#fetch">                  @</a>&nbsp;
+<a href="#abs">                  ABS</a>&nbsp;
+<a href="#and">                  AND</a>&nbsp;
+<a href="#c-store">               C!</a>&nbsp;
+<a href="#c-fetch">               C@</a>&nbsp;
+<a href="#c-move">             CMOVE</a>&nbsp;
+<br>
+<a href="#c-move-up">      CMOVE&gt;</a>&nbsp;
+<a href="#count">              COUNT</a>&nbsp;
+<a href="#d-plus">                D+</a>&nbsp;
+<a href="#d-less-than">        D&lt;</a>&nbsp;
+<a href="#depth">              DEPTH</a>&nbsp;
+<a href="#d-negate">         DNEGATE</a>&nbsp;
+<a href="#drop">                DROP</a>&nbsp;
+<a href="#dupe">                 DUP</a>&nbsp;
+<a href="#execute">          EXECUTE</a>&nbsp;
+<br>
+<a href="#exit">                EXIT</a>&nbsp;
+<a href="#fill">                FILL</a>&nbsp;
+<a href="#i">                      I</a>&nbsp;
+<a href="#j">                      J</a>&nbsp;
+<a href="#max">                  MAX</a>&nbsp;
+<a href="#min">                  MIN</a>&nbsp;
+<a href="#mod">                  MOD</a>&nbsp;
+<a href="#negate">            NEGATE</a>&nbsp;
+<a href="#not">                  NOT</a>&nbsp;
+<a href="#or">                    OR</a>&nbsp;
+<a href="#over">                OVER</a>&nbsp;
+<a href="#pic">                 PICK</a>&nbsp;
+<br>
+<a href="#r-from">             R&gt;</a>&nbsp;
+<a href="#r-fetch">               R@</a>&nbsp;
+<a href="#roll">                ROLL</a>&nbsp;
+<a href="#rot">                  ROT</a>&nbsp;
+<a href="#swap">                SWAP</a>&nbsp;
+<a href="#u-less-than">        U&lt;</a>&nbsp;
+<a href="#u-m-times">            UM*</a>&nbsp;
+<a href="#u-m-divide-mod">    UM/MOD</a>&nbsp;
+<a href="#xor">                  XOR</a>&nbsp;
+</tt></td></tr></table>
+<pre>
           Device layer <a name="device.layer"></a>
-
+</pre><!--
                BLOCK  BUFFER  CR  EMIT  EXPECT  FLUSH  KEY  SAVE-BUFFERS
                SPACE  SPACES  TYPE  UPDATE
-
-
+--><table cellpadding=0><tr><td><tt>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<tt></td><td><tt>
+<a href="#block">              BLOCK</a>&nbsp;
+<a href="#buffer">            BUFFER</a>&nbsp;
+<a href="#cr">                    CR</a>&nbsp;
+<a href="#emit">                EMIT</a>&nbsp;
+<a href="#expect">            EXPECT</a>&nbsp;
+<a href="#flush">              FLUSH</a>&nbsp;
+<a href="#key">                  KEY</a>&nbsp;
+<a href="#save-buffers">SAVE-BUFFERS</a>&nbsp;
+<br>
+<a href="#space">              SPACE</a>&nbsp;
+<a href="#spaces">            SPACES</a>&nbsp;
+<a href="#type">                TYPE</a>&nbsp;
+<a href="#update">            UPDATE</a>&nbsp;
+</tt></td></tr></table>
+<pre>
           Interpreter layer <a name="interpreter.layer"></a>
-
+</pre><!--
                #  #&gt;  #S  #TIB  '  (  -TRAILING  .  .(  &lt;#  &gt;BODY  &gt;IN
                ABORT  BASE  BLK  CONVERT  DECIMAL  DEFINITIONS  FIND
                FORGET  FORTH  FORTH-83  HERE  HOLD  LOAD  PAD  QUIT  SIGN
                SPAN  TIB  U.  WORD
-
-
+--><table cellpadding=0><tr><td><tt>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<tt></td><td><tt>
+<a href="#sharp">                  #</a>&nbsp;
+<a href="#sharp-greater">      #&gt;</a>&nbsp;
+<a href="#sharp-s">               #S</a>&nbsp;
+<a href="#number-t-i-b">        #TIB</a>&nbsp;
+<a href="#tick">                   '</a>&nbsp;
+<a href="#paren">                  (</a>&nbsp;
+<a href="#dash-trailing">  -TRAILING</a>&nbsp;
+<a href="#dot">                    .</a>&nbsp;
+<a href="#dot-paren">             .(</a>&nbsp;
+<a href="#less-sharp">         &lt;#</a>&nbsp;
+<a href="#to-body">         &gt;BODY</a>&nbsp;
+<a href="#to-in">             &gt;IN</a>&nbsp;
+<br>
+<a href="#abort">              ABORT</a>&nbsp;
+<a href="#base">                BASE</a>&nbsp;
+<a href="#blk">                  BLK</a>&nbsp;
+<a href="#convert">          CONVERT</a>&nbsp;
+<a href="#decimal">          DECIMAL</a>&nbsp;
+<a href="#definitions">  DEFINITIONS</a>&nbsp;
+<a href="#find">                FIND</a>&nbsp;
+<br>
+<a href="#forget">            FORGET</a>&nbsp;
+<a href="#forth">              FORTH</a>&nbsp;
+<a href="#forth-83">        FORTH-83</a>&nbsp;
+<a href="#here">                HERE</a>&nbsp;
+<a href="#hold">                HOLD</a>&nbsp;
+<a href="#load">                LOAD</a>&nbsp;
+<a href="#pad">                  PAD</a>&nbsp;
+<a href="#quit">                QUIT</a>&nbsp;
+<a href="#sign">                SIGN</a>&nbsp;
+<br>
+<a href="#span">                SPAN</a>&nbsp;
+<a href="#tib">                  TIB</a>&nbsp;
+<a href="#u-dot">                 U.</a>&nbsp;
+<a href="#word">                WORD</a>&nbsp;
+</tt></td></tr></table>
+<pre>
           Compiler layer <a name="compiler.layer"></a>
-
-               +LOOP  ,  ."  :  ;  ABORT"  ALLOT  BEGIN  COMPILE  CONSTANT
+</pre><!--
+               +LOOP  ,  .&quot;  :  ;  ABORT&quot;  ALLOT  BEGIN  COMPILE  CONSTANT
                CREATE  DO  DOES&gt;  ELSE  IF  IMMEDIATE  LEAVE  LITERAL  LOOP
                REPEAT  STATE  THEN  UNTIL  VARIABLE  VOCABULARY  WHILE  [
                [']  [COMPILE]  ]
+--><table cellpadding=0><tr><td><tt>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<tt></td><td><tt>
+<a href="#plus-loop">         +LOOP</a>&nbsp;
+<a href="#comma">                 ,</a>&nbsp;
+<a href="#dot-quote">       .&quot;</a>&nbsp;
+<a href="#colon">                 :</a>&nbsp;
+<a href="#semi-colon">            ;</a>&nbsp;
+<a href="#abort">       ABORT&quot;</a>&nbsp;
+<a href="#allot">             ALLOT</a>&nbsp;
+<a href="#begin">             BEGIN</a>&nbsp;
+<a href="#compile">         COMPILE</a>&nbsp;
+<a href="#constant">       CONSTANT</a>&nbsp;
+<br>
+<a href="#create">           CREATE</a>&nbsp;
+<a href="#do">                   DO</a>&nbsp;
+<a href="#does">           DOES&gt;</a>&nbsp;
+<a href="#else">               ELSE</a>&nbsp;
+<a href="#if">                   IF</a>&nbsp;
+<a href="#immediate">     IMMEDIATE</a>&nbsp;
+<a href="#leave">             LEAVE</a>&nbsp;
+<a href="#literal">         LITERAL</a>&nbsp;
+<a href="#loop">               LOOP</a>&nbsp;
+<br>
+<a href="#repeat">           REPEAT</a>&nbsp;
+<a href="#state">             STATE</a>&nbsp;
+<a href="#then">               THEN</a>&nbsp;
+<a href="#until">             UNTIL</a>&nbsp;
+<a href="#variable">       VARIABLE</a>&nbsp;
+<a href="#vocabulary">   VOCABULARY</a>&nbsp;
+<a href="#while">             WHILE</a>&nbsp;
+<a href="#left-bracket"           [</a>&nbsp;
+<br>
+<a href="#bracket-tick">        [']</a>&nbsp;
+<a href="#bracket-compile">[COMPILE]</a>&nbsp;
+<a href="#right-bracket">         ]</a>&nbsp;
+</tt></td></tr></table>
+<pre>
 
 
 
