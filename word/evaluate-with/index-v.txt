@@ -1,0 +1,61 @@
+title: EVALUATE-WITH
+informal-description:
+Analogous to EVALUATE , but performs the function specified
+by the user instead of interpreting the text.
+When the function finished, the
+
+(You remember that Forth definitions can get their arguments from
+the input stream, don't you? EVALUATE-WITH is a way to ~~~tag[em]tag~~~pass~~~tag[/em]tag~~~
+input stream arguments to a function)
+
+title: EVALUATE-WITH
+informal-description:
+Analogous to EVALUATE , but performs the function specified
+by the user instead of interpreting the text.
+When the function finished, the
+
+(You remember that Forth definitions can get their arguments from
+the input stream, don't you? EVALUATE-WITH is a way to ~~~tag[em]tag~~~pass~~~tag[/em]tag~~~
+input stream arguments to a function.)
+
+description:
+EVALUATE-WITH ( i*x addr len xt -- j*x )
+
+Save the current input source specification.  Store minus-one (-1) in
+SOURCE-ID if it is present.  Make the string described by c-addr and u
+both the input source and input buffer, set >IN to zero, and perform
+the semantics identified by xt. After that, restore the prior input source
+specification.  The stack effect ( i*x -- j*x ) is due to execution of xt.
+
+implementation:
+
+: EVALUATE-WITH
+     -ROT SAVE-INPUT N>R S-SOURCE! EXECUTE NR> RESTORE-INPUT DROP
+;
+: EVALUATE
+     ['] INTERPRET EVALUATE-WITH
+;
+
+This implementation is unstandard because:
+1) ANS Forth allows RESTORE-INPUT to fail when the new input source
+is different from the old input source;
+2) the words N>R NR> S-SOURCE! are unstandard.
+
+
+notes:
+Anton Ertl used to have a special opinion about a name for this functionality.
+I am really sorry, but I can never remember the name that he proposed. (mlg)
+
+For the analogs of INCLUDE-FILE the following names were proposed:
+INCLUDE-FILE-WITH ( fid xt -- ) and INCLUDE-FILE-LINES-WITH ( fid xt -- ).
+The difference between them is that in the first case the procedure
+specified by xt is responsible for REFILLing the input buffer, while
+in the second case REFILL is invoked by INCLUDE-FILE-LINES-WITH ,
+and the procedure is invoked after each successful REFILL.
+
+The word EVALUATE-WITH is used in practice enough often;
+comp.lang.forth (almost?) unanimously agreed on that such
+functionality is necessary.
+
+(mlg)
+
