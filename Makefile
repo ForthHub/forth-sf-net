@@ -29,8 +29,8 @@ clean:
 	rm -f *~ */*~ */*/*~
 
 zip:
-	test -d pub || mkdir pub
-	zip -9r pub/forth-`date +%m%d`.zip $(SUBDIRS) mk/ *.* Makefile
+	test -d $$HOME/pub || mkdir $$HOME/pub
+	zip -9r $$HOME/pub/forth-`date +%m%d`.zip $(SUBDIRS) mk/ *.* Makefile
 
 
 

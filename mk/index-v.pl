@@ -52,11 +52,11 @@ s{ ((?:http|ftp|mailto):/*) ([\w\.\/\~\-]+) }
     }gmex;
 s{ ((?:\.\./)+)([\w\.\/\~\-]+) }
 { " <a href=\"$1$2\"> ".$2." </a> " }gmex;
-s{ (\./)([\w\.\/\~\-]+\.\w\w\w?\w?\b) }
-{ " <a href=\"$1$2\"> ".$2." </a> " }gmex;
+s{ (\s)(\./)([\w\.\/\~\-]+\.\w\w\w?\w?\b) }
+{ $1." <a href=\".".$2.$3."\"> ".$3." </a> " }gmex;
 
 # and look for these too...
-s{ (\$Id: index-v.pl,v 1.2 2000/10/27 04:21:28 guidod Exp $]+ \$) }
+s{ (\$Id: index-v.pl,v 1.3 2000/10/27 06:15:18 guidod Exp $]+ \$) }
 { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) }
 { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
