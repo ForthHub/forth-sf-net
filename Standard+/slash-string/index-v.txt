@@ -5,6 +5,12 @@ question:
 brief-answer:
  yes
 
+recommended-implementation:
+
+ : /STRING ( c-addr1 u1 n -- c-addr2 u2 )
+     TUCK - >R CHARS + R>
+ ;
+
 more-detailed-question:
 
 > 17.6.1.0245   /STRING    "slash-string"                      STRING
@@ -33,11 +39,12 @@ fully-detailed-answer:
  1. ( Michael Gassanenko:)
 
  The words "plus" and "minus" in 17.6.1.0245 mean the functionalities of
- 6.1.0120 + "plus" and 6.1.0160 - "minus" respectively. There indeed is
- an ambiguous condition when /STRING returns negative length, but it is
- ambiguous only because when we interpret bits that represent a negative
- number as an unsigned number, the result depends on the number of bits
- in a cell.
+ 6.1.0120 + "plus" and 6.1.0160 - "minus" respectively. And 6.1.0120 +
+ "plus" and 6.1.0160 - "minus" return values of type n|u. There indeed
+ is an ambiguous condition when /STRING returns negative length, but what
+ is ambiguous is not the result (a cell containing a negative number), but
+ interpretation of that result as an unsigned number (the interpretation
+ depends on the number of bits in a cell etc.)
 
  2. ( Anton Ertl:)
 
@@ -64,6 +71,27 @@ fully-detailed-answer:
 > should produce c-addr u for any n.  I.e., that the /STRING
 > implementation of Gforth, SwiftForth, and VFX is the better one (and
 > it's also faster).
+
+more-discussion:
+
+ Correct implementation of a /STRING that returns an empty string
+ when n>u1 is not trival. At first, you must not put checks on the
+ output result since the length of string may be greater than MAX-N
+ (numbers greater than MAX-N will be interpreted by 0< as negative).
+
+
+ You might write  OVER MIN /STRING  but here you again apply MIN
+ that requires two signed inputs to a (unsigned, signed) pair.
+
+ So the definition becomes
+
+ \ /STRING that returns an empty string when n>u1
+ \ !!! Returning an empty string when n>u1 *is not* the
+ \ recommended behaviour for /STRING !!!
+ : /STRING0 ( c-addr1 u1 n -- c-addr2 u2 )
+     DUP 0> IF  OVER MIN  THEN
+     TUCK - >R CHARS + R>
+ ;
 
 page-written-by:
  mlg
