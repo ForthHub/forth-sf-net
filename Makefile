@@ -27,7 +27,7 @@ default: web
 it: # install while being on shell.sf.net
 	$(MAKE) install DOCDIR=/home
 	@ for i in $(HTDOCS)/* ; do : \
-	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then \
+	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then : \
 	; echo "chgrp -R forth $$i" \
 	;       chgrp -R forth $$i \
 	; echo "chmod -R g+w $$i" \
@@ -85,7 +85,7 @@ updone:
 
 perms:
 	@ for i in $(HTDOCS)/* ; do : \
-	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then \
+	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then : \
 	; echo "chgrp -R forth $$i" \
 	;       chgrp -R forth $$i \
 	; echo "chmod -R g+w $$i" \
