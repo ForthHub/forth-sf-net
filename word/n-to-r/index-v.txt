@@ -1,6 +1,6 @@
 title: N>R
 description:
-N>R                                     "n-to-r"    CORE EXT
+N>R                                     "n-to-r"
 
      ( xn ... x1 n -- ) ( R: -- x1 ... xn n )
 
@@ -9,8 +9,8 @@ data stack item to the return stack. After that, place n
 onto the return stack.
 
 note:
-This word is a means to store the information returned by words
-like SAVE-INPUT to the return stack and thus unblock the data stack.
+The words N>R and NR> are a means to store the information returned by words
+like SAVE-INPUT to the return stack and thus unblock the data stack
 
 see:
 NR> ../n-r-from/index.html
