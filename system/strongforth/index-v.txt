@@ -1,0 +1,21 @@
+title: strongForth
+keywords:
+	opensource, typechecking, possible overloading
+internet-url:
+*	http://home.t-online.de/home/s.becher/forth
+*	../../from/Anton.Ertl
+developers:
+*	Dr. Stephan Becher
+compare-with:
+*	../../system/pfe
+
+quote-from-the-homepage:
+
+    The majority of Forth users might believe that strong static typing
+    is not Forth-like. Nevertheless, the implementation of strongForth
+    proves that Forth can incorporate static typechecking without
+    increasing the complexity of the language.
+
+--- $Id: index-v.txt,v 1.1 2002/07/04 15:36:55 guidod Exp $
+
+
