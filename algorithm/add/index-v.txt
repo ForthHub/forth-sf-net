@@ -1,4 +1,4 @@
-title:  Addition (of integers)
+title:  Addition [of integers]
 
 description:
  This is one of the most well-known Forth one-liners.
