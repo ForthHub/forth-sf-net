@@ -176,7 +176,37 @@ recommendation:
 	: STRUCT: DUP >R FIELD: TYPE-ID @ R> >TYPE-ID ! ;
 	and note that type-id implementations are used widely.
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+important-variant:
+	MPE/ProForth uses a system that has only offsets
+	available, ie. the usage of the <type-name> later
+	will simply return the size of the <type-name>. A
+	special SIZEOF operation is not needed, instead you
+	can simply adjust the defining-offset.
+>	CELL FIELD-TYPE INT   ( INT will call CREATE now )
+>	                      ( and will add CELL to the offset )
+>	STRUCT POINT
+>	  INT .X
+>	  INT .Y
+>	END-STRUCT
+>
+>       STRUCT RECT
+>         POINT .TOP-LEFT     ( that means, STRUCT has just declared )
+>         POINT .BOTTOM-RIGHT ( another FIELD-TYPE ... )
+>       END-STRUCT
+>
+>       RECT BUFFER: NEW-RECT ( outside STRUCT it leaves the offset )
+>
+>       CREATE ANOTHER-RECT   ( so you could also write )
+>         RECT ALLOT          ( this )
+
+	notice that even in this implementation the top-of-stack
+	inside STRUCT...END-STRUCT contains the current offset
+	(a.k.a. current sizeof).
+
+
+
+
+--- $Id: index-v.txt,v 1.2 2000/10/26 18:18:50 guidod Exp $
 
 
 
