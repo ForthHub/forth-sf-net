@@ -2,7 +2,10 @@ title: CRC32
 description:
  Here we present some Forth versions of the CRC32 (a.k.a. CRC-32 ) algorithm.
 
- ./crc32-16b.txt
  ./crc32-32b.txt
+ ./crc32-16b.txt
  ./crc32-bit.txt
 
+If you do need CRC-32, first read the file with the 32-bit version,
+ ./crc32-32b.txt ; then, if you need a 16-bit version, read ./crc32-16b.txt ;
+ and if you need a bit-by-bit version, read ./crc32-bit.txt .
