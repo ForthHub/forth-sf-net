@@ -1,5 +1,4 @@
 title: Number conversion in OTA
-
 description:
 > ... OTA input number conversion may be directed to convert a
 > particular number in a particular base, specified by a prefix character
@@ -16,7 +15,37 @@ Prefix  Conversion base     Example
 $       Hex                 $FE00     ~~~
 ~~~tag[/pre]tag~~~
 
+----
+notes-1:
+Guido Draheim wrote:
+>
+> I see that it refers to OTA and a decimal-prefix
+> of "#" - IIRC, this is what mpe-forth had as a
+> decimal-prefix, and most probably swiftforth too.
+>
+> However, I remember another off-NG discussion
+> with Anton Ertl and Tom Zimmer where we did
+> talk about conversion-prefixes - it was not
+> specifically about prefixes to be used, but
+> now I use "&" for a decimal-prefix which is
+> actually what I remember that was agreed upon.
+>
+> Therefore, while the commercial forthers
+> did settle to "#", in the freeforth world
+> it might look a bit different.
 
+note-2:
+SwiftForth uses a different set of number conversion prefixes:
+>
+> SwiftForth 2.2.2 09Mar2001
+> HEX  ok
+> %10 . 2  ok
+> @10 . @10 ?
+> #10 . A  ok
+> $10 . 10  ok
+> &10 . 8  ok
 
+note-3:
+Among these, only OTA is an official standard.
 
 
