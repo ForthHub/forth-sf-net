@@ -1,0 +1,20 @@
+title: FIG forth.org
+internet-url:
+	http://www.forth.org
+forth:
+	The Forth Interest Group had the largest impact with
+	the free forth implementation that we usually refer to
+	as fig-forth. The sources and the style of implementation
+	have been influencing a huge collection of other forth
+	systems. During the 80's the ansi standard defined rules
+	that were in more than one respect simply incompatible
+	with fig-forth.
+
+	The site itself has lost its impact on the forth community,
+	much of which has been overtaken by ../../website/taygeta
+	with respect to internet life.
+
+	The FIG seems to sit on the other end of the balance
+	that the ../../website/forth.com has in use.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:24 guidod Exp $ ((guidod's notes))

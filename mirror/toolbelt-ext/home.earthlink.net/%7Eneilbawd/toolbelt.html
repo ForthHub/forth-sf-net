@@ -1,0 +1,656 @@
+<HTML>
+<HEAD>
+<TITLE>Tool Belt</TITLE></HEAD><BODY BGCOLOR="#F8F4E7" TEXT="#552800" LINK="#0000A0" VLINK="#A000A0" ALINK="#00A000">
+<H2>Tool Belt</H2>
+<A HREF="toolbelt.txt"> <SMALL>TEXT</SMALL></A>
+
+<P ALIGN=RIGHT>Wil Baden 2000-08-14</P>
+
+<A HREF="toolgfth.html"> Tool Belt for GForth</A><BR>
+
+<A HREF="toolifth.html"> Tool Belt for iForth</A><BR>
+
+<A HREF="toolmpe.html"> Tool Belt for MPE</A><BR>
+
+<A HREF="toolpmf.html"> Tool Belt for PowerMacForth</A><BR>
+
+<A HREF="toolswif.html"> Tool Belt for SwiftForth</A><BR>
+
+<A HREF="toolwin.html"> Tool Belt for Win32forth</A><BR>
+
+
+<P>These are common tools used in several source files.  They are
+all given here so you can avoid duplicate definitions. Comment
+out those that you already have or are enhancing.  Many of
+them should be CODE definitions.
+</P>
+<P><B><CODE>0 [IF]</CODE></B> is the convention used for commentary, so comment
+out with <B><CODE>\</CODE></B> or <B><CODE>FALSE [IF]</CODE></B> or <B><CODE>[VOID] [IF]</CODE></B>.
+</P>
+<P><B><CODE>[VOID]</CODE></B> is an immediate constant of FALSE. It is defined
+first so it can be used to comment out sections of code.
+</P>
+<P>Definitions in Standard Forth by Wil Baden. Any similarity
+with anyone else's code is coincidental, historical, or
+inevitable.
+</P>
+<SMALL>
+
+
+<A HREF="#212B">!+</A>&nbsp;&nbsp;
+<A HREF="#23BACKSPACE2DCHAR">#BACKSPACE-CHAR</A>&nbsp;&nbsp;
+<A HREF="#23CHARS2FLINE">#CHARS/LINE</A>&nbsp;&nbsp;
+<A HREF="#23EOL2DCHAR">#EOL-CHAR</A>&nbsp;&nbsp;
+<A HREF="#23TAB2DCHAR">#TAB-CHAR</A>&nbsp;&nbsp;
+<A HREF="#27th">'th</A>&nbsp;&nbsp;
+<A HREF="#282E29">(.)</A>&nbsp;&nbsp;
+<A HREF="#2B2B">++</A>&nbsp;&nbsp;
+<A HREF="#2C22">,"</A>&nbsp;&nbsp;
+<A HREF="#2DCELL">-CELL</A>&nbsp;&nbsp;
+<A HREF="#2FSPLIT">/SPLIT</A>&nbsp;&nbsp;
+<A HREF="#32NIP">2NIP</A>&nbsp;&nbsp;
+<A HREF="#33DROP">3DROP</A>&nbsp;&nbsp;
+<A HREF="#33DUP">3DUP</A>&nbsp;&nbsp;
+<A HREF="#402B">@+</A>&nbsp;&nbsp;
+<A HREF="#ANDIF">ANDIF</A>&nbsp;&nbsp;
+<A HREF="#APPEND">APPEND</A>&nbsp;&nbsp;
+<A HREF="#APPEND2DCHAR">APPEND-CHAR</A>&nbsp;&nbsp;
+<A HREF="#BACK">BACK</A>&nbsp;&nbsp;
+<A HREF="#BL2DSCAN">BL-SCAN</A>&nbsp;&nbsp;
+<A HREF="#BL2DSKIP">BL-SKIP</A>&nbsp;&nbsp;
+<A HREF="#BOUNDS">BOUNDS</A>&nbsp;&nbsp;
+<A HREF="#C2B21">C+!</A>&nbsp;&nbsp;
+<A HREF="#CELL">CELL</A>&nbsp;&nbsp;
+<A HREF="#CELL2D">CELL-</A>&nbsp;&nbsp;
+<A HREF="#EMITS">EMITS</A>&nbsp;&nbsp;
+<A HREF="#EMPTY">EMPTY</A>&nbsp;&nbsp;
+<A HREF="#ENDS3F">ENDS?</A>&nbsp;&nbsp;
+<A HREF="#FILE2DCHECK">FILE-CHECK</A>&nbsp;&nbsp;
+<A HREF="#FOURTH">FOURTH</A>&nbsp;&nbsp;
+<A HREF="#H23">H#</A>&nbsp;&nbsp;
+<A HREF="#HIWORD">HIWORD</A>&nbsp;&nbsp;
+<A HREF="#IS2DALNUM">IS-ALNUM</A>&nbsp;&nbsp;
+<A HREF="#IS2DALPHA">IS-ALPHA</A>&nbsp;&nbsp;
+<A HREF="#IS2DDIGIT">IS-DIGIT</A>&nbsp;&nbsp;
+<A HREF="#IS2DWHITE">IS-WHITE</A>&nbsp;&nbsp;
+<A HREF="#LEXEME">LEXEME</A>&nbsp;&nbsp;
+<A HREF="#LOWORD">LOWORD</A>&nbsp;&nbsp;
+<A HREF="#MAX2DN">MAX-N</A>&nbsp;&nbsp;
+<A HREF="#MEMORY2DCHECK">MEMORY-CHECK</A>&nbsp;&nbsp;
+<A HREF="#NEXT2DWORD">NEXT-WORD</A>&nbsp;&nbsp;
+<A HREF="#NOT">NOT</A>&nbsp;&nbsp;
+<A HREF="#OFF">OFF</A>&nbsp;&nbsp;
+<A HREF="#ON">ON</A>&nbsp;&nbsp;
+<A HREF="#ORIF">ORIF</A>&nbsp;&nbsp;
+<A HREF="#OUT">OUT</A>&nbsp;&nbsp;
+<A HREF="#PLACE">PLACE</A>&nbsp;&nbsp;
+<A HREF="#R2740">R'@</A>&nbsp;&nbsp;
+<A HREF="#REWIND2DFILE">REWIND-FILE</A>&nbsp;&nbsp;
+<A HREF="#SCAN">SCAN</A>&nbsp;&nbsp;
+<A HREF="#SIGN2DBIT">SIGN-BIT</A>&nbsp;&nbsp;
+<A HREF="#SKIP">SKIP</A>&nbsp;&nbsp;
+<A HREF="#SPLIT2DNEXT2DLINE">SPLIT-NEXT-LINE</A>&nbsp;&nbsp;
+<A HREF="#STARTS3F">STARTS?</A>&nbsp;&nbsp;
+<A HREF="#STRING2C">STRING,</A>&nbsp;&nbsp;
+<A HREF="#TEMP">TEMP</A>&nbsp;&nbsp;
+<A HREF="#THIRD">THIRD</A>&nbsp;&nbsp;
+<A HREF="#TRIM">TRIM</A>&nbsp;&nbsp;
+<A HREF="#VIEW2DNEXT2DLINE">VIEW-NEXT-LINE</A>&nbsp;&nbsp;
+<A HREF="#VOCABULARY">VOCABULARY</A>&nbsp;&nbsp;
+<A HREF="#5BDEFINED5D">[DEFINED]</A>&nbsp;&nbsp;
+<A HREF="#5BUNDEFINED5D">[UNDEFINED]</A>&nbsp;&nbsp;
+<A HREF="#5BVOID5D">[VOID]</A>&nbsp;&nbsp;
+<A HREF="#5C5C">\\</A>&nbsp;&nbsp;
+
+
+</SMALL><BR>&nbsp;
+
+
+<B><PRE></PRE></B><HR>
+
+<DL><DT><B><CODE>[VOID]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="5BVOID5D"></A>
+( <I>-- flag </I>)
+<DD>Immediate FALSE. Used to comment out sections of code.
+IMMEDIATE so it can be inside definitions.
+<BR>
+</DL>
+<SMALL>Program Text 1 </SMALL><BR>&nbsp;<BR><B><PRE>FALSE CONSTANT [VOID] IMMEDIATE
+
+</PRE></B><HR>
+
+<A HREF="http://www.forth.com/Content/Handbook/Handbook.html">
+
+
+<H3>Forth Programmer's Handbook, Conklin and Rather</H3>
+</A>
+
+
+<DL><DT><B><CODE>NOT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="NOT"></A>
+( <I>x -- flag </I>)
+<DD>Identical to <B><CODE>0=</CODE></B>, used for program clarity to reverse the
+result of a previous test.
+<DT><B><CODE>[DEFINED]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="5BDEFINED5D"></A>
+( <I>"name" -- flag </I>)
+<DD>Search the dictionary for <I>name</I>. If <I>name</I> is found,
+return TRUE; otherwise return FALSE. Immediate for use in
+definitions.
+<DT><B><CODE>[UNDEFINED]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="5BUNDEFINED5D"></A>
+( <I>"name" -- flag </I>)
+<DD>Search the dictionary for <I>name</I>. If <I>name</I> is found,
+return FALSE; otherwise return TRUE. Immediate for use in
+definitions.
+<DT><B><CODE>C+!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="C2B21"></A>
+( <I>n addr -- </I>)
+<DD>Add the low-order byte of <I>n</I> to the byte at <I>addr</I>,
+removing both from the stack.
+<DT><B><CODE>EMPTY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="EMPTY"></A>
+( <I>-- </I>)
+<DD>Reset the dictionary to a predefined golden state,
+discarding all definitions and releasing all allocated
+data space beyond that state.
+<DT><B><CODE>VOCABULARY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="VOCABULARY"></A>
+( <I>"name" -- </I>)
+<DD>Create a word list <I>name</I>. Subsequent execution of <I>name</I>
+replaces the first word list in the search order with
+<I>name</I>. When <I>name</I> is made the compilation word list, new
+definitions will be added to <I>name</I>'s list.
+<BR>
+</DL>
+<P>For potential definitions, see
+<A HREF="fphuse.html"> FPH Common Usage</A>.
+
+</P>
+<SMALL>Program Text 2 </SMALL><BR>&nbsp;<BR><B><PRE>\  Definitions in "FPH Common Usage".
+
+</PRE></B><HR>
+
+<H3>Common Use</H3>
+
+<DL><DT><B><CODE>BOUNDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="BOUNDS"></A>
+( <I>str len -- str+len str </I>)
+<DD>Convert <I>str len</I> to range for DO-loop.
+<DT><B><CODE>OFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="OFF"></A>
+( <I>addr  -- </I>)
+<DD>Store 0 at <I>addr</I>. See <B><CODE>ON</CODE></B>.
+<DT><B><CODE>ON&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="ON"></A>
+( <I>addr -- </I>)
+<DD>Store -1 at <I>addr</I>. See <B><CODE>OFF</CODE></B>.
+<BR>
+</DL>
+<SMALL>Program Text 3 </SMALL><BR>&nbsp;<BR><B><PRE>: BOUNDS  ( str len -- str+len str )  OVER + SWAP ;
+
+\ : OFF  ( addr -- )  0 SWAP ! ;
+
+\ : ON  ( addr -- )  -1 SWAP ! ;
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>APPEND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="APPEND"></A>
+( <I>str len add2 -- </I>)
+<DD>Append string <I>str len</I> to the counted string at <I>addr</I>.
+AKA <B><CODE>+PLACE</CODE></B>.
+<DT><B><CODE>APPEND-CHAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="APPEND2DCHAR"></A>
+( <I>char addr -- </I>)
+<DD>Append <I>char</I> to the counted string at <I>addr</I>.
+<DT><B><CODE>PLACE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="PLACE"></A>
+( <I>str len addr -- </I>)
+<DD>Place the string <I>str len</I> at <I>addr</I>, formatting it as a
+counted string.
+<DT><B><CODE>STRING,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="STRING2C"></A>
+( <I>str len -- </I>)
+<DD>Store a string in data space as a counted string.
+<DT><B><CODE>,"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2C22"></A>
+( <I>"&lt;ccc&gt;&lt;quote&gt;" -- </I>)
+<DD>Store a quote-delimited string in data space as a counted
+string.
+<BR>
+</DL>
+<SMALL>Program Text 4 </SMALL><BR>&nbsp;<BR><B><PRE>: APPEND              ( addr1 u addr2 -- )
+    2DUP 2&gt;R  COUNT +  SWAP MOVE ( ) 2R&gt; C+! ;
+
+: APPEND-CHAR         ( char addr -- )
+    DUP &gt;R  COUNT  DUP 1+ R&gt; C!  +  C! ;
+
+: PLACE               ( str len addr -- )
+    2DUP 2&gt;R  1+  SWAP  MOVE  2R&gt; C! ;
+
+: STRING,             ( str len -- )
+    HERE  OVER 1+  ALLOT  PLACE ;
+
+: ," [CHAR] " PARSE  STRING, ; IMMEDIATE
+
+</PRE></B><HR>
+
+<H3>Stack Handling</H3>
+
+<DL><DT><B><CODE>THIRD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="THIRD"></A>
+( <I>x y z -- x y z x </I>)
+<DD>Copy third element on the stack onto top of stack.
+<DT><B><CODE>FOURTH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="FOURTH"></A>
+( <I>w x y z -- w x y z w </I>)
+<DD>Copy fourth element on the stack onto top of stack.
+<DT><B><CODE>3DUP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="33DUP"></A>
+( <I>x y z -- x y z x y z </I>)
+<DD>Copy top three elements on the stack onto top of stack.
+<DT><B><CODE>3DROP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="33DROP"></A>
+( <I>x y z -- </I>)
+<DD>Drop the top three elements from the stack.
+<DT><B><CODE>2NIP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="32NIP"></A>
+( <I>w x y z -- y z </I>)
+<DD>Drop the third and fourth elements from the stack.
+<DT><B><CODE>R'@&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="R2740"></A>
+( <I>-- x </I>)( <I>R: x y -- x y </I>)
+<DD>The second element on the return stack.
+<BR>
+</DL>
+<P>These should all be CODE definitions.
+</P>
+<SMALL>Program Text 5 </SMALL><BR>&nbsp;<BR><B><PRE>: THIRD  ( x y z -- x y z x )  2 PICK ;
+
+: FOURTH ( w x y z -- w x y z w )  3 PICK ;
+
+: 3DUP  ( x y z -- x y z x y z )  THIRD THIRD THIRD ;
+
+: 3DROP ( x y z -- )  DROP 2DROP ;
+
+: 2NIP  ( w x y z -- y z )  2SWAP 2DROP ;
+
+: R'@   S" 2R@ DROP " EVALUATE ; IMMEDIATE
+
+
+</PRE></B><HR>
+<H3>Short-Circuit Conditional</H3>
+
+<DL><DT><B><CODE>ANDIF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="ANDIF"></A>
+( <I>p ... -- flag </I>)
+<DD>Given <B><CODE>p ANDIF q THEN</CODE></B>,  <I>q</I> will not be performed if
+<I>p</I> is false.
+<DT><B><CODE>ORIF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="ORIF"></A>
+( <I>p ... -- flag </I>)
+<DD>Given <B><CODE>p ORIF q THEN</CODE></B>,  <I>q</I> will not be performed if
+<I>p</I> is true.
+<BR>
+</DL>
+<SMALL>Program Text 6 </SMALL><BR>&nbsp;<BR><B><PRE>: ANDIF  S" DUP IF DROP " EVALUATE ; IMMEDIATE
+
+: ORIF   S" DUP 0= IF DROP " EVALUATE ; IMMEDIATE
+
+</PRE></B><HR>
+
+<H3>String Handling</H3>
+
+<DL><DT><B><CODE>SCAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="SCAN"></A>
+( <I>str len char -- str+i len-i </I>)
+<DD>Look for a particular character in the specified string.
+<DT><B><CODE>SKIP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="SKIP"></A>
+( <I>str len char -- str+i len-i </I>)
+<DD>Advance past leading characters in the specified string.
+<DT><B><CODE>BACK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="BACK"></A>
+( <I>str len char -- str len-i </I>)
+<DD>Look for a particular character in the string from the
+back toward the front.
+<DT><B><CODE>/SPLIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2FSPLIT"></A>
+( <I>a m a+i m-i -- a+i m-i a i </I>)
+<DD>Split a character string <I>a m</I> at place given by <I>a+i m-i</I>.
+Called "cut-split" because "slash-split" is a tongue
+twister.
+<BR>
+</DL>
+<SMALL>Program Text 7 </SMALL><BR>&nbsp;<BR><B><PRE>: SCAN           ( str len char -- str+i len-i )
+    &gt;R  BEGIN  DUP WHILE  OVER C@ R@ -
+        WHILE  1 /STRING  REPEAT THEN
+    R&gt; DROP ;
+
+: SKIP           ( str len char -- str+i len-i )
+   &gt;R  BEGIN  DUP WHILE  OVER C@ R@ =
+        WHILE  1 /STRING  REPEAT THEN
+    R&gt; DROP ;
+
+: BACK           ( str len char -- str len-i )
+    &gt;R  BEGIN  DUP WHILE
+        1-  2DUP + C@  R@ =
+    UNTIL 1+ THEN
+    R&gt; DROP ;
+
+: /SPLIT  ( a m b n -- b n a m-n )  DUP &gt;R  2SWAP  R&gt; - ;
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>IS-WHITE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="IS2DWHITE"></A>
+( <I>char -- flag </I>)
+<DD>Test char for white space.
+<DT><B><CODE>TRIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="TRIM"></A>
+( <I>str len -- str len-i </I>)
+<DD>Trim white space from end of string.
+<DT><B><CODE>BL-SCAN&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="BL2DSCAN"></A>
+( <I>str len -- str+i len-i </I>)
+<DD>Look for white space from start of string
+<DT><B><CODE>BL-SKIP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="BL2DSKIP"></A>
+( <I>str len -- str+i len-i </I>)
+<DD>Skip over white space at start of string.
+<BR>
+</DL>
+<SMALL>Program Text 8 </SMALL><BR>&nbsp;<BR><B><PRE>: IS-WHITE       ( char -- flag )  33 - 0&lt; ;
+
+: TRIM           ( str len -- str len-i )
+    BEGIN  DUP WHILE
+        1-  2DUP + C@ IS-WHITE NOT
+    UNTIL 1+ THEN ;
+
+: BL-SCAN        ( str len -- str+i len-i )
+    BEGIN  DUP WHILE  OVER C@ IS-WHITE NOT
+    WHILE  1 /STRING  REPEAT THEN ;
+
+: BL-SKIP        ( str len -- str+i len-i )
+    BEGIN  DUP WHILE  OVER C@ IS-WHITE
+    WHILE  1 /STRING  REPEAT THEN ;
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>STARTS?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="STARTS3F"></A>
+( <I>str len pattern len2 -- str len flag </I>)
+<DD>Check start of string.
+<DT><B><CODE>ENDS?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="ENDS3F"></A>
+( <I>str len pattern len2 -- str len flag </I>)
+<DD>Check end of string.
+<BR>
+</DL>
+<SMALL>Program Text 9 </SMALL><BR>&nbsp;<BR><B><PRE>: STARTS?  ( str len pattern len2 -- str len flag )
+    DUP &gt;R  2OVER  R&gt; MIN  COMPARE 0= ;
+
+: ENDS?  ( str len pattern len2 -- str len flag )
+    DUP &gt;R  2OVER  DUP R&gt; - /STRING  COMPARE 0= ;
+
+</PRE></B><HR>
+
+<H3>Character Tests</H3>
+
+<DL><DT><B><CODE>IS-DIGIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="IS2DDIGIT"></A>
+( <I>char -- flag </I>)
+<DD>Test <I>char</I> for digit [0-9].
+<DT><B><CODE>IS-ALPHA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="IS2DALPHA"></A>
+( <I>char -- flag </I>)
+<DD>Test <I>char</I> for alphabetic [A-Za-z].
+<DT><B><CODE>IS-ALNUM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="IS2DALNUM"></A>
+( <I>char -- flag </I>)
+<DD>Test <I>char</I> for alphanumeric [A-Za-z0-9].
+<BR>
+</DL>
+<SMALL>Program Text 10 </SMALL><BR>&nbsp;<BR><B><PRE>: IS-DIGIT  ( char -- flag )  [CHAR] 0 -  10 U&lt; ;
+: IS-ALPHA  ( char -- flag )  32 OR  [CHAR] a -  26 U&lt; ;
+: IS-ALNUM  ( char -- flag )
+    DUP IS-ALPHA  ORIF  DUP IS-DIGIT  THEN  NIP ;
+
+</PRE></B><HR>
+
+<H3>Common Constants</H3>
+
+<DL><DT><B><CODE>#BACKSPACE-CHAR&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="23BACKSPACE2DCHAR"></A>
+( <I>-- char </I>)
+<DD>Backspace character.
+<DT><B><CODE>#CHARS/LINE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="23CHARS2FLINE"></A>
+( <I>-- n </I>)
+<DD>Preferred width of line in source files.  Suit yourself.
+<DT><B><CODE>#EOL-CHAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="23EOL2DCHAR"></A>
+( <I>-- char </I>)
+<DD>End-of-line character.  13 for Mac and DOS, 10 for Unix.
+<DT><B><CODE>#TAB-CHAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="23TAB2DCHAR"></A>
+( <I>-- char </I>)
+<DD>Tab character.
+<DT><B><CODE>MAX-N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="MAX2DN"></A>
+( <I>-- n </I>)
+<DD>Largest usable signed integer.
+<DT><B><CODE>SIGN-BIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="SIGN2DBIT"></A>
+( <I>-- n </I>)
+<DD>1-bit mask for the sign bit.
+<DT><B><CODE>CELL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="CELL"></A>
+( <I>-- n </I>)
+<DD>Address units (i.e. bytes) in a cell.
+<DT><B><CODE>-CELL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2DCELL"></A>
+( <I>-- n </I>)
+<DD>Negative of address units in a cell.
+<BR>
+</DL>
+<SMALL>Program Text 11 </SMALL><BR>&nbsp;<BR><B><PRE> 8 CONSTANT #BACKSPACE-CHAR
+62 VALUE    #CHARS/LINE
+13 CONSTANT #EOL-CHAR
+ 9 CONSTANT #TAB-CHAR
+
+TRUE 1 RSHIFT        CONSTANT MAX-N
+TRUE 1 RSHIFT INVERT CONSTANT SIGN-BIT
+
+ 1 CELLS CONSTANT CELL
+-1 CELLS CONSTANT -CELL
+
+</PRE></B><HR>
+<H3>Filter Handling</H3>
+
+<DL><DT><B><CODE>SPLIT-NEXT-LINE&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="SPLIT2DNEXT2DLINE"></A>
+( <I>src . -- src' . str len </I>)
+<DD>Split the next line from the string.
+<DT><B><CODE>VIEW-NEXT-LINE&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="VIEW2DNEXT2DLINE"></A>
+( <I>src . str len -- src . str len str2 len2 </I>)
+<DD>Copy next line above current line.
+<DT><B><CODE>OUT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="OUT"></A>
+( <I>-- addr </I>)
+<DD>Promiscuous variable.
+<DT><B><CODE>TEMP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="TEMP"></A>
+( <I>-- addr </I>)
+<DD>Promiscuous variable.
+<BR>
+</DL>
+<SMALL>Program Text 12 </SMALL><BR>&nbsp;<BR><B><PRE>: SPLIT-NEXT-LINE   ( src . -- src' . str len )
+    2DUP #EOL-CHAR SCAN
+    DUP &gt;R  1 /STRING  2SWAP R&gt; - ;
+
+: VIEW-NEXT-LINE  ( src . str len -- src . str len str2 len2 )
+    2OVER 2DUP #EOL-CHAR SCAN NIP - ;
+
+VARIABLE OUT
+VARIABLE TEMP
+
+</PRE></B><HR>
+
+<H3>Input Stream</H3>
+
+<DL><DT><B><CODE>NEXT-WORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="NEXT2DWORD"></A>
+( <I>-- str len </I>)
+<DD>Get the next word across line breaks as a character
+string. <I>len</I> will be 0 at end of file.
+<DT><B><CODE>LEXEME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="LEXEME"></A>
+( <I>"name" -- str len </I>)
+<DD>Get the next word on the line as a character string.
+If it's a single character, use it as the delimiter to
+get a phrase.
+<DT><B><CODE>H#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="H23"></A>
+( <I>"hexnumber" -- n </I>)
+<DD>Get the next word in the input stream as a hex
+single-number literal.  (Adopted from Open Firmware.)
+<DT><B><CODE>\\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="5C5C"></A>
+( <I>"...&lt;eof&gt;" -- </I>)
+<DD>Ignore the rest of the input stream.
+<BR>
+</DL>
+<SMALL>Program Text 13 </SMALL><BR>&nbsp;<BR><B><PRE>: NEXT-WORD           ( -- str len )
+    BEGIN   BL WORD COUNT      ( str len)
+        DUP IF EXIT THEN
+        REFILL
+    WHILE  2DROP ( ) REPEAT ;  ( str len)
+
+: LEXEME              ( "name" -- str len )
+    BL WORD ( addr) DUP C@ 1 =
+        IF  CHAR+ C@ WORD  THEN
+    COUNT ;
+
+: H#  ( "hexnumber" -- n )  \  Simplified for easy porting.
+    0 0 BL WORD COUNT                   ( str len)
+    BASE @ &gt;R  HEX  &gt;NUMBER  R&gt; BASE !
+        ABORT" Not Hex " 2DROP          ( n)
+    STATE @ IF  POSTPONE LITERAL  THEN
+    ; IMMEDIATE
+
+: \\              ( "...&lt;eof&gt;" -- )
+    BEGIN  -1 PARSE  2DROP  REFILL 0= UNTIL ;
+
+</PRE></B><HR>
+<H3>Error Checking</H3>
+
+<DL><DT><B><CODE>FILE-CHECK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="FILE2DCHECK"></A>
+( <I>n -- </I>)
+<DD>Check for file access error.
+<DT><B><CODE>MEMORY-CHECK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="MEMORY2DCHECK"></A>
+( <I>n -- </I>)
+<DD>Check for memory allocation error.
+<BR>
+</DL>
+<P>These words should be tailored for your system.
+</P>
+<SMALL>Program Text 14 </SMALL><BR>&nbsp;<BR><B><PRE>\ : FILE-CHECK    ( n -- )  THROW ;
+\ : MEMORY-CHECK  ( n -- )  THROW ;
+
+: FILE-CHECK      ( n -- )  ABORT" File Access Error " ;
+: MEMORY-CHECK    ( n -- )  ABORT" Memory Allocation Error " ;
+
+\ : FILE-CHECK    ( n -- )  SHOWERROR ;
+\ : MEMORY-CHECK  ( n -- )  SHOWERROR ;
+
+
+</PRE></B><HR>
+
+<H3>Generally Useful</H3>
+
+<DL><DT><B><CODE>++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2B2B"></A>
+( <I>addr -- </I>)
+<DD>Increment the value at <I>addr</I>.
+<DT><B><CODE>@+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="402B"></A>
+( <I>addr -- addr' x </I>)
+<DD>Fetch the value <I>x</I> from <I>addr</I>, and increment the address
+by one cell.
+<DT><B><CODE>!+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="212B"></A>
+( <I>addr x -- addr' </I>)
+<DD>Store the value <I>x</I> into <I>addr</I>, and increment the address
+by one cell.
+<BR>
+</DL>
+<SMALL>Program Text 15 </SMALL><BR>&nbsp;<BR><B><PRE>: ++  ( addr -- )  1 SWAP +! ;
+
+: @+  ( addr -- addr' x )  DUP CELL+ SWAP  @ ;
+
+: !+  ( addr x -- addr' )  OVER !  CELL+ ;
+
+</PRE></B><HR>
+
+<H3>Miscellaneous</H3>
+
+<DL><DT><B><CODE>'th&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="27th"></A>
+( <I>n "addr" -- &amp;addr[n] </I>)
+<DD>Address <B><CODE>n CELLS addr +</CODE></B>.
+<DT><B><CODE>(.)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="282E29"></A>
+( <I>n -- addr u </I>)
+<DD>Convert <I>n</I> to characters, without punctuation, as for <B><CODE>.</CODE></B>
+(dot), returning the address and length of the resulting
+string.
+<DT><B><CODE>CELL-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="CELL2D"></A>
+( <I>addr -- addr' </I>)
+<DD>Decrement address by one cell
+<DT><B><CODE>EMITS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="EMITS"></A>
+( <I>n char -- </I>)
+<DD>Emit <I>char</I> <I>n</I> times.
+<DT><B><CODE>HIWORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="HIWORD"></A>
+( <I>xxyy -- xx </I>)
+<DD>The high half of the value.
+<DT><B><CODE>LOWORD&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="LOWORD"></A>
+( <I>xxyy -- yy </I>)
+<DD>The low half of the value.
+<DT><B><CODE>REWIND-FILE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="REWIND2DFILE"></A>
+( <I>file-id -- ior </I>)
+<DD>Rewind the file.
+<BR>
+</DL>
+<SMALL>Program Text 16 </SMALL><BR>&nbsp;<BR><B><PRE>: 'th     ( n "addr" -- &amp;addr[n] )
+    S" 2 LSHIFT " EVALUATE
+    BL WORD COUNT EVALUATE
+    S" + " EVALUATE
+    ; IMMEDIATE
+
+: (.)  ( n -- addr u )  DUP ABS 0 &lt;# #S ROT SIGN #&gt; ;
+
+: CELL-  ( addr -- addr' )  CELL - ;
+
+: EMITS             ( n char -- )
+    SWAP 0 ?DO  DUP EMIT  LOOP DROP ;
+
+: HIWORD  ( xxyy -- xx )  16 RSHIFT ;
+: LOWORD  ( xxyy -- yy )  65535 AND ;
+
+: REWIND-FILE       ( file-id -- ior )
+    0 0 ROT REPOSITION-FILE ;
+
+</PRE></B><HR>
+<P><A HREF="index.html">Go back to Neil Bawd's home page.</A></P>
+</BODY>
+</HTML>

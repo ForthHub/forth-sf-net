@@ -1,0 +1,7 @@
+title: Pygmy Forth
+internet-url:
+	http://www.eskimo.com/~pygmy/forth.html
+written-by:
+	 by Frank Sergeant.
+	../../from/Frank.Sergeant
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

@@ -1,0 +1,63 @@
+<title> Maintainer HOWTO </title>
+<h1> Maintainer HOWTO </h1>
+
+<h4> Preface </h4>
+<pre>
+The complete source for the websites live in the CVS
+repository. The module is simply called "forth-repository".
+Most of the html-files are generated from other
+files with a Makefile-based system. The generators
+are often perl-files that live in this (mk/)-subdirectory.
+</pre>
+<pre>
+There should be additional cvs-modules that carry
+forth-source for portable programming, but currently
+there is no such module, just the example code embedded
+in the website documents.
+</pre>
+
+<h4> CVS checkin/checkout </h4>
+<pre>
+The actual usage of the CVS command is written in
+the sourceforge docs. See there, a starting point is the
+ <a href="http://sourceforge.net/cvs/?group_id=12692">
+ forth project's cvs helper </a> and have a look at the
+ <a href="http://sourceforge.net/docman/?group_id=1">
+ sourceforge documentation </a> including guides for
+access from windows (which does not have cvs/ssh installed
+by the OS vendor).
+</pre>
+
+<h4> Updating the website </h4>
+
+<pre>
+Logon to sourceforge with your ssh-account. The
+ssh-howto can be found sourceforge too. Get
+the cvs-source unpacked somewhere and copy
+copy <em>./forth/*</em> to <em>/home/groups/forth/htdocs/</em>
+</pre>
+<pre>
+Then go to that directory <em>cd /home/groups/forth/htdocs</em>
+and <em>make index</em> followed by <em>make links</em>.
+Voila, ca y est. The mirror/ subdirectory is currently the
+only one to have a seperate makefile (which understands
+"make mirror"), the others just use mk/M-subdir.mk for
+operation.
+</pre>
+<pre>
+In reality, I remake the website on my local disk and test
+the site with a local webserver (e.g. apache or pws), the
+local website is then zipped and copied to sourceforge's
+forth/htdocs directory.
+
+     Psssst: have a look at <a href="../pub">/pub/</a> where I
+             store the upload-tarballs...
+</pre>
+
+<hr />
+$Id: index.html,v 1.1 2000/10/26 07:41:23 guidod Exp $
+
+
+
+
+

@@ -1,0 +1,8 @@
+title: MPE ProForth
+type: big, commercial, more than one product
+internet-url:
+	http://www.mpeltd.demon.co.uk
+comp.lang.forth:
+	../../from/Stephen.Pelc
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+

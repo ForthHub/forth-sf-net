@@ -1,0 +1,31 @@
+title: 64-bit-ext
+description:
+	an openboot draft from 1995 specified a set of words
+	for 64-bit arithmetics. These words would be actually
+	redefinitions of the doublecell words in 32-bit forth
+	systems, but doublecell may be 32-bit on 16-bit forth
+	systems. This "proposed standard" uses an "X"-modifier
+	in the place of the "D"-modifier for 64-bit-number
+	words.
+references:
+	././12756d5.ps to be found at
+	http://playground.sun.com/1275
+
+fcode:
+	the actual implementation can be looked up in the
+	published draft document. Here are the words that
+	have been reserved for that usage.
+
+	bxjoin <l@ rx@ rx! wxjoin x, x@ x! /x /x*
+	xa+ xa1+ xbflip xbflips xbsplit xlflip xlflips
+	xlsplit xwsplit xwflip xwflips xwsplit
+
+
+comments:
+	../../from/Guido.Draheim
+	these are just to be used as interface words, a
+	simple forth that does not access hardware will
+	hardly find a use for them. Otherwise these words
+	should be treated as reserved by implementations.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:31 guidod Exp $

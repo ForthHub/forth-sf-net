@@ -1,0 +1,7 @@
+title: Jax4th
+internet-url:
+	http://www.well.com/user/jax/rcfb/forth.html
+written-by:
+	 V1.25 for NT and V0.3.17 for Amiga by Jack Woehr.
+	../../from/Jack.Woehr
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

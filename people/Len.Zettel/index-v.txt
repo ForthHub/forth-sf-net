@@ -1,0 +1,4 @@
+title: Len Zettel
+internet-url:
+	http://www.flash.net/~lenz/
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $

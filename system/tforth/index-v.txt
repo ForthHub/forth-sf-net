@@ -1,0 +1,7 @@
+title: tforth
+internet-url:
+	http://www.iaehv.nl/users/mhx/t4faq.html
+written-by:
+	 by Marcel Hendrix.
+	../../from/Marcel.Hendrix
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

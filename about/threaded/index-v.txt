@@ -1,0 +1,74 @@
+title: threaded code categories
+From: Fox@UltraTechnology.com
+Newsgroups: comp.lang.forth
+Date: Tue, 10 Oct 2000 17:35:16 GMT
+<pre>
+
+I think we are using the terms differently.  I am using the
+definitions that have traditionally been used in Forth:
+
+DTC, Direct Threaded Code, address lists processed by an
+inner interpreter where colon definitions begin with inlined
+code or a call to a routine (docolon) to process the threaded list.
+
+ITC, Indirect Threaded Code, address lists processed by an
+inner interpreter where one level of indirection is added
+at the start of a word. The indirect reference points to
+the list of addresses to be interpreted.  An extra register
+or memory location is needed for the indirect reference.
+
+STC, Subroutine Threaded Code, CALL/RET mechanism is used
+to thread code.  Colon definitions use CALL/RET.
+
+Native Code, STC and native code inlining may be combined
+with loop unrolling, peephole optimizations, or register
+allocation.
+
+TTC, Token Threaded Code, execution tokens use an indexed jump
+table or some other mechanism to represent Forth words with
+fewer bits.
+
+BTC, Bit Threaded Code, similar to Direct or Indirect Threaded
+code but where DOCOLON is represented by a single bit in the
+execution tokens.
+
+I repeat my assertion that on many processors STC is larger
+larger and slower than DTC.  Native code is faster and may
+be larger or smaller depending on the architecture and
+implementation.
+
+> Threading is another term for subroutine calling .
+> I doubt if your indirect threading is "slower and larger"
+
+Um, I said STC was larger and slower than DTC in some cases.
+Not that ITC was larger and slower than STC.  That will be
+very dependent on the architecture.
+
+STC uses CALL/RET and my be larger or smaller than an
+address depending on the processor and type of CALL used.
+Comparisons are different on 8,12,16,20,32, and 64 bit
+machines and depending on the instruction set.
+
+> I have seen hundreds of indirect threaded F's ....
+> they are all smaller , not larger as they have not
+> the CALL overhead.
+
+ITC does tend to be smaller than STC when the number
+of bits for an address is less than the number of bits
+for a call instruction and address argument.
+
+When you campare to native code it may be more or less
+depending on the architecture.  When inlined opcodes
+require fewer bits than addresses or when optimization
+removes code then native code will be smaller.
+
+The biggest ratio I have seen between the size of Direct
+Threaded and Native Code was about 4 to 1.  A wider
+application of inlining or of loop unrolling may make
+native code larger in search of higher speed.
+
+</pre>
+---
+- Jeff Fox   UltraTechnology
+- www.UltraTechnology.com
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $

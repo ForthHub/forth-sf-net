@@ -1,0 +1,4 @@
+title: Tom Almy
+internet-url:
+	http://www.aracnet.com/~tomalmy
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $

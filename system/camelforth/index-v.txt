@@ -1,0 +1,10 @@
+title: CamelForth
+internet-url:
+	http://www.zetetics.com/camel/
+written-by:
+	 by Brad Rodriguez.
+	../../from/Brad.Rodriguez
+description:
+        crosscompiler type forth for 8-bit embedded microprocessors,
+        free for noncommercial use.
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

@@ -1,0 +1,7 @@
+title: wfroth
+internet-url:
+	http://www.qnx.com/~omsingla/wfroth_help/wfroth.htm
+written-by:
+	 by Olivier Singla.
+	../../from/Olivier.Singla
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

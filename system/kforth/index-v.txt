@@ -1,0 +1,7 @@
+title: kforth
+internet-url:
+	http://ourworld.compuserve.com/homepages/krishnamyneni/ccre/kforth1.html
+written-by:
+	 by Krishna Myneni.
+	../../from/Krishna.Myneni
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

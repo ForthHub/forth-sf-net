@@ -1,0 +1,342 @@
+<HTML>
+<HEAD>
+<TITLE>FPH Common Usage</TITLE></HEAD><BODY BGCOLOR="#F8F4E7" TEXT="#552800" LINK="#0000A0" VLINK="#A000A0" ALINK="#00A000">
+<CENTER><H2>FPH Common Usage</H2>
+</CENTER><P ALIGN=RIGHT>Wil Baden 1998-08-26</P>
+
+<A HREF="http://www.forth.com/Content/Handbook/Handbook.html">
+
+
+<H3>Forth Programmer's Handbook, Conklin and Rather</H3>
+</A>
+
+
+<P>With <I>Forth Programmer's Handbook</I>, ISBN 0-9662156-0-5, as the
+only current general book about Forth, for portability today's
+Forth implementations and tutorials should agree with it.
+</P>
+<P>Here are words that are in FPH but not in Standard Forth.
+</P>
+<A HREF="#=2E=27">.'</A>&nbsp;&nbsp;
+<A HREF="#2=2B">2+</A>&nbsp;&nbsp;
+<A HREF="#2=2D">2-</A>&nbsp;&nbsp;
+<A HREF="#C=2B=21">C+!</A>&nbsp;&nbsp;
+<A HREF="#CONTEXT">CONTEXT</A>&nbsp;&nbsp;
+<A HREF="#CURRENT">CURRENT</A>&nbsp;&nbsp;
+<A HREF="#CVARIABLE">CVARIABLE</A>&nbsp;&nbsp;
+<A HREF="#DASM">DASM</A>&nbsp;&nbsp;
+<A HREF="#DEFER">DEFER</A>&nbsp;&nbsp;
+<A HREF="#EMPTY">EMPTY</A>&nbsp;&nbsp;
+<A HREF="#INCLUDE">INCLUDE</A>&nbsp;&nbsp;
+<A HREF="#IS">IS</A>&nbsp;&nbsp;
+<A HREF="#L">L</A>&nbsp;&nbsp;
+<A HREF="#LOCATE">LOCATE</A>&nbsp;&nbsp;
+<A HREF="#M=2D">M-</A>&nbsp;&nbsp;
+<A HREF="#M=2F">M/</A>&nbsp;&nbsp;
+<A HREF="#NOT">NOT</A>&nbsp;&nbsp;
+<A HREF="#T=2A">T*</A>&nbsp;&nbsp;
+<A HREF="#T=2F">T/</A>&nbsp;&nbsp;
+<A HREF="#VOCABULARY">VOCABULARY</A>&nbsp;&nbsp;
+<A HREF="#WH">WH</A>&nbsp;&nbsp;
+<A HREF="#WHERE">WHERE</A>&nbsp;&nbsp;
+<A HREF="#=5BDEFINED=5D">[DEFINED]</A>&nbsp;&nbsp;
+<A HREF="#=5BUNDEFINED=5D">[UNDEFINED]</A>&nbsp;&nbsp;
+
+
+<P>These words are described as common usage. Some of them are
+implementation dependent. Others have simple definitions in
+Standard Forth. Potential definitions for those which can be
+defined in Standard Forth are given here for systems that are
+missing them.
+</P>
+<P>Existing definitions are surely superior, especially when
+implementation dependent.
+</P>
+<P>Comment out definitions that you already have or are
+improving.
+</P>
+<P>Definitions in Standard Forth by Wil Baden.  Any similarity
+with anyone else's code is coincidental, historical, or
+inevitable.
+</P>
+<A HREF="fphuse.txt"><BIG>TEXT</BIG></A>
+
+
+<B><PRE></PRE></B><HR>
+
+<DL><DT><B><CODE>NOT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="NOT"></A>
+( <I>x -- flag </I>)
+<DD>Identical to <B><CODE>0=</CODE></B>, used for program clarity to reverse the
+result of a previous test.
+<DT><B><CODE>[DEFINED]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="=5BDEFINED=5D"></A>
+( <I>"name" -- flag </I>)
+<DD>Search the dictionary for <I>name</I>. If <I>name</I> is found,
+return TRUE; otherwise return FALSE. Immediate for use in
+definitions.
+<DT><B><CODE>[UNDEFINED]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="=5BUNDEFINED=5D"></A>
+( <I>"name" -- flag </I>)
+<DD>Search the dictionary for <I>name</I>. If <I>name</I> is found,
+return FALSE; otherwise return TRUE. Immediate for use in
+definitions.
+<DT><B><CODE>C+!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="C=2B=21"></A>
+( <I>n addr -- </I>)
+<DD>Add the low-order byte of <I>n</I> to the byte at <I>addr</I>,
+removing both from the stack.
+<BR>
+</DL>
+<SMALL>Program Text 1 </SMALL><B><PRE>
+: NOT ( n -- flag ) S" 0= " EVALUATE ; IMMEDIATE
+
+: [DEFINED]         ( "name" -- flag )
+    BL WORD FIND NIP 0&lt;&gt; ; IMMEDIATE
+
+: [UNDEFINED]       ( "name" -- flag )
+    BL WORD FIND NIP 0= ; IMMEDIATE
+
+: C+! ( n addr -- ) DUP &gt;R C@ + R&gt; C! ;
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>2+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2=2B"></A>
+( <I>n -- n+2 </I>)
+<DD>Add 2 to the top of stack.
+<DT><B><CODE>2-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="2=2D"></A>
+( <I>n -- n-2 </I>)
+<DD>Subtract 2 from the top of stack.
+<DT><B><CODE>INCLUDE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="INCLUDE"></A>
+( <I>"filename" -- </I>)
+<DD>Include the named file.
+<DT><B><CODE>DEFER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="DEFER"></A>
+( <I>"name" -- </I>)
+<DD>Define <I>name</I> as an execution vector. When <I>name</I> is
+executed, the execution token stored in <I>name</I>'s data area
+will be retrieved and its behavior performed. An abort
+will occur if <I>name</I> is executed before it has been
+initialized.
+<DT><B><CODE>IS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="IS"></A>
+( <I>xt "name" -- </I>)
+<DD>Store <I>xt</I> in <I>name</I>, where <I>name</I> is a word defined by
+<B><CODE>DEFER</CODE></B>.
+<BR>
+</DL>
+<SMALL>Program Text 2 </SMALL><B><PRE>
+: 2+  ( n -- n+2 )  2 + ;
+
+: 2-  ( n -- n-2 )  2 - ;
+
+: INCLUDE           ( "filename" -- )
+    BL WORD COUNT INCLUDED  DECIMAL ;
+
+    : Uninitialized-DEFER  ( -- )
+        TRUE ABORT" Uninitialized DEFER." ;
+
+: DEFER CREATE      ( "name" -- )
+    ['] Uninitialized-DEFER ,  DOES&gt; @ EXECUTE ;
+
+: IS                ( xt "name" -- )
+    '                             ( xt xt2)
+    STATE @ IF
+        POSTPONE LITERAL  POSTPONE &gt;BODY  POSTPONE !
+    ELSE
+        &gt;BODY !
+    THEN ; IMMEDIATE
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>M-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="M=2D"></A>
+( <I>d . n --  d . </I>)
+<DD>Subtract single number <I>n</I> from double number <I>d.</I>.
+<DT><B><CODE>M/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="M=2F"></A>
+( <I>d . n -- q </I>)
+<DD>Divide double number <I>d.</I> by single number <I>n</I>.
+<DT><B><CODE>T*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="T=2A"></A>
+( <I>d . n -- t . . </I>)
+<DD>Multiply a double number by a single number to get a triple number.
+<DT><B><CODE>T/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="T=2F"></A>
+( <I>t . . u -- d . </I>)
+<DD>Divide a triple number by an unsigned number to get a double
+answer.
+<DT><B><CODE>M*/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="M=2A=2F"></A>
+( <I>d . n u -- d . </I>)
+<DD>Multiply <I>d.</I> by <I>n</I> to triple result; divide by <I>u</I> to double
+result.  [Double]
+<BR>
+</DL>
+<SMALL>Program Text 3 </SMALL><B><PRE>
+: M-  ( d . n -- d . )  NEGATE M+ ;
+
+: M/  ( d . n -- q )  SM/REM NIP ;
+
+    : TNEGATE          ( t . . -- -t . . )
+        &gt;R  2DUP OR DUP IF DROP  DNEGATE 1  THEN
+        R&gt; +  NEGATE ;
+
+: T*                 ( d . n -- t . . )
+                     ( d0 d1 n)
+    2DUP XOR &gt;R                ( R: sign)
+    &gt;R DABS R&gt; ABS
+    2&gt;R              ( d0)( R: sign d1 n)
+    R@ UM* 0         ( t0 d1 0)
+    2R&gt; UM*          ( t0 d1 0 d1*n .)( R: sign)
+    D+               ( t0 t1 t2)
+    R&gt; 0&lt; IF TNEGATE THEN ;
+
+: T/                 ( t . . u -- d . )
+                     ( t0 t1 t2 u)
+    OVER &gt;R &gt;R       ( t0 t1 t2)( R: t2 u)
+    DUP 0&lt; IF TNEGATE THEN
+    R@ UM/MOD        ( t0 rem d1)
+    ROT ROT          ( d1 t0 rem)
+    R&gt; UM/MOD        ( d1 rem' d0)( R: t2)
+    NIP SWAP         ( d0 d1)
+    R&gt; 0&lt; IF DNEGATE THEN ;
+
+: M*/  ( d . n u -- d . )  &gt;R T*  R&gt; T/ ;
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>VOCABULARY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="VOCABULARY"></A>
+( <I>"name" -- </I>)
+<DD>Create a word list <I>name</I>. Subsequent execution of <I>name</I>
+replaces the first word list in the search order with
+<I>name</I>. When <I>name</I> is made the compilation word list, new
+definitions will be added to <I>name</I>'s list.
+<BR>
+</DL>
+<SMALL>Program Text 4 </SMALL><B><PRE>
+\  From Standard Forth Rationale A.16.6.2.0715.
+
+: DO-VOCABULARY     ( -- )
+    DOES&gt;  @ &gt;R               ( )( R: widnew)
+        GET-ORDER  SWAP DROP  ( wid_n ... wid_2 n)
+    R&gt; SWAP SET-ORDER ;
+
+: VOCABULARY        ( "name" -- )
+    WORDLIST CREATE ,  DO-VOCABULARY ;
+
+
+</PRE></B><HR>
+
+<DL><DT><B><CODE>EMPTY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="EMPTY"></A>
+( <I>-- </I>)
+<DD>Reset the dictionary to a predefined golden state,
+discarding all definitions and releasing all allocated
+data space beyond that state.
+<BR>
+"When the system starts, or following an <B><CODE>EMPTY</CODE></B>, the
+default word list for both <B><CODE>CONTEXT</CODE></B> and <B><CODE>CURRENT</CODE></B> is
+<B><CODE>FORTH</CODE></B>." FPH 2nd edn, p. 169
+<BR>
+<DT><B><CODE>POSSIBLY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="POSSIBLY"></A>
+( <I>"name" -- </I>)
+<DD>Execute <I>name</I> if it exists; otherwise, do nothing. Useful
+implementation factor of <B><CODE>ANEW</CODE></B>.
+<BR>
+<DT><B><CODE>ANEW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="ANEW"></A>
+( <I>"name" -- </I>)
+<DD>Compiler directive used in the form: <B><CODE>ANEW <I>name</I></CODE></B>. If the
+word <I>name</I> already exists, it and all subsequent words
+are forgotten from the current dictionary, then a <B><CODE>MARKER</CODE></B>
+word <I>name</I> is created that does nothing. This is usually
+placed at the start of a file. When the code is reloaded,
+any prior version is automatically pruned from the
+dictionary.
+<BR>
+Executing <I>name</I> will also cause it to be forgotten, since
+it is a <B><CODE>MARKER</CODE></B> word.
+<BR>
+Useful implementation factor of <B><CODE>EMPTY</CODE></B>.
+<BR>
+</DL>
+<SMALL>Program Text 5 </SMALL><B><PRE>
+    : POSSIBLY  ( "name" -- )
+        BL WORD FIND  ?DUP AND IF  EXECUTE  THEN ;
+
+    : ANEW  ( "name" -- )  &gt;IN @  POSSIBLY  &gt;IN !  MARKER ;
+
+: EMPTY  ( -- )  S" ANEW --- DECIMAL " EVALUATE ;
+
+</PRE></B><HR>
+
+<H3>Implementation Dependent</H3>
+
+<DL><DT><B><CODE>.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="=2E=27"></A>
+( <I>addr -- </I>)
+<DD>Display the name of the nearest definition before <I>addr</I>,
+and the offset of <I>addr</I> from the beginning of that
+definition. Implementation dependent.
+<DT><B><CODE>CONTEXT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="CONTEXT"></A>
+( <I>-- a-addr </I>)
+<DD>Return <I>a-addr</I>, the address of a cell that contains a
+pointer to the first word in the search order.
+Implementation dependent.
+<DT><B><CODE>CURRENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="CURRENT"></A>
+( <I>-- a-addr </I>)
+<DD>Return <I>a-addr</I>, the address of a cell that contains a
+pointer to the current compilation word list.
+Implementation dependent.
+<DT><B><CODE>CVARIABLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="CVARIABLE"></A>
+( <I>"name" -- </I>)
+<DD>Define a one-byte variable. Execution of <I>name</I> will
+return the address of its data space. Typically available
+only on embedded systems. Implementation dependent.
+<DT><B><CODE>DASM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="DASM"></A>
+( <I>addr -- </I>)
+<DD>Begin disassembly at the address <I>addr</I> on top of stack.
+Implementation dependent.
+<DT><B><CODE>L&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="L"></A>
+( <I>-- </I>)
+<DD>Show the current source code file or block and the current
+cursor position in it. If used after a compiling error,
+point to the source code that caused the error.
+Implementation dependent.
+<DT><B><CODE>LOCATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="LOCATE"></A>
+( <I>"name" -- </I>)
+<DD>If <I>name</I> is the name of a definition that has been
+compiled from source code, display the source code for
+<I>name</I>. On some systems, the phrase <B><CODE>VIEW</CODE></B> <I>name</I> performs
+a similar function. Implementation dependent.
+<DT><B><CODE>WH&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="WH"></A>
+( <I>"name" -- </I>)
+<DD>Short synonym for <B><CODE>WHERE</CODE></B>, defined for typing convenience.
+Implementation dependent.
+<DT><B><CODE>WHERE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </CODE></B>
+<A NAME="WHERE"></A>
+( <I>"name" -- </I>)
+<DD>Display all the places in the currently compiled program
+where <I>name</I> has been used, showing any redefinitions
+separately. Implementation dependent.
+<BR>
+</DL>
+<P>These are implementation dependent, and can't have Standard
+definitions.
+</P>
+<P><A HREF="index.html">Go back to Neil Bawd's home page.</A></P>
+</BODY>
+</HTML>

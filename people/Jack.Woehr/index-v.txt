@@ -1,0 +1,4 @@
+title: Jack Woehr
+internet-url:
+	http://www.well.com/user/jax/
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $

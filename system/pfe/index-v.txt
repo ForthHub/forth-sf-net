@@ -1,0 +1,17 @@
+title: PFE - Portable Forth Environment
+keywords:
+	opensource, portable, C only, indirect-subroutine-token-threaded,
+	multithreaded, autoconf, automake, sharedlibrary, terminalinterface
+	replacable for embedded environments.
+internet-url:
+*	http://sourceforge.net/projects/pfe
+developers:
+*	../../from/Guido.Draheim
+*	../../from/Dirk.Zoller
+compare-with:
+*	../../system/gforth
+*	../../system/bigforth
+*	../../system/win32for
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+

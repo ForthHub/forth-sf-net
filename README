@@ -1,0 +1,27 @@
+
+quick explanations
+
+----------------------------------------------------------
+use "make index" to make..
+- the third-level index (possibly by their own makefile)
+- the second-level index (possibly by mk/M-subdir.mk)
+- the toplevel index.html
+
+use "make links" to create a few symbolic links
+ int the toplevel directory to make implicit-hrefs
+ easier
+
+use "make zip" to create a new snapshot of your sources
+
+---------------------------------------------------------
+
+the current third-level files do usually use an index-v.txt
+to create the index from (with mk/index-v.pl)
+
+This script will make hrefs from anything that looks like
+an url or like a file-ref, that is here...
+  ../some/name  and ././somename
+and it does quite a few of other magic.
+
+---------------------------------------------------------
+$Id: README,v 1.1 2000/10/26 07:41:16 guidod Exp $

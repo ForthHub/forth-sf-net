@@ -1,0 +1,14 @@
+title: Forth Scientific Library
+internet-url:
+	http://www.taygeta.com/fsl/sciforth.html
+	http://www.taygeta.com/fsl/scilib.html
+description:
+*	not actually a system but a huge set of algorithms
+	written in forth. Many of the presented algorithms
+	have been published, e.g. in the ACM journals.
+*	Many of the algorithm rely on some words that
+	extend the standard notion of floating point
+	handling, known as FSL auxilary code in
+	../../wordset/fsl-util
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $ ((guidod's notes))

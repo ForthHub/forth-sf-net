@@ -1,0 +1,8 @@
+title: Smal32
+internet-url:
+	http://www.forth.ru/smal32/
+written-by:
+	 by Alexandr Larionov (english documentation by Bruce Hoyt).
+	../../from/Alexandr.Larionov
+	../../from/Bruce.Hoyt
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

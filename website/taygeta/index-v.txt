@@ -1,0 +1,16 @@
+title: Taygeta
+internet-url: http://www.taygeta.com/forth.html
+forth:
+	"Forth (the largest collection of Forth information anywhere !)"
+
+	The site took over much of the responsibilities to serve
+	the forth community. It has provided webspace to almost
+	everyone who had something about forth. The ftp space at
+	taygeta will bring up almost any zip-file one needs - which
+	is truly the largest collection of forth files anywhere.
+
+	compare with FIG ../../website/forth.org, which should
+	have been the logical place but it did never came as far
+	as the taygeta site.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:24 guidod Exp $ ((guidod's notes))

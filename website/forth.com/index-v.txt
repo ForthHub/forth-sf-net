@@ -1,0 +1,16 @@
+title: Forth Inc.
+internet-url:
+	http://www.forth.com
+forth:
+	The company that defines itself by the name - Forth.
+	It seems to have taken great influence on the standardization
+	process of forth.
+
+	see ../../forth.org for the non-commercial side of forth, and
+	the ../../system/swiftforth is the currenct product name.
+
+	sadly there is not too much information here but you can
+	always ask ../../from/Elizabeth.D.Rather
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:23 guidod Exp $ ((guidod's notes))
+

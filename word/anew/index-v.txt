@@ -1,0 +1,14 @@
+title: ANEW name
+description:
+  ANEW ( "name" -- )
+
+  Creates a => MARKER if it doesn't exist,
+  or forgets everything after it, if it does.
+
+: ANEW
+   BL WORD
+   DUP FIND NIP IF NAME> EXECUTE THEN
+   (MARKER)
+;
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $

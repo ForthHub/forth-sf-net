@@ -1,0 +1,7 @@
+title: RETRO
+internet-url:
+	http://retro.tunes.org/
+written-by:
+	 by Tom Novelli.
+	../../from/Tom.Novelli
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

@@ -1,0 +1,27 @@
+Collections of words that can
+be grouped together under a
+descriptive name. In most cases
+they are not under a specific
+functional category, instead they
+bear the names of the project
+they were the underlying set
+of basic words.
+
+It is assumed that there could
+be compatibility extensions in a
+number of forth systems that
+could be loaded at runtime to
+provide the specified behaviour,
+i.e. using INCLUDED or NEEDED.
+
+People having a set of favourite
+words that they use in more than
+one project should really consider
+to place their wordset here for
+reference. May be implementors
+of other forth system will like
+your ideas and implement your
+wordset in full so that your
+scripts may become even portable.
+
+

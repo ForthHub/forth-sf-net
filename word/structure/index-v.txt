@@ -1,0 +1,186 @@
+title: STRUCTURE words
+introduction:
+	The usage of structure definitions is quite commonplace
+	among forth implementors. The actual implementation
+	techniques vary as widely as the resulting capabilities
+	of the resulting structure-"types".
+
+	During the years, a common minimum characteristics can
+	be deduced from the implementations that manifest
+	themselves in the three words
+
+>	STRUCTURE ( "structname" -- xx end_offset )
+>	ENDSTRUCTURE ( xx end_offset -- )
+>	SIZEOF ( "structname" -- sizeof_it )
+
+short-description:
+	The words STRUCTURE and ENDSTRUCTURE are always used
+	in pairs. In the text between them, the top-of-stack
+	hold a value that is both the sizeof-struct and the
+	current-offset. ENDSTRUCTURE will save the last value in
+	the "structname" parameterpart CREATEd by STRUCTURE,
+	and SIZEOF will fetch the value from the "structname"
+	(so, SIZEOF is state-smart).
+
+	When the "structname" is executed later it will in turn
+	CREATE a new word - followed by an ALLOT with the
+	size-value saved by ENDSTRUCTURE. The created word
+	behaves just like a VARIABLE. This is called a
+	struct-instance.
+
+	The access of the various parts of the struct-instance
+	and the modifications to the endoffset-value is
+	very different among implementations, but in general
+	they create offsetwords with a global namespace.
+
+intro-example:
+	STRUCTURE newtype
+	    2 CELLS NEWFIELD ->first_2_cells
+	    2 CHARS NEWFIELD ->next_2_chars
+	ENDSTRUCTURE
+
+	SIZEOF newtype . ( prints probably 10 in a 32-bit forth)
+	0 ->first_2_cells . ( prints probably 0 )
+	0 ->next_2_cells . ( prints probably 8 in a 32-bit forth)
+
+	newtype myvar  ( myvar is otherwise just a VARIABLE)
+	HERE myvar - . ( the sizeof myvar's body is... 10)
+
+	myvar ->next_2_cells C@ ( to get the first of the 2 chars )
+
+quick-n-dirty-implementation:
+: STRUCTURE   ( "name" -- xx offset )
+    CREATE
+      HERE    ( leave the address of the following sizeof-comma )
+      0 DUP , ( initial size is zero and left on the stack )
+    DOES>     ( has the address of the sizeof-comma )
+      CREATE  ( make a variable )
+      @ ALLOT ( and make the variable that long )
+;
+
+: ENDSTRUCTURE ( xx offset -- )
+    SWAP !    ( store the last endoffset into the sizeof-comma )
+;
+
+: SIZEOF ( "name" -- size )
+    ' >BODY @ ( get the sizeof ... some implementations need also >DOES )
+    STATE @ IF [COMPILE] LITERAL THEN
+; IMMEDIATE
+
+: NEWFIELD ( offset field_size "name" -- offset' )
+    CREATE
+      OVER , ( store the current end_offset )
+      +      ( increase the end_offset by the field_size )
+    DOES>
+      @ +    ( add the memorized offset of the field)
+;
+	The generic name for an offset-word is totally different
+	among forth implementations (if it exists anyway), I chose
+	NEWFIELD because it has never been used anywhere before.
+
+description:
+	The words STRUCTURE and ENDSTRUCTURE are always used
+	in pairs - ENDSTRUCTURE is supposed to clean up
+	everything that the STRUCTURE word has changed in the
+	environment. A portable script may not make any
+	assumptions about the additional depth of the
+	parameter-stack.
+
+	The final offset is saved as the size of the struct,
+	but some implementations do also some alignement,
+	either during storage of the value or on instantiation,
+	so that the values do sometimes differ (instead of
+	being the contant 10 in the example). The actual
+	address of the sizevalue inside of the DOES-parameter
+	is not fixed either. Some implemenations put a
+	type-id in there too.
+
+	A generic NEWFIELD-like word does often not exists
+	because the STRUCTURE fields are only declared with
+	words that do also memorize a type-id to be checked
+	on access to the fields. An example usage would be
+>	STRUCTURE typename
+>	   CHAR: ->first_char
+>	   CELL: ->probably_aligned_before
+>	   CHAR: ->aligned_good_enough
+>       ENDSTRUCTURE
+
+	The sizeof-value (on a 32bit system) could be 6, 7, 9, 10 or 12.
+	The same applies to the HERE-difference	on instantiation of
+	the typename, so you better do not make assumptions if the
+	current structure-implemenation is packed or not.
+
+	On the other hand, you are free to increase the offset-value
+	at will, which is somehow that same as an ALLOT after a call
+	to CREATE, i.e. "CHAR: ->my_chars 10 CHARS +" is always the
+	same as a "11 CHARARRAY: ->my_chars". This should be widely
+	used to make descriptive names of field by creating new
+	offsetword-declarators, e.g.
+>	: CELLARRAY:   >R CELL: R> CELL- + ;
+>	: WINDOWFIELD: 3 CELLARRAY: ;
+
+	Among the typelike FIELD-declarators you will find
+	BYTE SHORT LONG    BYTEARRAY SHORTARRAY LONGARRAY
+	CHAR: WORD: CELL:  CHARARRAY CHARARRAY: CHAR-ARRAY CHAR-ARRAY:
+
+	Among the generic NEWFIELD-declarators you will find
+	FIELD ATTRIBUTE ATTRIBUTE: OFFSETWORD OFFSETWORD:
+
+	The generic declarator (in a typeless implementation)
+	could be used to make some kind of inheritance and
+	structure-field using:
+>	STRUCTURE a
+>	   2 CELLS FIELD ->a
+>	ENDSTRUCTURE
+>	STRUCTURE b
+>	   SIZEOF a FIELD ->a_in_b
+>	   CELL FIELD ->b
+>	ENDSTRUCTURE
+
+recommendation:
+	In either typeless or typeprone implementations, you are
+	supposed to provide field-declarators for the basic types.
+	Newer implementations chose the ANSI' typenames plus a
+	colon, i.e. you should atleast provide CHAR: and CELL:
+	The Swiftforth ./structs.txt states also INTEGER: and
+	FLOAT: (where they have a word INTEGER that returns the
+	sizeof such a basic type). The arraytypes would be CELLS:
+	and CHARS: instead of old-fashioned CHARARRAY.
+
+	The generic name field-declarator varies widely and it
+	does even not exist to prevent typeless fields (in that
+	case you could still use "SIZEOF a CHARS: ->a") - SwiftForth
+	uses ATTRIBUTE but struct-fields are declared with STRUCT:
+	in SwithForth, and for the typeid, the SIZEOF has a litte
+	extra sideeffect.
+
+	The typeid is absolutly important if the implementation
+	wants to integrate such structures with an objectoriented
+	class-system, sometimes therein with multiple inheritance
+	and always with method-invokation, added up even with
+	non-global member-names for classes (not for these
+	structs!).
+
+	There are a lot of variants, including STRUCTURE:
+	;STRUCTURE ;ENDSTRUCTURE END_STRUCTURE ADDROF and so on.
+	I (guidod) do recommend to implement the following words:
+
+	STRUCTUTRE ENDSTRUCTURE SIZEOF ( as above )
+	CHAR: CHARS: CELL: CELLS: FIELD: STRUCT:
+	...where "field:" is the generic field-declarator,
+	and "struct:" is only a synonym that is only useful
+	in implemenatations that have [DEFINED] TYPE-ID
+
+	e.g. a TYPE-ID implementation could do...
+	: SIZEOF ' >BODY 2@ TYPE-ID ! STATE @ IF [COMPILE] LITERAL THEN ;
+	: STRUCT: DUP >R FIELD: TYPE-ID @ R> >TYPE-ID ! ;
+	and note that type-id implementations are used widely.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+
+
+
+
+
+
+

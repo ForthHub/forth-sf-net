@@ -1,0 +1,16 @@
+title: Bernd Paysan
+homepage: http://www.jwdt.com/~paysan
+employer: http://www.jwdt.com - ...
+forth: many,
+-      ../../system/bigforth
+-      ../../system/gforth
+- see http://www.jwdt.com/~paysan/bigforth.html
+- and http://bigforth.sourceforge.net
+  , including the MINOS (graphics) add-on
+e-mail:
+	Bernd.Paysan at gmx.de
+languages:
+ 	(DE) ++ (EN) ++ ...
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $ ((guidod's private notes))
+
+

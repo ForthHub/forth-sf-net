@@ -1,0 +1,19 @@
+
+smallest policy ever:
+- toplevel directory contains
+only subdirectories that
+contain subdirectories
+(collection of collections)
+- in the collections a user
+can easily create subdirectories
+with self-descriptive names.
+- Thereunder, the third level,
+has no further policies, any
+file can live there.
+- if you feel that the toplevel
+collection names are not very
+self-descriptive for the
+subdiretory topic you want to
+have, then you may need to
+create a new toplevel category.
+- read on in <a href=mk>mk</a>

@@ -1,0 +1,11 @@
+title: Dirk Zoller
+homepage: http://www.dirk-zoller.de
+employer: http://www.sol-3.de, self-employed (banking&amp;database).
+forth: none any more.
+-  see ../../system/pfe
+e-mail:
+	duz at sol-3.de
+languages:
+	(DE) ++ (EN) ++ ...
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $ ((guidod's private notes))
+

@@ -1,0 +1,7 @@
+title: KernelForth
+internet-url:
+	http://www.kernelforth.com/
+written-by:
+	 by Paul Dougherty.
+	../../from/Paul.Dougherty
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

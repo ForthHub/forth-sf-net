@@ -1,0 +1,18 @@
+title: 	Anton Ertl
+homepage:
+	http://www.complang.tuwien.ac.at/anton
+employer:
+	http://www.complang.tuWien.ac.at - higher academic
+forth:
+	many, prominently ../../system/gforth
+- 	http://www.complang.tuwien.ac.at/projects/forth.html
+	- links and papers
+- 	http://www.complang.tuwien.ac.at/forth
+	- file archive (incl. some mirrors)
+e-mail:
+	anton at mips.complang.tuwien.ac.at
+languages:
+	(DE) ++ (EN) ++ ...
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $
+	((guidod's private notes))
+

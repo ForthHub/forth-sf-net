@@ -1,0 +1,9 @@
+
+sometimes people ask on comp.lang.forth
+for pointers to certain implementations
+that they are in need of. Here you have
+some answers collected for quick references,
+but please, if these pages are older than
+a few months then you should definitly
+ask again. Times are achanging... fast.
+

@@ -1,0 +1,13 @@
+title: Julian V. Noble
+homepage: ?
+employer: http://www.virginia.edu, professor (academic)
+-	  job-info http://www.phys.virginia.edu/People/personal.asp?uID=jvn
+-	  job-info http://erwin.phys.virginia.edu/info/people/desc/jvn.html
+forth:
+	../../system/fsl - i.e. the forth scientific library
+e-mail:
+	jvn at virginia.edu
+article:
+*	http://www.jfar.org/article001.html
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:52 guidod Exp $

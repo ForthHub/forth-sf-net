@@ -1,0 +1,94 @@
+title: 16-color-text-ext
+
+description:
+	The "terminal-emulator" comes from an openboot extension
+	(wg ieee-std-1275-1994) with status "voluntary-use
+	recommended practice". It defines a 16-color terminal
+	interface based on iso-6429-1983 escape sequences.
+reference:
+	././16colord1_2.pdf to be found at
+	http://playground.sun.com/1275/practice
+
+fcodes:
+>      foreground-color ( -- color-number )
+       "value, that defines the color table number that is to
+       be used as the foreground color when writing to the
+       display buffer" ((value)) initially 0, i.e. black
+
+>      background-color ( -- color-number )
+       "value, that defines the color table number that is to
+       be used as the background color when writing to the
+       display buffer" ((value)) initially 15, i.e. white
+
+>      inverse? ( -- value ) ((value))
+       initially false
+
+>      inverse-screen? ( -- value ) ((value))
+       initially false
+
+needs-also:
+	the actual drawing can be done with the fcodes
+	from the fb8 support package. These have an "fb8-"
+	prefix, e.g.  => fb8-draw-character => fb8-draw-logo
+	=> fb6-invert-screen => fb8-toggle-cursor
+
+predefined-values:
+	the first 16 colors are predefined. They take the
+	usual semantics and numbers that everyone knows, so
+	there are no names needed anyway. The presented names
+	are used only for reference here. The recommendation
+	uses the values 0, 1/3, 2/3, 1 to defined approximate
+	values. For reference, the usual hexadecimal notation
+	with with 00,55,AA,FF is used.
+
+> 0x000000 constant #SHADED-BLACK-RGB    0 constant #SHADED-BLACK
+> 0x0000AA constant #SHADED-BLUE-RGB     1 constant #SHADED-BLUE
+> 0x00AA00 constant #SHADED-GREEN-RGB    2 constant #SHADED-GREEN
+> 0x00AAAA constant #SHADED-CYAN-RGB     3 constant #SHADED-CYAN
+> 0xAA0000 constant #SHADED-RED-RGB      4 constant #SHADED-RED
+> 0xAA00AA constant #SHADED-MAGENTA-RGB  5 constant #SHADED-MAGENTA
+> 0xAA5500 constant #SHADED-BROWN-RGB    6 constant #SHADED-BROWN
+> 0xAAAAAA constant #SHADED-WHITE-RGB    7 constant #SHADED-WHITE
+> 0x555555 constant #SHADED-GRAY-RBG     8 constant #SHADED-GRAY
+> 0x5555FF constant #BRIGHT-BLUE-RGB     9 constant #BRIGHT-BLUE
+> 0x55FF55 constant #BRIGHT-GREEN-RBG   10 constant #BRIGHT-GREEN
+> 0x55FFFF constant #BRIGHT-CYAN-RGB    11 constant #BRIGHT-CYAN
+> 0xFF5555 constant #BRIGHT-RED-RBG     12 constant #BRIGHT-RED
+> 0xFF55FF constant #BRIGHT-MAGENTA-RBG 13 constant #BRIGHT-MAGENTA
+> 0xFFFF55 constant #BRIGHT-YELLOW-RGB  14 constant #BRIGHT-YELLOW
+> 0xFFFFFF constant #BRIGHT-WHITE-RGB   15 constant #BRIGHT-WHITE
+
+
+additional-note:
+	../../from/Guido.Draheim: the actual setting of these
+	values is actually undefined here. You could use just
+	the => TO word for setting the id-constant (0..15).
+	Among possible extra words are:
+>	set-foreground
+>	set-foreground-color
+>	foreground!
+>	foreground-color!
+>	as-foreground-color
+	AFAIC, the "foreground-color!" looks nice but most
+	platforms need to actually send an escape-sequence
+	to the terminal which is why some packages used the
+	"set-foreground-color". The others names are probably
+	just nicer to write and read. The same variants may
+	exists for the inverse attribute which does not
+	particularly need a seperate value, right?
+
+	note that this wordset defines that the foreground
+	and background color can be set independently which
+	contradicts the usecase in some systems.
+
+	In openboot, a device method would be used to set
+	a colorcell to an rgb value. The device is just known
+	to have the first 16 color cells preset to the values
+	shown above. Redefining #BRIGHT-YELLOW to #SHADED-RED
+	could be expressed as
+>       0xAA 0x00 0x00 14 color!
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $
+
+
+

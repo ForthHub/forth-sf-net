@@ -1,0 +1,14 @@
+<head><title> People - comp.lang.forth </title>
+<link rel=stylesheet media="screen" href="../forth.css" />
+</head><body>
+<table width="100%"><tr><td width="30%" align="left">
+	<h2><i> People </i></h2>
+</td><td width="30%" align="center">
+	<h1> comp.lang.forth.repository </h1>
+</td><td width="30%" align="right">
+	<a href="http://sourceforge.net">
+	<img src="http://sourceforge.net/sflogo.php?group_id=12692"
+     		width="88" height="31" border="0" alt="SourceForge Logo">
+	</a>
+</td></tr></table>
+

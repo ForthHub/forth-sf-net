@@ -1,0 +1,11 @@
+title: TheForthSource
+internet-url:
+	http://www.theforthsource.com
+organization:
+	Mountain View Press
+to-be-found:
+	selected informations,
+	less in number, higher in quality
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:23 guidod Exp $
+
+

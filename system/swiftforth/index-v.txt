@@ -1,0 +1,9 @@
+title: SwiftForth
+type: 	big, commercial, a number of products, of various types.
+
+internet-url:
+	http://www.forth.com
+comp.lang.forth:
+	../../from/Elizabeth.D.Rather
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+

@@ -1,0 +1,23 @@
+title: Neil Bawd
+homepage:
+	  http://home.earthlink.net/~neilbawd/
+	  "The site is a home for Forth writings of Neil Bawd and Wil Baden."
+e-mail:
+	neilbawd at earthlink.net
+forth:
+	famous for "Neil Bawd's ugly homepage" which had quite an impact
+	on the forth community on behalf of non-standard words.
+
+        see ../../wordset/toolbelt-ext
+
+comments:
+> m_l_g3 wrote:
+> [...] And even in this case trickery is possible.
+> For example, Neil Baden and Wil Bawd: is it one
+> person or two?
+- ((ed: well, everyone being new to comp.lang.forth is unable to
+distinguish them by their postings, also taken that the two
+use the same mail address. Use Neil Bawd and in singular.))
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $  ((guidod's notes))
+

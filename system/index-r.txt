@@ -1,0 +1,17 @@
+Here are references to forth system
+implementations, or just larger
+projects that could not fit
+into a wordset description.
+
+This category lists them just by
+their name, not by their forth type.
+Remember that there are quite different
+ways of implementing the forth languages,
+ranging from token-threading to
+crosscompiled assembly, from as deeply
+embedded as a wristwatch calendar to
+as communicative as spaceship control.
+
+
+
+

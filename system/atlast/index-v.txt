@@ -1,0 +1,7 @@
+title: ATLAST
+internet-url:
+	http://www.fourmilab.ch/atlast/
+written-by:
+	 by John Walker.
+	../../from/John.Walker
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

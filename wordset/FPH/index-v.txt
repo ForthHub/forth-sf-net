@@ -1,0 +1,15 @@
+title: FPH - Forth Programmer's Handbook
+description:
+	The Forth Programmer's Handbook used some words that
+	are not in the standard. The acceptance of the words
+	are atleast as wide as the book has reached programmers.
+
+internet-url:
+ http://home.earthlink.net/~neilbawd/fphuse.html
+ - ../../from/Neil.Bawd
+
+ http://www.forth.com/Content/Handbook/Handbook.html
+ - ../../from/Elizabeth.D.Rather and ../../from/Edward.K.Conklin
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+

@@ -1,0 +1,3 @@
+the directory names follow the
+output from ../nameguess.pl
+or ../mk/forthname.pl

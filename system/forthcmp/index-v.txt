@@ -1,0 +1,7 @@
+title: ForthCMP
+internet-url:
+	http://www.aracnet.com/~tomalmy/forthcmp.html
+written-by:
+	 by Tom Almy.
+	../../from/Tom.Almy
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

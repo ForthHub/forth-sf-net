@@ -1,0 +1,17 @@
+title: Tom Zimmer
+homepage:
+	http://home.netcom.com/~zforth
+employer:
+	? http://www.tmqaustin.com (R&D)
+forth:
+	much fame of old
+- 	see ../../system/win32for
+- 	see ../../system/tcom
+- 	see ../../system/f-pc
+- 	see ../../system/zforth
+e-mail:
+-	tzimmer at tmqaustin.com
+-	zforth at ix.netcom.com
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $ ((guidod's private notes))
+

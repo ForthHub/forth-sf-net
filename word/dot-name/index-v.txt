@@ -1,0 +1,47 @@
+title: .NAME
+
+description:
+	".NAME" is not specified in any standard document,
+	but it is found in almost any forth implementation.
+	It is commonly defined to print the string to be
+	found at a NFA.
+
+	The actual of implementation of a forth name is
+	not strictly specified. The classic implementation
+	uses a counted string where some of the higher bits
+	are used to flag immediate and smudge attributes.
+	These bits must be masked away before the string
+	can be printed to the screen.
+
+discussion:
+
+> Christophe Lavarenne wrote:
+> > Another (non ANS-standard) incompatibility between Gforth and W32for
+> > is `.NAME', which takes an NFA (alias nt or name-token) under Gforth,
+> > whereas it takes a CFA (alias xt or execution-token) under W32for.
+
+> Anton Ertl wrote:
+> > Bernd Paysan wrote:
+> > For .NAME, we should investigate a bit more. xt >NAME .NAME is quite
+> > common. PFE does it that way, too; it looks like it's inherited from F83.
+> I am just looking at the F83 sources: it has .ID ( nfa -- ) (i.e.,
+> like our .NAME and fig_forth's ID.) and no ".NAME" or "NAME.".  So
+> what we could do to avoid this conflict is to rename our .NAME to
+> ID. and/or .ID.
+
+> Guido Draheim wrote:
+> On the other hand, I do not particularly know where .NAME came from, the
+> things I have here do *not* actually point to F83 either. But I guess
+> it must be related to '83 times - it is simply the natural definition
+> with all of the f83-like things named >BODY and >NAME, and people did
+> still need sth. like ID. from fig times. And that is where the
+> incompatiblities may have been all about, since .NAME may be found
+> almost everywhere, but they were "inventented" independently, so some
+> were to make it based 'xt' as it was suggested as a general rule,
+> or just using the old fig-like behaviour that you have to go to NAME
+> first before you can print what the resulting NFA points to. Anyway,
+> that's just wild guessing anyway, let's have ID. back, it has a defined
+> almost-standardized execution ("print the NFA"), so it is very very
+> improbable to be differently implemented anywhere.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:24 guidod Exp $

@@ -1,0 +1,39 @@
+title: [DEFINED] name
+description:
+	precompiler-like test if a word ist defined. The result
+	is tested with => [IF]
+discussion:
+	[DEFINED] is part of the => ../../wordset/FPH
+	also in FPH is [UNDEFINED]
+	there are quite a few words that do something similar
+	but are named differently.
+
+> Guido Draheim wrote:
+>   gforth:  [IFDEF] and [IFUNDEF] in base system,
+>            does the nesting with a dynamic parser vector ;
+>             has neither [DEFINED] nor [NOT], but
+>             has immediate DEFINED ( "name" -- 0|1 )
+>   old pfe:  none in base system, strictly ansi
+>   new pfe:  [DEFINED] and [NOT] in base system,
+>             has also an independent C-like syntax that can not
+>             mix with [IF] [ELSE] (#IFDEF .. #ELSE .. #ENDIF)
+>   win32for: DEFINED and HAVE in base system, actually
+>             DEFINED ( "name" -- str 0 | cfa flag ) non-immediate
+>             HAVE ( "name" -- 0|flag ) non-immediate
+>   bigforth: [IFDEF] and [IFUNDEF] in base system,
+>             implemented just like gforth does ;
+>             neither [DEFINED] nor [NOT] ;
+>             has a non-immediate DEFINED?
+
+possible-implementations:
+: [DEFINED] ( IN: word -- CS: flag )
+    BL WORD FIND NIP
+; IMMEDIATE
+: [DEFINED] ( IN: word -- CS: flag )
+    BL WORD FIND NIP 0<>
+; IMMEDIATE
+: [UNDEFINED] ( IN: word -- CS: flag )
+    BL WORD FIND NIP 0=
+; IMMEDIATE
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $

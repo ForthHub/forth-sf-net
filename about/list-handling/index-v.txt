@@ -1,0 +1,157 @@
+title: forthcode for list-handling
+
+../../from/Elizabeth.D.Rather
+> Petter wrote:
+> >
+> > Does anybody know about some code that does list-handling in Forth? Like
+> > adding a member to a list, looking for members, CAR, CDR..?
+> >
+> > Regards, Petter
+>
+> SwiftForth's "linked list" structure and tools may be what you're
+> looking for.  If you have SwiftForth, see Section 4.5.2 in the Reference
+> Manual.  If not, see our web site for a free 30-day trial.
+>
+> Cheers,
+> Elizabeth
+
+../../from/David.N.Williams
+> John McKeon wrote:
+> >
+> > This site has a linklisit for SwiftForth using SWOOP:
+> > forth.swvrscca.com
+> >
+> I may as well mention mine:
+>
+> ftp://feynman.physics.lsa.umich.edu/pub/williams/forth/utilities/lists.fs
+>
+> It needs:
+>
+> ftp://feynman.physics.lsa.umich.edu/pub/williams/forth/utilities/qdstruct.fs
+>
+> -David
+
+---
+$Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $
+---
+here's also a longer answer from roelft <postbus@bmbcon2.demon.nl>
+<pre>
+0 [IF]
+
+Petter wrote:
+>
+> Does anybody know about some code that does list-handling in Forth? Like
+> adding a member to a list, looking for members, CAR, CDR..?
+>
+> Regards, Petter
+
+I recall a few packages were written, but can't remember where I saw them.
+Martin Tracy wrote a Lisp package, which is/was sold at the FIG store, this
+could be a problem, but you could try contacting them.
+Perhaps there is something in the Taygeta archives, I should look there.
+Dick Pountain wrote about lists in his OOF book, the last chapter, perhaps
+availlable via some library (f.i. figUK or Dutch Fig).
+I've got some code, but it's not Ans and a lot is in 68000 code, but I could
+send it if it would help.
+
+ But meanwhile to show something, incomplete and naive:
+Assuming the list is made of nodes and each node is composed of two cells.
+Cell 1 contains pointer to another node, the link.
+Cell2 points to another list, literal data, structure, xt, whatever.
+
+There are many ways to create these lists, here we use a free list from
+which we'll construct new lists.
+
+[THEN]
+
+decimal
+
+\ note on stack comments:
+\ node = address node-structure
+\ list = address first node-structure in list aka chain of nodes
+
+\  Allocate LISP cells
+
+2 cells constant Node           \ a list node has '2 cells' a.units
+
+512 constant #Nodes             \ bit arbitrary, but dividable by '2 cells'
+
+create List-Heap                        \ nodes will be cons from here
+#Nodes Node * allot                     \ 8 bytes, sorry: a.units, per cell
+
+create Nil Nil , Nil ,                  \ our special terminal node
+
+variable Free-List                      \ free list handle
+
+: Zero-Heap
+        List-Heap [ #Nodes Node * ] literal erase ;
+
+: Init-Free-List  ( --)
+        Zero-Heap                               \ not nescessary
+        List-Heap
+        #Nodes 1- 0                     \ all nodes except the last
+        do                                      \ will be linked
+          dup Node + dup >r swap ! r>
+        loop
+        Nil swap !                              \ last is linked to Nil node
+        List-Heap Free-List !   \ Free-List contains whole heap
+;
+
+cr .( Initiating the Heap into a List)
+Init-Free-List
+
+\ Some words to deal with the list, some have LISP names
+
+\ retrieves what is in the first node's 'pointer cell'
+: CAR  ( list - x )
+        cell+ @  ;
+
+\ return next node i.e. rest of list
+: CDR  ( list - restlist)
+        @  ;
+
+\ add node to the beginning of the list and return 'newlist'
+: add-node ( node list - newlist )
+        over ! ;
+
+\ remove first node, returning node and 'newlist'
+: remove-node   ( list - node restlist )
+        dup Nil = abort" Empty List" dup CDR ;
+
+\ get us a node from the heap
+: get-node      ( - node )
+        Free-List @ remove-node Free-List ! ;
+
+\ return node to the heap
+: return-node   ( node - )
+        Free-List @ add-node Free-List ! ;
+
+\ creating a new list with Nil as first node
+: New-List      (  - list )
+        Nil ;
+
+\ add item to a list returning the newlist
+: CONS  ( whatever list - newlist)
+        get-node
+        swap append
+        swap over cell+ ! ;
+
+\ show what is in list
+: show ( list - )
+        begin dup Nil = invert
+        while dup CAR cr . CDR
+        repeat
+        drop cr ." nil" ;
+
+\ example:
+variable my-list
+New-List my-list !
+my-list @ show
+s" postbus@bmbcon2.demon.nl"
+my-list @ CONS my-list !
+my-list @ CONS my-list !
+my-list @ show
+my-list @ dup CAR swap CDR CAR type
+
+\ Roelf
+</pre>

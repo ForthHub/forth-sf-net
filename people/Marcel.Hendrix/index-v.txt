@@ -1,0 +1,17 @@
+title: 	Marcel Hendrix
+homepage:
+	http://home.iae.nl/users/mhx
+employer:
+	http://www.er.ele.tue.nl/emv - lecturer (academic)
+forth:
+ 	mostly related to transputer like variants.
+-  see ../../system/iforth
+-  see ../../system/eforth
+-  see ../../system/tforth
+e-mail:
+- 	mhx at iae.nl
+-	(m.a.m.hendrix at ele.tue.nl)
+languages:
+	(NL) ++ (EN) ++ (DE) ++ ...
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $ ((guidod's private notes))
+

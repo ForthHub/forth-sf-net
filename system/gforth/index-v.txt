@@ -1,0 +1,19 @@
+title: gforth - GNU Forth
+keywords:
+	opensource, portable, all token-threading types available,
+	autoconf
+internet-url:
+*	http://www.gnu.org/software/gforth
+*	../../from/Anton.Ertl
+developers:
+*	../../from/Anton.Ertl
+*	../../from/Bernd.Paysan
+compare-with:
+*	../../system/bigforth
+*	../../system/pfe
+*	../../system/win32for
+*	../../system/tile-forth
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
+
+

@@ -1,0 +1,20 @@
+Discussion on the behaviour of
+some words. Most of the words that
+can be found here, have no actual
+ANSI standardized definition, but
+they are in widespread use.
+
+The texts here are often summaries
+of comp.lang.forth discussion that
+can make guidelines for everyone
+who "invents" a name for an obvious
+thing that needs a name and that
+the standard system does not have.
+In more than one place, the "natural"
+name was invented before, and the
+implementor will have the risk to
+be slightly different, so slightly
+different to be subtily incompatible
+and errornous elsewhere.
+
+

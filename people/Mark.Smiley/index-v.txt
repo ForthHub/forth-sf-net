@@ -1,0 +1,4 @@
+title: Mark Smiley
+internet-url:
+	http://members.aol.com/marksmiley/
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:53 guidod Exp $

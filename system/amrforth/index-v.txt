@@ -1,0 +1,7 @@
+title: amrFORTH
+internet-url:
+	http://www.amresearch.com/software.html
+written-by:
+	 by AM Research (commercial).
+	../../from/AM.Research
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

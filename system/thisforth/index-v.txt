@@ -1,0 +1,7 @@
+title: ThisForth
+internet-url:
+	ftp://ftp.taygeta.com/pub/Forth/Compilers/native/unix/this4th.tar.gz
+written-by:
+	 by Wil Baden.
+	../../from/Wil.Baden
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $

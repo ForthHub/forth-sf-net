@@ -1,0 +1,24 @@
+title: PygmyForth
+internet-url:
+	http://www.eskimo.com/~pygmy/forth.html
+description:
+	the above site is also interesting for the
+	"3-instruction Forth for the 68HC11", an FORML article
+
+3-instruction-forth:
+ How many instructions does it take to make a
+ Forth for target development work?  Does memory
+ grow on trees?  Does the cost of the development
+ system come out of your own pocket?  A 3-
+ instruction Forth makes Forth affordable for target
+ systems with very limited memory.  It can be
+ brought up quickly on strange new hardware.  You
+ don't have to do without Forth because of memory or
+ time limitations.  It only takes 66 bytes for the
+ Motorola MC68HC11.  Full source is provided.
+ [...]
+ The absolute minimum the target must do, it seems to
+ me, is fetch a byte, store a byte, and call a subroutine.
+ Everything else can be done in high-level Forth on the host.
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 07:41:22 guidod Exp $
