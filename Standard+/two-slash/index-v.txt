@@ -1,0 +1,59 @@
+title: 2/ : shift or division?
+description:
+ The ANS Forth (a.k.a. ISO Forth) defines 2/ as an arithmetic shift right,
+ but there are two unevident nuances.
+
+ First of all, 2/ is not the same as 2 /
+
+Jerry Avins <jya@ieee.o**> wrote in the message <3CF7A052.75658F4B@ieee.org>:
+[..]
+>  SwiftForth 2.2.2 09Mar2001
+>  101 2 / .  50  ok
+>  101 2/  .  50  ok
+> -101 2 / . -50  ok
+> -101 2/  . -51  ok
+[..]
+
+ Look once more at the last two lines. 2/ rounds towards minus infinity,
+ while 2 / rounds towards zero.
+
+
+ At second, the ANS Forth document fails to give the right definition
+ of what an arithmetic shift right is:
+
+> 6.1.0330   2/    "two-slash"   CORE
+> ( x1 -- x2 )
+> x2 is the result of shifting x1 one bit toward the least-significant
+> bit, leaving the most-significant bit unchanged.
+
+ This definition is ok for both tow's complement and one's complement
+ machines but is wrong for signed magnitude machines.
+
+Andrew Haley <aph@*****************>
+wrote in the message <ada1bg$2uu$2@hammerfield.cambridge.redhat.com>:
+>
+[...]
+> The only sane way to do an arithmetic right shift on a sign-magnitude
+> machine is a shift that doesn't involve the sign bit.  The standard
+> defintion of 2/ for such a machine is Just Plain Wrong.
+>
+> Andrew.
+
+ Two more examples of number representations some bits of which
+ must remain untouched are:
+
+m_l_g3@yahoo.com (Michael L Gassanenko) wrote
+in the message <b5ecdf44.0205310049.79efa6c3@posting.google.com>:
+[...]
+>
+> 1) a system that represent integers as floating point numbers.
+> I heard about at least one such system (IIRC pre-ANS).
+>
+> 2) a system that uses shadow bits for run-time type information.
+> I use one such system as a cross-compiling host.
+
+ The 3rd realistic example is a Forth system implemented on a
+ virtual machine with big numbers (each number is represented with
+ the necessary number of bits).
+
+
