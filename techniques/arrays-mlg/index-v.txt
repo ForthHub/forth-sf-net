@@ -1,0 +1,120 @@
+title: Arrays and indexing by MLG
+description:
+
+> Speaking of arrays.
+> What would be a good way to make an array in Forth, where the version you
+> have doesn't have arrays already defined or implemented?
+
+ There are multiple approaches, each one has its proponents.
+ IMO, the right way is:
+
+Main-idea:
+
+<spanforth>
+ \ based-indexed adressing;
+ \ I prefer to define these words as primitives (CODE definitions)
+ : [] ( index base -- value ) SWAP CELLS + @ ;
+ : []! ( value index base -- ) SWAP CELLS + ! ;
+ : []^ ( index base -- addr ) SWAP CELLS + ;
+
+ \ Example of use:
+ CREATE bar 10 , 20 , 30 , 40 , ~~~tag[font color=green]tag~~~--> ok[Dec]
+~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=green]tag~~~-->40  ok[Dec]~~~tag[/font]tag~~~
+0 bar [] .              ~~~tag[font color=green]tag~~~-->10  ok[Dec]~~~tag[/font]tag~~~
+123 3 bar []!           ~~~tag[font color=green]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=green]tag~~~-->123  ok[Dec]~~~tag[/font]tag~~~
+1 3 bar []^ +!          ~~~tag[font color=green]tag~~~--> ok[Dec]~~~tag[/font]tag~~~
+3 bar [] .              ~~~tag[font color=green]tag~~~-->124  ok[Dec]~~~tag[/font]tag~~~
+</spanforth>
+ The advantage of this method is that, like in C, pointers may be used
+ in place of arrays.
+
+FAQ:
+ Q: Why []^ ?
+ A: In practice, the word []^ is almost never used.
+    The most elegant name [] is reserved for the most frequent operation
+    of based-indexed fetching.
+
+ Q: Why not []@ ?
+ A: The symbol @ attracts inadequately much attention. It makes us
+    think about fetch operations rather than about array elements.
+
+ Q: Why not &[] ?
+ A: I use & for bit masks, e.g. &immediate
+
+ Q: I would do this differently
+ A: First see if you approach may be extended to differently-sized data.
+    At second, please, do not redefine the names defined here.
+    These words were invented about in 1994, they were published,
+    and now they are used by unpredictable number of people.
+    If you define these names differently, your code will be incompatible
+    with the code of the others.
+
+Extended-idea:
+
+ Analogously, for elements of greater and lesser size:
+<spanforth>
+ \ double numbers
+ : D[] ( index base -- value ) SWAP 2* CELLS + 2@ ;
+ : D[]! ( value index base -- ) SWAP 2* CELLS + 2! ;
+ : D[]^ ( index base -- addr ) SWAP 2* CELLS + ;
+
+ \ characters
+ : C[] ( index base -- value ) ( SWAP CHARS ) + C@ ;
+ : C[]! ( value index base -- ) ( SWAP CHARS ) + C! ;
+ : C[]^ ( index base -- addr ) ( SWAP CHARS ) + ;
+</spanforth>
+ Example:
+ >IN @ TIB C[]
+ returns the next character in the input stream
+ (assuming that TIB is the same as SOURCE DROP , that is, that TIB works for
+ all kinds of input sources, not only for the console)
+
+ Analogously for bit arrays (8086 asm, I used this code somewhere):
+<spanforth>
+ CODE BIT[] ( index addr -- b )
+ _(  POP BX      _ POP CX         _ MOV AX, CX
+ _   SHR AX, # 1 _ SHR AX, # 1    _ SHR AX, # 1
+ _   ADD BX, AX  _ AND CL, # 07   _ MOV AX, # 80   _ SHR AX, CL
+ _   AND AL, 0 [BX]
+ _   NEG AX      _ SBB AX, AX     _ NEG AX         _ PUSH AX
+ )_
+ NEXT;
+
+ CODE BIT[]! ( f index addr -- )
+ _(  POP BX      _ POP CX         _ MOV AX, CX
+ _   SHR AX, # 1 _ SHR AX, # 1    _ SHR AX, # 1
+ _   ADD BX, AX  _ AND CL, # 07
+ _  POP AX
+ _  NEG AX       _ SBB AX, AX     -- true if f<>0
+ _ MOV AH, # 80
+ _  AND AL, AH   _ SHR AX, CL
+ _ NOT AH
+ _ AND [BX], AH
+ _ OR  [BX], AL
+ )_
+ NEXT;
+ : BITS ( Nbits -- Nbytes )
+     8 /MOD SWAP 0<> -
+ ;
+</spanforth>
+ Two-dimensional arrays may be implemented with the help of
+ arrays to pointers to arrays; this will look as
+ i j arr [] []
+ and
+ 123 i j arr [] []!
+ The rows need not be the same size, but you have to initialize the
+ array of pointers to rows ( 'arr' in the above example).
+
+ See-also:
+ http://www.forth.org.ru/~mlg/CStyleIn/CStyleIndexing.html
+ FAQ:
+ http://www.forth.org.ru/~mlg/CStyleIn/CStyleIndexingQA.html
+
+
+ page-written-by:
+ mlg
+ (posted by Michael L Gassanenko as Message-ID: <3EF58BF9.240CB4FF@yahoo.com> )
+
+
