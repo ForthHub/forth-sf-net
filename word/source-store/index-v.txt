@@ -19,7 +19,7 @@ Related-words: 6.2.2148 RESTORE-INPUT, 6.2.2182 SAVE-INPUT,
 unstandard PARSE-AREA!.
 
 See:
-PARSE-AREA! ../parse-area-store
+PARSE-AREA! ../parse-area-store/index.html
 
 Definition-of-terms:
 the refill buffer: a region of memory that may be associated with
