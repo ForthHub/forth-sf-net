@@ -10,10 +10,10 @@ description:
 Number conversion prefixes
 ~~~tag[pre]tag~~~
 Prefix  Conversion base     Example
-%       Binary              %10101010
-@       Octal               @177
-#       Decimal             #-13579
-$       Hex                 $FE00
+%       Binary              %10101010 ~~~
+@       Octal               @177      ~~~
+#       Decimal             #-13579   ~~~
+$       Hex                 $FE00     ~~~
 ~~~tag[/pre]tag~~~
 
 
