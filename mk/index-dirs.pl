@@ -50,10 +50,11 @@ $html_header .= "\n ".$sourceforge_logo." \n";
 $html_header .= "</td></tr></table>\n";
 
 my $html_footer =
-    "\n<hr>\n<small> generated "
+    "\n<p align=right><small>"
+    ."<i>generated </i>"
     .(scalar localtime)
-    ." - ".$ENV{USER}
-    ." </small>";
+    ."<sup><s>".$ENV{USER}."</s></sup>"
+    ."\n</small></p>";
 
 my %index = ( );
 my ($F,$D);

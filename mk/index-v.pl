@@ -12,12 +12,6 @@ s{ (^)title:(.*) }
   $1." <a href=\"..\"> / $where / </a>\n<h1> ".$2." </h1>\n<dl>"
   }mex;
 
-my $html_footer =
-    "\n<hr>\n<small> generated "
-    .(scalar localtime)
-    ." - ".$ENV{USER}
-    ." </small>";
-
 # mark each section start, and some linestarts have also special replaments
 s{ (^)(\.\s) } { $1." <br> ".$2 }gmex;
 s{ (^)(\:\s) } { $1."<spanforth>".$2 }gmex;
@@ -87,6 +81,14 @@ s{ \(\( ([^\(\)]+) \)\) }
 s{ (\=\&gt\;)(\s+)([^\s\<\>]+) }
 { "<small>".$1."</small>".$2."<b>".$3."</b>" }gmex;
 
+my $html_footer =
+    "\n<p align=right><small>"
+    ."<i>generated </i>"
+    .(scalar localtime)
+    ."<sup><s>".$ENV{USER}."</s></sup>"
+    ."\n</small></p>";
+
+
 my $text = $_;
 
 if (not length $title)
@@ -97,6 +99,7 @@ if (not length $title)
 
 print "<head><title>".$title."</title>\n";
 print "<meta name=\"generator\" content=\"$0\" date=\"".(scalar localtime)."\" />\n";
+print "<link rev=\"derived-from\" content=\"$F\" />\n";
 if (-f "$where.css")
 {
   print "<link rel=\"stylesheet\" media=\"screen\" href=\"$where.css\" />\n";
