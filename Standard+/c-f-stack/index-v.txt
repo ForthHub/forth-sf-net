@@ -25,4 +25,5 @@ A standard program cannot assume that the items left on the data
 stack are not modified, moved or removed while there are
 control-flow stack elements above them.
 
+See also: ../colon-sys
 
