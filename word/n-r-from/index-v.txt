@@ -1,0 +1,16 @@
+title: NR>
+description:
+NR>                                     "n-r-from"
+
+     ( -- xn ... x1 n ) ( R: x1 ... xn n -- )
+
+Take n off the return stack. Repeat n times: move the top return stack item to the data stack. After that, place n onto the data stack.
+
+note:
+The words N>R and NR> are a means to store the information returned by words
+like SAVE-INPUT to the return stack and thus unblock the data stack.
+
+
+see:
+N>R ../n-to-r/index.html
+
