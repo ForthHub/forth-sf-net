@@ -40,7 +40,7 @@ should treat control characters in the same way!
 
 It is very easy, too easy to forget about this and create a system
 where tabs are treated as spaces except that [IF] looks for an [ELSE]
-or [THEN] delimited by ~~~tag[em]~~~spaces~~~tag[/em]tag~~~ and ~~~tag[em]tag~~~not tabs~~~tag[/em]tag~~~.
+or [THEN] delimited by ~~~tag[em]tag~~~spaces~~~tag[/em]tag~~~ and ~~~tag[em]tag~~~not tabs~~~tag[/em]tag~~~.
 
 And the Technical Committee will not be responsible in bugs of
 your system. This behaviour will be ~~~tag[em]tag~~~your~~~tag[/em]tag~~~ design error. So watch out!
