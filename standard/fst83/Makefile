@@ -12,8 +12,8 @@ CHK_FILES = fst83chk.fs \
 	fst83_b.fs fst83_c.fs
 
 index:
-	ln -s fst83.htm index.html
-	cp ../../forth.css forth.css
+	-ln -s fst83.htm index.html
+	-cp ../../forth.css forth.css
 
 zip:
 	zip -9 ../fst83.zip \
