@@ -1,0 +1,6 @@
+this is about syntax of number literals etc.
+
+[under construction]
+to do: take from OTA
+ref to Tom Zegub's (&Ko) S$ {text}
+
