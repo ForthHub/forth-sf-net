@@ -3,5 +3,5 @@ description:
 
 The algorithms mentioned in this file have not been reviewed of verified.
 
--> valuable-algorithms.txt
+~~~tag[a href=valuable-algorithms.txt]tag~~~discussion in comp.lang.forth~~~tag[/a]tag~~~
 
