@@ -309,9 +309,9 @@ provide all of the Environment and Environment Extensions word sets.
 </a>
 
 <hr>
-<A name=19.6.1.0001>
+<A name=19.6.1.1345>
 <code>
-19.6.1.0001 <b>ENVIRONMENT?</b>
+19.6.1.1345 <b>ENVIRONMENT?</b>
 </code>
 </a>
 <BR>
@@ -334,14 +334,15 @@ TRUE flag, otherwise return just a FALSE flag.
 See:
 <A href=../forth-std/defs.htm#3.4.2>3.4.2</a> Finding definition names, &nbsp;
 <A href=environ-extra.htm#A.19.3>A.19.3</a> ENVIRONMENT? implementation
+<A href=../core-ext/core-ext.htm#6.1.1345>.6.1.1345</A> CORE ENVIRONMENT?
 </code>
 
 <P>
 
 <hr>
-<A name=19.6.1.0002>
+<A name=19.6.1.1595>
 <code>
-19.6.1.0002 <b>ENVIRONMENT-WORDLIST</b>
+19.6.1.1595 <b>ENVIRONMENT-WORDLIST</b>
 </code>
 </a>
 <BR>
@@ -357,11 +358,19 @@ hints provided by the implementation.  This word list is never part
 of the initial search-order.
 
 <P>
+<code>
+See:
+<A href=#19.6.2.1590>19.6.2.1590</A> ENVIRONMENT
+<A href=#19.6.1.1345>19.6.1.1345</A> ENVIRONMENT?
+<A href=environ-extra.htm#A.19.3>A.19.3</a> ENVIRONMENT? implementation
+<A href=../search-ext/search-ext.htm#16.6.1.1595>16.6.1.1595</A> FORTH-WORDLIST
+</code>
+<p>
 
 <hr>
-<A name=19.6.1.0003>
+<A name=19.6.1.1718>
 <code>
-19.6.1.0003 <b>REQUIRED</b>
+19.6.1.1718 <b>REQUIRED</b>
 </code>
 </a>
 <BR>
@@ -399,22 +408,34 @@ do nothing.
 <a href="../file-ext/file-ext.htm#11.6.1.1718">INCLUDED</a>
  would modify the parameter stack - which may even include
  changes in stack depth. An implementation <b>shall</b> check the
- stack depth and throw a condition which the self-parsing variant
+ stack depth and throw a exception which the self-parsing variant
 <a href="../environ-ext/environ-ext.htm#19.6.2.3">REQUIRES</a>
- can catch - otherwise stack changes are ignored rendering the
- definition as ultimately (outside of catch blocks) being
+ can catch - an implementation calling REQUIRED within a
+ CATCH domain will see the stack depth difference at the
+ exit of the CATCH - so it <b>must</b> be prepared to handle
+ a stack effect of
  <code><nobr> ( i*x c-addr u -- j*x ) </nobr></code>.
 <P>
- An implementation without catch domains <b>may</b> print
+ An implementation without exceptions <b>shall</b> print
  a warning message that otherwise
 <a href="../environ-ext/environ-ext.htm#19.6.2.3">REQUIRES</a>
- would emit or that could be caught by other uses of this word.
+ would emit or any other word that will CATCH the exception thrown.
 <P>
 
-<hr>
-<A name=19.6.1.0004>
+<p>
 <code>
-19.6.1.0004 <b>[DEFINED]</b>
+See:
+<a href=#19.6.2.1718>19.6.2.1718</a> REQUIRES
+<a href="../file-ext/file-ext.htm#11.6.1.1718">11.6.1.1718</a> INCLUDED
+<a href=../exception-ext/exception-ext.htm#9.6.1.0875>9.6.1.0875</a> CATCH
+<a href=../exception-ext/exception-ext.htm#9.6.1.2275>9.6.1.2275</a> THROW
+</code>
+<p>
+
+<hr>
+<A name=19.6.1.1550>
+<code>
+19.6.1.1550 <b>[DEFINED]</b>
 </code>
 </a>
 <BR>
@@ -435,12 +456,12 @@ flag. The flag is intended to be consumed by
 
 <P>
 
-See: the inverse of <a href="#19.6.1.0005">[UNDEFINED]</a>.
+See: the inverse of <a href="#19.6.1.1549">[UNDEFINED]</a>.
 
 <hr>
-<A name=19.6.1.0005>
+<A name=19.6.1.1549>
 <code>
-19.6.1.0005 <b>[UNDEFINED]</b>
+19.6.1.1549 <b>[UNDEFINED]</b>
 </code>
 </a>
 <BR>
@@ -461,7 +482,7 @@ flag. The flag is intended to be consumed by
 
 <P>
 
-See: the inverse of <a href="#19.6.1.0004">[DEFINED]</a>.
+See: the inverse of <a href="#19.6.1.1550">[DEFINED]</a>.
 
 <hr>
 <A name=19.6.2>
@@ -469,9 +490,9 @@ See: the inverse of <a href="#19.6.1.0004">[DEFINED]</a>.
 </a>
 
 <hr>
-<A name=19.6.2.0001>
+<A name=19.6.2.1590>
 <code>
-19.6.2.0001 <b>ENVIRONMENT</b>
+19.6.2.1590 <b>ENVIRONMENT</b>
 </code>
 </a>
 <BR>
@@ -484,14 +505,22 @@ ENVIRON EXT
 
 Transform the environment consisting of widn, ...  wid2, wid1 (where
 wid1 is searched first) into widn, ...  wid2,
-wid <a href=environ-ext.htm#19.6.1.0002>ENVIRONMENT-WORDLIST</a>.
+wid <a href=environ-ext.htm#19.6.1.1595>ENVIRONMENT-WORDLIST</a>.
 
 <P>
+<code>
+See:
+<A href=#19.6.2.1595>19.6.2.1595</A> ENVIRONMENT-WORDLIST
+<A href=#19.6.1.1345>19.6.1.1345</A> ENVIRONMENT?
+<A href=environ-extra.htm#A.19.3>A.19.3</a> ENVIRONMENT? implementation
+<A href=../search-ext/search-ext.htm#16.6.2.1590>16.6.2.1590</A> FORTH
+</code>
+<p>
 
 <hr>
-<A name=19.6.2.0002>
+<A name=19.6.2.1718>
 <code>
-19.6.2.0002 <b>REQUIRES</b>
+19.6.2.1718 <b>REQUIRES</b>
 </code>
 </a>
 <BR>
@@ -504,21 +533,44 @@ ENVIRON EXT
 
 Skip leading space delimiters. Parse name delimited by a space.
 Submit the string to
-<a href=environ-ext.htm#19.6.1.0003>REQUIRED</a>
+<a href=environ-ext.htm#19.6.1.1718>REQUIRED</a>
 
 <P>
 If the underlying
-<a href=environ-ext.htm#19.6.1.0003>REQUIRED</a>
+<a href=environ-ext.htm#19.6.1.1718>REQUIRED</a>
 call did detect a stack depth change from including a source
 file, this word <b>must</b> catch the corresponding exception
 and it may print a warning on doing so.
-
 <P>
+within a system that does not support exceptions, the
+warning message on a stack change <b>should</b> have
+been printed by <a href=environ-ext.htm#19.6.1.1718>REQUIRED</a>
+itself. Consequently in this case, this word is simply the self-parsing
+variant of the underlying <a href=environ-ext.htm#19.6.1.1718>REQUIRED</a>.
+<P>
+In both cases, this word REQUIRES is responsible to ensure
+that a stack depth change does not cause an exception to
+be handled by the caller of this word. It <b>may</b>
+consequently leave the stack depth change visible to the
+caller of this word, so the caller of REQUIRES can not
+assume to access parameters pushed on the parameter stack
+before this call, and consequently this word is not supposed
+to be run in compilation mode (though it may get compiled).
+
+<p>
+<code>
+See:
+<a href=#19.6.1.1718>19.6.1.1718</a> REQUIRED
+<a href="../file-ext/file-ext.htm#11.6.1.1718">11.6.1.1718</a> INCLUDED
+<a href=../exception-ext/exception-ext.htm#9.6.1.0875>9.6.1.0875</a> CATCH
+<a href=../file-ext/file-res-ext.htm#R.11.6.1.1718>R.11.6.1.1718 INCLUDE</a> ,
+</code>
+<p>
 
 <hr>
-<A name=19.6.2.0003>
+<A name=19.6.2.1485>
 <code>
-19.6.2.0003 <b>[VOID]</b>
+19.6.2.1485 <b>[VOID]</b>
 </code>
 </a>
 <BR>
@@ -536,6 +588,15 @@ Place a false flag to be consumed by
 <P>
 An ambiguous condition exists if [VOID] is
 <a href="../core-ext/core-ext.htm#6.1.2033">POSTPONE</a>d
+
+<p>
+<code>
+See:
+<a href="../core-ext/core-ext.htm#6.2.1485">6.2.1485</a> FALSE
+<a href="../tools-ext/tools-ext.htm#15.6.2.2532">15.6.2.2532</a> [IF]
+<a href=#19.6.1.1550>19.6.1.1550</a> [DEFINED]
+</code>
+<p>
 
 <hr>
 <A href=../forth-std/index.htm><IMG src="../forth-std/up.gif" ></A>

@@ -84,10 +84,12 @@ and including the REQUIRED-EXT option could follow a scheme not unlike
       2DUP
       ENVIRONMENT-WORDLIST SEARCH-WORDLIST
       IF 2DROP EXECUTE TRUE EXIT THEN
+
       DUP 4 < IF 2R> 4DROP EXIT THEN
       2DUP 4- /STRING S" -EXT" COMPARE IF 2DROP EXIT THEN
-      2DUP 2>R REQUIRED
-      2R> ENVIRONMENT-WORDLIST SEARCH-WORDLIST
+      2DUP 2>R REQUIRED 2R>
+
+      ENVIRONMENT-WORDLIST SEARCH-WORDLIST
       IF EXECUTE TRUE EXIT THEN
       FALSE
     ;
@@ -98,6 +100,7 @@ The initial environment hints could answer environment queries from
 <a href=../forth-std/defs.htm#table.3.5>table 3.5</a>, possibly setup by
 a source like
 <pre>
+GET-CURRENT ENVIRONMENT-WORDLIST SET-CURRENT
          MAXCOUNTED  CONSTANT /COUNTED-STRING
                0x50  CONSTANT /HOLD
           MAXSTRING  CONSTANT /PAD
@@ -130,6 +133,7 @@ a source like
                TRUE  CONSTANT STRING
                TRUE  CONSTANT STRING-EXT
            #-LOCALS  CONSTANT #LOCALS
+( previous ) SET-CURRENT
 </pre>
 <P>
 
