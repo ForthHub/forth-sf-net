@@ -84,24 +84,36 @@ while ($F = readdir D)
 
 my $html_l_pane = "<ul>\n";
 my $big = "span"; $big = "big" if scalar %index < 20;
+my %secnames;
+my %secfiles;
+my $secname;
+my $sec;
 for $F (sort keys %index)
 {
     next if $F =~ /^(\w\w)$/;
-    my $secname = dir2sec($F);
+    $secname = dir2sec($F);
     if (-f $index{$F})
     {
 	if (open F, "<$index{$F}")
 	{
 	    my $T = join ("",<F>); close F;
-	    $T =~ s{<title>([^<>]*)</title>} { $secname = $1; "" }se;
+	    if ($T =~ m{<(title|TITLE)>([^<>]*)</(title|TITLE)>}s)
+	    { $secname = $2; "" }
+	    # HEY, WHAT WAS THAT FOR? I JUST DON'T REMEMBER...
 	    $secname =~ s{\([\w\s\.]+\)}{};
 	}else{
 	    print STDERR " ...could not open $index{$F}: $!\n";
 	}
     }
-
-    $html_l_pane .= "<li><$big><a href=\"".$index{$F}."\">"
- 	.$secname."</a></$big></li>\n";
+    $sec = $secname;
+    $sec =~ y/[a-z]/[A-Z]/;
+    $secnames{$sec.$F} = $secname;
+    $secfiles{$sec.$F} = $F;
+}
+for $sec (sort keys %secnames)
+{
+    $html_l_pane .= "<li><$big><a href=\"".$index{$secfiles{$sec}}."\">"
+ 	.$secnames{$sec}."</a></$big></li>\n";
 } $html_l_pane .= "</ul>\n";
 
 my $html_l_text = "";

@@ -1,0 +1,583 @@
+<HTML><HEAD>
+<TITLE>ZCHAR-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+      href="../forth-std/forth-std.css">
+</HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../string-ext/string-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../forth-std/rationale.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+ This is <b>NO</b> page from the
+ <a href="../../standard/dpans/dpans.htm">dpans'94</a> document.
+<br>
+ It is an experimental draft for public review, here at
+ <a href="http://forth.sf.net">FORTH.SF.NET</a>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=26.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<H1>26. The optional ZChar word set</H1>
+
+<p>
+<code>
+See:
+<a href=zchar-extern.htm>A.20</a> The optional ZChar word set
+</code>
+<p>
+
+<hr>
+<A name=26.1>
+<H2>26.1 Introduction</H2>
+</a>
+
+<hr>
+<A name=26.2>
+<H2>26.2 Additional terms and notation</H2>
+</a>
+
+<DL><DL><DT><B>zchar string:</B>
+<DD>A ZChar strings consists of characters terminated by
+a null. The length of a zchar string is number of charachters
+between the start of the string and null character at the end.
+An empty zchar string still occupies a character cell in
+memory for the null character.
+</DL>
+
+<p>
+<code>
+See:
+<a href=zchar-extern.htm#A.26.2>A.26.2</a> Additional terms
+</code>
+<p>
+
+<hr>
+<A name=26.3>
+<H2>26.3 Additional usage requirements</H2>
+</a>
+
+<hr>
+<A name=26.3.1>
+<H3>26.3.1 Basis</H3>
+</a>
+
+The ZChar strings are an implementation used primarily
+to interface with C implemented routines - to create
+parameters and work on returned data. In many cases
+it is beneficial to keep the zero-terminated strings
+on forth level and to work directly with them.
+<P>
+
+<code>
+See:
+<A href=../string-ext/string-ext.htm>17</a> string extensions word set.
+</code>
+<P>
+
+<hr>
+<A name=26.3.2>
+<H3>26.3.2 Environmental queries</H3>
+</a>
+
+Append table 26.2 to table 3.5.
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.2.6>3.2.6</a> Environmental queries
+</code>
+<P>
+
+Table 26.2 - Environmental query strings
+<P>
+
+<PRE>
+String            Value data type  Constant?  Meaning
+------            ---------------  ---------  -------
+ZCHAR-EXT         flag             no         zchar extensions word set present
+<!--
+/ZCHAR            n                yes        size of a zchar
+-->
+</PRE>
+
+<P>
+
+<hr>
+<A name=26.4>
+<H2>26.4 Additional documentation requirements</H2>
+</a>
+
+<hr>
+<A name=26.4.1>
+<H3>26.4.1 System documentation</H3>
+</a>
+
+<hr>
+<A name=26.4.1.1>
+<H4>26.4.1.1 Implementation-defined options</H4>
+</a>
+
+<UL>
+<LI>the compatibility level of backslash sequences in
+    string literals with C and extensions of C.
+</UL>
+<P>
+
+<hr>
+<A name=26.4.1.2>
+<H4>26.4.1.2 Ambiguous conditions</H4>
+</a>
+
+<UL>
+<LI>whether C literals can span multiple lines using the
+    backslash-newline code from C soures - forth system
+    may throw on any control char in a string.
+</ul>
+
+<hr>
+<a name=26.4.1.3>
+<h4>26.4.1.3 Other system documentation</h4>
+</a>
+<ul>
+<li>no additional requirements.
+</ul>
+
+
+<hr>
+<a name=26.4.2>
+<h3>26.4.2 Program documentation</h3>
+</a>
+
+
+<hr>
+<A name=26.4.2.1>
+<H4>26.4.2.1 Environmental dependencies</H4>
+</a>
+
+<UL>
+<LI>no additional dependencies.
+</UL>
+
+
+<hr>
+<A name=26.4.2.2>
+<H4>26.4.2.2 Other program documentation</H4>
+</a>
+
+<UL>
+<LI>no additional requirements.
+</UL>
+
+<hr>
+<A name=26.5>
+<H2>26.5 Compliance and labeling</H2>
+</a>
+
+<hr>
+<A name=26.5.1>
+<H3>26.5.1 STD Forth systems</H3>
+</a>
+
+The phrase <B>Providing the ZChar word set</B> shall be appended
+to the label of any Standard System that provides all of the
+ZChar word set.
+
+<P>
+
+The phrase <B>Providing name(s) from the ZChar Extensions word
+set</B> shall be appended to the label of any Standard System that
+provides portions of the ZChar Extensions word set.
+
+<P>
+
+The phrase <B>Providing the ZChar Extensions word set</B> shall
+be appended to the label of any Standard System that provides all of the
+Environment and ZChar Extensions word sets.
+
+<P>
+
+<hr>
+<A name=26.5.2>
+<H3>26.5.2 STD Forth programs</H3>
+</a>
+
+The phrase <B>Requiring the ZChar word set</B> shall be appended
+to the label of Standard Programs that require the system to provide the
+ZChar word set.
+
+<P>
+
+The phrase <B>Requiring name(s) from the ZChar Extensions word
+set</B> shall be appended to the label of Standard Programs that require
+the system to provide portions of the ZChar Extensions word set.
+
+<P>
+
+The phrase <B>Requiring the ZChar Extensions word set</B> shall
+be appended to the label of Standard Programs that require the system to
+provide all of the Environment and ZChar Extensions word sets.
+
+<P>
+
+<hr>
+<A name=26.6>
+<H2>26.6 Glossary</H2>
+</a>
+
+<hr>
+<A name=26.6.1>
+<H3>26.6.1 ZChar words</H3>
+</a>
+
+<hr>
+<A name=26.6.1.0001>
+<code>
+26.6.1.0001 <b>Z&quot;</b>
+</code>
+</a>
+<BR>
+ZCHAR
+<BR>
+
+<P>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<P>
+<pre>
+        Compilation: ( <B>"ccc&lt;quote&gt;"</B> -- )
+</pre>
+<P>
+
+Parse ccc delimited by &quot; (double-quote).
+Append the run-time semantics
+given below to the current definition.
+
+
+<PRE>
+        Run-time: ( -- z-addr )
+</PRE>
+
+<P>
+
+Return z-addr describing a string consisting of the characters ccc
+plus a terminating null zchar.
+A program shall not alter the returned string.
+
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
+<A href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
+<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=26.6.1.0002>
+<code>
+26.6.1.0002 <b>ZCOUNT</b>
+</code>
+</a>
+<BR>
+ZCHAR
+<BR>
+<pre>
+        ( z-addr -- z-addr u )
+</pre>
+
+<P>
+
+Return the
+character string specification for the zchar string stored at
+c-addr. The returned c-addr is the same for these strings. u is
+number of zchars up to the terminating null charachter,
+which is the length of the string.
+
+<P>
+
+<code>
+See:
+<A href=../core-ext/core-ext.htm#6.1.0980>6.1.0980</a> COUNT
+<A href=zchar-ext.htm#26.6.1.0003>26.6.1.0003</a> ZSTRLEN
+</code>
+
+<P>
+
+<hr>
+<A name=26.6.1.0003>
+<code>
+26.6.1.0003 <b>ZSTRLEN</b>
+</code>
+</a>
+<BR>
+ZCHAR
+<BR>
+<pre>
+       ( z-addr -- u )
+</pre>
+<P>
+
+Return the length of the zchar string stored at
+c-addr which is the number of zchars up to the
+terminating null charachter from z-addr.
+
+<P>
+
+<code>
+See:
+<A href=zchar-ext.htm#26.6.1.0003>26.6.1.0002</a> ZCOUNT
+</code>
+
+<P>
+
+<hr>
+<A name=26.6.1.0004>
+<code>
+26.6.1.0004 <b>ZMOVE</b>
+</code>
+</a>
+<BR>
+ZCHAR
+<BR>
+
+<pre>
+        ( z-addr1 z-addr2 -- )
+</pre>
+<P>
+
+Copy consecutive characters from the data space starting at c-addr1
+to that starting at c-addr2, proceeding character-by-character from
+lower addresses to higher addresses until the terminating null
+character in z-addr1 is encountered which is copied last.
+
+<P>
+<code>
+See:
+<a href=../string-ext/string-ext.htm#17.6.1.0910>17.6.1.0910 CMOVE</a> ,
+<a href=../string-ext/string-ext.htm#17.6.1.0920>17.6.1.0920 CMOVE&gt;</a>
+</code>
+<p>
+
+<hr>
+<A name=26.6.2>
+<H3>26.6.2 ZChar extension words</H3>
+</a>
+
+<hr>
+<A name=26.6.2.0001>
+<code>
+26.6.2.0001 <b>APPENDZ / Z+PLACE</b>
+</code>
+</a>
+<BR>
+ZCHAR EXT
+<BR>
+<pre>
+        ( c-addr u z-addr -- )
+</pre>
+<P>
+
+Adjust the destination z-addr by looking for its terminating
+null character. If u is greater than zero, copy u consecutive
+characters from the data space starting at c-addr to that
+starting at the null character, proceeding
+character-by-character from lower addresses to higher addresses.
+Place a null character in the destination area after copying
+
+<P>
+<code>
+See:
+<a href=zchar-ext.htm#26.6.1.0004>26.6.1.0004 ZMOVE</a> ,
+<a href=zchar-ext.htm#26.6.2.0002>26.6.1.0002 ZPLACE</a>
+</code>
+<P>
+
+<hr>
+<A name=26.6.2.0002>
+<code>
+26.6.2.0002 <b>ZPLACE</b>
+</code>
+</a>
+<BR>
+ZCHAR EXT
+<BR>
+<pre>
+        ( c-addr u z-addr -- )
+</pre>
+<P>
+
+If u is greater than zero, copy u consecutive
+characters from the data space starting at c-addr to that
+starting at z-addr, proceeding
+character-by-character from lower addresses to higher addresses.
+Always place a null character in the destination area as
+the end of the z-addr.
+
+<P>
+<code>
+See:
+<a href=zchar-ext.htm#26.6.1.0004>26.6.1.0004 ZMOVE</a> ,
+<a href=zchar-ext.htm#26.6.2.0002>26.6.1.0001 Z+PLACE / APPENDZ</a>
+</code>
+<P>
+
+<hr>
+<A name=26.6.2.0003>
+<code>
+26.6.2.0003 <b>C\&quot;</b>
+</code>
+</a>
+<BR>
+ZCHAR EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<P>
+<pre>
+        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+</pre>
+<P>
+
+Parse the c-style-string definition up to the final &quot; (double-quote)
+and append the run-time semantics given below to the current definition.
+
+<P>
+<pre>
+        Run-time: ( -- c-addr )
+</pre>
+<P>
+
+Return c-addr, a counted string consisting of the characters of
+the c-style-string.
+A program shall not alter the returned string.
+
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<a href=zchar-ext.htm#26.2.0005>26.2.005 Z\&quot;</a> ,
+<a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
+<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=26.6.2.0004>
+<code>
+26.6.2.0004 <b>S\&quot;</b>
+</code>
+</a>
+<BR>
+ZCHAR EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<P>
+<pre>
+        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+</pre>
+<P>
+
+Parse the c-style-string definition up to the final &quot; (double-quote)
+and append the run-time semantics given below to the current definition.
+
+<P>
+<pre>
+        Run-time: ( -- c-addr u )
+</pre>
+<P>
+
+Return c-addr and u describing a string consisting of the characters
+ccc. A program shall not alter the returned string.
+
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<a href=zchar-ext.htm#26.2.0005>26.2.005 Z\&quot;</a> ,
+<a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
+<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=26.6.2.0005>
+<code>
+26.6.2.0005 <b>Z\&quot;</b>
+</code>
+</a>
+<BR>
+ZCHAR EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<P>
+<pre>
+        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+</pre>
+<P>
+
+Parse the c-style-string definition up to the final &quot; (double-quote)
+and append the run-time semantics given below to the current definition.
+
+<P>
+<pre>
+        Run-time: ( -- z-addr )
+</pre>
+<P>
+
+Return z-addr, a zchar string consisting of the characters of
+the c-style-string plus the required null character at the end.
+A program shall not alter the returned string.
+
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<a href=zchar-ext.htm#26.2.0003>26.2.0003 C\&quot;</a> ,
+<a href=zchar-ext.htm#26.2.0004>26.2.0004 S\&quot;</a> ,
+<a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
+<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+</code>
+
+<P>
+
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../forth-std/rationale.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>

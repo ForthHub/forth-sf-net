@@ -1,0 +1,9 @@
+
+body { background-color : #F0F0E0 ;
+       background-image : url("../forth-std/bg.gif") ; }
+
+a:link     { color: #0000FF ; text-decoration: none ; }
+a:visited  { color: #000080 ; text-decoration: none ; }
+a:active   { color: #0000FF ; text-decoration: underline ; }
+dt { font-weight: bold ; }
+ .justify  { text-align : justify ; }
