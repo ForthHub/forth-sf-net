@@ -37,6 +37,19 @@ The logic behind this strange syntax is that ' (tick)
 is actually a number conversioon prefix. (Do not ask
 me why or how, I am not a proponent of this syntax -- mlg)
 
+In addition, I (mlg) would like to cite the following message:
+
+Marcel Hendrix writes (Message-ID: <9r1i29$juf$1@news.IAEhv.nl>):
+>
+> An amusing bug in a metacompiler that allows forward references:
+>
+> 'REGMASK @ IF ....
+>
+> Because my old NUMBER? allowed 'A to mean [CHAR] A the reference to the
+> forward label 'REGMASK was compiled as [CHAR] R . I have now changed NUMBER?
+> so that a quoted character constant should have a length of 3 and end in a
+> "'" too.
+
 summary:
 Which syntax is better, 'c' or 'c , is the subject of an argument.
 
