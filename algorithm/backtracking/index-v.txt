@@ -11,17 +11,34 @@ description:
    L> >R  R@ ENTER  R> >L
 ;
 
-Continuation: for a called word, it is the address of the residue
-of the calling procedure's code.
+ Continuation: for a called word, it is the address of the residue
+ of the calling procedure's code.
 
-PRO is a prologue of a backtrackable word.
-It moves the continuation address from the return stack to the L-stack.
-When the definition is exited, the continuation address is removed from
-the L-stack.
+ PRO is a prologue of a backtrackable word.
+ It moves the continuation address from the return stack to the L-stack.
+ When the definition is exited, the continuation address is removed from
+ the L-stack.
 
-CONT (a.k.a. YIELD ) calls the continuation. The stack effect ( i*x -- j*x )
-is due to execution of the continuation. For the time of executing
-the continuation, its address is temporarily removed from the L-stack.
+ CONT (a.k.a. YIELD ) calls the continuation. The stack effect ( i*x -- j*x )
+ is due to execution of the continuation. For the time of executing
+ the continuation, its address is temporarily removed from the L-stack.
+
+ Words that use PRO and CONT can call the continuation any number of
+ times (0, 1, or N).
+
+ Generators are words that generate values and call the continuation for
+ each of the values.
+
+ Filters are words that check some condition and call the continuation
+ only for values that make the condition true.
+
+ Generators implement loops over sets of values. Filters are
+ condition-checking statements, or loops that execute 0 or 1 times.
+
+ The advantage of backtracking is that we get reusable routines that
+ implement loops. If we change the way of looking over a set of values,
+ we change the corresponding iterator, and do not touch the words that
+ use this iterator.
 
 
 Examples:
@@ -53,6 +70,6 @@ t2
 
 
 author: mlg
-http://www.forth.org.ru/~mlg
+ http://www.forth.org.ru/~mlg
 
 
