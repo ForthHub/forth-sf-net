@@ -55,6 +55,9 @@ FAQ:
     If you define these names differently, your code will be incompatible
     with the code of the others.
 
+ Q: I still want to use names with @
+ A: See the "alternative names" section, but @ is not needed there.
+
 Extended-idea:
 
  Analogously, for elements of greater and lesser size:
@@ -116,8 +119,19 @@ Extended-idea:
  FAQ:
  http://www.forth.org.ru/~mlg/CStyleIn/CStyleIndexingQA.html
 
+alternative-names:
+ You may try to use []@ []! and &[] ( C[]@ C[]! &C[] etc.), this will not
+ cause any name conflicts, but soon you will see that @ is not needed
+ after [] . The names have been chosed this way because [] is used
+ many (7?) times more often than []! , and []^ is used many times
+ less often than []! .
 
- page-written-by:
+ Please, do not redefine already used names with a different
+ functionaliy: the result will be that the name will become unusable
+ (as it happened with NOT that must be avoided in portable code;
+ 0= or INVERT must be used instead).
+
+page-written-by:
  mlg
  (posted by Michael L Gassanenko as Message-ID: <3EF58BF9.240CB4FF@yahoo.com> )
 
