@@ -51,4 +51,26 @@ J.Brien wrote:
 > ~~~tag[code]tag~~~ PARSE-AREA@  PatternMatch /dosomething/ PARSE-AREA!
 ~~~tag[/code]tag~~~
 
+implementation:
+
+( by mlg)
+: PARSE-AREA! ( c-addr len -- )
+    2DUP SOURCE ( a l a l sa sl )
+    ROT - >R -  ( a l a-sa ) ( r: sl-l )
+    R@ <>  R@ 0< OR
+    IF
+	R> DROP SOURCE!
+    ELSE
+	2DROP R> >IN !
+    THEN
+;
+\ if sl-l = a-sa , that is, sl+sa = a+l,
+\ and if sl-l >= 0 , that is, l <= sl,
+\ then it is within the same input buffer and we adjust >IN .
+
+For some applications, such as some parsers, PARSE-AREA! can
+do nothing else than adjust >IN by the appropriate number
+of characters. In other words, the full-featured functionality
+of PARSE-AREA! shown above is not always necessary.
+
 
