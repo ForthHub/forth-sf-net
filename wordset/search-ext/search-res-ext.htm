@@ -1,0 +1,127 @@
+<HTML><HEAD>
+<TITLE>[16] SEARCH-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../block-ext/block-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../exception-ext/exception-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.16.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.16>
+<H2>R.16 Search-Order reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.16.6.1.1643>
+<code>
+R.16.6.1.1643 <b>CURRENT</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+SEARCH RES EXT
+<BR>
+<pre>
+        ( -- wid-var-addr )
+</pre>
+
+<P>
+
+Most forth system do not need to react with special actions
+to a SET-CURRENT execution to set the current definition wordlist
+and instead the SET-CURRENT call will simply set a wordlist-variable
+that will be used by other forth defining words. This words returns
+the address of this variable. Therefore:
+
+<pre>
+   : GET-CURRENT CURRENT @ ;
+   : SET-CURRENT CURRENT ! ;
+   : DEFINITIONS CONTEXT @ CURRENT ! ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../search-ext/search-ext.htm#16.6.1.1643>16.6.1.1643 GET-CURRENT</a>,
+<a href=../search-ext/search-ext.htm#16.6.1.2195>16.6.1.2195 SET-CURRENT</a>,
+<a href=../search-ext/search-ext.htm#16.6.1.1180>16.6.1.1180 DEFINITIONS</a>,
+<a href=../search-ext/search-res-ext.htm#16.6.1.1647>R.16.6.1.1647 CONTEXT</a>,
+</code>
+
+<P>
+
+<hr>
+<A name=R.16.6.1.1647>
+<code>
+R.16.6.1.1647 <b>CONTEXT</b>
+</code>
+</a>
+<BR>
+<!-- B>context</B -->
+SEARCH RES EXT
+<BR>
+<pre>
+        ( -- wid-var-addr )
+</pre>
+
+<P>
+
+Most forth system do not need to react with special actions
+to add a WORDLIST to the search ORDER. Many systems implement
+the ORDER as an array of wordlist-ids known as the CONTEXT array
+which has a length declared as the ENVIRONMENT WORDLISTS value.
+This word here returns an address to the topmost wordlist entry
+which is searched first by FIND. It is an ambiguous condition
+whether the returned value is constant and in which direction
+the other ORDER entries can be found, so the other entries of
+the CONTEXT array should be treated inaccessible directly and
+subject to the words GET-ORDER and SET-ORDER.
+
+<pre>
+   : FORTH FORTH-WORDLIST CONTEXT ! ;
+   : VOCABULARY HERE 0 , WORDLIST SWAP ! DOES> @ CONTEXT ! ;
+   : DEFINITIONS CONTEXT @ CURRENT ! ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../search-ext/search-ext.htm#16.6.1.1643>16.6.1.1643 GET-ORDER</a>,
+<a href=../search-ext/search-ext.htm#16.6.1.2195>16.6.1.2195 SET-ORDER</a>,
+<a href=../search-ext/search-ext.htm#16.6.1.1180>16.6.1.1180 DEFINITIONS</a>,
+<a href=../search-ext/search-res-ext.htm#16.6.1.1647>R.16.6.1.1643 CURRENT</a>,
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../string-ext/string-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
