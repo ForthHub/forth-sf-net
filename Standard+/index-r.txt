@@ -1,0 +1,8 @@
+There is a number of dim places
+in ANS Forth. Some of them were
+clarified in RFIs, some were not.
+
+In these section (still far from
+completeness) we give an overview
+of such dim places.
+

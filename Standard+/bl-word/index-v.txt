@@ -1,0 +1,50 @@
+title: BL WORD and the text interpreter
+description:
+
+> 3.4  The Forth text interpreter
+...
+> Text interpretation (see 6.1.1360 EVALUATE and 6.1.2050 QUIT)
+> shall repeat the following steps until either the parse area
+> is empty or an ambiguous condition exists:
+>   a) Skip leading spaces and parse a name (see 3.4.1);
+...
+
+> 3.4.1    Parsing
+...
+> 3.4.1.1  Delimiters
+> If the delimiter is the space character, hex 20 (BL),
+> control characters may be treated as delimiters.
+> ~~~tag[em]tag~~~The set of conditions, if any, under which a "space" delimiter~~~tag[/em]tag~~~
+> ~~~tag[em]tag~~~matches control characters is implementation defined.~~~tag[/em]tag~~~
+> To skip leading delimiters is to pass by zero or more contiguous
+> delimiters in the parse area before parsing.
+
+
+> 6.1.2450   WORD                                          CORE
+>     ( char "<chars>ccc<char>" -- c-addr )
+> Skip leading delimiters.  Parse characters ccc delimited by char.  An
+> ambiguous condition exists if the length of the parsed string is greater
+> than the implementation-defined length of a counted string.
+> c-addr is the address of a transient region containing the parsed word
+> as a counted string.  If the parse area was empty or contained no
+> characters other than the delimiter, the resulting string has a zero
+> length.  A space, not included in the length, follows the string.  A
+> program may replace characters within the string.
+> Note: The requirement to follow the string with a space is obsolescent and is
+> included as a concession to existing programs that use CONVERT.  A program
+> shall not depend on the existence of the space.
+> See: 3.3.3.6 Other transient regions, 3.4.1 Parsing.
+
+Now, nothing in the standard says that BL WORD and the text interpreter
+should treat control characters in the same way!
+
+It is very easy, too easy to forget about this and create a system
+where tabs are treated as spaces except that [IF] looks for an [ELSE]
+or [THEN] delimited by ~~~tag[em]~~~spaces~~~tag[/em]tag~~~ and ~~~tag[em]tag~~~not tabs~~~tag[/em]tag~~~.
+
+And the Technical Committee will not be responsible in bugs of
+your system. This behaviour will be ~~~tag[em]tag~~~your~~~tag[/em]tag~~~ design error. So watch out!
+
+page-written-by:
+ mlg
+
