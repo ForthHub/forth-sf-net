@@ -1,0 +1,889 @@
+<HTML><HEAD>
+<TITLE>[lc] LOCALE-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+      href="../forth-std/forth-std.css">
+</HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../string-ext/string-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../environ-ext/environ-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+ This is <b>NO</b> page from the
+ <a href="../../standard/dpans/dpans.htm">dpans'94</a> document.
+<br>
+ It is an experimental draft for public review, here at
+ <a href="http://forth.sf.net">FORTH.SF.NET</a>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=18.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<H1>18. The optional LOCALE word set</H1>
+
+<p>
+<code>
+See:
+<!-- <a href=locale-extern.htm>A.20</a> The optional LOCALE word set -->
+
+<a href="http://www.mpeltd.demon.co.uk/arena.htm">
+   www.mpeltd.demon.co.uk/arena.htm
+</a>
+with the original
+<a href="http://www.mpeltd.demon.co.uk/arena/i18n.propose.v7.PDF">
+ i18n.propose.*.PDF
+</a>
+
+</code>
+<p>
+
+<hr>
+<A name=18.1>
+<H2>18.1 Introduction</H2>
+</a>
+<p>
+ Forth Applications designed to run in many coutries and languages cannot yet
+ make enough assumptions about strings and characters sets to be portable.
+ The LOCALE word set is designed to provide words for portable
+ internationalisation of application progams. The proposal does not attempt
+ to cover text processing in general, but only to permit conversion of a
+ limited set of application defined text for internationalisation.
+</p>
+<p>
+ In practice, many applications are not localised by the software developer,
+ but by their agents in other countries. The LOCALE word set permits the
+ software developer to provide tools that will produce text files that can
+ be edited and converted to another language locally without dependency
+ on computer language or operating system specific tools such as resource
+ compilers and managers. At the same time, the proposed word set does not
+ inhibit the use of sets of statically compiled strings for each language,
+ it just does not define the mechanism.
+</p>
+<p>
+ The basis of the LOCALE word set is that all strings for internationalisation
+ are compiled as LOCALE structures, and all access to these strings is through
+ these structures. It appears that the following word set is adequate in the
+ first place. The word set is designed to cope with character sets that are
+ different size to the native set.
+</p>
+
+<hr>
+<A name=18.2>
+<H2>18.2 Additional terms and notation</H2>
+</a>
+
+<DL><DL><DT><B>LOCALE</B>
+<DD>We use the word <tt>locale</tt> to mean the mixture of country,
+    language, font, date/time formatting and so on in use when an
+    application program runs.
+</DL>
+
+<!--
+<p>
+<code>
+See:
+<a href=locale-extern.htm#A.18.2>A.18.2</a> Additional terms
+</code>
+<p>
+-->
+
+<hr>
+<a name="DCS">
+<DL><DT><B>DCS - Development Character Set</B>
+<DD>The language and character set encoding used by the Forth system
+at development time is referred to as the Development Character Set (DCS).
+The development character set is assumed never to change. It is furthermore
+assumed that character manipulation in the Forth System is defined in terms
+of the DCS, and that the action of character operations suchs as
+<code>CMOVE</code> is locked to the DCS.
+</DL></a>
+
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#OCS>OCS</a>
+<a href=locale-ext.htm#ACS>ACS</a>
+</code>
+<p>
+
+
+<hr>
+<a name="OCS">
+<DL><DT><B>OCS - Operating Character Set</B>
+<DD>The language and character set encoding used by any underlying
+operating system is referred to as the Operating Character Set (OCS).
+The OCS may or may not be the same as the DCS
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#DCS>DCS</a>
+<a href=locale-ext.htm#ACS>ACS</a>
+</code>
+<p>
+
+<hr>
+<DL><DT><B>ACS - Application Character Set</B>
+<DD>The language and character set encoding used at application run time
+is referred to as the Application Character Set (ACS). It is assumed that
+the largets character in an ACS fits in the native cell of the
+development Forth system. The only LOCALE word set use of individual
+characters is for setting macro escape characters (see later). The ACS
+may or may not be the same as the OCS.
+</DL>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#DCS>DCS</a>
+<a href=locale-ext.htm#ACS>OCS</a>
+</code>
+<p>
+
+<hr>
+<a name="lsid">
+<DL><DT><B>LOCALE structures / lsid</B>
+<DD>We do not wish to contrain or influence the techniques in any way.
+A specific string for internationalistion needs to be referred to by
+a single parameter, which we call the "locale string identifier", or
+<em>lsid</em>. This is an opaque type, in other words the programmer
+should make no asumptions about what it means, except that different
+strings have different <em>lsids</em>. In many cases, an <em>lsid</em>
+may well be an address.
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lstrings>locale string</a>
+</code>
+<p>
+
+<hr>
+<a name="lstrings">
+<DL><DT><B>LOCALE strings / lstrings</B>
+<DD>At application run time, locale strings need to be manipulated.
+Locale strings are described in the terms of address units. For
+brevity, locale strings are also referred to as <em>lstrings</em>
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lsid>locale structures</a>
+</code>
+<p>
+
+<hr>
+<a name="escape">
+<DL><DT><B>escape character</B>
+<DD>used in <code>SUBSTITUTE</code> that expands macro-references
+denoted in pairs of the escape-character to their corresponding
+locale string given by SET-MACRO. With the escape character being
+a %, a substitute-string looks like
+<pre>
+   Your balance at %time% on %date% is %currencyvalue%.
+</pre>
+   where time, date and currencyvalue are macro-references that shall
+   be expanded. A literal % can be expressed by doubling the
+   escape-char as %% which returns a single %.
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lsid>locale structures</a>
+</code>
+<p>
+
+<hr>
+<a name="macro-name">
+<DL><DT><B>macro-names / references</B>
+The macro names and expansions are usually created in a seperated
+wordlist as it is done with the ENVIRONMENT-WORDLIST to implement
+ENVIRONMENT?-queries - if an entry exists it is executed, so that
+the system is free to create complex expansions for macro names.
+<p>
+It is recommended that the macro names and parameter sequences
+of ISO WD2 15435 (or later) be used where appropriate.
+</p><p>
+The implementation with a LOCALE-WORDLIST can not be specifically
+recommended as a SEARCH-WORDLIST would run in ACS on the target
+system and in crosscompile environments that may be different than
+the wordlists on the development system.
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lsid>locale structures</a>
+</code>
+<p>
+
+<hr>
+<a name="country">
+<DL><DT><B>country and language constants</B>
+<DD><p>
+The are a number standardisation efforts for country and language codes.
+Since the objective of this document is to provide for source portability
+of applications, we do not need to mandate numeric or string values,
+but only to define language and country source names that can be used
+as Forth words.
+</p><p>
+Assuming that text processing is mostly affected by language selection,
+and that formatting is heavily influenced by both country and corporate
+standards, we suggest that the country be dfined by the ISO3166:1998
+two letter country codes (Alpha-2). For this standard an algorithm has
+been defined to produce unique numeric codes for each country. A set
+of language codes (ISO639:1998) also exists.
+<p>
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lsid>locale structures</a>
+</code>
+<p>
+<hr>
+
+<a name="octets">
+<DL><DT><B>Octets and Bytes</B>
+<DD><p>
+Since the vast majority of character sets are defined in terms of
+8bit units commonly referred to as bytes or octets, it is likely that
+the implementation of any internationalisation code will require the
+presence of byte/octet access words, regardless of the underlying
+DCS character size.
+</p><p>
+The presence and definition of an octet/byte access mechanism is outside
+the scoep of this proposal.
+<p>
+</DL></a>
+
+<p>
+<code>
+See:
+<a href=locale-ext.htm#lsid>locale structures</a>
+</code>
+<p>
+
+<hr>
+<A name=18.3>
+<H2>18.3 Additional usage requirements</H2>
+</a>
+
+<hr>
+<A name=18.3.1>
+<H3>18.3.1 Basis</H3>
+</a>
+
+The following three words are defined to handle macro substitions of text,
+and output of application data such as date, time, currency and so on. The
+normative definitions appear later in this proposal.
+<pre>
+     SUBSTITUTE     \ i*x addr1 len1 addr2 len2 -- addr2 len3 j*y
+                      performs the macro substition
+     SET-MACRO      \ addr len(au) c-addr u --
+                      defines a localised string
+     SET-ESCAPE     \ locale-char --
+                      sts the macro escape chacter
+</pre>
+<P>
+
+<code>
+See:
+<A href=../string-ext/string-ext.htm>17</a> string extensions word set.
+</code>
+<P>
+
+<hr>
+<A name=18.3.2>
+<H3>18.3.2 Environmental queries</H3>
+</a>
+
+Append table 18.2 to table 3.5.
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.2.6>3.2.6</a> Environmental queries
+</code>
+<P>
+
+Table 18.2 - Environmental query strings
+<P>
+
+<PRE>
+String            Value data type  Constant?  Meaning
+------            ---------------  ---------  -------
+LOCALE-EXT         flag             no         locale extensions word set present
+<!--
+/LOCALE            n                yes        size of a locale
+-->
+</PRE>
+
+<P>
+
+<hr>
+<A name=18.4>
+<H2>18.4 Additional documentation requirements</H2>
+</a>
+
+<hr>
+<A name=18.4.1>
+<H3>18.4.1 System documentation</H3>
+</a>
+
+<hr>
+<A name=18.4.1.1>
+<H4>18.4.1.1 Implementation-defined options</H4>
+</a>
+
+<P>
+
+<hr>
+<A name=18.4.1.2>
+<H4>18.4.1.2 Ambiguous conditions</H4>
+</a>
+
+<UL>
+<LI>use of an invalid local string identifier <em>(lsid)</em>
+<LI>a locale string is too big for a destination buffer
+<LI>a macro name is not found by <code>SUBSTITUTE</code>
+<LI>an invalid locale string identifier <em>(lsid)</em> is used
+<LI>in-place macro substitution.
+</UL>
+<font color="red">(two times invalid-lsid?)</font>
+
+<hr>
+<a name=18.4.1.3>
+<h4>18.4.1.3 Other system documentation</h4>
+</a>
+<ul>
+<li>which development character set is used.
+</ul>
+
+
+<hr>
+<a name=18.4.2>
+<h3>18.4.2 Program documentation</h3>
+</a>
+
+
+<hr>
+<A name=18.4.2.1>
+<H4>18.4.2.1 Environmental dependencies</H4>
+</a>
+
+<UL>
+<LI>no additional dependencies.
+</UL>
+
+
+<hr>
+<A name=18.4.2.2>
+<H4>18.4.2.2 Other program documentation</H4>
+</a>
+
+<UL>
+<LI>no additional requirements.
+</UL>
+
+<hr>
+<A name=18.5>
+<H2>18.5 Compliance and labeling</H2>
+</a>
+
+<hr>
+<A name=18.5.1>
+<H3>18.5.1 STD Forth systems</H3>
+</a>
+
+The phrase <B>Providing the LOCALE word set</B> shall be appended
+to the label of any Standard System that provides all of the
+LOCALE word set.
+
+<P>
+
+The phrase <B>Providing name(s) from the LOCALE Extensions word
+set</B> shall be appended to the label of any Standard System that
+provides portions of the LOCALE Extensions word set.
+
+<P>
+
+The phrase <B>Providing the LOCALE Extensions word set</B> shall
+be appended to the label of any Standard System that provides all of the
+Environment and LOCALE Extensions word sets.
+
+<P>
+
+<hr>
+<A name=18.5.2>
+<H3>18.5.2 STD Forth programs</H3>
+</a>
+
+The phrase <B>Requiring the LOCALE word set</B> shall be appended
+to the label of Standard Programs that require the system to provide the
+LOCALE word set.
+
+<P>
+
+The phrase <B>Requiring name(s) from the LOCALE Extensions word
+set</B> shall be appended to the label of Standard Programs that require
+the system to provide portions of the LOCALE Extensions word set.
+
+<P>
+
+The phrase <B>Requiring the LOCALE Extensions word set</B> shall
+be appended to the label of Standard Programs that require the system to
+provide all of the Environment and LOCALE Extensions word sets.
+
+<P>
+
+<hr>
+<A name=18.6>
+<H2>18.6 Glossary</H2>
+</a>
+
+<hr>
+<A name=18.6.1>
+<H3>18.6.1 LOCALE words</H3>
+</a>
+
+<hr>
+<A name=18.6.1.0001>
+<code>
+18.6.1.0001 <b>SET-LANGUAGE</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+
+<P>
+<pre>
+        ( lang -- ior) <em>; lang is a language code</em>
+</pre>
+<P>
+
+Sets the current lnaguage for the LOCALE system. The <em>ior</em>
+is returned false if the operation succeeds, otherwise it returns
+a non-zero implementation-dependent <em>ior</em>. If the operation
+does not succeed, the current langauge remains unchanged.
+
+<P>
+
+<code>
+See:
+<A href=#country>country and language constants</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0002>
+<code>
+18.6.1.0002 <b>GET-LANGUAGE</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+
+<P>
+<pre>
+        ( -- lang ) <em>; lang is a language code</em>
+</pre>
+<P>
+Returns the language code last set by <code>SET-LANGUAGE</code>
+The default language is implemenation defined.
+
+<P>
+
+<code>
+See:
+<A href=#country>country and language constants</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0003>
+<code>
+18.6.1.0003 <b>SET-COUNTRY</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+
+<P>
+<pre>
+        ( country -- ior) <em>; country is a country code</em>
+</pre>
+<P>
+
+Sets the current country for the LOCALE system. The <em>ior</em>
+is returned false if the operation succeeds, otherwise it returns
+a non-zero implementation-dependent <em>ior</em>. If the operation
+does not succeed, the current country remains unchanged.
+
+<P>
+
+<code>
+See:
+<A href=#country>country and language constants</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0004>
+<code>
+18.6.1.0004 <b>GET-COUNTRY</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+
+<P>
+<pre>
+        ( -- country ) <em>; country is a country code</em>
+</pre>
+<P>
+Returns the country code last set by <code>SET-COUNTRY</code>
+The default country is implemenation defined.
+
+<P>
+
+<code>
+See:
+<A href=#country>country and language constants</a> ,
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0005>
+<code>
+18.6.1.0005 <b>L&quot;</b>
+</code>
+</a>
+<BR>
+LOCALE EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<P>
+<pre>
+        Compilation: ( <B>"backslash-string&lt;quote&gt;"</B> -- )
+</pre>
+<P>
+
+Parse DCS charachters to the final &quot; (double-quote)
+and append the run-time semantics given below to the current definition.
+
+<P>
+<pre>
+        Run-time: ( -- lsid )
+</pre>
+<P>
+
+Return <em>lsid</em>, an identifier for a locale string.
+Other words use <em>slid</em> to extract language specific information.
+
+<P>
+
+<code>
+See:
+<A href=#DCS>DCS</a> ,
+<A href=#lsid>lsid</a> ,
+</code>
+
+<P>
+
+
+<hr>
+<A name=18.6.1.0006>
+<code>
+18.6.1.0006 <b>LOCALE@</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+        ( lsid -- addr len@au )
+</pre>
+
+<P>
+
+Return the address and length in address units of the string
+(possibly converted to the current language) that corresponds to
+the DCS string identified by <em>lsid</em>
+character string specification for the locale string stored at
+c-addr. The returned c-addr is the same for these strings. u is
+number of locales up to the terminating null charachter,
+which is the length of the string.
+
+<P>
+
+<code>
+See:
+<A href=#DCS>DCS</a>
+<A href=lsid>lsid</a>
+<A href=lstrings>lstrings</a>
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0007>
+<code>
+18.6.1.0007 <b>SUBSTITUTE</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+        ( i*x addr1 len1 addr2 len2 -- j*y addr2 len3 )
+</pre>
+
+<P>
+Perform macro substition on the <em>lstring</em> at addr1/len1
+placing the result at <em>lstring</em> addr2/len2, returning
+addr2 and len3, the length of the resulting string. Ambigous
+conditions occur if the resulting string will not fit into
+addr2/len2, or macro text cannot be found, or if the <em>lstring</em>
+at addr2/len2 overlaps the <em>lstring</em> at addr1/len1. Macros
+may take parameters from the Forth data stack.
+(<font color="red">why?</font>)
+<P>
+When a macro name delimited by escape characters (see <code>SET-ESCAPE</code>)
+is encountered by <code>SUBSTITUTE</code>, the following action occurs:
+<ol>
+<li> if the name is a valid macro name,
+     a locale and implementation dependent action occurs
+<li> if the name is null, a single escape character is substituted
+<li> in all other cases an ambigous condition exists.
+</ol>
+
+(<font color="red">why not leave the macro-name as is just chopping off
+  the first or last macro escape character?</font>)
+
+<P>
+
+<code>
+See:
+<A href=#18.6.1.0008>SET-MACRO</a>
+<A href=#18.6.1.0009>SET-ESCAPE</a>
+<A href=lstrings>lstrings</a>
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.1.0008>
+<code>
+18.6.1.0008 <b>SET-MACRO</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+        ( addr len c-addr u -- )
+</pre>
+
+<P>
+define the localised string <em>addr/len</em> in address units
+as the text to substitute for the macro of the name (in the
+development character set) <em>c-addr/u</em>. If the macro
+does not exist it is created.
+
+Perform macro substition on the <em>lstring</em> at addr1/len1
+placing the result at <em>lstring</em> addr2/len2, returning
+addr2 and len3, the length of the resulting string. Ambigous
+conditions occur if the resulting string will not fit into
+addr2/len2, or macro text cannot be found, or if the <em>lstring</em>
+at addr2/len2 overlaps the <em>lstring</em> at addr1/len1. Macros
+may take parameters from the Forth data stack.
+(<font color="red">why?</font>)
+<P>
+
+<code>
+See:
+<A href=#18.6.1.0007>SUBSTITUTE</a>
+<A href=#18.6.1.0009>SET-ESCAPE</a>
+<A href=#lstrings>lstrings</a>
+</code>
+
+<P>
+
+
+<hr>
+<A name=18.6.1.0009>
+<code>
+18.6.1.0009 <b>SET-ESCAPE</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+        ( locale-char -- )
+</pre>
+
+<P>
+Set the macro escape character to be the localised character
+<em>locale-char</em>. By default it is the ASCII % character
+if it is available in the application character set.
+(<font color="red">why ACS when macro-references are in DCS?</font>)
+<P>
+
+<code>
+See:
+<A href=#18.6.1.0007>SUBSTITUTE</a>
+<A href=#18.6.1.0008>SET-MACRO</a>
+<A href=#lstrings>lstrings</a>
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.2>
+<H3>18.6.2 LOCALE extension words</H3>
+</a>
+
+<hr>
+<A name=18.6.2.0010>
+<code>
+18.6.2.0010 <b>LOCALE-INDEX</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+       ( lsid -- )
+</pre>
+<P>
+Updates the internal data structure. Useful if structures are added and
+changes to internal structures are required.
+
+<P>
+
+<code>
+See:
+<A href=#lsid>lsid</a>
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.2.0011>
+<code>
+18.6.2.0011 <b>LOCALE-LINK</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+       ( lsid1 -- lsid2 )
+</pre>
+<P>
+
+Given the address of one LOCALE structure, returns the address of the next.
+
+<P>
+
+<code>
+See:
+<A href=#lsid>lsid</a>
+</code>
+
+<P>
+
+<hr>
+<A name=18.6.2.0012>
+<code>
+18.6.2.0012 <b>LOCALE-TYPE</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+       ( addr len -- )
+</pre>
+<P>
+
+Displays the LOCALE string whose address and length in address units
+are given.
+
+<P>
+
+<code>
+See:
+<A href=#lstrings>lstrings</a>
+<A href=#18.6.1.0006>18.6.1.0006 LOCALE@</a>
+</code>
+
+<P>
+
+
+<hr>
+<A name=18.6.2.0013>
+<code>
+18.6.2.0013 <b>NATIVE@</b>
+</code>
+</a>
+<BR>
+LOCALE
+<BR>
+<pre>
+       ( lsid -- c-addr len )
+</pre>
+<P>
+
+Given the LOCALE structure, returns the address and length of the
+corresponding DCS native string that was compiled by L"
+
+<P>
+
+<code>
+See:
+<A href=#lstrings>lstrings</a>
+<A href=#18.6.1.0006>18.6.1.0006 LOCALE@</a>
+<A href=#18.6.1.0005>18.6.1.0005 L"</a>
+</code>
+
+<P>
+
+
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../environ-ext/environ-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>

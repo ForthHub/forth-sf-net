@@ -7,7 +7,7 @@
 <BODY>
 <table width=100%><tr valign=top>
 <td align=left width=70>
-<a href=../string-ext/string-ext.htm><img src=../forth-std/left.gif
+<a href=../environ-ext/environ-ext.htm><img src=../forth-std/left.gif
  width=26 height=26 align=ALIGN border=0></a>
 <a href=../forth-std/rationale.htm><img src=../forth-std/right.gif
  width=26 height=26 align=ALIGN border=0></a>
@@ -64,7 +64,7 @@ See:
 <p>
 
 <hr>
-<DL><DL><DT><B>backslash string:</B>
+<DL><DT><B>backslash string:</B>
 <DD>A backslash string is an encoding of a basic character string
 where each sequence of a backslash followed by one or a number of
 characters does represent one character of the basic character
@@ -99,7 +99,7 @@ See:
 <p>
 
 <hr>
-<DL><DL><DT><B>backslash octalescapes:</B>
+<DL><DT><B>backslash octalescapes:</B>
 <DD>A backslash sequence introduces with a number character
 and followed other number characters. The number sequences
 is subject to a number conversion from an octal number
@@ -115,7 +115,7 @@ See:
 <p>
 
 <hr>
-<DL><DL><DT><B>backslash hexescapes:</B>
+<DL><DT><B>backslash hexescapes:</B>
 <DD>A backslash sequence introduces with an [x] character
 followed by exactly two other non-delimiter characters.
 The two characters are subject to a number conversion from
@@ -241,13 +241,16 @@ ZCHAR-EXT         flag             no         zchar extensions word set present
 <LI>whether other backslash-alphachar sequnces are understood in
     backslash  string literals, including a default mapping of
     these to control characters instead of throwing an exception.
-<LI>whether some backslash-non-alphanum sequences are not mapped
-    silently to the non-alphanum character in the sequence but
-    to another non-alphanum character. (note: some systems chose
+<LI>systems usually map sequences of backslash and a non-alphanumeric
+    character silently to the very same non-alphanumeric character after
+    the backslash. An ambiguous condition exists when a system chooses
+    to do otherwise like throwing on an unrecognized characters or
+    to map silently some of these non-alnum characters to a different
+    non-alphanum character. (note: some systems chose
     to map backslash-singlequote to a doublequote character).
 <LI>whether in backslash string literals the delimiter (usually
-    the doublequote character or space) may occur when escaped as a
-    backslash-delimiterchar sequence, or whether another
+    the doublequote character or space character) may occur when escaped
+    as a backslash-delimiterchar sequence, or whether another
     backslash-sequence must be used to represent the delimiter char.
 </ul>
 
