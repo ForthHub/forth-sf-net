@@ -1,0 +1,25 @@
+title: W@
+description:
+
+  W@ "w-fetch"
+
+  ( addr -- x )
+
+ Fetch, zero-extend and return the 16-bit word at addr.
+ The system may require addr to be aligned on a 16-bit word boundary.
+
+comment:
+
+ This word is present in Open Firmware and may be found in many other Forths.
+
+ For sign-extending words fetch, one may use the word SW@ or the word <W@
+ used in Open Firmware.
+
+
+"Elizabeth D. Rather" wrote:
+>
+>Open Firmware also provides <w@ and <l@ as sign-extending fetches
+>for doublets and quadlets, respectively (the <l@ word is necessary
+>because there are 64-bit implementations of OF on both SPARCs and
+>Power PCs).
+

@@ -1,0 +1,18 @@
+title: W!
+description:
+
+ W! "w-store"
+
+ ( x addr -- )
+
+ Store the 16 least significant bits of x into the 16-bit word at addr.
+ The system may require addr to be aligned on a 16-bit word boundary.
+
+comment:
+
+ this word is there in Open Firmware and many Forth systems.
+
+
+
+
+
