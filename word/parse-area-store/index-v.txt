@@ -65,6 +65,7 @@ J.Brien wrote:
 <hr>
 The old version of this page:
 <small>
+<small>
 description:
     PARSE-AREA! ( c-addr len -- )       "parse-area-store"
 
@@ -139,5 +140,6 @@ do nothing else than adjust >IN by the appropriate number
 of characters. In other words, the full-featured functionality
 of PARSE-AREA! shown above is not always necessary.
 
+</small>
 </small>
 
