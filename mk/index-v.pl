@@ -88,6 +88,7 @@ my $html_footer =
     ."<sup><s>".$ENV{USER}."</s></sup>"
     ."\n</small></p>";
 
+s{\240}{\&nbsp;}gs;
 
 my $text = $_;
 
