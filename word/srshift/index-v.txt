@@ -40,6 +40,7 @@ discussion-of-functionality:
  depends on the platform (one's complement or two's complement).
 
  For a discussion of arithmetic shift problems, see
- http:../../Standard+/two-slash/index.html
+ http://forth.sourceforge.net/Standard%2B/two-slash/index.html
+
 
 
