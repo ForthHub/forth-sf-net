@@ -43,7 +43,8 @@ upload:
 	scp -prvC . shell.sourceforge.net:/home/groups/forth/htdocs
 
 copy:
-	cp -r . /home/groups/f/fo/forth/htdocs
+	cp -rf . /home/groups/f/fo/forth/htdocs
+	chmod -R --quet a+rw  /home/groups/f/fo/forth/htdocs
 # mlg -- 09.06.2001 -- it seems that now it's on the same server
 
 upload-user:
