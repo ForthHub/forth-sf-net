@@ -1,0 +1,45 @@
+title: SRSHIFT
+
+description:
+
+ SRSHIFT                             "s-r-shift"
+
+ ( x1 u -- x2 )
+
+ Perform an arithmetic right shift of u bit-places on x1, giving x2.
+ (On one's complement and two's complement machines this means: copy
+ the sign bit into the most significant bits vacated by the shift.)  An
+ ambiguous condition exists if u is greater than or equal to the number
+ of bits in a cell.
+
+
+discussion-of-name:
+
+ SRSHIFT stands for "Signed Right SHIFT". Usually this is called
+ "arithmetic shift", but we cannot derive a Forth name from this
+ because of the following consideration.
+
+"Michael L.Gassanenko" wrote:
+
+ [why not ARSHIFT or ASHIFT ]
+
+> The problem is that Russian/German/French speakers are likely to pronounce
+> ASHIFT so that you, American English speaker, would understand it as RSHIFT.
+> And vice versa, when an English speaker says RSHIFT, a Russian/German/French
+> speaker may hear ASHIFT.
+> (The same about ARSHIFT: you pronounce 'r' as "ar", don't you?)
+>
+> Things get even worse with two Russian/German/French speakers:
+> one cannot be sure whether the other speaks with or without
+> an accent. And if you remember that the other person may try
+> to correct his/her pronunciation but not be consistent...
+
+discussion-of-functionality:
+
+ The rounding direction (towards zero or towards minus infinity)
+ depends on the platform (one's complement or two's complement).
+
+ For a discussion of arithmetic shift problems, see
+ http:../../Standard+/two-slash/index.html
+
+
