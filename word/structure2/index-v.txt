@@ -1,0 +1,76 @@
+title: [structures, very simple]
+description:
+<forthspan>
+ : ^FIELD CREATE , DOES> @ + ; ( offset "name" -- offset )
+                               ( name: addr -- addr+offset )
+
+ \ base stricture
+ 0
+   ^FIELD mst^x CELL+
+   ^FILED mst^y CELL+
+   ^FIELD mst^a CHAR+
+   ^FIELD mst^b CHAR+ ALIGNED
+   ^FILED mst^z CELL+
+ CONSTANT mst-size    \ mst for "My STructure"
+
+ \ derived structure
+ mst-size
+   ^FIELD mst^u CELL+
+   ^FIELD mst^v CELL+
+ CONSTANT xmst-size
+
+: foo
+	...
+	( addr ) mst^x @ ( val )
+	...
+	( val addr ) mst^y !
+;
+
+</forthspan>
+
+More-complex:
+<forthspan>
+ : @FIELD CREATE ,         ( offset "name" -- offset )
+          DOES> @ + @ ;    ( name: addr -- val )
+ : !FIELD CREATE ,         ( offset "name" -- offset )
+          DOES> @ + ! ;    ( name: val addr -- )
+ : C@FIELD CREATE ,        ( offset "name" -- offset )
+          DOES> @ + @ ;    ( name: addr -- val )
+ : C!FIELD CREATE ,        ( offset "name" -- offset )
+          DOES> @ + ! ;    ( name: val addr -- )
+
+0
+ ^FIELD xyz^c C@FIELD xyz.c C!FIELD xyz!c CHAR+ ALIGNED
+ ^FIELD xyz^x  @FIELD xyz.x  !FIELD xyz!x CELL+
+CONSTANT /xyz
+\ Slash "/" stands for "size-of"
+
+</forthspan>
+or
+<forthspan>
+: word: ^FIELD @FIELD !FIELD CELL+ ;
+: byte: ^FIELD C@FIELD C!FIELD CHAR+ ;
+
+0
+ word: smp^x smp.x smp!x
+ byte: smp^a smp.a smp!a
+ byte: smp^b smp.b smp!b
+ ALIGNED
+ word: smp^z smp.z smp!z
+CONSTANT /smp
+</forthspan>
+
+Explanation:
+ to be written
+
+Page-written-by:
+ mlg
+
+Notes:
+ GuidoD most likely would say that ^FIELD should be called +FIELD
+ and that the field selectors must be of the form structname->fieldname
+ rather than structname[operation]fieldname . It's a matter of taste.
+
+ Anyway, to add structures to Forth you need one line of auxiliary code.
+
+
