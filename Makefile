@@ -32,6 +32,13 @@ zip:
 	test -d $$HOME/pub || mkdir $$HOME/pub
 	zip -9r $$HOME/pub/forth-`date +%m%d`.zip $(SUBDIRS) mk/ *.* Makefile
 
+upload-zip:
+	zip -9r $$HOME/pub/forth.zip $(SUBDIRS) mk/ *.* Makefile
+	scp -prvC forth.zip shell.sourceforge.net:/home/groups/forth/htdocs
+#	ssh && cd /home/groups/forth/htdocs && unzip forth.zip
 
+upload:
+	scp -prvC . shell.sourceforge.net:/home/groups/forth/htdocs
 
-
+upload-guidod:
+	scp -prvC . guidod@shell.sourceforge.net:/home/groups/forth/htdocs
