@@ -40,8 +40,11 @@ install:
 	; case $$f \
 	in */CVS/*|*/CVS|*~|*.bak) $(IGNORED) $$f \
 	;; *) if test -d $$f ; then : \
-	; echo mkdir $(DESTDIR)$(FORTHDOC)/$$f \
-	;      mkdir $(DESTDIR)$(FORTHDOC)/$$f \
+	;  if test -d $(DESTDIR)$(FORTHDOC)/$$f ; then : \
+	;  echo ::dir $(DESTDIR)$(FORTHDOC)/$$f ; else : \
+	;  echo mkdir $(DESTDIR)$(FORTHDOC)/$$f \
+	;       mkdir $(DESTDIR)$(FORTHDOC)/$$f \
+	;  fi \
 	; else : \
 	; echo cp $$f $(DESTDIR)$(FORTHDOC)/$$f \
 	;      cp $$f $(DESTDIR)$(FORTHDOC)/$$f \

@@ -140,8 +140,11 @@ install :
 	; true
 	@ TOPDIR="$(TOPDIR)" ; test -z "$$TOPDIR" && TOPDIR=`pwd` \
 	; for i in $(SUBDIRS) ; do : \
+	; if test -d $(DESTDIR)$(FORTHDOC)/$$i ; then : \
+	; echo ::dir $(DESTDIR)$(FORTHDOC)/$$i ; else : \
 	; echo mkdir $(DESTDIR)$(FORTHDOC)/$$i \
 	;      mkdir $(DESTDIR)$(FORTHDOC)/$$i \
+	; fi \
 	; if test -f $$i/Makefile  \
 	; then echo $(MAKE) -C $$i install \
           FORTHDOC=$(FORTHDOC)/$$i UPINDEX=../$(INDEXFILE) TOPDIR=$$TOPDIR \
@@ -165,6 +168,11 @@ install :
 	; echo "(cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl)" \
 	;       (cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl \
 			>$(INDEXFILE) )
+	@ for i in $(LINKS) ; do if test ! -e "$(DESTDIR)$(FORTHDOC)/$$i" \
+	; then FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
+	; echo "(cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT)" \
+	;       (cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT) \
+	; fi ; done
 
 DISTNAME=forth-repository
 DATECODE=%Y%m%d
