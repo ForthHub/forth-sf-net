@@ -1,0 +1,21 @@
+title: ENVIRONMENT-EXT
+
+description:
+	a wordset that combines the ENVIRONMENT-WORDLIST
+        idea with library script environment access via
+        REQUIRES. The wordset is formatted just as an
+        the other word sets in the ../../standard/dpans
+
+files:
+	./dpstd19.htm
+	./dpstda19.htm
+
+environment-words:
+	ENVIRONMENT-WORDLIST REQUIRED
+	[DEFINED] [UNDEFINED]
+
+environment-ext-words:
+	ENVIRONMENT REQUIRES [VOID]
+
+--- $Id: index-v.txt,v 1.1 2001/08/09 21:56:45 guidod Exp $
+
