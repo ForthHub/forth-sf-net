@@ -1,0 +1,31 @@
+title: Fast Bit Counting
+description:
+
+
+> From: W.Baden (wilbaden@netcom.com)
+> Subject: Re: Counting bits...
+> Newsgroups: comp.lang.forth
+> Date: 1995-02-26 06:12:45 PST
+
+: count-bits    ( number -- bits )
+        [ HEX ] DUP  55555555 AND  SWAP  1 RSHIFT  55555555 AND  +
+                DUP  33333333 AND  SWAP  2 RSHIFT  33333333 AND  +
+                DUP  0F0F0F0F AND  SWAP  4 RSHIFT  0F0F0F0F AND  +
+        [ DECIMAL ] 255 MOD
+;
+
+> From: Michael Pr"umm (mip@wa.oche.de)
+> Subject: Re: bit counting algorithm
+> Newsgroups: comp.lang.forth
+> Date: 1994-07-28 00:54:03 PST
+>
+> And here is another one: octal
+>
+
+: ones ( uint32 - numbits)
+  dup 1 RSHIFT 33333333333 and
+  dup 1 RSHIFT 33333333333 and + -
+  dup 3 RSHIFT  +  30707070707 and  77 mod
+;
+
+
