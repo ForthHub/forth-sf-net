@@ -1,0 +1,17 @@
+title: REVEAL
+description:
+
+( -- )
+
+If the last definition is not findable in the dictionary, make the last definition findable. Do nothing if the last definition already is findable or has no name.
+
+Ambiguous conditions:
+
+- no definition has been created before execution of REVEAL
+
+- the compilation wordlist has changed after creation of the last definition
+
+- execution of a definition begins before the definition is finished
+
+See also: HIDE ../hide/index.html
+
