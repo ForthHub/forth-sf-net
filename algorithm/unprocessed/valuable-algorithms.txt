@@ -1,0 +1,824 @@
+Subject: valuable algorithms
+Date: Sun, 12 May 2002 18:37:09 +0400
+From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+Organization: St.Petersburg University
+Newsgroups: comp.lang.forth
+
+There are currently only two at
+http://forth.sourceforge.net/algorithm/index.html
+
+The 3rd item to be added here is the use of the carry flag for math
+comparison routines. (If anybody writes & posts here a good explanation,
+that would be useful.)
+
+1) If you have any valuable algorithms, preferrably one-liners, you are
+invited to post them to this thread.
+
+2) If you write good explanations for algorithms posted by the others,
+that will also be good.
+
+The value of the algorithm may be practical, or educational, or just "hack value".
+BTW, I would like to have Wil Baden's (IIRC) colon definition for + there.
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 15:12:04 GMT
+From: mhx@iaehv.iae.nl (Marcel Hendrix)
+Organization: Internet Access Eindhoven
+Newsgroups: comp.lang.forth
+
+Michael wrote:
+
+> [asks for algorithms]
+
+Old but good:
+
+-- More Bit-twiddling
+: POWER-OF-2?   ( n -- bool )   EVAL" DUP 1- AND 0= " ; IMMEDIATE
+
+( others are in assembly language )
+
+-marcel
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 17:47:30 GMT
+From: rhq093s@tninet.se (Dan Andersson)
+Organization: Telenordia/Algonet
+Newsgroups: comp.lang.forth
+
+On Sun, 12 May 2002 18:37:09 +0400, "Michael L.Gassanenko"
+<m_l_g3@yahoo.com> wrote:
+
+>There are currently only two at
+>http://forth.sourceforge.net/algorithm/index.html
+>
+>
+: firstbit ( number -- firstbit )
+    dup 2 / or
+    dup 4 / or
+    dup 16 / or
+    dup 256 / or
+    dup 65536 / or
+    dup 2 / xor
+;
+
+MvH Dan Andersson
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 17:53:28 GMT
+From: Wil Baden <neilbawd@earthlink.net>
+Organization: EarthLink Inc. -- http://www.EarthLink.net
+Newsgroups: comp.lang.forth
+
+In article <3CDE7E15.CEE58181@yahoo.com>, Michael L.Gassanenko
+<m_l_g3@yahoo.com> wrote:
+
+> The value of the algorithm may be practical, or educational, or just "hack
+> value".
+> BTW, I would like to have Wil Baden's (IIRC) colon definition for + there.
+
+Hint taken.  Please add.
+
+: +                         ( x y -- x+y )
+    BEGIN  dup WHILE
+        2dup AND 2*  \  Calculate bit carries.
+        >R XOR R>    \  Calculate bit sums.
+    REPEAT DROP ;
+
+--
+Wil
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 18:12:49 GMT
+From: Mark I Manning IV <I440r@mailcity.com>
+Organization: EarthLink Inc. -- http://www.EarthLink.net
+Newsgroups: comp.lang.forth
+
+Marcel Hendrix wrote:
+> Michael wrote:
+>
+>
+>>[asks for algorithms]
+>>
+>
+> Old but good:
+>
+> -- More Bit-twiddling
+> : POWER-OF-2?   ( n -- bool ) EVAL" DUP 1- AND 0= " ; IMMEDIATE
+>
+> ( others are in assembly language )
+>
+> -marcel
+>
+
+could you explain to me why it was better to eval" that ? (this REALY
+confuses me).
+
+: power-of-2? dup 1- and 0= ;  \ works without eval" too
+
+under what conditions would you chose to use eval" over not using it ?
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 22:20:15 +0400
+From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+Organization: St.Petersburg University
+Newsgroups: comp.lang.forth
+
+Marcel Hendrix wrote:
+> ( others are in assembly language )
+
+I see no reason to include only high-level algorithms.
+Many valuable Forth techniques require assembly language.
+Finally, CODE is built into almost any Forth.
+
+So please post them.
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 15:07:42 -0400
+From: Jerry Avins <jya@ieee.org>
+Organization: The Hectic Eclectic
+Newsgroups: comp.lang.forth
+
+Dan Andersson wrote:
+>
+> On Sun, 12 May 2002 18:37:09 +0400, "Michael L.Gassanenko"
+> <m_l_g3@yahoo.com> wrote:
+>
+> >There are currently only two at
+> >http://forth.sourceforge.net/algorithm/index.html
+> >
+> >
+> : firstbit ( number -- firstbit )
+>     dup 2 / or
+>     dup 4 / or
+>     dup 16 / or
+>     dup 256 / or
+>     dup 65536 / or
+>     dup 2 / xor
+> ;
+>
+> MvH Dan Andersson
+
+Oh. well:
+
+: Gray-to-binary ( Graycoded-number -- binary-equivalent )
+        dup  1 rshift xor
+        dup  2 rshift xor
+        dup  4 rshift xor
+        dup  8 rshift xor
+        dup 16 rshift xor
+;
+
+Similar, no?
+
+For the record,
+
+: binary-to-Gray ( u -- Graycode-equivalent )
+        dup 1 rshift xor ;
+
+Jerry
+--
+Engineering is the art of making what you want from things you can get.
+¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 19:19:05 GMT
+From: rhq093s@tninet.se (Dan Andersson)
+Organization: Telenordia/Algonet
+Newsgroups: comp.lang.forth
+
+On Sun, 12 May 2002 15:07:42 -0400, Jerry Avins <jya@ieee.org> wrote:
+
+>Dan Andersson wrote:
+>>
+>> On Sun, 12 May 2002 18:37:09 +0400, "Michael L.Gassanenko"
+>> <m_l_g3@yahoo.com> wrote:
+>>
+>> >There are currently only two at
+>> >http://forth.sourceforge.net/algorithm/index.html
+>> >
+>> >
+>> : firstbit ( number -- firstbit )
+>>     dup 2 / or
+>>     dup 4 / or
+>>     dup 16 / or
+>>     dup 256 / or
+>>     dup 65536 / or
+>>     dup 2 / xor
+>> ;
+>>
+>> MvH Dan Andersson
+>
+>Oh. well:
+>
+>: Gray-to-binary ( Graycoded-number -- binary-equivalent )
+>       dup  1 rshift xor
+>       dup  2 rshift xor
+>        dup  4 rshift xor
+>       dup  8 rshift xor
+>       dup 16 rshift xor
+>;
+>
+>Similar, no?
+
+Similar, yes! But useful for ordered sets and game programming,
+hardly. But I appreciate the eerie similarity.
+
+MvH Dan Andersson
+>
+>For the record,
+>
+>: binary-to-Gray ( u -- Graycode-equivalent )
+>       dup 1 rshift xor ;
+>
+>Jerry
+>--
+>Engineering is the art of making what you want from things you can get.
+>¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+
+Subject: Re: valuable algorithms
+Date: Sun, 12 May 2002 20:46:23 GMT
+From: mhx@iaehv.iae.nl (Marcel Hendrix)
+Organization: Internet Access Eindhoven
+Newsgroups: comp.lang.forth
+
+(#26145) rhq093s@tninet.se (Dan Andersson) writes Re: valuable algorithms
+
+[..]
+
+> : firstbit ( number -- firstbit )
+>    dup 2 / or
+>    dup 4 / or
+>    dup 16 / or
+>    dup 256 / or
+>    dup 65536 / or
+>    dup 2 / xor
+> ;
+
+> MvH Dan Andersson
+
+Don't try that without an optimizing compiler :-)
+
+SwiftForth 2.2.2.9 07May2001
+0 VALUE _timer_
+: TIMER-RESET  COUNTER TO _timer_ ;
+: MS?          COUNTER _timer_ - ;
+: .ELAPSED     MS? . ." ms elapsed." ;
+
+: firstbit ( number -- firstbit )
+     dup 2 / or
+     dup 4 / or
+     dup 16 / or
+     dup 256 / or
+     dup 65536 / or
+     dup 2 / xor
+;
+
+: TEST
+   CR TIMER-RESET
+     #1000000 0 DO  I firstbit DROP  LOOP
+  .ELAPSED ;
+
+TEST
+2003 ms elapsed. ok
+  ok
+
+With iForth 2.0:
+
+FORTH> : firstbit ( number -- firstbit )
+     dup 2 / or
+     dup 4 / or
+     dup 16 / or
+     dup 256 / or
+     dup 65536 / or
+     dup 2 / xor
+;
+FORTH> see firstbit
+$004C38E0  : firstbit
+$004C38E6  pop         ebx                                      5B
+$004C38E7  mov         ecx, ebx                                 8BCB
+$004C38E9  sar         ebx, 1 b#                                C1FB01
+$004C38EC  or          ecx, ebx                                 0BCB
+$004C38EE  mov         ebx, ecx                                 8BD9
+$004C38F0  sar         ebx, 2 b#                                C1FB02
+$004C38F3  or          ecx, ebx                                 0BCB
+$004C38F5  mov         ebx, ecx                                 8BD9
+$004C38F7  sar         ebx, 4 b#                                C1FB04
+$004C38FA  or          ecx, ebx                                 0BCB
+$004C38FC  mov         ebx, ecx                                 8BD9
+$004C38FE  sar         ebx, 8 b#                                C1FB08
+$004C3901  or          ecx, ebx                                 0BCB
+$004C3903  mov         ebx, ecx                                 8BD9
+$004C3905  sar         ebx, #16 b#                              C1FB10
+$004C3908  or          ecx, ebx                                 0BCB
+$004C390A  mov         ebx, ecx                                 8BD9
+$004C390C  sar         ebx, 1 b#                                C1FB01
+$004C390F  xor         ecx, ebx                                 33CB
+$004C3911  push        ecx                                      51
+$004C3912  ;
+: TEST CR TIMER-RESET
+   #1000000 0 DO  I firstbit DROP  LOOP
+  .ELAPSED ;  ok
+FORTH> TEST
+0.228 seconds elapsed. ok
+FORTH> $1010 firstbit . 4096  ok
+FORTH> -1 firstbit . 0  ok
+
+    ??? BIG oops!
+
+FORTH> $FFFF firstbit . 32768  ok
+FORTH> $FFFF firstbit H. $00008000 ok
+FORTH> $1FFFF firstbit H. $00010000 ok
+FORTH> $2FFFF firstbit H. $00020000 ok
+FORTH> $4FFFF firstbit H. $00040000 ok
+FORTH> $FFFFF firstbit H. $00080000 ok
+FORTH> $FFFFFF firstbit H. $00800000 ok
+FORTH> $7FFFFFF firstbit H. $04000000 ok
+FORTH> $FFFFFFF firstbit H. $08000000 ok
+FORTH> $7FFFFFFF firstbit H. $40000000 ok
+
+My suggestion:
+
+: firstbit2 ( number -- firstbit )
+     dup  1 rshift or
+     dup  2 rshift or
+     dup  4 rshift or
+     dup  8 rshift or
+     dup 16 rshift or
+     dup  1 rshift xor
+;
+FORTH> see firstbit2
+$004C3970  : firstbit2
+$004C3976  pop         ebx                                      5B
+$004C3977  mov         ecx, ebx                                 8BCB
+$004C3979  shr         ecx, 1 b#                                C1E901
+$004C397C  or          ebx, ecx                                 0BD9
+$004C397E  mov         ecx, ebx                                 8BCB
+$004C3980  shr         ecx, 2 b#                                C1E902
+$004C3983  or          ebx, ecx                                 0BD9
+$004C3985  mov         ecx, ebx                                 8BCB
+$004C3987  shr         ecx, 4 b#                                C1E904
+$004C398A  or          ebx, ecx                                 0BD9
+$004C398C  mov         ecx, ebx                                 8BCB
+$004C398E  shr         ecx, 8 b#                                C1E908
+$004C3991  or          ebx, ecx                                 0BD9
+$004C3993  mov         ecx, ebx                                 8BCB
+$004C3995  shr         ecx, #16 b#                              C1E910
+$004C3998  or          ebx, ecx                                 0BD9
+$004C399A  mov         ecx, ebx                                 8BCB
+$004C399C  shr         ecx, 1 b#                                C1E901
+$004C399F  xor         ebx, ecx                                 33D9
+$004C39A1  push        ebx                                      53
+$004C39A2  ;
+FORTH> -1 firstbit2 h. $80000000 ok
+FORTH> $7FFFFFFF firstbit2 h. $40000000 ok
+
+2 / is signed, that is not wanted here.
+
+BTW:
+
+: TEST2 cr timer-reset
+   #1000000 0 DO  I LOG2 DROP  LOOP
+  .elapsed ;
+
+FORTH> TEST2
+0.291 seconds elapsed. ok
+
+... so on a P54c 166 MHz, firstbit2 can be actually recommended.
+
+On an Athlon 900 MHz however:
+
+FORTH> : TEST CR TIMER-RESET
+<2>[FORTH>]    #100000000 0 DO  I firstbit2 DROP  LOOP
+<2>[FORTH>]   .ELAPSED ;  ok
+FORTH> test
+3.058 seconds elapsed. ok
+FORTH> : TEST2 cr timer-reset
+<2>[FORTH>]    #100000000 0 DO  I LOG2 DROP  LOOP
+<2>[FORTH>]   .elapsed ;    ok
+FORTH> test2
+2.228 seconds elapsed. ok
+
+... there are faster ways.
+
+-marcel
+
+Subject: Re: valuable algorithms
+Date: Mon, 13 May 2002 09:49:40 +0000 (UTC)
+From: aph@redhat.invalid
+Organization: Red Hat UK
+Newsgroups: comp.lang.forth
+
+Michael L.Gassanenko <m_l_g3@yahoo.com> wrote:
+> There are currently only two at
+> http://forth.sourceforge.net/algorithm/index.html
+
+> The 3rd item to be added here is the use of the carry flag for math
+> comparison routines. (If anybody writes & posts here a good explanation,
+> that would be useful.)
+
+> 1) If you have any valuable algorithms, preferrably one-liners, you are
+> invited to post them to this thread.
+
+My favourite is the division of a signed double-length integer by a
+positive divisor, by Chuck Moore:
+
+: -M/MOD ( l h u - q r)   OVER 0< IF  DUP >R +  R> THEN
+   M/MOD ;
+
+and WITHIN:
+
+: WITHIN ( n l h - t)   OVER - >R  - R> U< ;
+
+Both from cmFORTH.
+
+> 2) If you write good explanations for algorithms posted by the others,
+> that will also be good.
+
+I'll produce an explanation of how -M/MOD works if anyone's
+interested.
+
+Andrew.
+
+Subject: Re: valuable algorithms
+Date: Mon, 13 May 2002 10:43:06 GMT
+From: sfp@mpeltd.demon.co.uk (Stephen Pelc)
+Organization: MPE
+To: comp.lang.forth
+Newsgroups: comp.lang.forth
+
+On Sun, 12 May 2002 20:46:23 GMT, mhx@iaehv.iae.nl (Marcel Hendrix)
+wrote:
+
+>On an Athlon 900 MHz however:
+>
+>FORTH> : TEST CR TIMER-RESET
+><2>[FORTH>]    #100000000 0 DO  I firstbit2 DROP  LOOP
+><2>[FORTH>]   .ELAPSED ;  ok
+>FORTH> test
+>3.058 seconds elapsed. ok
+
+Under VFX Forth for Windows build 0851, Windows 2k, 900MHz Athlon
+
+: firstbit      \ number -- firstbit
+  dup  1 rshift or
+  dup  2 rshift or
+  dup  4 rshift or
+  dup  8 rshift or
+  dup 16 rshift or
+  dup  1 rshift xor
+;
+
+: TFB
+  CR TIMER-RESET
+    #100000000 0 DO  I firstbit DROP  LOOP
+  .ELAPSED ;
+
+tfb
+1865 ms. ok
+
+Stephen
+
+--
+Stephen Pelc, sfp@mpeltd.demon.co.uk
+MicroProcessor Engineering Ltd - More Real, Less Time
+133 Hill Lane, Southampton SO15 5AF, England
+tel: +44 (0)23 8063 1441, fax: +44 (0)23 8033 9691
+web: http://www.mpeltd.demon.co.uk - free VFX Forth downloads
+
+Subject: Re: valuable algorithms
+Date: Mon, 13 May 2002 13:43:50 +0200
+From: "Marcel Hendrix" <mhx@iae.nl>
+Newsgroups: comp.lang.forth
+
+"Stephen Pelc" <sfp@mpeltd.demon.co.uk> wrote in message news:3cdf982e.250901482@192.168.0.1...
+> On Sun, 12 May 2002 20:46:23 GMT, mhx@iaehv.iae.nl (Marcel Hendrix)
+> wrote:
+>
+> >On an Athlon 900 MHz however:
+> >
+> >FORTH> : TEST CR TIMER-RESET
+> ><2>[FORTH>]    #100000000 0 DO  I firstbit2 DROP  LOOP
+> ><2>[FORTH>]   .ELAPSED ;  ok
+> >FORTH> test
+> >3.058 seconds elapsed. ok
+>
+> Under VFX Forth for Windows build 0851, Windows 2k, 900MHz Athlon
+>
+> : firstbit \ number -- firstbit
+>   dup  1 rshift or
+>   dup  2 rshift or
+>   dup  4 rshift or
+>   dup  8 rshift or
+>   dup 16 rshift or
+>   dup  1 rshift xor
+> ;
+>
+> : TFB
+>   CR TIMER-RESET
+>     #100000000 0 DO  I firstbit DROP  LOOP
+>   .ELAPSED ;
+>
+> tfb
+> 1865 ms. ok
+>
+> Stephen
+>
+
+With modification:
+
+:INLINE firstbit \ number -- firstbit
+
+on an 866 MHz Dell Optiplex GX110:
+
+FORTH> tfb
+1.770 seconds elapsed. ok
+
+.. which VFX does automatically :-)
+
+-marcel
+
+Subject: Re: valuable algorithms
+Date: Tue, 14 May 2002 10:07:21 +0400
+From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+Organization: St.Petersburg University
+Newsgroups: comp.lang.forth
+
+aph@redhat.invalid wrote:
+[..]
+> My favourite is the division of a signed double-length integer by a
+> positive divisor, by Chuck Moore:
+>
+> : -M/MOD ( l h u - q r)   OVER 0< IF  DUP >R +  R> THEN
+>    M/MOD ;
+>
+[..]
+>
+> I'll produce an explanation of how -M/MOD works if anyone's
+> interested.
+
+yes, please
+
+Subject: Re: valuable algorithms
+Date: Tue, 14 May 2002 09:25:08 +0000 (UTC)
+From: aph@redhat.invalid
+Organization: Red Hat UK
+Newsgroups: comp.lang.forth
+
+Michael L.Gassanenko <m_l_g3@yahoo.com> wrote:
+> aph@redhat.invalid wrote:
+> [..]
+>> My favourite is the division of a signed double-length integer by a
+>> positive divisor, by Chuck Moore:
+>>
+>> : -M/MOD ( l h u - q r)   OVER 0< IF  DUP >R +  R> THEN
+>>    M/MOD ;
+>>
+> [..]
+>>
+>> I'll produce an explanation of how -M/MOD works if anyone's
+>> interested.
+
+> yes, please
+
+From: "Andrew Haley" (aph@cix.compulink.co.uk)
+Subject: Floored division: How?
+Newsgroups: comp.lang.forth
+Date: 1994-08-02 05:06:13 PST
+
+   Can anyone provide an example of how to perform floored
+   division on a system with only symmetrical division operators?
+
+There's a surprisingly simple way to do this.  It relies on two's
+complement arithmetic and uses the technique of adding back the bias
+in a negative number before performing the division:
+
+: -M/MOD ( d +n - r q)   OVER 0< IF  DUP >R  +  R> THEN U/MOD ;
+
+This give the correct result for the quotient and the remainder.
+However, this only allows a positive divisor.  To extend this to a
+signed divisor, fix up the signs:
+
+: M/ ( d n - q)   DUP 0< IF  NEGATE >R  DNEGATE R> THEN
+-M/MOD SWAP DROP ;
+
+If you need the remainder with correct sign you'll also have to invert
+it in the case of the divisor being negative.
+
+If you don't have U/MOD, you can use any version of M/MOD because once
+the fixups have been made all arguments in the division are positive.
+
+If you can't figure out why this works, consider the fact that a two's
+complement negative number is represented as some bias + the number
+itself.  If we want to divide negative double a by single b, the
+arithmetic looks like this, where B is the bias:
+
+            a + B^2
+            -------
+               b
+
+(Negative doubles use B^2 as the bias, rather than B.)
+
+If we add b into the high half of a, we get:
+
+            a + B^2 + Bb
+
+However, there is a carry bit when we calculate B^2 + Bb.  As this
+carry is thrown away, we effectively _subtract_ B^2.  Thus the result
+of the addition is
+
+            a + Bb
+
+We then divide by b:
+
+             a + Bb
+            -------
+               b
+
+Which cancels to:
+
+             a
+            --- + B
+             b
+
+As the division truncates downwards, the result is floor(-(a/b)) in
+two's complement notation.
+
+As an example, consider -25 / 3 (all numbers are hex.)
+
+On a 16 bit system the bias B is 10000.
+
+Thus -25 as a two's complement double number is B^2 + (-25) = FFFFFFDB.
+
+Add 3 (the divisor) into the high part of FFFFFFDB = 10002FFDB.  As
+the carry is thrown away, we have 2FFDB.
+
+Divide 2FFDB by 3 = FFF3, which is -0D, the correct result in 16 bit
+two's complement notation.  The remainder is 2.
+
+Finally, to quote Graham, Knuth and Patashnik:
+"Beware of computer languages which use another definition [of mod]."
+
+Andrew.
+
+Subject: Re: valuable algorithms
+Date: Thu, 16 May 2002 11:38:29 +0000
+From: h-peter recktenwald <l4@lxhp.in-berlin.de>
+Organization: Lux3
+Newsgroups: comp.lang.forth
+
+On Thu, 16 May 2002 10:21:22 +0000
+h-peter recktenwald <l4@lxhp.in-berlin.de> wrote:
+
+>
+> ---
+>                        pi   --            m^n       x-1
+>               atg x = --- + >  (-1)^(n+1) ----, m = ---; x=0,x>0; (Hütte I)
+>                        4    --            2n-1      x+1
+> done if (m) => 0, or limit of iterations reached, e.g. 255.
+
+should read "m(n)/(2n-1) => 0"
+
+regards,
+        hp
+
+Subject: Re: valuable algorithms
+Date: Thu, 16 May 2002 10:21:22 +0000
+From: h-peter recktenwald <l4@lxhp.in-berlin.de>
+Organization: Lux3
+Newsgroups: comp.lang.forth
+
+On Sun, 12 May 2002 22:20:15 +0400
+"Michael L.Gassanenko" <m_l_g3@yahoo.com> wrote:
+
+> Marcel Hendrix wrote:
+> > ( others are in assembly language )
+>
+> I see no reason to include only high-level algorithms.
+> Many valuable Forth techniques require assembly language.
+> Finally, CODE is built into almost any Forth.
+>
+> So please post them.
+
+x86 asm implementations of the below algorithms for 'real numbers' by cells pairs
+(fractions) available but, quite long. square root also for integers (different
+sizes, up to unlimited). I could send the full sqrt code, on request, and an
+overview of the others - the real code can be found in 'lib4th'.
+
+regards,
+        hp
+
+square root at the cost of one bitwise division:
+                input x, p := 0, a := 0
+                loop 1 to #bits(x)/2
+                        shift left x into a 2 places
+                        shift left p one place
+                        if a > 2*p then a:=a-(2*p+1); p:=p+1
+                end
+                return p
+---
+                            _oo_       2
+                ln x = (x-1)|  | -------------, 0<x<oo
+                             n=1 x^(1/(2^n))+1
+fast and exact, done if overflow occurs or, when x^(1/(2^n)) cannot be resoved to
+a value different from x^(1/(2^(n-1))).
+---
+
+                        -- x^n          x^n   x^(n-1)    x
+                e^x   = >  ---, x >= 0, --- = ------- * ---
+                        --  n!           n!    (n-1)!    n
+done if (x/n) => 0 or the rsp. factorials representation limit exceded (n=33 for 128 bit)
+
+---
+                         pi   --            m^n       x-1
+                atg x = --- + >  (-1)^(n+1) ----, m = ---; x=0,x>0; (Hütte I)
+                         4    --            2n-1      x+1
+done if (m) => 0, or limit of iterations reached, e.g. 255.
+
+---
+                        --       x^2n          x^2n     x^(2n-1)     x^2
+                cos x = > (-1)^n -----; x(n) = ----- = --------- * ---------; n=1..33(or ovf)
+                        --       (2n)!         (2n!)   (2(n-1))!   2n*(2n-1)
+done if x(n) => 0 or, max factorial 2n, n=16 for 128-Bit.
+
+--
+Linux,Assembly,Forth: http://www.lxhp.in-berlin.de/index-lx.shtml en/de
+NO abusive software patents http://petition.eurolinux.org/pr/pr17.html
+
+Subject: Re: valuable algorithms
+Date: 16 May 2002 08:55:34 -0700
+From: brad@tinyboot.com (Brad Eckert)
+Organization: http://groups.google.com/
+Newsgroups: comp.lang.forth
+
+h-peter recktenwald <l4@lxhp.in-berlin.de> wrote in message news:<20020516102122.6bcd9d11.l4@lxhp.in-berlin.de>...
+>
+> square root at the cost of one bitwise division:
+>               input x, p := 0, a := 0
+>               loop 1 to #bits(x)/2
+>                       shift left x into a 2 places
+>                       shift left p one place
+>                       if a > 2*p then a:=a-(2*p+1); p:=p+1
+>               end
+>               return p
+> ---
+Very nice. I tried it in Forth (awkward to code) and it worked. It
+would be much better coded in assembly.
+
+: sqrt  ( d -- n ) { \ a p -- }     \ 64-bit -> 32-bit
+                0 to a  0 to p  32 0
+        do      a 2* over 0< if 1+ then to a    \ shift MSB into a
+                2dup d+                         \ shift x
+                a 2* over 0< if 1+ then to a    \ shift MSB into a
+                2dup d+                         \ shift x
+                p 2* to p                       \ shift p one place
+                a p 2* >
+                if      a p 2* 1+ - to a
+                        p 1+ to p
+                then
+        loop    2drop p ;
+
+Subject: Re: valuable algorithms
+Date: Thu, 16 May 2002 18:31:43 GMT
+From: Wil Baden <neilbawd@earthlink.net>
+Organization: EarthLink Inc. -- http://www.EarthLink.net
+Newsgroups: comp.lang.forth
+
+> h-peter recktenwald <l4@lxhp.in-berlin.de> wrote in message
+> news:<20020516102122.6bcd9d11.l4@lxhp.in-berlin.de>...
+> >
+> > square root at the cost of one bitwise division:
+> >         input x, p := 0, a := 0
+> >         loop 1 to #bits(x)/2
+> >             shift left x into a 2 places
+> >             shift left p one place
+> >             if a > 2*p then a:=a-(2*p+1); p:=p+1
+> >         end
+> >         return p
+> > ---
+
+Exhumed.
+
+\          SQUARE ROOT
+\
+\  This corresponds to the paper-and-pencil method of taking the
+\  square root.  It is based on the equation:
+\
+\      (x+1)^2 = x^2 + 2*x + 1
+\
+\  `D2* D2*` corresponds to considering the radicand two digits
+\  at a time.  `2DUP 2* U>` is a comparison with 2*x in the
+\  algebra.
+
+ADDRESS-UNIT-BITS CELLS CONSTANT Bits/Cell
+
+: SQROOT                          ( radicand -- root )
+    0 0                             ( radicand . root)
+    Bits/Cell 2/ 0 DO
+        >R D2* D2* R>
+        2*
+        2dup 2* U> IF
+            dup >R 2* - 1- R>
+            1+
+        THEN
+    LOOP
+    NIP NIP ( root) ;
