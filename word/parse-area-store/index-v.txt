@@ -11,11 +11,14 @@ notes:
     The system must be aware of this word.
     It must maintain the input buffer (returned by SOURCE and read by
     parsing words) and the source refill buffer (written to by REFILL)
-    separately. PARSE-AREA! is allowed to set the input buffer outside
-    of the source refill buffer. REFILL is required to set the input
-    buffer back to the source refill buffer.
+    separately. PARSE-AREA! allows program to set the input buffer
+    outside of the source refill buffer. REFILL is required to
+    set the input buffer back to the source refill buffer.
 
-See: PARSE-AREA@ http:../parse-area-fetch/index.html
+See: ../parse-area-fetch/index.html PARSE-AREA@
+
+For definition of the source refill buffer, see SOURCE! ../source-store/index.html
+
 
 words-from-the-inventor:
 
@@ -42,8 +45,7 @@ J.Brien wrote:
 >
 > and use them in the form:
 >
-> ~~~tag[code]tag~~~
- PARSE-AREA@  PatternMatch /dosomething/ PARSE-AREA!
-~~tag[/code]tag~~~
+> ~~~tag[code]tag~~~ PARSE-AREA@  PatternMatch /dosomething/ PARSE-AREA!
+~~~tag[/code]tag~~~
 
 
