@@ -1,0 +1,91 @@
+
+
+          2.   PURPOSE
+
+
+
+
+                                    2.   PURPOSE
+
+
+          The purpose of this standard is to allow transportability of
+          FORTH-83 Standard Programs in source form among FORTH-83 Standard
+          Systems.  A standard program shall execute equivalently on all
+          standard systems.
+
+
+
+                                     3.   SCOPE
+
+
+          This standard shall apply to any FORTH-83 Standard Program
+          executing on any FORTH-83 Standard System, provided sufficient
+          computer resources (memory, mass storage) are available.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

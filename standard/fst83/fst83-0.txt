@@ -1,0 +1,265 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  FORTH-83 STANDARD
+
+                      A PUBLICATION OF THE FORTH STANDARDS TEAM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                     AUGUST 1983
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          FORTH-83 STANDARD
+
+
+
+
+                       COPYRIGHT c. 1983  FORTH STANDARDS TEAM
+
+          Permission is hereby granted to reproduce this document in whole
+          or in part provided that such reproductions refer to the fact
+          that the copied material is subject to copyright by the FORTH
+          Standards Team.  No changes or modifications may be made to the
+          copied material unless it is clearly indicated that such changes
+          were not incorporated in the original copyrighted work.
+
+          The existence of a FORTH Standard does not in any respect
+          preclude anyone, whether the individual has approved this
+          Standard or not, from implementing, marketing, purchasing or
+          using products, processes, or procedures not conforming to the
+          Standard.  FORTH Standards are subject to periodic review and
+          users are cautioned to obtain the latest editions.
+
+          ISBN 0-914699-03-2
+
+          FORTH STANDARDS TEAM
+          P.O. BOX 4545
+          MOUNTAIN VIEW, CA  94040
+          USA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         ii
+
+
+
+
+
+          FORTH-83 STANDARD
+
+
+
+
+                                  TABLE OF CONTENTS
+
+          1.   FOREWORD  ...............................................  1
+          2.   PURPOSE  ................................................  2
+          3.   SCOPE  ..................................................  2
+          4.   TRADEOFFS  ..............................................  3
+          5.   DEFINITIONS OF TERMS  ...................................  4
+          6.   REFERENCES  ............................................. 12
+          7.   REQUIREMENTS  ........................................... 13
+          8.   COMPLIANCE AND LABELING  ................................ 15
+          9.   USAGE  .................................................. 17
+          10.  ERROR CONDITIONS  ....................................... 20
+          11.  GLOSSARY NOTATION  ...................................... 22
+          12.  REQUIRED WORD SET  ...................................... 25
+          13.  DOUBLE NUMBER EXTENSION WORD SET  ....................... 41
+          14.  ASSEMBLER EXTENSION WORD SET  ........................... 44
+          15.  SYSTEM EXTENSION WORD SET  .............................. 46
+          16.  CONTROLLED REFERENCE WORDS  ............................. 48
+
+          APPENDICES
+               A.   FORTH STANDARDS TEAM MEMBERSHIP  ................... 51
+               B.   UNCONTROLLED REFERENCE WORDS  ...................... 54
+               C.   EXPERIMENTAL PROPOSALS  ............................ 60
+                    C.1  SEARCH ORDER SPECIFICATION AND CONTROL  ....... 61
+                    C.2  DEFINITION FIELD ADDRESS CONVERSION OPERATORS . 66
+               D.   STANDARDS TEAM CHARTER  ............................ 69
+               E.   PROPOSAL/COMMENT FORM AND INSTRUCTIONS  ............ 78
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         iii
+
+
+
+
+
+          FORTH-83 STANDARD
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         iv
+
+

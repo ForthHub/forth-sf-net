@@ -1,0 +1,146 @@
+<html><head><title>FORTH-83 STANDARD - ASSEMBLER EXTENSION WORD SET</title>
+<meta name="keywords" content="forth,forth-83,standard">
+<link rel=stylesheet type="text/css" media="screen" href="forth.css">
+</head><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
+
+
+          14.  ASSEMBLER EXTENSION WORD SET
+
+</pre></td></tr></table>
+<a href="fst83-13.htm">prev</a>
+<a href="fst83-14.txt">text</a>
+<a href="fst83-15.htm">next</a>
+<pre>
+
+
+                          14.  ASSEMBLER EXTENSION WORD SET
+
+
+
+          14.1 The Assembler Extension Word Set Layers <a name="14.1" />
+
+
+          Nucleus layer <a name="nucleus.layer" />
+
+               none
+
+
+          Device layer <a name="device.layer" />
+
+               none
+
+
+          Interpreter layer <a name="interpreter.layer" />
+
+               ASSEMBLER
+
+
+          Compiler layer <a name="compiler.layer" />
+
+               ;CODE  CODE  END-CODE
+
+
+          14.2 Assembler Extension Word Set Usage <a name="14.2" />
+
+          Because of the system dependent nature of machine language
+          programming, a Standard Program cannot use CODE or ;CODE .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         48 <a name=".48" />
+
+
+</pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
+
+
+          14.  ASSEMBLER EXTENSION WORD SET
+
+</pre></td></tr></table><pre>
+
+
+          14.3 The Assembler Extension Word Set Glossary <a name="14.3" />
+
+          ;CODE        --                            C,I,79   "semi-colon- <a name="semi-colon-code" />
+                       sys1 -- sys2                  (compiling)     code"
+               Used in the form:
+                       : &lt;namex&gt; ... &lt;create&gt; ... ;CODE ... END-CODE
+               Stops compilation, terminates the defining word &lt;namex&gt; and
+               executes ASSEMBLER.  When &lt;namex&gt; is executed in the form:
+                       &lt;namex&gt; &lt;name&gt;
+               to define the new &lt;name&gt;, the execution address of &lt;name&gt;
+               will contain the address of the code sequence following the
+               ;CODE in &lt;namex&gt;.  Execution of any &lt;name&gt; will cause this
+               machine code sequence to be executed.  sys1 is balanced with
+               its corresponding : .  sys2 is balanced with its
+               corresponding END-CODE .  See:  <a href="#code">CODE</a>  <a href="fst83-12.htm#does">DOES&gt;</a>
+
+          ASSEMBLER    --                            83                   <a name="assembler" />
+               Execution replaces the first vocabulary in the search order
+               with the ASSEMBLER vocabulary.  See:  <a href="fst83-12.htm#vocabulary">VOCABULARY</a>
+
+          CODE         -- sys                        M,83                 <a name="code" />
+               A defining word executed in the form:
+                       CODE &lt;name&gt; ... END-CODE
+               Creates a dictionary entry for &lt;name&gt; to be defined by a
+               following sequence of assembly language words.  Words thus
+               defined are called code definitions.  This newly created
+               word definition for &lt;name&gt; cannot be found in the dictionary
+               until the corresponding END-CODE is successfully processed
+               (see:  <a href="#end-code">END-CODE</a> ).  Executes ASSEMBLER .  sys is balanced
+               with its corresponding END-CODE .
+
+          END-CODE     sys --                        79         "end-code" <a name="end-code" />
+               Terminates a code definition and allows the &lt;name&gt; of the
+               corresponding code definition to be found in the dictionary.
+               sys is balanced with its corresponding CODE or ;CODE .
+               See:  <a href="#code">CODE</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         49 <a name=".49" />
+
+
+
+</pre></html>
+
+
+
+
+
+

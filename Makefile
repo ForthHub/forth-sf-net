@@ -1,6 +1,6 @@
 
-SUBDIRS = naming people mirror syntax system website word wordset
-LINKS = from/people sys/system web/website ws/wordset
+SUBDIRS = naming people mirror syntax system website word wordset standard
+LINKS = from/people sys/system web/website ws/wordset std/standard
 
 default: web
 

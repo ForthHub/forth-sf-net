@@ -1,0 +1,141 @@
+<html><head><title>FORTH-83 STANDARD - ERROR CONDITIONS</title>
+<meta name="keywords" content="forth,forth-83,standard">
+<link rel=stylesheet type="text/css" media="screen" href="forth.css">
+</head><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
+
+
+          10.  ERROR CONDITIONS
+
+</pre></td></tr></table>
+<a href="fst83-9.htm">prev</a>
+<a href="fst83-10.txt">text</a>
+<a href="fst83-11.htm">next</a>
+<pre>
+
+
+                                10.  ERROR CONDITIONS
+
+
+
+          10.1 Possible Actions on an Error <a name="10.1" /> <a name="actions" />
+
+          When an error condition occurs, a Standard System may take one or
+          more of the following actions:
+
+          1.   ignore and continue;
+
+          2.   display a message;
+
+          3.   execute a particular word;
+
+          4.   set interpret state and interpret a block;
+
+          5.   set interpret state and begin interpretation;
+
+          6.   other system dependent actions.
+
+          See:  <a href="fst83-7.htm#7.1">"7.1 Documentation Requirements"</a>
+
+
+          10.2 General Error Conditions <a name="10.2" /> <a name="general" />
+
+          The following error conditions apply in many situations.  These
+          error conditions are listed below, but may occur at various times
+          and with various words.
+
+          1.   input stream exhausted before encountering a required &lt;name&gt;
+               or delimiting character;
+
+          2.   insufficient stack space or insufficient number of stack
+               entries during text interpretation or compilation;
+
+          3.   a word not found and not a valid number, during text
+               interpretation or compilation;
+
+          4.   compilation of incorrectly nested control structures;
+
+          5.   execution of words restricted to compilation only, when not
+               in the compile state and while not compiling a colon
+               definition;
+
+          6.   FORGETting within the system to a point that removes a word
+               required for correct execution;
+
+          7.   insufficient space remaining in the dictionary;
+
+          8.   a stack parameter out of range, e.g., a negative number when
+               a +n was specified in the glossary;
+
+
+
+                                         21 <a name=".21" />
+
+
+</pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
+
+
+          10.  ERROR CONDITIONS
+
+</pre></td></tr></table><pre>
+
+          9.   correct mass storage read or write was not possible.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                         22 <a name=".22" />
+
+
+</pre></html>
