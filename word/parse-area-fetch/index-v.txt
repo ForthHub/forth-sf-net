@@ -8,7 +8,7 @@ description:
     SOURCE >IN @ /STRING
 ;
 
-See: PARSE-AREA! http:../parse-area-store/index.html
+See: PARSE-AREA! ../parse-area-store/index.html
 
 Proposed-by: J.Brien
 
