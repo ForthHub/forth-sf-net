@@ -63,9 +63,13 @@ compilation state.
 
 one-more-approach:
 
-: CH> ( "c" -- c )  SOURCE >IN @ TUCK > >R + C@ R> 0= OR 1 >IN +! ;
+: CH> ( "c" -- c )
+    SOURCE >IN @ TUCK > >R + C@ R> 0= OR 1 >IN +!
+;
 
- ( "c" -- c )
+  CH> "c-h-from"
+
+  ( "c" -- c )
 
   Obtain the next character from the input stream.
   Advance >IN by one character.
