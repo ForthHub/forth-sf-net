@@ -1,0 +1,25 @@
+title: DPL
+description:
+
+ DPL ( -- addr )
+
+ DPL is a variable. The cell at addr describes the location of last
+ punctuation mark in the number most recently converted by the system.
+ (The word >NUMBER does not affect DPL, but more high-level number
+ conversion words do.) If the value at addr is negative, the number
+ was unpunctuated. If it is non-negative, it represents the number
+ of digits to the right of the last (rightmost) punctuation character.
+
+acceptance:
+ wide; DPL is mentioned in Forth-83 as a uncontrolled reference word
+ ( ../../standard/fst83/fst83-b.htm#d-p-l )
+ and may be found in many systems.
+
+note:
+ This definition explains why in Forth numbers with the decimal point
+ are double numbers: the decimal point is reserved for use in
+ fixed-point math packages; DPL is also meant to be used there.
+
+page-written-by:
+ mlg
+
