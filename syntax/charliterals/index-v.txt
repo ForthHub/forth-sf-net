@@ -38,7 +38,7 @@ is actually a number conversioon prefix. (Do not ask
 me why or how, I am not a proponent of this syntax -- mlg)
 
 summary:
-Which syntax is better, 'c' or 'c , is a subject of an argument.
+Which syntax is better, 'c' or 'c , is the subject of an argument.
 
 If you write for portability, you cannot rely on this syntax.
 OTOH, understanding what was meant in such code is usually
