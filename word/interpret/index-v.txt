@@ -1,0 +1,26 @@
+title: INTERPRET
+description:
+
+ INTERPRET ( i*x -- j*x ) ( changes >IN )
+
+ Repeat the steps specified in the section 3.4 "The Forth text interpreter"
+ /standard/dpans/dpans3.htm#3.4 of the ANS Forth standard until either
+ the parse area is empty (or an ambiguous condition exists).
+ When the parse area becomes empty, return control to the calling routine.
+ The stack effect ( i*x -- j*x ) is due to the interpreted text.
+
+Notes:
+
+ The text interpretation starts with the current input source state
+ and finishes when the parse area is empty. No attempts to refill the
+ input source buffer is made.
+
+ The word INTERPRET is not responsible for restoration of any input source
+ specification.
+
+Origin:
+ Forth-83.
+
+Acceptance:
+ Widely used.
+
