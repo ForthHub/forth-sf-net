@@ -1,0 +1,32 @@
+title: CS-SWAP
+description:
+
+CS-SWAP             "c-s-swap"
+
+  Interpretation: Interpretation semantics for this word are undefined.
+
+  Execution: ( C: orig1|dest1 orig2|dest2 -- orig2|dest2 orig1|dest1 )
+
+  Swap two elements on top of the control-flow stack. An ambiguous condition exists if there are less than two items, each of which shall be an orig or dest, at the top of the control-flow stack before CS-SWAP is executed.
+
+discussion:
+
+This word was propposed for ANS standardization, but was rejected because it may be added to any standard program with a single line of code:
+
+: CS-SWAP
+    1 CS-ROLL
+;
+
+On the other hand, the need to invoke CS-ROLL with an argument other than 1 happens very rarely. You do not really need to implement CS-ROLL to implement ELSE :
+
+: ELSE
+    POSTPONE AHEAD CS-SWAP POSTPONE THEN
+; IMMEDIATE
+
+because the implementation-dependent definition of CS-SWAP most likely will be:
+
+: CS-SWAP
+    2SWAP    \ assuming double-cell orig's and dest's
+             \ assuming that the control-flow stack is the data stack
+;
+
