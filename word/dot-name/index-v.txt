@@ -44,4 +44,22 @@ discussion:
 > almost-standardized execution ("print the NFA"), so it is very very
 > improbable to be differently implemented anywhere.
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:24 guidod Exp $
+> Gary Chason wrote:
+>  Guido Draheim wrote:
+>> About a year ago, Anton Ertl, Tom Zimmer and myself agreed on "ID.",
+>> the relevant quotes from (off-NG) e-mails are published under the
+>> above URL.
+>  I also use ID. and $ID pushes the name on the string stack
+>  which is much more useful.
+
+>> Marcel Hendrix wrote:
+>> I'm sorry, but this is a most uninformative page. It isn't even possible to
+>> deduce the stackeffect of the extension being 'discussed'. Less, but better
+>> chosen, words -- everywhere :-)
+> it is:   ID. ( nfa -- )
+> and therefore: ' WHAT >NAME ID.
+> while .NAME may sometimes be defined differently like in win32for
+> where it is .NAME ( xt -- ) [most other forths have it same as ID.]
+
+
+--- $Id: index-v.txt,v 1.2 2001/09/02 11:08:50 guidod Exp $
