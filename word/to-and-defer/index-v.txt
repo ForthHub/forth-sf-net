@@ -1,6 +1,8 @@
 title: TO
 description:
 
+ANS Forth (1994) allows TO to be used on children of VALUE and locals.
+This section extends the specification of this word:
 TO is allowed to work on children of DEFER .
 
 Proposal:
