@@ -176,7 +176,7 @@ recommendation:
 	: STRUCT: DUP >R FIELD: TYPE-ID @ R> >TYPE-ID ! ;
 	and note that type-id implementations are used widely.
 
-important-variant:
+mpe-forth:
 	MPE/ProForth uses a system that has only offsets
 	available, ie. the usage of the <type-name> later
 	will simply return the size of the <type-name>. A
@@ -203,10 +203,12 @@ important-variant:
 	inside STRUCT...END-STRUCT contains the current offset
 	(a.k.a. current sizeof).
 
+williams-variant:
+	There is another implementation ../../from/David.N.Williams
+	that does only rely on offsetword definitions, see
+	./qdstruct.fs and ./dlist.fs for an example.
 
-
-
---- $Id: index-v.txt,v 1.2 2000/10/26 18:18:50 guidod Exp $
+--- $Id: index-v.txt,v 1.3 2000/10/27 04:21:28 guidod Exp $
 
 
 
