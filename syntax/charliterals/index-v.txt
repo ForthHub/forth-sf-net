@@ -1,6 +1,5 @@
 title: Character literals
 description:
-
 The ANSI/ISO Forth standard recommends the following syntax for
 character literals:
 [CHAR] c
@@ -11,19 +10,19 @@ outside colon definitions.
 Many Forth systems support the following syntax as well:
 'c'
 
-Supported in:
+Supported-in:
 Win32Forth, T32Forth
 
 HEX  ok
 'a' . 61  ok
 'a' EMIT a ok
 
-Not supported in:
+Not-supported-in:
 MPE VFX Forth 3.40 14 May 2001,
 SwiftForth 2.2.2 09Mar2001,
 SP-Forth 4.006
 
-Differently supported in:
+Differently-supported-in:
 bigForth and gForth
 HEX  ok
 'a' . 6127  ok
@@ -34,8 +33,11 @@ To obtain the code of 'a', you have to write: 'a
 'a . 61  ok
 'a EMIT a ok
 
-summary:
+The logic behind this strange syntax is that ' (tick)
+is actually a number conversioon prefix. (Do not ask
+me why or how, I am not a proponent of this syntax -- mlg)
 
+summary:
 Which syntax is better, 'c' or 'c , is a subject of an argument.
 
 If you write for portability, you cannot rely on this syntax.
@@ -43,11 +45,12 @@ OTOH, understanding what was meant in such code is usually
 no problem for a human.
 
 note:
-
-You see that 'abcd leaves 'a' in the most significant byte and 'd'
-in the least significant byte. Let us define VARIABLE X .
-What do you think, which character will be in the byte at address X
-after execution of 'abcd X ! ?
+You see that with the gForth syntax, 'abcd leaves 'a' in the most
+significant byte and 'd' in the least significant byte. Let us
+define VARIABLE X . What do you think, which character will be in
+the byte at address X after execution of 'abcd X ! ?
 The answer is that this depends on the platform.
+
+
 
 
