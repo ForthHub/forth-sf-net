@@ -1,0 +1,10 @@
+It is a common mistake to believe
+that ANS Forth is a definition of Forth.
+It is not. But what is it about?
+If you know what is Forth, and have a program,
+ANS Forth tells you what assumptions need
+documenting and what assumptions need not.
+Defining what Foerth is, as well as guidelines
+for implementors, are outside of the
+scope of the standard.
+
