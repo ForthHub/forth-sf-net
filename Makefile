@@ -4,6 +4,10 @@ LINKS = from:people sys:system web:website ws:wordset std:standard
 HTGROUP= groups/f/fo/forth/htdocs
 HTDOCS = /home/$(HTGROUP)
 HTHOST = shell.sourceforge.net
+# ---------------------------------------------------------------------------
+SHELL = sh
+mkinstalldirs = $(SHELL) mkinstalldirs
+# ---------------------------------------------------------------------------
 
 default: web
 
@@ -96,8 +100,13 @@ DISTFILES= forth.css forth2.css bg.gif 4ring.gif Makefile \
 DOCDIR=/usr/share
 FORTHDOC=$(DOCDIR)/$(HTGROUP)
 INDEXFILE=index.html
-install:
-	test -d $(DESTDIR)$(FORTHDOC) || mkinstalldirs $(DESTDIR)$(FORTHDOC)
+
+install-dir installdir :
+	test -d $(DESTDIR)$(FORTHDOC) || $(mkinstalldirs) $(DESTDIR)$(FORTHDOC)
+
+install :
+	@ echo "START INSTALL TO:" $(DESTDIR)$(FORTHDOC)
+	test -d $(DESTDIR)$(FORTHDOC) || $(mkinstalldirs) $(DESTDIR)$(FORTHDOC)
 	@ if test -n "$(DISTFILES)" ; then : \
 	;    echo cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
 	;         cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
