@@ -1,0 +1,255 @@
+<HTML><HEAD>
+<TITLE>[15] TOOLS-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../memory-ext/memory-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../search-ext/search-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.15.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.15>
+<H2>R.15 Programming-Tools reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.15.6.1.0001>
+<code>
+R.15.6.1.0001 <b>CSP</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+TOOLS RES EXT
+<BR>
+<pre>
+        ( -- var-addr )
+</pre>
+
+<P>
+
+Return the address of the system variable used by
+<a href=#R.15.6.1.0002>!CSP</a> and <a href=#R.15.6.1.0003>?CSP</a>.
+<p>
+
+  a possible implementation of a CS-Stack may use the parameter-stack.
+  All CS-related words may be characterized invalid if no !CSP has
+  been made where !CSP will be setting the base of the CS-Stack to
+  the current top-address of the parameter-stack. Other implementations
+  might choose a different memory area for the CS-Stack.
+
+<p>
+  Note that there are might be different implementation variants for
+  <a href=#R.15.6.1.0002>!CSP</a> and <a href=#R.15.6.1.0003>?CSP</a>
+  and the actual interpreation of
+  <a href=#R.15.6.1.0001>CSP</a> is strictly related to their
+  actual implementation. A forth system can characterize itself to
+  follow traditional CSP handling including the ability to clean
+  out the CS-stack through unframing by setting SP! to the value.
+<p>
+  A non-traditional variant must assert that a  value of CSP
+  being null represents that no CS-stack is available. For an
+  implementation with a seperate CS-stack, the CSP is similar to
+  the SP! stack-pointer ranging between a bottom and top of the
+  CS-stack - forth systems with such an implementation do often
+  allow words like <a href=../core-ext/core-ext.htm#6.1.1700>IF</a>
+  <a href=../core-ext/core-ext.htm#6.1.1310>ELSE</a>
+  <a href=../core-ext/core-ext.htm#6.1.2270>THEN</a> to be used
+  in interpret-state.
+<p>
+<code>
+See:
+<a href=#R.15.6.1.0002>R.15.6.1.0002 !CSP</a>
+<a href=#R.15.6.1.0003>R.15.6.1.0003 ?CSP</a>.
+<a href=../core-ext/core-ext.htm#6.1.1310>6.1.1310 ELSE</a>
+</code>
+
+<p>
+<hr>
+<A name=R.15.6.1.0002>
+<code>
+R.15.6.1.0002 <b>!CSP</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+TOOLS RES EXT
+<BR>
+<pre>
+        ( -- )
+</pre>
+
+<p>
+
+a possible implementation of a CS-Stack may use the parameter-stack.
+All CS-related words may be characterized invalid if no !CSP has
+been made where !CSP will be setting the base of the CS-Stack to
+the current top-address of the parameter-stack. Other implementations
+might choose a different memory area for the CS-Stack.
+
+<p>
+This words is usually executed by the CORE word
+<a href=../core-ext/core-ext.htm#6.1.0450>:</a> (colon) along with
+<a href=../core-ext/core-ext.htm#6.1.2540>]</a> (right-bracket) when entering
+the compilation state. It commonly uses the <a href=#0001>CSP</a> variable.
+When the CS-Stack is put atop of the parameter stack, a simple
+definition is:
+<pre>
+   : !CSP CSP @ IF -22 THROW THEN SP@ CSP ! ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../core-ext/core-ext.htm#6.1.0450>6.1.0450 :</a>
+<a href=../core-ext/core-ext.htm#6.1.2540>6.1.2540 ]</a>
+<a href=#R.15.6.1.0003>R.15.6.1.0003 ?CSP</a>.
+<a href=#R.15.6.1.0002>R.15.6.1.0001  CSP</a>
+</code>
+
+<p>
+<hr>
+<A name=R.15.6.1.0003>
+<code>
+R.15.6.1.0003 <b>?CSP</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+TOOLS RES EXT
+<BR>
+<pre>
+        ( -- )
+</pre>
+
+<p>
+
+a possible implementation of a CS-Stack may use the parameter-stack.
+All CS-related words may be characterized invalid if no !CSP has
+been made where !CSP will be setting the base of the CS-Stack to
+the current top-address of the parameter-stack, and the ?CSP will
+do the inverse operation. If not possible, the ?CSP may THROW
+an "control structure mismatch" exception.
+
+<p>
+This words is usually executed by the CORE word
+<a href=../core-ext/core-ext.htm#6.1.0460>;</a> (semicolon)
+<a href=../core-ext/core-ext.htm#6.1.2500>[</a> (left-bracket) when leaving
+the compilation state. It commonly uses the <a href=#0001>CSP</a> variable.
+When the CS-Stack is put atop of the parameter stack, a simple
+definition is:
+<pre>
+   : ?CSP SP@ CSP @ <> IF -22 THROW THEN 0 CSP ! ;
+   \ or
+   : ?CSP SP@ CSP @ <  IF -22 THROW ELSE .. THEN CSP @ SP! 0 CSP ! ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../core-ext/core-ext.htm#6.1.0460>6.1.0460 ;</a>
+<a href=../core-ext/core-ext.htm#6.1.2500>6.1.2500 [</a>
+<a href=#R.15.6.1.0003>R.15.6.1.0002 !CSP</a>.
+<a href=#R.15.6.1.0002>R.15.6.1.0001  CSP</a>
+</code>
+
+<p>
+<hr>
+<A name=R.15.6.2.1015>
+<code>
+R.15.6.2.1015 <b>CS-DROP</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+TOOLS RES EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<pre>
+        Execution: ( C: orig0|dest0 -- )
+</pre>
+
+Drop the CS-item at the top of the control-flow stack. An ambigous
+condition exists if there are no CS-items on the control-flow stack
+before CS-DROP is executed.
+
+<pre>
+   : CS-DROP CS-ITEM-SIZE NDROP ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../tools-ext/tools-ext.htm#15.6.2.1015>15.6.2.1015 CS-PICK</a>
+<a href=../tools-ext/tools-ext.htm#15.6.2.1020>15.6.2.1020 CS-ROLL</a>
+<a href=#R.15.6.2.1020>R.15.6.2.1020 CS-SWAP</a>.
+</code>
+
+<p>
+<hr>
+<A name=R.15.6.2.1020>
+<code>
+R.15.6.2.1020 <b>CS-DROP</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+TOOLS RES EXT
+<BR>
+<pre>
+        Interpretation: Interpretation semantics for this word are undefined.
+</pre>
+<pre>
+        Execution: ( C: orig1|dest1 orig0|dest0 -- orig0|dest0 orig1|dest1 )
+</pre>
+
+Swap the two topmost CS-items of the control-flow stack. An ambigous
+condition exists if there are no two CS-items on the control-flow stack
+before CS-DROP is executed.
+
+<pre>
+   : CS-SWAP 1 CS-ROLL ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../tools-ext/tools-ext.htm#15.6.2.1020>15.6.2.1020 CS-ROLL</a>
+<a href=../tools-ext/tools-ext.htm#15.6.2.1015>15.6.2.1015 CS-PICK</a>
+<a href=#R.15.6.2.1015>R.15.6.2.1015 CS-DROP</a>.
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../search-ext/search-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
