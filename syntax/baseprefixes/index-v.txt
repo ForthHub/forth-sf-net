@@ -1,0 +1,21 @@
+title: Number conversion in OTA
+
+description:
+> ... OTA input number conversion may be directed to convert a
+> particular number in a particular base, specified by a prefix character
+> from Table 9. Following such a conversion, BASE remains unchanged from
+> its prior value. If the number is to be negative, the minus sign must
+> follow the prefix and precede the most significant digit.
+
+Number conversion prefixes
+
+Prefix  Conversion base     Example
+%       Binary              %10101010
+@       Octal               @177
+#       Decimal             #-13579
+$       Hex                 $FE00
+
+
+
+
+
