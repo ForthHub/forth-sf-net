@@ -106,5 +106,35 @@ FAQ:
 
 page-written-by: mlg
 
+notes:
 
+ Guido Draheim writes:
+
+ On the newsgroup most people did later agree that it is okay to let
+ the return-value of NAME> to be used as the header-id. The participants
+ agreed to call it name-token. An application may not assume a specific
+ interpretation of this value, instead the word NAME>STRING must be used
+ to convert the name-token into a name-string for COMPARE. This was
+ accepted since it became obvious that many system implementations had
+ lifted the traditional 31 char limit on names by using very different
+ approaches being incompatible with traditional interpretation anyway.
+
+ It was furthermore recognized that no common definition for a link-field
+ interpretation can be given and that the problem should indeed be solved
+ in a wordset targetting wordlist walking. Proposals came up that sniped
+ the existance of a link-field altogether, energized by recognizing that
+ many systems implement hashed wordlists and a real wordlist iterator must
+ in fact have atleast two values to remember the current position and a
+ simple name-token or exec-token or one-cell header-token is simply not
+ enough.
+
+ The discussion around bit-flags did not came to a conclusion, possibly
+ due to lack of interest. It seems even the flags-get and flags-set
+ operations has not found a common ground, some systems implement the
+ hidden attribute without a bit btw.
+
+ In the end, this wordset has not reached a consensus beyond mlg's
+ considerable efforts in the topic, none of the words discussed
+ was adopted widely but for NAME>STRING which can now even be seen
+ as semi-standard, being ( name-token -- str-ptr str-len ).
 
