@@ -42,20 +42,33 @@ upload-zip:
 #	ssh && cd /home/groups/forth/htdocs && unzip forth.zip
 
 upload:
-	scp -prvC . $(HTHOST):$(HTDOCS)
+	scp -rC . $(HTHOST):$(HTDOCS)
+updone:
+	ssh $(HTHOST) make perms -C $(HTDOCS)
+
+
+perms:
+	-chgrp -R forth $(HTDOCS)
+	-chmod -R g+w $(HTDOCS)
+	-chmod -R a+r $(HTDOCS)
+	@ for i in `find $(HTDOCS) -name CVS` ; do : \
+	; test ! -f $$i/Entries || rm $$i/Entries \
+	; test ! -f $$i/Repository || rm $$i/Repository \
+	; test ! -f $$i/Root || rm $$i/Root \
+	; rmdir $$i \
+	; done ; true
 
 copy:
 	cp -rf . $(HTDOCS)
 	-chmod -R --quiet g+rw  $(HTDOCS)
 	-chmod -R --quiet a+r $(HTDOCS)
 	-chgrp -R --quiet forth $(HTDOCS)
-
-# mlg -- 09.06.2001 -- it seems that now it's on the same server
-
-perms:
-	-chgrp -R forth $(HTDOCS)
-	-chmod -R g+w $(HTDOCS)
-	-chmod -R a+r $(HTDOCS)
+	@ for i in `find $(HTDOCS) -name CVS` ; do : \
+	; test ! -f $$i/Entries || rm $$i/Entries \
+	; test ! -f $$i/Repository || rm $$i/Repository \
+	; test ! -f $$i/Root || rm $$i/Root \
+	; rmdir $$i \
+	; done ; true
 
 uploads:
 	zip -9r forth-$(USER).zip $(SUBDIRS) mk/ *.* Makefile
@@ -66,7 +79,7 @@ uploads:
 	"cd $(HTDDOCS) && unzip forth-$(USER).zip && make perms"
 
 upload-user:
-	scp -prvC . $(USER)@$(HTHOST):$(HTDOCS)
+	scp -rC . $(USER)@$(HTHOST):$(HTDOCS)
 
 
 
@@ -75,7 +88,7 @@ upload-user:
 # different approach: choose "make install" to put the wealth
 # of pages into a directory path of the local system. Then, assemble
 # the files installed into a dist-tarball/rpm, and carry elsewhere.
-DISTFILES= forth.css forth2.css bg.gif 4ring.gif \
+DISTFILES= forth.css forth2.css bg.gif 4ring.gif Makefile \
 	index-l.txt index-l.htm index-r.txt index-r.htm index.header
 
 DOCDIR=/usr/doc
