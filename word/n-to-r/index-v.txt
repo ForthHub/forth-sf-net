@@ -14,4 +14,32 @@ like SAVE-INPUT to the return stack and thus unblock the data stack
 
 See: NR> ../n-r-from/index.html
 
+Implementation:
+
+( Thanks to Coos Haak for posting this high-level code)
+
+\ Push n+1 elements on the return stack.
+: N>R ( S: xn .. x1 n -- ) ( R: -- xn .. x1 n )
+ DUP
+ BEGIN DUP
+ WHILE ROT R> SWAP >R >R 1-
+ REPEAT
+ DROP R> SWAP >R >R
+; \ COMPILE-ONLY
+
+This implementation assumes presence of a single-cell return address
+on the return stack. This is why there is R> SWAP >R >R instead of
+just >R .
+
+BTW, R> SWAP >R >R is the same as R> 2>R , so you may prefer:
+
+\ Push n+1 elements on the return stack.
+: N>R ( S: xn .. x1 n -- ) ( R: -- xn .. x1 n )
+ DUP
+ BEGIN DUP
+ WHILE ROT R> 2>R 1-
+ REPEAT
+ DROP R> SWAP >R >R
+; \ COMPILE-ONLY
+
 

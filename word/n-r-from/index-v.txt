@@ -13,3 +13,31 @@ like SAVE-INPUT to the return stack and thus unblock the data stack.
 
 See: N>R ../n-to-r/index.html
 
+Implementation:
+
+( Thanks to Coos Haak for posting this high-level code)
+
+\ Pop n+1 elements from the return stack.
+: NR> ( S: -- xn .. x1 n ) ( R: xn .. x1 n -- )
+ R> R> SWAP >R DUP
+ BEGIN DUP
+ WHILE R> R> SWAP >R -ROT 1-
+ REPEAT
+ DROP
+; \ COMPILE-ONLY
+
+This implementation assumes presence of a single-cell return address
+on the return stack. This is why there is R> R> SWAP >R instead of
+just R> .
+
+BTW, R> R> SWAP >R is the same as 2R> >R , so you may prefer:
+
+\ Pop n+1 elements from the return stack.
+: NR> ( S: -- xn .. x1 n ) ( R: xn .. x1 n -- )
+ R> R> SWAP >R DUP
+ BEGIN DUP
+ WHILE 2R> >R -ROT 1-
+ REPEAT
+ DROP
+; \ COMPILE-ONLY
+
