@@ -1,0 +1,108 @@
+title: Cross-Compiler's access to memory
+
+question:
+
+ does CData contain code and data or only constant data?
+
+answer:
+
+ (Elizabeth Rather)
+ CData is intended as code space.
+
+ (Stephen Pelc)
+ CDATA spaces refer to code areas, basically read/execute.
+ IDATA refers to read/write space that is automagically
+ initialised.
+ UDATA refers to read/write space that is NOT initialised
+ at cross compile time.
+
+ The intention on Harvard targets (e.g. AVR and 8051) is
+ that CDATA describes the type of the CODE area, and UDATA
+ and IDATA refer to the RAM space. If you need a third
+ address space you'll have to invent an xDATA name for
+ yourself.
+
+ In a machine with a single adress space all three types
+ live in the same address space.
+
+ (mlg)
+ So the best interpretation for CData is: "code and constant data".
+
+question:
+
+ What memory access words assess what address spaces?
+
+answer:
+
+> "cross @" means "the version of @ used by host to write to its
+> image of the target memory"
+>
+> "target @" means "the version of @ used by the target system"
+
+
+ (Stephen Pelc)
+ I have added P for perhaps, H for Harvard and S for
+ single address space machines. In the MPE
+ cross compilers, @C and !C exist in the compiler in all
+ architectures, but are mapped onto @ and ! for single
+ address space machines. The use of @ and ! to refer to
+ code space (even if CDATA is selected) is IMHO at the very
+ least an ambiguous condition for a Harvard target.
+
+             Exists?    CData    IData     UData
+ cross @       y        S        y         P
+ cross !       y        S        y         P
+ cross @C      H/P      H        n         n
+ cross !C      H/P      H        n         n
+ target @      y        S        y         y
+ target !      y        S        y         y
+ target @C     y        y        n         n
+ target !C     H/P      P        n         n
+
+ Note that some Harvard CPUs, e.g. Z8, do allow you
+ to write to code space and hence !C and friends are
+ useful in both host and target.
+
+ (Elizabeth Rather)
+ I agree with Stephen's interpretations
+
+ (mlg's note: H means "yes for Harvard", S means "yes for single
+ address space machines", H/P means "yes for Harvard, perhaps
+ for single address space machines".)
+
+
+question:
+
+ On a Harvard processor, code and data memory may use
+ the same range of addresses (e.g. $0000..$FFFF), but
+ belong to different spaces.
+
+ Does the cross-compiler need to map these two
+ different spaces (code and data) onto a single development
+ space?
+
+answer:
+
+ No. A SECTION describes the memory map of the TARGET, not
+ where you put it during development on the HOST. The table
+ above permits you full access to both Harvard spaces, since
+ you must use @C and !C and friends to access data in CDATA
+ space.
+
+ The point about SECTION is that it allows you to describe
+ several areas of each type of memory.
+
+ [...]
+ [To avoid confusion, remember that] the comma words ARE affected
+ by the xDATA switching but that @ and ! are NOT. This is necessary
+ so that you can build tables using CREATE, e.g.
+
+ CDATA CREATE MyTable  \ -- codeaddr
+   5 c, 7 c, ...
+ IDATA CREATE ATable   \ -- dataaddr
+   7 c, 9 c, ...
+
+ (Elizabeth Rather)
+ I agree with Stephen's interpretations
+
+
