@@ -43,7 +43,7 @@ is different from the old input source;
 
 
 notes:
-Anton Ertl used to have a special opinion about a name for this functionality.
+Anton Ertl used to have a special opinion about naming this functionality.
 I am really sorry, but I can never remember the name that he proposed. (mlg)
 
 For the analogs of INCLUDE-FILE the following names were proposed:
