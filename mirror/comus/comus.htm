@@ -1,0 +1,591 @@
+<HTML>
+<HEAD>
+<TITLE>Comus</TITLE>
+<META NAME="description" content="Glossary of Commonly Used Forth Words">
+<META NAME="keywords" content="ANS Forth,Forth,Forth programming language,Forth source code,Comus,Leo Wong,Wil Baden,Neil Bawd">
+</HEAD>
+<font face="Comic Sans MS">
+<BODY BGCOLOR=cornsilk text="000000">
+<P ALIGN=CENTER><A HREF="hello.htm">Hello</A></P>
+<P ALIGN=CENTER><A HREF="forth.htm">Forth</A></P>
+<table width="100%">
+<tr>
+<td width="10%"></td>
+<td width="80%">
+<font face="Comic Sans MS">
+<H2><font color=green>Comus</font></H2>
+<H3>Some Commonly Used Forth Words</H3>
+<P>27 April 1999<BR>
+<P>Compiled by Leo Wong <A HREF="mailto:hello@albany.net">hello@albany.net</A>
+
+<P>Comus explains some common Forth words that aren't in the <A HREF="http://www.forth.org/dpans/dpans.html">ANS Forth Standard</A>.  The name Comus was suggested by Neil Bawd.</P>
+
+<P>Peter Knaggs maintains a forum for proposing and discussing words that might be added to the Standard:  <a href="http://dec.bournemouth.ac.uk/forth/ans/extentions/index.html">Proposed ANS Forth Extensions</A>.</P>
+
+<P>Forth Interest Group (FIG) Members can see <A HREF="http://www.forth.org/programming.html">Forth Programming Gems</A> not included in Comus.
+
+<P>
+<A NAME="ascii"></A>
+<EM>In ASCII order:</EM><BR>
+!+ See <A HREF="#@+">@+</A><BR>
+<A HREF="##do">#DO</A><BR>
+<A HREF="#(.)">(.)</A><BR>
+<A HREF="#.'">.'</A><BR>
+<A HREF="#-rot">-ROT</A><BR>
+<A HREF="#1/f">1/F</A><BR>
+<A HREF="#2+">2+</A><BR>
+<A HREF="#2-">2-</A><BR>
+<A HREF="#3dup">3DUP</A><BR>
+<A HREF="#4dup">4DUP</A><BR>
+?? See <A HREF="#leave">?LEAVE</A><BR>
+<A HREF="#leave">?LEAVE</A><BR>
+<A HREF="#@+">@+</A><BR>
+@EXECUTE See <A HREF="#perform">PERFORM</A><BR>
+<A HREF="#append">APPEND</A><BR>
+<A HREF="#b#">B#</A><BR>
+<A HREF="#between">BETWEEN</A><BR>
+<A HREF="#bounds">BOUNDS</A><BR>
+<A HREF="#buffer:">BUFFER:</A><BR>
+C!+ See <A HREF="#@+">@+</A><BR>
+<A HREF="#c+!">C+!</A><BR>
+C@+ See <A HREF="#@+">@+</A><BR>
+<A HREF="#cell">CELL</A><BR>
+<A HREF="#cell-">CELL-</A><BR>
+CHOOSE See <A HREF="#random">RANDOM<BR>
+<A HREF="#clear">CLEAR</A><BR>
+<A HREF="#d#">D#</A><BR>
+<A HREF="#dasm">DASM</A><BR>
+<A HREF="#defer">DEFER</A><BR>
+<A HREF="#f**2">F**2</A><BR>
+<A HREF="#f-rot">F-ROT</A><BR>
+<A HREF="#fnip">FNIP</A><BR>
+<A HREF="#for">FOR</A><BR>
+<A HREF="#fpi">FPI</A><BR>
+<A HREF="#ftuck">FTUCK</A><BR>
+<A HREF="#h#">H#</A><BR>
+<A HREF="#high-bit">HIGH-BIT</A><BR>
+<A HREF="#include">INCLUDE</A><BR>
+<A HREF="#is">IS</A><BR>
+<A HREF="#m-">M-</A><BR>
+<A HREF="#m/">M/</A><BR>
+MACRO See <A HREF="##do">#DO</A><BR>
+<A HREF="#max-n">MAX-N</A><BR>
+NEXT See <A HREF="#for">FOR</A><BR>
+<A HREF="#noop">NOOP</A><BR>
+<A HREF="#not">NOT</A><BR>
+<A HREF="#o#">O#</A><BR>
+<A HREF="#off">OFF</A><BR>
+<A HREF="#on">ON</A><BR>
+<A HREF="#parse-word">PARSE-WORD</A><BR>
+<A HREF="#perform">PERFORM</A><BR>
+<A HREF="#place">PLACE</A><BR>
+<A HREF="#random">RANDOM</A><BR>
+RANDOMIZE See <A HREF="#random">RANDOM</A><BR>
+RND See <A HREF="#random">RANDOM</A><BR>
+<A HREF="#s2f">S&gt;F</A><BR>
+<A HREF="#scan">SCAN</A><BR>
+<A HREF="#skip">SKIP</A><BR>
+<A HREF="#string,">STRING,<BR>
+<A HREF="#t*">T*</A><BR>
+<A HREF="#t/">T/</A><BR>
+<A HREF="#th">TH</A><BR>
+<A HREF="#under+">UNDER+</A><BR>
+<A HREF="#vocabulary">VOCABULARY</A><BR>
+<A HREF="#[defined]">[DEFINED]</A><BR>
+<A HREF="#[undefined]">[UNDEFINED]</A><BR>
+</P>
+
+<P><EM>Sources:</EM><BR>
+<STRONG>ANS</STRONG> <A HREF="http://www.forth.org/dpans/dpans.html">ANS Forth Standard document</A><BR>
+<STRONG>CMF</STRONG> cmForth<BR>
+<STRONG>FPH</STRONG> <A HREF="http://www.forth.com/Content/Handbook/Handbook.html">Forth Programmer's Handbook</A><BR>
+<STRONG>JVN</STRONG> Julian V. Noble <A HREF="mailto:jvn@virginia.edu">jvn@virginia.edu</A><BR>
+<STRONG>OF</STRONG>  <A HREF="http://playground.sun.com/1275/home.html">Open Firmware</A><BR>
+<STRONG>SF</STRONG> <CITE>Starting Forth</CITE>, by Leo Brodie (<A HREF="http://www.forth.org">FIG</A>, Reprint of 2nd Edition [1987])<BR>
+<STRONG>TF</STRONG> <CITE>Thinking Forth</CITE>, by Leo Brodie (<A HREF="http://www.forth.org">FIG</A>, Reprint Edition, 1994)
+
+<P><EM>Comments by Wil Baden <A HREF="mailto:neilbawd@earthlink.net">neilbawd@earthlink.net</A>:
+</EM><BR>
+<STRONG>FTI</STRONG>  From Time Immemorial<BR>
+<STRONG>Incorrigible</STRONG>  Can't be defined in Standard Forth<BR>
+<STRONG>NFPC</STRONG> Not For Portable Code - unless built in, it slows execution
+</P>
+<BR>
+<H3>Comus:</H3>
+<A NAME="#do"></A>
+<P><STRONG><CODE>#DO</CODE></STRONG> ( n|u -- )<BR>
+Short for: <CODE>0 ?DO</CODE>.
+<PRE>
+\ Wil Baden implements #DO with MACRO
+: MACRO  ( "name &LT;char&GT; ccc&LT;char&GT;" -- )
+   : CHAR PARSE  POSTPONE SLITERAL  POSTPONE EVALUATE
+   POSTPONE ; IMMEDIATE
+;
+
+MACRO #DO " 0 ?DO"
+
+\ This gives the same result:
+: #DO  ( n|u -- )  S" 0 ?DO" EVALUATE ; IMMEDIATE
+
+\ Yet another implementation:
+0 CONSTANT 0
+: #DO  ( n|u -- )  POSTPONE 0  POSTPONE ?DO ; IMMEDIATE
+</PRE>
+
+<A NAME="(.)"></A>
+<P><STRONG><CODE>(.)</CODE></STRONG> ( n -- str len ) OF<BR>
+Convert <EM>n</EM> into the string specified by <EM>str len</EM>.  Baden:  FTI.
+<PRE>
+\ Implementation by Wil Baden
+: (.)  ( n -- str len )
+   BASE @ 10 = IF DUP ABS ELSE 0 SWAP THEN
+   0 &LT;# #S ROT SIGN #&GT; ;
+</PRE>
+
+<A NAME=".'"></A>
+<P><STRONG><CODE>.'</CODE></STRONG> ( addr -- ) FPH<BR>
+"Return [display] the name of the nearest definition before <EM>addr</EM>, and the offset of <EM>addr</EM> within that definition."  Baden:  Incorrigible.
+
+<A NAME="-rot"></A>
+<P><STRONG><CODE>-ROT</CODE></STRONG>  ( x1 x2 x3 -- x3 x1 x2 )<BR>
+Rotate top stack item below the next two items.  Baden:  NFPC.
+<PRE>
+: -ROT  ( x1 x2 x3 -- x3 x1 x2 )  ROT ROT ;
+</PRE>
+
+<A NAME="1/f"></A>
+<P><STRONG><CODE>1/F</CODE></STRONG>  ( F: r1 -- r2 ) JVN<BR>
+<EM>r2</EM> is 1.0 divided by <EM>r1</EM>.
+<PRE>
+: 1/F   ( F: r1 -- r2 )  1.e0  FSWAP  F/  ;
+</PRE>
+
+<A NAME="2+"></A>
+<P><STRONG><CODE>2+</CODE></STRONG>  ( n1|u1 -- n2|u2 )<BR>
+Add two (2) to <EM>n1|u1</EM> giving the sum <EM>n2|u2</EM>.
+<PRE>
+: 2+  ( n1|u1 -- n2|u2 )  2 + ;
+</PRE>
+
+<A NAME="2-"></A>
+<P><STRONG><CODE>2-</CODE></STRONG>  ( n1|u1 -- n2|u2 )<BR>
+Subtract two (2) from <EM>n1|u1</EM> giving the difference <EM>n2|u2</EM>.
+<PRE>
+: 2-  ( n1|u1 -- n2|u2 )  2 - ;
+</PRE>
+
+<A NAME="3dup"></A>
+<P><STRONG><CODE>3DUP</CODE></STRONG>  ( x1 x2 x3 -- x1 x2 x3 x1 x2 x3 )<BR>
+Duplicate cell trio <EM>x1 x2 x3</EM>.
+<PRE>
+: 3DUP  ( x1 x2 x3 -- x1 x2 x3 x1 x2 x3 )  DUP 2OVER ROT ;
+\ Or:
+: 3DUP  ( x1 x2 x3 -- x1 x2 x3 x1 x2 x3 )
+   2 PICK 2 PICK 2 PICK ;
+</PRE>
+
+<A NAME="4dup"></A>
+<P><STRONG><CODE>4DUP</CODE></STRONG>  ( x1 x2 x3 x4 -- x1 x2 x3 x4 x1 x2 x3 x4 )<BR>
+Duplicate cell quartet <EM>x1 x2 x3 x4</EM>.
+<PRE>
+: 4DUP  ( x1 x2 x3 -- x1 x2 x3 x1 x2 x3 )  2OVER 2OVER ;
+</PRE>
+
+<A NAME="leave"</A>
+<p><STRONG><CODE>?LEAVE</CODE></STRONG> ( flag -- ) OF<BR>
+If <EM>x</EM> is nonzero, continue execution immediately following the innermost <CODE>DO</CODE> (or <CODE>?DO</CODE>) ... <CODE>LOOP</CODE> (or <CODE>+LOOP</CODE>).  Baden:  Some users also have <CODE>?EXIT ?QUIT ?STOP</CODE> <EM>etc.</EM>, and their complements.  Rather than adding all of these Baden uses
+<BLOCKQUOTE><PRE>?? LEAVE  ?? EXIT  ?? QUIT  ?? STOP  0= ?? EXIT</PRE></BLOCKQUOTE> and for any other single word, <BLOCKQUOTE><PRE>?? CR  ?? NEGATE  ?? RECURSE</PRE></BLOCKQUOTE> <EM>etc.</EM>  The presentation of <CODE>??</CODE> at FORML in 1986 was the first appearance of Neil Bawd.
+<PRE>
+: ??  S" IF" EVALUATE
+      BL WORD COUNT EVALUATE
+      S" THEN" EVALUATE
+; IMMEDIATE
+: TRIES  ( u -- )
+   <A HREF="##do">#DO</A>  I DUP 1+ .  2 U&LT; <A HREF="#not">NOT</A> ?? LEAVE  LOOP
+   ." No more than three." ;
+ 0 TRIES
+ 3 TRIES
+10 TRIES
+</PRE>
+
+<A NAME="@+"></A>
+<P><STRONG><CODE>@+</CODE></STRONG> ( a-addr1 -- a-addr2 x )<BR>
+<EM>x</EM> is the value stored at <EM>a-addr1</EM>; <EM>a-addr2</EM> is the next aligned address after <EM>a-addr1</EM>.  Baden:  Although <CODE>@+</CODE> is an ugly name, it is well established.  If you have a use for it, you may want the others:<CODE>!+ C@+ C!+</CODE>.
+<PRE>
+: @+  ( a-addr1 -- a-addr2 x )  DUP CELL+  SWAP @ ;
+
+\ !+ expects: addr1 x
+: !+  ( addr1 x -- addr2 )  OVER !  CELL+ ;
+
+\ Same as COUNT
+: C@+  ( c-addr1 -- c-addr2 c )  DUP CHAR+  SWAP C@ ;
+
+\ C!+ expects: c-addr1 c
+: C!+  ( c-addr1 c -- c-addr2 )  OVER C!  CHAR+ ;
+
+CREATE COMBINATION  3 CELLS ALLOT
+COMBINATION  16 !+  33 !+  8 !
+COMBINATION  @+ . @+ . @ .
+</PRE>
+
+<A NAME="append"></A>
+<P><STRONG><CODE>APPEND</CODE></STRONG>  ( c-addr1 u c-addr2 -- )<BR>
+Append string specified by <EM>c-addr1 u</EM> to counted string specified by <EM>c-addr2</EM>.
+<PRE>
+: APPEND  ( c-addr len counted-string -- )
+   2DUP 2&GT;R  COUNT CHARS +  SWAP CHARS MOVE  2R&GT; C+! ;
+</PRE>
+
+<A NAME="b#"></A>
+<P><STRONG><CODE>B#</CODE></STRONG> <EM>number</EM> OF<BR>
+Assume that <EM>number</EM> is binary and convert it to a number.  If interpreting, push the number on the stack; if compiling, compile the number as a literal.  Do not change the contents of <CODE>BASE</CODE>.  Compare  <CODE><A HREF="#d#">D#</A></CODE>, <CODE><A HREF="#h#">H#</A></CODE>, <CODE><A HREF="#o#">O#</A></CODE>.  Usage example:  <CODE><A HREF="#h#">#H</A></CODE>.  Some Forths support:  <CODE>%<EM>number</EM></CODE>.
+
+<A NAME="between"></A>
+<p><STRONG><CODE>BETWEEN</CODE></STRONG>  ( n min max -- flag ) OF<BR>
+Return true flag if min<=n<=max, else return false flag.
+<PRE>
+: BETWEEN  ( n min max - flag )  1+ WITHIN ;
+10 1 10 BETWEEN .
+</PRE>
+
+<A NAME="bounds"></A>
+<P><STRONG><CODE>BOUNDS</CODE></STRONG>  ( start cnt -- start+cnt start ) OF<BR>
+"Convert a starting value and count into the form required for a <CODE>DO</CODE> or <CODE>?DO</CODE> loop.  For example, to perform as loop 20 times counting up from <CODE>4000</CODE> to <CODE>401F</CODE> inclusive use:  <CODE>4000 20 BOUNDS DO ... LOOP</CODE>."  Discussed in TF as <CODE>RANGE</CODE>.
+<PRE>
+: BOUNDS  ( n1|u1 n2|u2 -- n3|u3 n1|u1 )  OVER + SWAP ;
+</PRE>
+
+<A NAME="buffer:"></A>
+<P><STRONG><CODE>BUFFER:</CODE></STRONG> <EM>name</EM> ( +n -- ) OF<BR>
+Reserve <EM>+n</EM> address units of data space beginning at the aligned address to be returned by <EM>name</EM>.
+<PRE>
+: BUFFER:  \ &lt;name&gt; ( +n -- )  CREATE ALLOT ;
+50 CELLS BUFFER: MONKS
+</PRE>
+
+<A NAME="c+!"></A>
+<P><STRONG><CODE>C+!</CODE></STRONG>  ( n c-addr -- )<BR>
+Add <EM>n</EM> to the character-size value at <EM>c-addr.</EM></P>
+<PRE>
+: C+!  ( n c-addr -- )  DUP &gt;R C@ + R&gt; C! ;
+\ Or:
+: C+!  ( n c-addr -- )  DUP C@ <A HREF="#under+">UNDER+</A> C! ;
+</PRE>
+
+<A NAME="cell"></A>
+<P><STRONG><CODE>CELL</CODE></STRONG>  ( -- +n )<BR>
+Number of address units in 1 CELL.  Also seen as /CELL along with /CHAR.
+<PRE>
+1 CELLS CONSTANT CELL
+</PRE>
+
+<A NAME="cell-"></A>
+<P><STRONG><CODE>CELL-</CODE></STRONG>  ( a-addr1 -- a-addr2 ) JVN<BR>
+Subtract the size in address units of a cell from <EM>a-addr1</EM>, giving <EM>a-addr2</EM>.
+<PRE>
+: CELL-  ( a-addr1 -- a-addr2 )  <A HREF="#cell">CELL</A> - ;
+</PRE>
+
+<A NAME="clear"></A>
+<P><STRONG><CODE>CLEAR</CODE></STRONG>  ( i*x -- )  OF<BR>
+Empty the stack.
+<PRE>
+: CLEAR  ( i*x -- )  DEPTH 0 ?DO DROP LOOP ;
+</PRE>
+<P>Baden:<BLOCKQUOTE><CODE>CLEAR</CODE> has also been used to clear the screen, clear a variable or structure, and other similar uses.  It's use is almost certain to cause confusion to someone.  Save it for a temporary debug.</P>
+<P>The oldest debug tool I use is <CODE>..</CODE> .</P>
+<PRE>
+: ..  ( i*x -- )
+   DEPTH IF  .S  DEPTH 0 DO DROP LOOP  THEN ;
+</PRE>
+<P>This is the only way I would ever clear the stack.</P>
+</BLOCKQUOTE>
+
+<A NAME="d#"></A>
+<P><STRONG><CODE>D#</CODE></STRONG> <EM>number</EM> OF<BR>
+Assume that <EM>number</EM> is decimal and convert it to a number.  If interpreting, push the number on the stack; if compiling, compile the number as a literal.  Do not change the contents of <CODE>BASE</CODE>.  Compare  <CODE><A HREF="#b#">B#</A></CODE>, <CODE><A HREF="#h#">H#</A></CODE>, <CODE><A HREF="#o#">O#</A></CODE>.  Usage example:  <CODE><A HREF="#h#">#H</A></CODE>.  Some Forths support:  <CODE>#<EM>number</EM></CODE>.
+
+
+<A name="dasm"></A>
+<P><STRONG><CODE>DASM</CODE></STRONG> ( addr -- ) FPH<BR>
+"Begin disassembly at the address <EM>addr</EM> on top of the stack.  The disassembler stops when it encounters an unconditional transfer of control outside the range of the definition, such as returns from interrupt or from subroutines, branches, and jumps.  Subroutine calls are excluded, as control is assumed to return to the location following the call."  Baden:  Incorrigible.
+
+<A NAME="defer"></A>
+<P><STRONG><CODE>DEFER</CODE></STRONG> <EM>name</EM>  ( -- )<BR>
+Create the word <EM>name</EM> whose behavior will be determined later and may be varied.  See <CODE><A HREF="#is">IS</A></CODE>.
+
+<A NAME="f**2"></A>
+<P><STRONG><CODE>F**2</CODE></STRONG> ( F: r1 -- r2 ) JVN<BR>
+<EM>r2</EM> is the square of <EM>r1</EM>.  Also called <CODE>F^2</CODE>.
+<PRE>
+: F**2  ( F: r1 -- r2 )  FDUP  F* ;
+</PRE>
+
+<A NAME="f-rot"></A>
+<P><STRONG><CODE>F-ROT</CODE></STRONG> ( F: r1 r2 r3 -- r3 r1 r2 ) JVN<BR>
+Rotate the top floating-point stack item below the next two floating-point stack items.
+<PRE>
+: F-ROT  ( F: r1 r2 r3 -- r3 r1 r2 )   FROT  FROT  ;
+</PRE>
+
+<A NAME="fnip"></A>
+<P><STRONG><CODE>FNIP</CODE></STRONG>  ( F: r1 r2 -- r2 ) JVN<BR>
+Drop <EM>r1</EM>.
+<PRE>
+: FNIP  ( F: r1 r2 -- r2 )  FSWAP  FDROP  ;
+</PRE>
+
+<A NAME="for"></A>
+<P><STRONG><CODE>FOR</CODE></STRONG>  ( n -- ) CMF</BR>
+<P>Start of a <CODE>FOR ... NEXT</CODE> loop.  The loop iterates <EM>n</EM> (Pygmy Forth, Quartus, Timbre, botForth, Mops) or <EM>n+1</EM> (cmForth, eForth, Gforth, iForth, F-PC) times.  eForth and F-PC have <CODE>AFT</CODE> for jumping to <CODE>THEN</CODE> the first time through.</P>
+
+<A NAME="fpi"></A>
+<P><STRONG><CODE>FPI</CODE></STRONG>  ( F: -- r1 ) JVN<BR>
+<EM>r1</EM> is a floating-point approximation of pi.
+<PRE>
+3.1415926535897932385E0 FCONSTANT FPI
+</PRE>
+
+<A NAME="ftuck"></A>
+<P><STRONG><CODE>FTUCK</CODE></STRONG>  ( F: r1 r2 -- r2 r1 r2 ) JVN<BR>
+Copy the top floating-point stack item below the second floating-point stack item.
+<PRE>
+: FTUCK  ( F: r1 r2 -- r2 r1 r2 )  FSWAP  FOVER ;
+</PRE>
+
+<A NAME="h#"></A>
+<P><STRONG><CODE>H#</CODE></STRONG> <EM>number</EM> OF<BR>
+Assume that <EM>number</EM> is hexadecimal and convert it to a number.  If interpreting, push the number on the stack; if compiling, compile the number as a literal.  Do not change the contents of <CODE>BASE</CODE>.  Compare  <CODE><A HREF="#b#">B#</A></CODE>, <CODE><A HREF="#d#">D#</A></CODE>, <CODE><A HREF="#o#">O#</A></CODE>.  Some Forths support: <CODE>$<EM>number</EM></CODE>, <CODE>0x<EM>number</EM></CODE>, <CODE><EM>number</EM>h</CODE>.
+<PRE>
+100 .  B# 100 .  O# 100 .  D# 100 .  H# 100 .  100 .
+</PRE>
+<A NAME="high-bit"></A>
+<P><STRONG><CODE>HIGH-BIT</CODE></STRONG> ( -- mask ) ANS<BR>
+Return a bit mask with only the most-significant bit set.  Also called <CODE>HI-BIT</CODE>.
+<PRE>
+\ Implementation by Wil Baden
+TRUE 1 RSHIFT INVERT CONSTANT HIGH-BIT
+</PRE>
+
+<A NAME="include"></A>
+<P><STRONG><CODE>INCLUDE</CODE></STRONG> <EM>filename</EM>  ( -- ) FPH<BR>
+Same as ANS <CODE>INCLUDE-FILE</CODE>, except the file is specified by <EM>filename</EM>.  Baden:  A preferred suffix for Forth source files may be appended.  The path to a master directory may be prepended.
+
+<A NAME="is"></A>
+<P><STRONG><CODE>IS</CODE></STRONG> <EM>name</EM> ( xt -- )<BR>
+Give the behavior identified by <EM>xt</EM> to the <CODE><A HREF="#defer">DEFER</A></CODE> word <EM>name</EM>.  In some systems, <CODE>IS</CODE> is used with <code>VALUE</CODE> words and <CODE>DEFER</CODE> words.  In some systems, <CODE>TO</CODE> is used with <code>VALUE</CODE> words and <CODE>DEFER</CODE> words.
+<PRE>
+DEFER display
+: signed  ( -- )  ['] . IS display ;
+signed  -1 display  -2 display
+: unsigned  ( -- )  ['] U. IS display ;
+unsigned  -1 display  -2 display
+</PRE>
+
+<A NAME="m-"></A>
+<P><STRONG><CODE>M-</CODE></STRONG>  ( d1|ud1 n -- d2|ud2 ) FPH<BR>
+Subtract <EM>n</EM> from <EM>d1|u1</EM>, giving the difference <EM>d2|ud2</EM>.
+<PRE>
+: M-  ( d1|u1 n -- d2|ud2 )  NEGATE M+ ;
+</PRE>
+
+<A NAME="m/"></A>
+<P><STRONG><CODE>M/</CODE></STRONG>  ( d n1 -- n2 ) FPH<BR>
+Divide <EM>d</EM> by <EM>n1</EM>, giving the signed quotient <EM>n2</EM>.
+<PRE>
+/ For floored quotient:
+: M/  ( d n1 -- n2 )  FM/MOD NIP ;
+/ For symmetric quotient:
+: M/  ( d n1 -- n2 )  SM/REM NIP ;
+</PRE>
+
+<A NAME="max-n"></A>
+<P><STRONG><CODE>MAX-N</CODE></STRONG> ( -- +n ) ANS<BR>
+Return largest usable signed integer.
+<PRE>
+TRUE 1 RSHIFT CONSTANT MAX-N
+</PRE>
+
+<A NAME="noop"></A>
+<P><STRONG><CODE>NOOP</CODE></STRONG> ( -- )<BR>
+Do nothing.  Baden:  FTI.
+<PRE>
+: NOOP ;
+</PRE>
+
+<A NAME="not"></A>
+<P><STRONG><CODE>NOT</CODE></STRONG> ( x|x1 -- flag|x2 )<BR>
+Some systems: <CODE>0=</CODE> ( x -- flag ),  others: <CODE>INVERT</CODE> ( x1 -- x2 ).  Baden:  The traditional meaning was <CODE>0=</CODE>.  Forth-83 made it <CODE>INVERT</CODE>. FPH retains <CODE>0=</CODE>.  <CODE>0=</CODE> is the only meaning that makes sense with native or optimized object code.<BR>
+<PRE>
+: NOT?  ( -- )
+   ." NOT: " 1 NOT IF ." INVERT" ELSE ." 0=" THEN ;
+</PRE>
+
+<A NAME="o#"></A>
+<P><STRONG><CODE>O#</CODE></STRONG> <EM>number</EM> OF<BR>
+Assume that <EM>number</EM> is octal and convert it to a number.  If interpreting, push the number on the stack; if compiling, compile the number as a literal.  Do not change the contents of <CODE>BASE</CODE>.  Compare  <CODE><A HREF="#b#">B#</A></CODE>, <CODE><A HREF="#d#">D#</A></CODE>, <CODE><A HREF="#h#">H#</A></CODE>.  Usage example:  <CODE><A HREF="#h#">#H</A></CODE>.  Some Forths support:  <CODE>@<EM>number</EM></CODE>.
+
+
+<A NAME="off"></A>
+<P><STRONG><CODE>OFF</CODE></STRONG> ( a-addr -- )<BR>
+Store false flag at <EM>a-addr</EM>.  May have a different but related action in a particular application.  Opposite of <A HREF="#on">ON</A>.
+<PRE>
+: OFF  ( a-addr -- )  FALSE SWAP ! ;
+</PRE>
+
+<A NAME="on"></A>
+<P><STRONG><CODE>ON</CODE></STRONG> ( a-addr -- )<BR>
+Store true flag at <EM>a-addr</EM>.  May have a different but related action in a particular application.  Opposite of <A HREF="#off">OFF</A>.
+<PRE>
+: ON  ( a-addr -- )  TRUE SWAP ! ;
+</PRE>
+
+<A NAME="parse-word"></A>
+<P><STRONG><CODE>PARSE-WORD</CODE></STRONG> <EM>name</EM> ( -- c-addr u) ANS<BR>
+<P>"Skip leading spaces and parse <EM>name</EM> delimited by a space. <EM>c-addr</EM> is the address within the input buffer and <EM>u</EM> is the length of the selected string.  If the parse area is empty, the resulting string has a zero length.  If both <CODE>PARSE</CODE> and <CODE>PARSE-WORD</CODE> are present, the need for <CODE>WORD</CODE> is largely eliminated."</P>
+
+<A NAME="perform"></A>
+<p><STRONG><CODE>PERFORM</CODE></STRONG> ( i*x a-addr -- j*x )<BR>
+<CODE>EXECUTE</CODE> the word whose execution token is stored at <EM>a-addr</EM>.  Other stack effects are due to the word <CODE>EXECUTE</CODE>d.  Baden:  NFPC.  Classical Forth has <CODE>@EXECUTE</CODE> as a primitive.  Contents of zero is a noop. This is very useful for execution tables.
+<PRE>
+: PERFORM  ( i*x a-addr -- j*x )  @ EXECUTE ;
+</PRE>
+
+<A NAME="place"></A>
+<P><STRONG><CODE>PLACE</CODE></STRONG> ( c-addr1 u c-addr2 -- )<BR>
+Store the character string specified by <EM>c-addr1 u</EM> as
+a counted string in data space beginning at <EM>c-addr-2</EM>.  See also <CODE><A HREF="#string,">STRING,</A></CODE>.
+<PRE>
+: PLACE  ( c-addr1 u c-addr2 -- )
+   2DUP &GT;R &GT;R CHAR+ SWAP CHARS MOVE R&GT; R&GT; C! ;
+</PRE>
+<A NAME=random></A>
+<P><STRONG><CODE>RANDOM</CODE></STRONG> ( -- u ) SF<BR>
+Return a random integer.
+<PRE>
+\ Baden: these implementations aren't for serious work
+VARIABLE RND  \ Holds current result
+HERE RND !    \ Possible initialization
+\ 16-bit Starting Forth version
+: RANDOM  ( -- u ) RND @  31421 *  6927 +  DUP RND ! ;
+\ Wil Baden's 32-bit version
+: RANDOM  ( -- u ) RND @  3141592621 *  1+ DUP RND ! ;
+\ Return a random integer between 0 and u-1
+: CHOOSE  ( u -- 0...u-1 ) RANDOM UM* NIP ;
+\ Another way of initializing
+: RANDOMIZE  ( -- )  TIME&DATE 5 0 DO 65599 * + LOOP  RND ! ;
+</PRE>
+
+<A NAME="s2f"></A>
+<P><STRONG><CODE>S&gt;F</CODE></STRONG> ( n -- ) ( F: -- r ) JVN<BR>
+<EM>r</EM> is the floating-point equivalent of <EM>n</EM>.
+<PRE>
+: S&gt;F  ( n -- ) ( F: -- r )   S&gt;D  D&gt;F ;
+</PRE>
+
+<A NAME="scan"></A>
+<P><STRONG><CODE>SCAN</CODE></STRONG>  ( c-addr1 u1 char -- c-addr2 u2 )<BR>
+<EM>c-addr2 u2</EM> is string <EM>c-addr1 u1</EM> from first instance, if any, of <EM>char</EM>.  Contrast <A HREF="#skip">SKIP</A>.
+<PRE>
+: SCAN  ( c-addr u1 char -- c-addr2 u2 )
+   >R
+   BEGIN DUP WHILE OVER C@ R@ <> WHILE 1 /STRING REPEAT THEN
+   R> DROP ;
+\ From string c-addr1 u1
+\ return first "word" c-addr3 u3
+\ and remaining string c-addr2 u2
+: word>  ( c-addr1 u2 -- c-addr2 u2 c-addr3 u3 )
+   BL <A HREF="#skip">SKIP</A> 2DUP 2>R BL SCAN DUP 2R> ROT - ;
+</PRE>
+
+<A NAME="skip"></A>
+<P><STRONG><CODE>SKIP</CODE></STRONG>  ( c-addr1 u1 char -- c-addr2 u2 )
+<EM>c-addr2 u2</EM> is string <EM>c-addr1 u1</EM> beyond any leading instances of <EM>char</EM>. Contrast <A HREF="#scan">SCAN</A>.
+<PRE>
+: SKIP  ( c-addr1 u1 char -- c-addr2 u2 )
+   >R
+   BEGIN DUP WHILE OVER C@ R@ = WHILE 1 /STRING REPEAT THEN
+   R> DROP ;
+\ Skip leading spaces
+: -leading  ( c-addr1 u1 -- c-addr2 u2 )
+   BL SKIP ;
+</PRE>
+
+<A NAME="string,"></A>
+<P><STRONG><CODE>STRING,</CODE></STRONG>  ( c-addr u -- )<BR>
+Reserve space for and store a string.
+<PRE>
+: STRING,  ( c-addr u -- )
+   HERE  OVER 1+ CHARS ALLOT <A HREF="#place">PLACE</A> ;
+</PRE>
+
+
+<A NAME="t*"></A>
+<P><STRONG><CODE>T*</CODE></STRONG> ( d n -- t ) FPH<BR>
+"Multiply <EM>d</EM> by <EM>n</EM>, yielding the triple-precision result <EM>t</EM>.  Used in [ANS] <CODE>M*/</CODE>."
+<A NAME="m*/"></A>
+<PRE>
+: M*/  ( d1 n1 +n2 -- d2 )  &GT;R  T*  R&GT; T/ ;
+</PRE>
+
+<A NAME="t/"></A>
+<P><STRONG><CODE>T/</CODE></STRONG>  ( t +n -- d ) FPH<BR>
+"Divide the triple-precision number <EM>t</EM> by the positive number <EM>+n</EM>, leaving a double-precision result <EM>d</EM>.  Used in [ANS] <CODE><A HREF="#m*/">M*/</A></CODE>."
+
+
+<A NAME="th"></A>
+<P><STRONG><CODE>TH</CODE></STRONG> ( a-addr1 n -- a-addr2 )  TF<BR>
+Add <EM>n</EM> CELLS (typically) to <EM>a-addr1</EM>, giving <EM>a-addr2</EM>.</P>
+<PRE>
+: TH  ( a-addr1 n -- a-addr2 ) CELLS + ;
+CREATE language 1001 CELLS ALLOT
+TRUE language 4 TH !
+</PRE>
+
+<A NAME="under+"></A>
+<P><STRONG><CODE>UNDER+</CODE></STRONG> ( n1|u1 x n2|u2 -- n3|u3 x ) TF<BR>
+Add <EM>n2|u2</EM> to <EM>n1|u1</EM>, giving the sum <EM>n3|u3</EM>.  Called <CODE>+UNDER</CODE> in Pygmy Forth.  PFE gives different semantics.
+<PRE>
+: UNDER+  ( n1|u1 x n2|u2 -- n3|u3 x ) ROT + SWAP ;
+<A NAME="spaces"></A>\ Count spaces in a string
+: #spaces  ( c-addr u -- +n )
+   0 ROT ROT  0 ?DO  COUNT BL = 1 AND UNDER+  LOOP  DROP ;
+</PRE>
+
+<A NAME="vocabulary"></A>
+<P><STRONG><CODE>VOCABULARY</CODE></STRONG> <EM>name</EM> ( -- ) FPH<BR>
+"Create a word list <EM>name</EM>.  Subsequent execution of <EM>name</EM> replaces the first word list in the search order with <EM>name</EM>. When <EM>name</EM> becomes the complilation word list, new definitions will be appended in <EM>name</EM>'s list."
+
+<A NAME="[defined]"></A>
+<P><STRONG><CODE>[DEFINED]</CODE></STRONG> <EM>name</EM> ( -- flag ) FPH<BR>
+Search the dictionary for <EM>name</EM>.  If found, return true flag, else return false flag.
+<PRE>
+: [DEFINED]  \ &lt;name&gt;  ( -- flag )
+   BL WORD FIND NIP 0&LT;&GT; ; IMMEDIATE
+</PRE>
+
+<A NAME="[undefined]"></A>
+<P><STRONG><CODE>[UNDEFINED]</CODE></STRONG> <EM>name</EM> ( -- flag ) FPH<BR>
+Search the dictionary for <EM>name</EM>.  If found, return false flag, else return true flag.
+<PRE>
+: [UNDEFINED]  \ &lt;name&gt;  ( -- flag )
+   BL WORD FIND NIP 0= ; IMMEDIATE
+</PRE>
+<BR>
+<P><A HREF="#ascii">Back to ASCII list.</A></P>
+
+<ADDRESS>
+Leo Wong
+<A HREF="mailto:hello@albany.net">hello@albany.net</A>
+</ADDRESS>
+</font>
+</td>
+<td width="10%"></td>
+</tr>
+</table>
+
+<P ALIGN=CENTER><A HREF="forth.htm">Forth</A></P>
+<P ALIGN=CENTER><A HREF="hello.htm">Hello</A></P>
+</font>
+</BODY>
+</HTML>
