@@ -127,7 +127,8 @@ alternative-names:
  less often than []! .
 
  Please, do not redefine already used names with a different
- functionaliy: the result will be that the name will become unusable
+ functionaliy: the result will be impossibility to determine
+ which functionality is meant, "the right" one of "the wrong" one
  (as it happened with NOT that must be avoided in portable code;
  0= or INVERT must be used instead).
 

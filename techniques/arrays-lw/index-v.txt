@@ -1,4 +1,4 @@
-title: Arrays (ato)  by Leo Wong
+title: Arrays by Leo Wong (ato)
 description:
 
    This approach is unique in having no proponents.  It is part of
