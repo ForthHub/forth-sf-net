@@ -42,6 +42,10 @@ system-dependent code that switches the input sources, e.g.
 the word EVALUATE-WITH (q.v.), you may use SAVE-INPUT ... RESTORE-INPUT
 to nest input sources.
 
+As to the restriction, it means that the program must not trick
+the system directing the text interpretation routines to input
+sources of which they (the routines) are not aware.
+
 Note the definition in 2.1:
 
 input source specification:
@@ -51,5 +55,8 @@ input source specification:
   on the same or different input sources.
 
 
+status:
+  In practice, SAVE-INPUT ... RESTORE-INPUT is often used
+  to implement input source nesting.
 
 
