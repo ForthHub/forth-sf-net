@@ -113,6 +113,7 @@ The general prnciple is that[virtual] machines that implement some
 behaviour consistently are preferrable to those with unpredictable
 behaviour. Of course, some ok behaviours are better than others.
 
+
 division by zero
 
 - silently returning a meaningless number is ok
@@ -121,6 +122,7 @@ division by zero
 
 - depending on the stack depth, silently returning a meaningless
   number or THROWing an exception is wrong
+
 
 access to return addresses that possibly are on the return stack
 
@@ -133,7 +135,8 @@ access to return addresses that possibly are on the return stack
   a different stack" is ok
 
 - "the definitions in which return address manipulations are used
-  work unless they are followed by a semi-colon" is wrong
+  work unless return stack access words are immediately followed
+  by a semi-colon" is wrong
 
 
 control structure words in the interpretation state
