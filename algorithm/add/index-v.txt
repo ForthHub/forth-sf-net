@@ -1,0 +1,20 @@
+title:  Addition (of integers)
+
+description:
+ This is one of the most well-known Forth one-liners.
+ In the short form, it looks like following:
+
+ : + BEGIN DUP WHILE 2DUP AND 2* >R XOR R> REPEAT DROP ;
+
+explanation:
+
+> From: Wil Baden <neilbawd@earthlink.net>
+
+: +                         ( x y -- x+y )
+    BEGIN  DUP WHILE
+        2DUP AND 2*  \  Calculate bit carries.
+        >R XOR R>    \  Calculate bit sums.
+    REPEAT DROP
+;
+
+
