@@ -1,0 +1,35 @@
+title: colon-sys
+description:
+
+ According to the ANS Forth standard, : (colon) leaves colon-sys
+ on the control-flow stack and ; (semi-colon) consumes it.
+
+ One might think that the !CSP ... ?CSP approach is not
+ ANS-compliant. The mentioned approach is based on checking
+ the stack depth by comparing the values returned by the
+ word SP@ (read the data stack pointer) in the beginning and
+ the end of colon definition.
+
+\ the following code is from Win32Forth source (public domain)
+
+VARIABLE CSP \ Current Stack Pointer variable
+
+: !CSP ( -- ) \ save current stack pointer for later stack depth check
+    SP@ CSP !
+;
+
+: ?CSP ( -- ) \ check current stack pointer against saved stack pointer
+    SP@ CSP @ XOR ABORT" stack changed"
+;
+
+ The word : (colon) calls !CSP and the word ; (semi-colon) calls ?CSP
+ to verify that no control structures have been left unfinished.
+
+ This implementation is ANS-compliant with the following definition of
+ the control-flow stack (c.f. stack):
+ the c.f. stack consists of the value kept in the variable CSP (the
+ bottom element) and the values placed on the data stack above the
+ value that was on the stack top when the word !CSP was performed;
+ outside of a colon definition, the c.f. stack does not exist.
+
+

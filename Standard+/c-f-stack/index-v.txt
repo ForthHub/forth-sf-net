@@ -1,0 +1,28 @@
+title: Control-Flow Stack
+description:
+
+The ANS Forth standard says that it may not physically exist:
+> 3.2.3.2   Control-flow stack
+[...]
+> ~~~tag[The control-flow stack may, but need not, physically exist]tag~~~
+> ~~~tag[in an implementation.]tag~~~  If it does exist, it may be, but
+> need not be, implemented using the data stack.  The format of
+> the control-flow stack is implementation defined.
+
+This means that the control-flow stack may exist
+only logically rather than both logically and physically.
+
+> Since the control-flow stack may be implemented
+> using the data stack, items placed on the data stack
+> are unavailable to a program after items are placed
+> on the control-flow stack and remain unavailable until
+> the control-flow stack items are removed.
+
+Equally placing new items onto the data stack blocks
+access to the control-flow stack items.
+
+A standard program cannot assume that the items left on the data
+stack are not modified, moved or removed while there are
+control-flow stack elements above them.
+
+
