@@ -1,8 +1,9 @@
 title: IS
 description:
-  A synonym of TO .
+  A synonym of TO . This word is widely used to assign to DEFERred
+  words and sometimes to VALUEs and probably locals.
 
-notes:
+justification:
 
 The reason behind the requirement that TO and IS are the same is
 as follows:
@@ -23,7 +24,10 @@ by the computer rather than the human.
 where TO and IS are the same. It cannot be ported to
 systems where TO and IS are different. But the code written
 for systems where TO and IS are different can be ported
-to systems where TO and IS are the same.
+to systems where TO and IS are the same. Respecting existing
+working code, we require that TO and IS are the same.
+
+more-notes:
 
 There are two more considerations:
 
@@ -49,4 +53,17 @@ and 2 NUMBER ;
 3) use IS for long-term assignments (including those that
 are unlikely to be changed at all), use TO for short-term assignments.
 
+portability-note:
+
+There are systems on which TO and IS compile different code,
+sometimes they silently compile incorrect code when are applied to
+words of wrong type. Such systems use TO for VALUEs and IS for
+DEFERred words.
+
+If you need portability across the mentioned systems, and
+cannot fix these systems, use TO only on VALUEs and IS only
+on DEFERred words. But do not burden your mind with this silly
+business, write some code for that!
+Regrettably, you cannot write that code in ANS Forth because
+ANS Forth does not let you examine the word's type.
 
