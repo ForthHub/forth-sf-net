@@ -1,0 +1,142 @@
+<HTML><HEAD>
+<TITLE>[17] STRING-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../search-ext/search-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../environ-ext/environ-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.17.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.17>
+<H2>R.17 String reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.17.6.1.2212>
+<code>
+R.17.6.1.2212 <b>STRING,</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+STRING RES EXT
+<BR>
+<pre>
+        ( c-addr u -- )
+</pre>
+
+<P>
+
+Append the string-span described by c-addr u to the last created
+data definition placed as a counted string.
+
+<pre>
+  : STRING,  HERE OVER 1+ ALLOT PLACE ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../string-ext/string-ext.htm#17.6.1.2212>17.6.1.2212 SLITERAL</a>,
+<a href=#R.19.6.1.2212>R.19.6.1.2212 SLITERAL,</a>,
+<a href=#R.17.6.1.0910>R.17.6.1.0910 PLACE</a>,
+</code>
+
+<p>
+<hr>
+<A name=R.17.6.1.0910>
+<code>
+R.17.6.1.0910 <b>PLACE</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+STRING RES EXT
+<BR>
+<pre>
+        ( c-addr u dest -- )
+</pre>
+
+<P>
+
+Copy the string-span desribed by c-addr u to the destination
+addr so that then the dest points to a counted string containing
+the copy of the string-span. An ambigous condition exists if the
+target area pointed to by dest does not contain enough space to
+hold the copy of the string-span.
+
+<pre>
+  : PLACE  2DUP C! 1+ SWAP CMOVE ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../string-ext/string-ext.htm#17.6.1.2212>17.6.1.2212 SLITERAL</a>,
+<a href=#R.17.6.1.0910>R.17.6.1.0920 +PLACE</a>,
+</code>
+
+<hr>
+<A name=R.17.6.1.0920>
+<code>
+R.17.6.1.0920 <b>+PLACE / APPEND </b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+STRING RES EXT
+<BR>
+<pre>
+        ( c-addr u dest -- )
+</pre>
+
+<P>
+
+Copy the string-span desribed by c-addr u to the end of the
+counted string pointed to by dest. After the operation the
+complete length of the dest counted string is the sum of both
+lenghts. An ambigous condition exists if the
+target area pointed to by dest does not contain enough space to
+hold the characters of the complete string.
+
+<p>
+<code>
+See:
+<a href=../string-ext/string-ext.htm#17.6.1.2212>17.6.1.2212 SLITERAL</a>,
+<a href=#R.17.6.1.0910>R.17.6.1.0910 PLACE</a>,
+</code>
+
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../environ-ext/environ-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
