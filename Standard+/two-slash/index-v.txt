@@ -52,8 +52,9 @@ in the message <b5ecdf44.0205310049.79efa6c3@posting.google.com>:
 > 2) a system that uses shadow bits for run-time type information.
 > I use one such system as a cross-compiling host.
 
- The 3rd realistic example is a Forth system implemented on a
- virtual machine with big numbers (each number is represented with
- the necessary number of bits).
+ The 3rd realistic example of a system that uses an unusual number
+ representation is a Forth system implemented on a virtual machine
+ with big numbers (each number is represented with as many bits as
+ is needed).
 
 
