@@ -1,7 +1,21 @@
 title: +STRING
+description:
+
+ +STRING  ( c-addr1 len1 c-addr2 len2 - c-addr2 len3 )
+    Append the string at c-addr1, for len1 characters, to the end
+    of the string at c-addr2, for len2 characters.  Return the
+    beginning of the destination string (c-addr2) and the
+    sum of the two lengths (len3).  It is the programmer's
+    responsibility to ensure that there is room at the end
+    of the destination string to hold both strings.
+    An ambiguous condition exists if there's no room at the end
+    of the destination string
+
+
 status:
  standardized in OTA (Open Terminal Architecture)
-description:
+
+description-as-in-OTA:
 
  +STRING  ( c-addr1 len1 c-addr2 len2 - c-addr2 len3 )
     Append the string at c-addr1, for len1 bytes, to the end
