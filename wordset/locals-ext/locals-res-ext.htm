@@ -1,0 +1,137 @@
+<HTML><HEAD>
+<TITLE>[013] LOCALS-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../file-ext/file-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../memory-res-ext/memory-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.13.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.13>
+<H2>R.13 Locals reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.13.6.1.0086>
+<code>
+R.13.6.1.0068 <b>LVALUE / LOCAL</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+LOCALS RES EXT
+<BR>
+<pre>
+        Compressed Syntax: ( n [name] -- ) : [name] ( -- n )
+<pre>
+        Interpretation: Interpretion semantics for this word are undefined
+<pre>
+        Compilation: ( "name" -- )
+</pre>
+
+<P>
+
+Create a new local identifier by skipping leading spaces,
+parsing the name, and executing
+<a href=../locals-ext/locals-ext.htm#13.6.1.0086>13.6.1.0086</a> (LOCAL)
+and assign cellsize data space in the locals frame to the identifier.
+Append the run-time semantics to the current definition
+to initialize the data cell denoted by the name with the
+current value on stack.
+<pre>
+        Run-time:  ( n -- )
+</pre>
+<p>
+
+Append execution semantics to the local identifier
+to return the data cell value to the parameter stack.
+<pre>
+       Execution: ( -- n )
+</pre>
+
+<p>
+The identifier is subject to the LOCALS
+<a href=../locals-ext/locals-ext.htm#13.6.1.2295>TO</a>
+extension thereby imitating a
+<a href=../core-ext/core-ext.htm#6.2.2405>6.2.2405 VALUE</a>
+
+<p>
+note: most system using
+<a href=../local-ext/local-ext.htm#13.6.2.1795>13.6.2.1795 LOCALS|</a>,
+declarations can not be easily extended with
+<A href=#R.13.6.1.0086>R.13.6.1.0068</a> LVALUE declarations since the
+locals-frame is setup by the execution code compiled by the
+<a href=../local-ext/local-ext.htm#13.6.2.1795>LOCALS|</a> call
+and any <A href=#R.13.6.1.0086>LVALUE</a> would need to add to
+it but without adding initialization code - the locals-frame setup
+code (often called "LOCALS" or "(LOCALS)") is split into a
+an area of <a href=../local-ext/local-ext.htm#13.6.2.1795>LOCALS|</a>
+values that get initialized immediatly and an
+ <A href=#R.13.6.1.0086>LVALUE</a> part that gets initialized
+at the point of declaration within the current defintition.
+Furthermore <a href=../local-ext/local-ext.htm#13.6.2.1795>LOCALS|</a>
+has the tendency to call
+<a href=../local-ext/local-ext.htm#13.6.1.0086>(LOCAL)</a> once
+with that END-flag while this is should be done just implicitly for the
+current feature of <A href=#R.13.6.1.0086>LVALUE</a> declarations at the
+end of the definition (or the END-flag is not necessary or just ignored).
+
+<p>
+a simple approach could be to let the special-syntax word
+<a href=../local-ext/local-ext.htm#13.6.2.1795>LOCALS|</a>
+translate all local declarations to be simply calls to
+<A href=#R.13.6.1.0086>LVALUE</a> that stops when a peek into
+the input-area can see a "|" character. A decompile might
+yield this:
+<pre>
+   : test LOCALS| a b c d | 2drop 2drop ;
+   see test
+   : test LOCALS LVALUE a LVALUE b LVALUE c LVALUE d 2DROP 2DROP ;
+</pre>
+which also explains why the
+<a href=../local-ext/local-ext.htm#13.6.2.1795>LOCALS|</a>
+names get initialized in the reverse order of the usual
+stackeffect declarations as it is also used in this standard.
+
+<p>
+<code>
+See:
+<a href=../local-ext/local-ext.htm#13.6.1.0086>13.6.1.0086 (LOCAL)</a>,
+<a href=../core-ext/core-ext.htm#6.2.2405>6.2.2405 VALUE</a>
+<a href=../local-ext/local-ext.htm#13.6.1.2295>13.6.1.2295 TO</a>,
+<a href=../local-ext/local-ext.htm#13.6.2.1795>13.6.2.1795 LOCALS|</a>,
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../facility-ext/facility-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
