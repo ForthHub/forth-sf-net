@@ -8,5 +8,5 @@ description:
   Copy the third single-cell return stack item onto the data stack
 
 note:
-  used less frequently than R'@ ~~~tag[a href="../r-tick-fetch/index.html"]tag~~~q.v.~~~tag[/a]tag~~~
+  used less frequently than R'@ ~~~tag[a href=../r-tick-fetch/index.html]tag~~~q.v.~~~tag[/a]tag~~~
 
