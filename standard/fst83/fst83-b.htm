@@ -26,19 +26,19 @@
           uncontrolled words.  However, use of these names for procedures
           differing from the given definitions is discouraged.
 
-          !BITS        16b1 addr 16b2 --                      "store-bits" <a name="store-bits" />
+          !BITS        16b1 addr 16b2 --                      "store-bits" <a name="store-bits"></a>
                Store the value of 16b1 masked by 16b2 into the equivalent
                masked part of the contents of addr, without affecting bits
                outside the mask.
 
-          **           n1 n2 -- n3                                 "power" <a name="power" />
+          **           n1 n2 -- n3                                 "power" <a name="power"></a>
                n3 is the value of n1 to the power n2.
 
-          +BLOCK       w -- u                                 "plus-block" <a name="plus-block" />
+          +BLOCK       w -- u                                 "plus-block" <a name="plus-block"></a>
                u is the sum of w plus the number of the block being
                interpreted.
 
-          -'           -- addr false                           "dash-tick" <a name="dash-tick" />
+          -'           -- addr false                           "dash-tick" <a name="dash-tick"></a>
                        -- true
                Used in the form:
                        -' &lt;name&gt;
@@ -46,13 +46,13 @@
                &lt;name&gt; can be found in the search order; leave only true if
                not found.
 
-          -MATCH       addr1 +n1 addr2 +n2 -- addr3 flag      "dash-match" <a name="dash-match" />
+          -MATCH       addr1 +n1 addr2 +n2 -- addr3 flag      "dash-match" <a name="dash-match"></a>
                Attempt to find the +n2-length text string beginning at
                addr2 somewhere in the +n1-length text string beginning at
                addr1.  Return the last+1 address addr3 of the match point
                and a flag which is zero if a match exists.
 
-          -TEXT        addr1 +n1 addr2 -- n2                   "dash-text" <a name="dash-text" />
+          -TEXT        addr1 +n1 addr2 -- n2                   "dash-text" <a name="dash-text"></a>
                Compare two strings over the length +n1 beginning at addr1
                and addr2.  Return zero if the strings are equal.  If
                unequal, return n2, the difference between the last
@@ -68,7 +68,7 @@
 
 
 
-                                         58 <a name=".58" />
+                                         58 <a name=".58"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -78,7 +78,7 @@
 
 </pre></td></tr></table><pre>
 
-          /LOOP        +n --                         C,I         "up-loop" <a name="up-loop" />
+          /LOOP        +n --                         C,I         "up-loop" <a name="up-loop"></a>
                        sys --   (compiling)
                A do-loop terminating word.  The loop index is incremented
                by the positive value +n.  If the unsigned magnitude of the
@@ -87,13 +87,13 @@
                DO .  The comparison is unsigned magnitude.  sys is balanced
                with its corresponding DO .  See:  <a href="fst83-12.htm#do">DO</a>
 
-          1+!          addr --                            "one-plus-store" <a name="one-plus-store" />
+          1+!          addr --                            "one-plus-store" <a name="one-plus-store"></a>
                Add one to the 16-bit contents at addr.
 
-          1-!          addr --                           "one-minus-store" <a name="one-minus-store" />
+          1-!          addr --                           "one-minus-store" <a name="one-minus-store"></a>
                Subtract one from the 16-bit contents at addr.
 
-          ;:           -- addr                       C,I"semi-colon-colon" <a name="semi-colon-colon" />
+          ;:           -- addr                       C,I"semi-colon-colon" <a name="semi-colon-colon"></a>
                Used to specify a new defining word:
                        : &lt;namex&gt; &lt;name&gt;
                When &lt;namex&gt; is executed, it creates an entry for the new
@@ -102,13 +102,13 @@
                first (if any) parameters associated with &lt;name&gt; on the
                stack.
 
-          ;S           --                            Interpret only"semi-s" <a name="semi-s" />
+          ;S           --                            Interpret only"semi-s" <a name="semi-s"></a>
                Stop interpretation of a block.
 
-          &lt;&gt;           w1 w2 -- flag                           "not-equal" <a name="not-equal" />
+          &lt;&gt;           w1 w2 -- flag                           "not-equal" <a name="not-equal"></a>
                flag is true if w1 is not equal to w2.
 
-          &lt;BUILDS      --                                         "builds" <a name="builds" />
+          &lt;BUILDS      --                                         "builds" <a name="builds"></a>
                Used in conjunction with DOES&gt; in defining words, in the
                form:
                        : &lt;namex&gt; ... &lt;BUILDS ... DOES&gt; ... ;
@@ -122,20 +122,20 @@
                DOES&gt; will be executed, with the parameter field address of
                &lt;name&gt; on the data stack.
 
-          &lt;CMOVE       addr1 addr2 u --                   "reverse-c-move" <a name="reverse-c-move" />
+          &lt;CMOVE       addr1 addr2 u --                   "reverse-c-move" <a name="reverse-c-move"></a>
                A synonym for CMOVE&gt; .
 
-          &gt;&lt;           16b1 -- 16b2                            "byte-swap" <a name="byte-swap" />
+          &gt;&lt;           16b1 -- 16b2                            "byte-swap" <a name="byte-swap"></a>
                Swap the high and low bytes within 16b1.
 
-          &gt;MOVE&lt;       addr1 addr2 u --                   "byte-swap-move" <a name="byte-swap-move" />
+          &gt;MOVE&lt;       addr1 addr2 u --                   "byte-swap-move" <a name="byte-swap-move"></a>
                Move u bytes beginning at addr1 to the memory beginning at
                addr2.  During this move, the order of each byte pair is
                reversed.
 
 
 
-                                         59 <a name=".59" />
+                                         59 <a name=".59"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -145,16 +145,16 @@
 
 </pre></td></tr></table><pre>
 
-          @BITS        addr 16b1 -- 16b2                      "fetch-bits" <a name="fetch-bits" />
+          @BITS        addr 16b1 -- 16b2                      "fetch-bits" <a name="fetch-bits"></a>
                Return the 16-bits at addr masked by 16b1.
 
-          AGAIN        --                            C,I                  <a name="again" />
+          AGAIN        --                            C,I                  <a name="again"></a>
                        sys --   (compiling)
                Effect an unconditional jump back to the start of a BEGIN-
                AGAIN loop.  sys is balanced with its corresponding BEGIN .
                See:  <a href="fst83-12.htm#begin">BEGIN</a>
 
-          ASCII        -- char                       I,M          "as-key" <a name="as-key" />
+          ASCII        -- char                       I,M          "as-key" <a name="as-key"></a>
                        --                            (compiling)
                Used in the form:
                        ASCII ccc
@@ -164,13 +164,13 @@
                compile char as a literal so that when the colon definition
                is later executed, char is left on the stack.
 
-          ASHIFT       16b1 n -- 16b2                            "a-shift" <a name="a-shift" />
+          ASHIFT       16b1 n -- 16b2                            "a-shift" <a name="a-shift"></a>
                Shift the value 16b1 arithmetically n bits left if n is
                positive, shifting zeros into the least significant bit
                positions.  If n is negative, 16b1 is shifted right; the
                sign is included in the shift and remains unchanged.
 
-          B/BUF        -- 1024                          "bytes-per-buffer" <a name="bytes-per-buffer" />
+          B/BUF        -- 1024                          "bytes-per-buffer" <a name="bytes-per-buffer"></a>
                A constant leaving 1024, the number of bytes per block
                buffer.
 
@@ -178,7 +178,7 @@
                Activate a terminal bell or noise-maker as appropriate to
                the device in use.
 
-          CHAIN        --                            M                    <a name="chain" />
+          CHAIN        --                            M                    <a name="chain"></a>
                Used in the form:
                        CHAIN &lt;name&gt;
                Connect the CURRENT vocabulary to all definitions that might
@@ -189,20 +189,20 @@
                defined vocabulary may include the sequence:
                        CHAIN FORTH
 
-          CONTINUED    u --                          M                    <a name="continue" />
+          CONTINUED    u --                          M                    <a name="continue"></a>
                Continue interpretation at block u.
 
-          CUR          -- addr                                            <a name="cur" />
+          CUR          -- addr                                            <a name="cur"></a>
                A variable pointing to the physical record number before
                which the tape is currently positioned.  REWIND sets CUR=1.
 
-          DBLOCK       ud -- addr                    M           "d-block" <a name="d-block" />
+          DBLOCK       ud -- addr                    M           "d-block" <a name="d-block"></a>
                Identical to BLOCK but with a 32-bit block unsigned number.
 
 
 
 
-                                         60 <a name=".60" />
+                                         60 <a name=".60"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -212,27 +212,27 @@
 
 </pre></td></tr></table><pre>
 
-          DPL          -- addr                       U             "d-p-l" <a name="d-p-l" />
+          DPL          -- addr                       U             "d-p-l" <a name="d-p-l"></a>
                A variable containing the number of places after the
                fractional point for input conversion.
 
-          FLD          -- addr                       U             "f-l-d" <a name="f-l-d" />
+          FLD          -- addr                       U             "f-l-d" <a name="f-l-d"></a>
                A variable pointing to the field length reserved for a
                number during output conversion.
 
-          H.           u --                          M             "h-dot" <a name="h-dot" />
+          H.           u --                          M             "h-dot" <a name="h-dot"></a>
                Output u as a hexadecimal integer with one trailing blank.
                The current base is unchanged.
 
-          I'           -- w                          C           "i-prime" <a name="i-prime" />
+          I'           -- w                          C           "i-prime" <a name="i-prime"></a>
                Used within a colon definition executed only from within a
                do-loop to return the corresponding loop index.
 
-          IFEND                                      Interpret only"if-end" <a name="if-end" />
+          IFEND                                      Interpret only"if-end" <a name="if-end"></a>
                Terminate a conditional interpretation sequence begun by
                IFTRUE .
 
-          IFTRUE       flag --                    Interpret only "if-true" <a name="if-true" />
+          IFTRUE       flag --                    Interpret only "if-true" <a name="if-true"></a>
                Begin an:
                        IFTRUE ... OTHERWISE ... IFEND
                conditional sequence.  These conditional words operated
@@ -244,22 +244,22 @@
                definition to control compilation, although they are not to
                be compiled.
 
-          INDEX        u1 u2 --                      M                    <a name="index" />
+          INDEX        u1 u2 --                      M                    <a name="index"></a>
                Print the first line of each screen over the range {u1..u2}.
                This displays the first line of each screen of source text,
                which conventionally contains a title.
 
-          LAST         -- addr                       U                    <a name="last" />
+          LAST         -- addr                       U                    <a name="last"></a>
                A variable containing the address of the beginning of the
                last dictionary entry made, which may not yet be a complete
                or valid entry.
 
-          LINE         +n -- addr                    M                    <a name="line" />
+          LINE         +n -- addr                    M                    <a name="line"></a>
                addr is the address of the beginning of line +n for the
                screen whose number is contained in SCR .  The range of +n
                is {0..15}.
 
-          LINELOAD     +n u --                                 "line-load" <a name="line-load" />
+          LINELOAD     +n u --                                 "line-load" <a name="line-load"></a>
                Begin interpretation at line +n of screen u.
 
 
@@ -269,7 +269,7 @@
 
 
 
-                                         61 <a name=".61" />
+                                         61 <a name=".61"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -279,54 +279,54 @@
 
 </pre></td></tr></table><pre>
 
-          LOADS        u --                          M                    <a name="loads" />
+          LOADS        u --                          M                    <a name="loads"></a>
                A defining word executed in the form:
                        u LOADS &lt;name&gt;
                When &lt;name&gt; is subsequently executed, block u will be
                loaded.
 
-          MAP0         -- addr                                  "map-zero" <a name="map-zero" />
+          MAP0         -- addr                                  "map-zero" <a name="map-zero"></a>
                A variable pointing to the first location in the tape map.
 
-          MASK         n -- 16b                                        <a name="mask" />
+          MASK         n -- 16b                                        <a name="mask"></a>
                16b is a mask of n most-significant bits if n is positive,
                or n least-significant bits if n is negative.
 
-          MOVE         addr1 addr2 u --                               <a name="move" />
+          MOVE         addr1 addr2 u --                               <a name="move"></a>
                The u bytes at address addr1 are moved to address addr2.
                The data are moved such that the u bytes remaining at
                address addr2 are the same data as was originally at address
                addr1.  If u is zero nothing is moved.
 
-          MS           +n --                         M               "m-s" <a name="m-s" />
+          MS           +n --                         M               "m-s" <a name="m-s"></a>
                Delay for approximately +n milliseconds.
 
-          NAND         16b1 16b2 -- 16b3                             <a name="nand" />
+          NAND         16b1 16b2 -- 16b3                             <a name="nand"></a>
                16b3 is the one's complement of the logical AND of 16b1 with
                16b2.
 
-          NOR          16b1 16b2 -- 16b3                             <a name="nor" />
+          NOR          16b1 16b2 -- 16b3                             <a name="nor"></a>
                16b3 is the one's complement of the logical OR of 16b1 with
                16b2.
 
-          NUMBER       addr -- d                                     <a name="number" />
+          NUMBER       addr -- d                                     <a name="number"></a>
                Convert the count and character string at addr, to a signed
                32-bit integer, using the value of BASE .  If numeric
                conversion is not possible, an error condition exists.  The
                string may contain a preceding minus sign.
 
-          O.           u --                          M             "o-dot" <a name="o-dot" />
+          O.           u --                          M             "o-dot" <a name="o-dot"></a>
                Print u in octal format with one trailing blank.  The value
                in BASE is unaffected.
 
-          OTHERWISE    --                            Interpret only       <a name="otherwise" />
+          OTHERWISE    --                            Interpret only       <a name="otherwise"></a>
                An interpreter-level conditional word.  See:  <a href="#iftrue">IFTRUE</a>
 
-          PAGE         --                            M                    <a name="page" />
+          PAGE         --                            M                    <a name="page"></a>
                Clear the terminal screen or perform a form-feed action
                suitable to the output device currently active.
 
-          READ-MAP     --                            M          "read-map" <a name="read-map" />
+          READ-MAP     --                            M          "read-map" <a name="read-map"></a>
                Read to the next file mark on tape constructing a
                correspondence table in memory (the map) relating physical
                block position to logical block number.  The tape should
@@ -336,7 +336,7 @@
 
 
 
-                                         62 <a name=".62" />
+                                         62 <a name=".62"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -346,7 +346,7 @@
 
 </pre></td></tr></table><pre>
 
-          REMEMBER     --                            M                    <a name="remember" />
+          REMEMBER     --                            M                    <a name="remember"></a>
                A defining word executed in the form:
                        REMEMBER &lt;name&gt;
                Defines a word which, when executed, will cause &lt;name&gt; and
@@ -357,34 +357,34 @@
                provides a standardized preface to any group of transient
                word definitions.
 
-          REWIND       --                            M                    <a name="rewind" />
+          REWIND       --                            M                    <a name="rewind"></a>
                Rewind the tape to its load point, setting CUR equal to one.
 
-          ROTATE       16b1 n -- 16b2                                     <a name="rotate" />
+          ROTATE       16b1 n -- 16b2                                     <a name="rotate"></a>
                Rotate 16b1 left n bits if n is positive, right n bits if n
                is negative.  Bits shifted out of one end of the cell are
                shifted back in at the opposite end.
 
-          S0           -- addr                       U            "s-zero" <a name="s-zero" />
+          S0           -- addr                       U            "s-zero" <a name="s-zero"></a>
                A variable containing the address of the bottom of the
                stack.
 
-          SET          16b addr --                   M                    <a name="set" />
+          SET          16b addr --                   M                    <a name="set"></a>
                A defining word executed in the form:
                        16b addr SET &lt;name&gt;
                Defines a word &lt;name&gt; which, when executed, will cause the
                value 16b to be stored at addr.
 
-          SHIFT        16b1 n -- 16b2                                    <a name="shift" />
+          SHIFT        16b1 n -- 16b2                                    <a name="shift"></a>
                Logical shift 16b1 left n bits if n is positive, right n
                bits if n is negative.  Zeros are shifted into vacated bit
                positions.
 
-          TEXT         char --                       M                    <a name="text" />
+          TEXT         char --                       M                    <a name="text"></a>
                Accept characters from the input stream, as for WORD , into
                PAD , blank-filling the remainder of PAD to 84 characters.
 
-          USER         +n --                         M                    <a name="user" />
+          USER         +n --                         M                    <a name="user"></a>
                A defining word executed in the form:
                        +n USER &lt;name&gt;
                which creates a user variable &lt;name&gt;.  +n is the offset
@@ -392,7 +392,7 @@
                Execution of &lt;name&gt; leaves its absolute user area storage
                address.
 
-          WORDS        --                            M                    <a name="words" />
+          WORDS        --                            M                    <a name="words"></a>
                List the word names in the first vocabulary of the currently
                active search order.
 
@@ -403,7 +403,7 @@
 
 
 
-                                         63 <a name=".63" />
+                                         63 <a name=".63"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -413,7 +413,7 @@
 
 </pre></td></tr></table><pre>
 
-          \LOOP        +n --                         C,I       "down-loop" <a name="down-loop" />
+          \LOOP        +n --                         C,I       "down-loop" <a name="down-loop"></a>
                        sys --   (compiling)
                A do-loop terminating word.  The loop index is decremented
                by the positive value +n.  If the unsigned magnitude of the
@@ -470,6 +470,6 @@
 
 
 
-                                         64 <a name=".64" />
+                                         64 <a name=".64"></a>
 
 </pre></html>

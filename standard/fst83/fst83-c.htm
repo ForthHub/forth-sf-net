@@ -68,7 +68,7 @@
 
 
 
-                                         65 <a name=".65" />
+                                         65 <a name=".65"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -79,7 +79,7 @@
 </pre></td></tr></table><pre>
 
 
-<a name="search.order" /> <a name="order.control" /> <a name="order" />
+<a name="search.order"></a> <a name="order.control"></a> <a name="order"></a>
                        SEARCH ORDER SPECIFICATION AND CONTROL
 
 
@@ -133,7 +133,7 @@
 
 
 
-                                         66 <a name=".66" />
+                                         66 <a name=".66"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -200,7 +200,7 @@
 
 
 
-                                         67 <a name=".67" />
+                                         67 <a name=".67"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -218,31 +218,31 @@
 
           7  GLOSSARY
 
-          ONLY         --                            ONLY              <a name="only" />
+          ONLY         --                            ONLY              <a name="only"></a>
                Select just the ONLY vocabulary as both the transient
                vocabulary and resident vocabulary in the search order.
 
-          FORTH        --                            ONLY              <a name="forth" />
+          FORTH        --                            ONLY              <a name="forth"></a>
                The name of the primary vocabulary.  Execution makes FORTH
                the transient vocabulary, the first in the search order, and
                thus replaces the previous transient vocabulary.
 
-          ALSO         --                            ONLY                 <a name="also" />
+          ALSO         --                            ONLY                 <a name="also"></a>
                The transient vocabulary becomes the first vocabulary in the
                resident portion of the search order.  Up to the last two
                resident vocabularies will also be reserved, in order,
                forming the resident search order.
 
-          ORDER        --                            ONLY                 <a name="order" />
+          ORDER        --                            ONLY                 <a name="order"></a>
                Display the vocabulary names forming the search order in
                their present search order sequence.  Then show the
                vocabulary into which new definitions will be placed.
 
-          WORDS        --                            ONLY                 <a name="words" />
+          WORDS        --                            ONLY                 <a name="words"></a>
                Display the word names in the transient vocabulary, starting
                with the most recent definition.
 
-          FORGET       --                            ONLY                 <a name="forget" />
+          FORGET       --                            ONLY                 <a name="forget"></a>
                Used in the form:
                        FORGET &lt;name&gt;
                Delete from the dictionary &lt;name&gt; and all words added to the
@@ -251,11 +251,11 @@
                condition also exists upon implicitly forgetting a
                vocabulary (due to its definition after &lt;name&gt;).
 
-          DEFINITIONS  --                            ONLY                 <a name="definitions" />
+          DEFINITIONS  --                            ONLY                 <a name="definitions"></a>
                Select the transient vocabulary as the current vocabulary
                into which subsequent definitions will be added.
 
-          SEAL         --                            ONLY                 <a name="seal" />
+          SEAL         --                            ONLY                 <a name="seal"></a>
                Delete all occurances of ONLY from the search order.  The
                effect is that only specified application vocabularies will
                be searched.
@@ -267,7 +267,7 @@
 
 
 
-                                         68 <a name=".68" />
+                                         68 <a name=".68"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -334,7 +334,7 @@
 
 
 
-                                         69 <a name=".69" />
+                                         69 <a name=".69"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -401,7 +401,7 @@
 
 
 
-                                         70 <a name=".70" />
+                                         70 <a name=".70"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -412,7 +412,7 @@
 </pre></td></tr></table><pre>
 
 
-<a name="field.address.conversion" /> <a name="fields" />
+<a name="field.address.conversion"></a> <a name="fields"></a>
                     DEFINITION FIELD ADDRESS CONVERSION OPERATORS
 
 
@@ -443,30 +443,30 @@
           In the following words, the compilation address is either the
           source or the destination, so it is not indicated in the names.
 
-          &gt;BODY        addr1 -- addr2                            "to-body" <a name="to-body" />
+          &gt;BODY        addr1 -- addr2                            "to-body" <a name="to-body"></a>
                addr2 is the parameter field address corresponding to the
                compilation address addr1.
 
-          &gt;NAME        addr1 -- addr2                            "to-name" <a name="to-name" />
+          &gt;NAME        addr1 -- addr2                            "to-name" <a name="to-name"></a>
                addr2 is the name field address corresponding to the
                compilation address addr1.
 
-          &gt;LINK        addr1 -- addr2                            "to-link" <a name="to-link" />
+          &gt;LINK        addr1 -- addr2                            "to-link" <a name="to-link"></a>
                addr2 is the link field address corresponding to the
                compilation address addr1.
 
-          BODY&gt;        addr1 -- addr2                          "from-body" <a name="from-body" />
+          BODY&gt;        addr1 -- addr2                          "from-body" <a name="from-body"></a>
                addr2 is the compilation address corresponding to the
                parameter field address addr1.
 
-          NAME&gt;        addr1 -- addr2                          "from-name" <a name="from-name" />
+          NAME&gt;        addr1 -- addr2                          "from-name" <a name="from-name"></a>
                addr2 is the compilation address corresponding to the name
                field address addr1.
 
 
 
 
-                                         71 <a name=".71" />
+                                         71 <a name=".71"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -476,7 +476,7 @@
 
 </pre></td></tr></table><pre>
 
-          LINK&gt;        addr1 -- addr2                          "from-link" <a name="from-link" />
+          LINK&gt;        addr1 -- addr2                          "from-link" <a name="from-link"></a>
                addr2 is the compilation address corresponding to the link
                field address addr1.
 
@@ -485,11 +485,11 @@
           For greater efficiency, additional operators may be defined which
           name both the source and destination fields.
 
-          N&gt;LINK       addr1 -- addr2                       "name-to-link" <a name="name-to-link" />
+          N&gt;LINK       addr1 -- addr2                       "name-to-link" <a name="name-to-link"></a>
                addr2 is the link field address corresponding to the name
                field address addr1.
 
-          L&gt;NAME       addr1 -- addr2                       "link-to-name" <a name="link-to-name" />
+          L&gt;NAME       addr1 -- addr2                       "link-to-name" <a name="link-to-name"></a>
                addr2 is the name field address corresponding to the link
                field address addr1.
 
@@ -533,7 +533,7 @@
 
 
 
-                                         72 <a name=".72" />
+                                         72 <a name=".72"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -600,7 +600,7 @@
 
 
 
-                                         73 <a name=".73" />
+                                         73 <a name=".73"></a>
 
 
 </pre></html>

@@ -16,7 +16,7 @@
 
 
 
-          <a name="9.1">9.1</a>  Words Names and Word Definitions <a name="words" />
+          <a name="9.1">9.1</a>  Words Names and Word Definitions <a name="words"></a>
 
           A Standard Program may reference only the definitions of the
           Required Word Set and Standard Extensions and definitions which
@@ -35,7 +35,7 @@
           comply with the Standard.
 
 
-          <a name="9.2">9.2</a>  Addressable Memory <a name="memory" />
+          <a name="9.2">9.2</a>  Addressable Memory <a name="memory"></a>
 
           The FORTH system may share the dictionary space with the user's
           application.  The native addressing protocol of the host computer
@@ -44,7 +44,7 @@
           Therefore, in a Standard Program, the user may only operate on
           data which was stored by the application.  No exceptions!
 
-          A Standard Program may address: <a name="may.address" />
+          A Standard Program may address: <a name="may.address"></a>
 
           1.   parameter fields of words created with CREATE , VARIABLE ,
                and user defined words which execute CREATE ;
@@ -59,7 +59,7 @@
           5.   text input buffer and PAD up to the amount specified as the
                minimum for each area.
 
-          A Standard Program may NOT address: <a name="may.not.address" />
+          A Standard Program may NOT address: <a name="may.not.address"></a>
 
           1.   directly into the data or return stacks;
 
@@ -67,7 +67,7 @@
 
 
 
-                                         18 <a name=".18" />
+                                         18 <a name=".18"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -81,7 +81,7 @@
                application.
 
 
-          <a name="9.3">9.3</a>  Return Stack <a name="return.stack" />
+          <a name="9.3">9.3</a>  Return Stack <a name="return.stack"></a>
 
           A Standard Program may cautiously use the return stack with the
           following restrictions:
@@ -97,7 +97,7 @@
           definition is terminated at ; or before EXIT is executed.
 
 
-          <a name="9.4">9.4</a>  Compilation <a name="compilation" />
+          <a name="9.4">9.4</a>  Compilation <a name="compilation"></a>
 
           The system uses the return stack and the dictionary in a system
           dependent manner during the compilation of colon definitions.
@@ -105,10 +105,10 @@
           compilation.  See:  "sys (11.7)"
 
 
-          <a name="9.5">9.5</a>  Terminal Input and Output <a name="terminal" />
+          <a name="9.5">9.5</a>  Terminal Input and Output <a name="terminal"></a>
 
 
-          <a name="9.5.1">9.5.1</a>     KEY <a name="key" />
+          <a name="9.5.1">9.5.1</a>     KEY <a name="key"></a>
 
           A Standard System must receive all valid ASCII characters.  Each
           KEY receives one ASCII character, with more-significant bits
@@ -118,7 +118,7 @@
           bit ASCII character received by KEY .  For example:  KEY 127 AND
 
 
-          <a name="9.5.2">9.5.2</a>     EXPECT <a name="expect" />
+          <a name="9.5.2">9.5.2</a>     EXPECT <a name="expect"></a>
 
           Control characters may be processed to allow system dependent
           editing of the characters prior to receipt.  Therefore, a
@@ -134,7 +134,7 @@
 
 
 
-                                         19 <a name=".19" />
+                                         19 <a name=".19"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -144,7 +144,7 @@
 
 </pre></td></tr></table><pre>
 
-          <a name="9.5.3">9.5.3</a>     EMIT <a name="emit" />
+          <a name="9.5.3">9.5.3</a>     EMIT <a name="emit"></a>
 
           Because of the potential non-transportable action by terminal
           devices of control characters, the use of ASCII control
@@ -156,20 +156,20 @@
           display as many bits as can be sent.
 
 
-          <a name="9.5.4">9.5.4</a>     TYPE <a name="type" />
+          <a name="9.5.4">9.5.4</a>     TYPE <a name="type"></a>
 
           Because of the potential non-transportable action by terminal
           devices of control characters, the use of ASCII control
           characters is an environmental dependency.
 
 
-          <a name="9.6">9.6</a>  Transporting Programs Between Standard Systems <a name="transporting" />
+          <a name="9.6">9.6</a>  Transporting Programs Between Standard Systems <a name="transporting"></a>
 
           Further usage requirements are expected to be added for
           transporting programs between Standard Systems.
 
 
-          <a name="9.7">9.7</a>  Multiprogramming Impact <a name="multiprogramming" />
+          <a name="9.7">9.7</a>  Multiprogramming Impact <a name="multiprogramming"></a>
 
           In a multiprogrammed system, Device Layer words and those words
           which implicitly reference the Device Layer words may relinquish
@@ -185,13 +185,13 @@
           only if its address is valid.  See:  "11.4 Attributes"
 
 
-          <a name="9.8">9.8</a>  Numbers <a name="numbers" />
+          <a name="9.8">9.8</a>  Numbers <a name="numbers"></a>
 
           Interpreted or compiled numbers are in the range
           {-32,768..65,535}.  See:  "number conversion"
 
 
-          <a name="9.9">9.9</a>  Control Structures <a name="control.structures" />
+          <a name="9.9">9.9</a>  Control Structures <a name="control.structures"></a>
 
           Control structures are compiled inside colon definitions.
           Control structures can be nested but cannot overlap.  For
@@ -201,7 +201,7 @@
 
 
 
-                                         20 <a name=".20" />
+                                         20 <a name=".20"></a>
 
 
 </pre></html>

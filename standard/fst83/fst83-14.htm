@@ -17,30 +17,30 @@
 
 
 
-          14.1 The Assembler Extension Word Set Layers <a name="14.1" />
+          14.1 The Assembler Extension Word Set Layers <a name="14.1"></a>
 
 
-          Nucleus layer <a name="nucleus.layer" />
-
-               none
-
-
-          Device layer <a name="device.layer" />
+          Nucleus layer <a name="nucleus.layer"></a>
 
                none
 
 
-          Interpreter layer <a name="interpreter.layer" />
+          Device layer <a name="device.layer"></a>
+
+               none
+
+
+          Interpreter layer <a name="interpreter.layer"></a>
 
                ASSEMBLER
 
 
-          Compiler layer <a name="compiler.layer" />
+          Compiler layer <a name="compiler.layer"></a>
 
                ;CODE  CODE  END-CODE
 
 
-          14.2 Assembler Extension Word Set Usage <a name="14.2" />
+          14.2 Assembler Extension Word Set Usage <a name="14.2"></a>
 
           Because of the system dependent nature of machine language
           programming, a Standard Program cannot use CODE or ;CODE .
@@ -68,7 +68,7 @@
 
 
 
-                                         48 <a name=".48" />
+                                         48 <a name=".48"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -79,9 +79,9 @@
 </pre></td></tr></table><pre>
 
 
-          14.3 The Assembler Extension Word Set Glossary <a name="14.3" />
+          14.3 The Assembler Extension Word Set Glossary <a name="14.3"></a>
 
-          ;CODE        --                            C,I,79   "semi-colon- <a name="semi-colon-code" />
+          ;CODE        --                            C,I,79   "semi-colon- <a name="semi-colon-code"></a>
                        sys1 -- sys2                  (compiling)     code"
                Used in the form:
                        : &lt;namex&gt; ... &lt;create&gt; ... ;CODE ... END-CODE
@@ -95,11 +95,11 @@
                its corresponding : .  sys2 is balanced with its
                corresponding END-CODE .  See:  <a href="#code">CODE</a>  <a href="fst83-12.htm#does">DOES&gt;</a>
 
-          ASSEMBLER    --                            83                   <a name="assembler" />
+          ASSEMBLER    --                            83                   <a name="assembler"></a>
                Execution replaces the first vocabulary in the search order
                with the ASSEMBLER vocabulary.  See:  <a href="fst83-12.htm#vocabulary">VOCABULARY</a>
 
-          CODE         -- sys                        M,83                 <a name="code" />
+          CODE         -- sys                        M,83                 <a name="code"></a>
                A defining word executed in the form:
                        CODE &lt;name&gt; ... END-CODE
                Creates a dictionary entry for &lt;name&gt; to be defined by a
@@ -110,7 +110,7 @@
                (see:  <a href="#end-code">END-CODE</a> ).  Executes ASSEMBLER .  sys is balanced
                with its corresponding END-CODE .
 
-          END-CODE     sys --                        79         "end-code" <a name="end-code" />
+          END-CODE     sys --                        79         "end-code" <a name="end-code"></a>
                Terminates a code definition and allows the &lt;name&gt; of the
                corresponding code definition to be found in the dictionary.
                sys is balanced with its corresponding CODE or ;CODE .
@@ -133,7 +133,7 @@
 
 
 
-                                         49 <a name=".49" />
+                                         49 <a name=".49"></a>
 
 
 

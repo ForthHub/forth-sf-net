@@ -17,8 +17,8 @@
 
 
           These are the definitions of the terms used within this Standard.
-<a name="address" />
-          address, byte <a name="byte.address" />
+<a name="address"></a>
+          address, byte <a name="byte.address"></a>
                An unsigned 16-bit number that locates an 8-bit byte in a
                standard FORTH address space over the range {0..65,535}.  It
                may be a native machine address or a representation on a
@@ -26,21 +26,21 @@
                virtual byte address space.  Addresses are treated as
                unsigned numbers.  See:  <a href="#twos.complement">"arithmetic, two's complement"</a>
 
-          address, compilation <a name="compilation.address" />
+          address, compilation <a name="compilation.address"></a>
                The numerical value compiled for a FORTH word definition
                which identifies that definition.  The address interpreter
                uses this value to locate the machine code corresponding to
                each definition.
 
-          address, native machine <a name="native.machine.address" /> <a name="native.address" />
+          address, native machine <a name="native.machine.address"></a> <a name="native.address"></a>
                The natural address representation of the host computer.
 
-          address, parameter field <a name="parameter.field.address" /> <a name="pfa" />
+          address, parameter field <a name="parameter.field.address"></a> <a name="pfa"></a>
                The address of the first byte of memory associated with a
                word definition for the storage of compilation addresses (in
                a colon definition), numeric data, text characters, etc.
 
-          arithmetic, two's complement <a name="twos.complement" />
+          arithmetic, two's complement <a name="twos.complement"></a>
                Arithmetic is performed using two's complement integers
                within a field of either 16 or 32 bits as indicated by the
                operation.  Addition and subtraction of two's complement
@@ -48,7 +48,7 @@
                treated as unsigned to produce the same results as if the
                numbers had been treated as signed.
 
-          block <a name="block" />
+          block <a name="block"></a>
                The 1024 bytes of data from mass storage which are
                referenced by block numbers in the range {0..the number of
                blocks available -1}.  The actual amount of data transferred
@@ -56,12 +56,12 @@
                record is a function of the implementation.
                See:  <a href="#block.buffer">"block buffer"</a>  <a href="#mass.storage">"mass storage"</a>
 
-          block buffer <a name="block.buffer" />
+          block buffer <a name="block.buffer"></a>
                A 1024-byte memory area where a block is made temporarily
                available for use.  Block buffers are uniquely assigned to
                blocks.  See:  <a href="fst83-9.htm#9.7">"9.7 Multiprogramming Impact"</a>
 
-          byte <a name="byte" />
+          byte <a name="byte"></a>
                An assembly of 8 bits.  In reference to memory, it is the
                storage capacity for 8 bits.
 
@@ -78,12 +78,12 @@
 
 </pre></td></tr></table><pre>
 
-          character <a name="character" />
+          character <a name="character"></a>
                A 7-bit number the significance of which is given by the
                ASCII standard.  When contained in a larger field, the
                higher order bits are zero.  See:  <a href="fst83-6.htm">"6. REFERENCES"</a>
 
-          compilation <a name="compilation" />
+          compilation <a name="compilation"></a>
                The action of converting text words from the input stream
                into an internal form suitable for later execution.  When in
                the compile state, the compilation addresses of FORTH words
@@ -94,29 +94,29 @@
                converted using the value of BASE .
                See:  <a href="#number">"number"</a>  <a href="#number.conversion">"number conversion"</a>  <a href="#text.interpreter">"interpreter, text"</a>
 
-          defining word <a name="defining.word" />
+          defining word <a name="defining.word"></a>
                A word that, when executed, creates a new dictionary entry
                in the compilation vocabulary.  The new word name is taken
                from the input stream.  If the input stream is exhausted
                before the new name is available, an error condition exists.
                Example of defining words are:  :  <a href="fst83-12.htm#constant">CONSTANT</a>  <a href="fst83-12.htm#create">CREATE</a>
 
-          definition <a name="definition" />
+          definition <a name="definition"></a>
                See:  <a href="#word.definition">"word definition"</a>
 
-          dictionary <a name="dictionary" />
+          dictionary <a name="dictionary"></a>
                A structure of word definitions in computer memory which is
                extensible and grows toward higher memory addresses.
                Entries are organized in vocabularies to aid location by
                name.  See:  <a href="#search.order">"search order"</a>
 
-          display <a name="display" />
+          display <a name="display"></a>
                The process of sending one or more characters to the current
                output device.  These characters are typically displayed or
                printed on a terminal.  The selection of the current output
                device is system dependent.
 
-          division, floored <a name="floored.division" /> <a name="division" />
+          division, floored <a name="floored.division"></a> <a name="division"></a>
                Integer division in which the remainder carries the sign of
                the divisor or is zero, and the quotient is rounded to its
                arithmetic floor.  Note that, except for error conditions,
@@ -129,13 +129,13 @@
                       10       -7       -4         -2
                      -10       -7       -3          1
 
-          equivalent execution <a name="equivalent.execution" />
+          equivalent execution <a name="equivalent.execution"></a>
 
 
 
 
 
-                                          5 <a name=".5" />
+                                          5 <a name=".5"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -151,41 +151,41 @@
                the program.  Only standard source programs are
                transportable.
 
-          error condition <a name="error.condition" />
+          error condition <a name="error.condition"></a>
                An exceptional condition which requires action by the system
                which may be other than the expected function.  Refer to the
                section "10. Error Conditions".
 
-          false <a name="false" />
+          false <a name="false"></a>
                A zero number represents the false state of a flag.
 
-          flag <a name="flag" />
+          flag <a name="flag"></a>
                A number that may have one of two logical states, false or
                true.  See:  <a href="#false">"false"</a>  <a href="#true">"true"</a>
 
-          floor, arithmetic <a name="floor" /> <a name="arithmetic.floor" />
+          floor, arithmetic <a name="floor"></a> <a name="arithmetic.floor"></a>
                If z is any real number, then the floor of z is the greatest
                integer less than or equal to z.
                     The floor of +.6 is 0
                     The floor of -.4 is -1
 
-          free field format <a name="free.field.format" />
+          free field format <a name="free.field.format"></a>
                Numbers are converted using the value of BASE and then
                displayed with no leading zeros.  A trailing space is
                displayed.  The number of characters displayed is the
                minimum number of characters, at least one, to uniquely
                represent the number.  See:  <a href="#number.conversion">"number conversion"</a>
 
-          glossary <a name="glossary" />
+          glossary <a name="glossary"></a>
                A set of explanations in natural language to describe the
                corresponding computer execution of word definitions.
 
-          immediate word <a name="immediate" /> <a name="immediate.word" />
+          immediate word <a name="immediate"></a> <a name="immediate.word"></a>
                A word which executes when encountered during compilation or
                interpretation.  Immediate words handle special cases during
                compilation.  See, for example, <a href="fst83-12.htm#if">IF</a> <a href="fst83-12.htm#literal">LITERAL</a> <a href="fst83-12.htm#dot-quote">.&quot;</a> etc.
 
-          input stream <a name="input" /> <a name="input.stream" />
+          input stream <a name="input"></a> <a name="input.stream"></a>
                A sequence of characters available to the system, for
                processing by the text interpreter.  The input stream
                conventionally may be taken from the current input device
@@ -202,7 +202,7 @@
 
 
 
-                                          6 <a name=".6" />
+                                          6 <a name=".6"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -218,13 +218,13 @@
                bytes long.  If BLK is non-zero the input stream is
                contained within the block buffer specified by BLK and is
                1024 bytes long.   See:  <a href="fst83-11.htm#11.8">"11.8 Input Text"</a>
-<a name="interpreter" />
-          interpreter, address <a name="address.interpreter" />
+<a name="interpreter"></a>
+          interpreter, address <a name="address.interpreter"></a>
                The machine code instructions, routine or other facilities
                that execute compiled word definitions containing
                compilation addresses.
 
-          interpreter, text <a name="text.interpreter" />
+          interpreter, text <a name="text.interpreter"></a>
                The word definitions(s) that repeatedly accepts a word name
                from the input stream, locates the corresponding compilation
                address and starts the address interpreter to execute it.
@@ -234,42 +234,42 @@
                and converted using the value of BASE .  See:  <a href="#number">"number"</a>
                <a href="#number.conversion">"number conversion"</a>
 
-          layers <a name="layers" />
+          layers <a name="layers"></a>
                The grouping of word names of each Standard word set to show
                like characteristics.  No implementation requirements are
                implied by this grouping.
 
-          layer, compiler <a name="compiler.layer" />
+          layer, compiler <a name="compiler.layer"></a>
                Word definitions which add new procedures to the dictionary
                or which aid compilation by adding compilation addresses or
                data structures to the dictionary.
 
-          layer, devices <a name="devices.layer" />
+          layer, devices <a name="devices.layer"></a>
                Word definitions which allow access to mass storage and
                computer peripheral devices.
 
-          layer, interpreter <a name="interpreter.layer" />
+          layer, interpreter <a name="interpreter.layer"></a>
                Word definitions which support vocabularies, terminal
                output, and the interpretation of text from the text input
                buffer or a mass storage device by executing the
                corresponding word definitions.
 
-          layer, nucleus <a name="nucleus.layer" />
+          layer, nucleus <a name="nucleus.layer"></a>
                Word definitions generally defined in machine code that
                control the execution of the fundamental operations of a
                virtual FORTH machine.  This includes the address
                interpreter.
 
-          load <a name="load" />
+          load <a name="load"></a>
                Redirection of the text interpreter's input stream to be
                from mass storage.  This is the general method for
                compilation of new definitions into the dictionary.
 
-          mass storage <a name="mass.storage" />
+          mass storage <a name="mass.storage"></a>
 
 
 
-                                          7 <a name=".7" />
+                                          7 <a name=".7"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -286,7 +286,7 @@
                UPDATEed (modified) the block will ultimately be transferred
                to mass storage.
 
-          number <a name="number" />
+          number <a name="number"></a>
                When values exist within a larger field, the most-
                significant bits are zero.  16-bit numbers are represented
                in memory by addressing the first of two bytes at
@@ -300,7 +300,7 @@
                field is unspecified.  See:  <a href="#twos.complement">"arithmetic, two's complement"</a>
                <a href="#number.types">"number types"</a> <a href="fst83-9.htm#9.8">"9.8 Numbers"</a>  <a href="fst83-11.htm#11.7">"11.7 Stack Parameters"</a>
 
-          number conversion <a name="number.conversion" />
+          number conversion <a name="number.conversion"></a>
                Numbers are maintained internally in binary and represented
                externally by using graphic characters within the ASCII
                character set.  Conversion between the internal and external
@@ -321,7 +321,7 @@
                number may be represented by preceding the digits with a
                single leading minus sign, the character "-".
 
-          number types <a name="number.types" />
+          number types <a name="number.types"></a>
                All number types consist of some number of bits.  These bits
                are either arbitrary or are weighted.
 
@@ -336,7 +336,7 @@
 
 
 
-                                          8 <a name=".8" />
+                                          8 <a name=".8"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -364,7 +364,7 @@
                signed numbers; program context determines whether the
                number is signed or unsigned.  See:  <a href="fst83-11.htm#11.7">"11.7 Stack Parameters"</a>
 
-          pictured numeric output <a name="pictured.numeric.output" />
+          pictured numeric output <a name="pictured.numeric.output"></a>
                The use of numeric output definitions which convert
                numerical values into text strings.  These definitions are
                used in a sequence which resembles a symbolic 'picture' of
@@ -372,27 +372,27 @@
                significant digit to most-significant digit, and converted
                characters are stored from higher memory addresses to lower.
 
-          program <a name="program" />
+          program <a name="program"></a>
                A complete specification of execution to achieve a specific
                function (application task) expressed in FORTH source code
                form.
 
-          receive <a name="receive" />
+          receive <a name="receive"></a>
                The process of obtaining one character from the current
                input device.  The selection of the current input device is
                system dependent.
 
-          recursion <a name="recursion" />
+          recursion <a name="recursion"></a>
                The process of self-reference, either directly or
                indirectly.
 
-          return <a name="return" />
+          return <a name="return"></a>
                The means of indicating the end of text by striking a key on
                an input device.  The key used is system dependent.  This
                key is typically called "RETURN", "CARRIAGE RETURN", or
                "ENTER".
 
-          screen <a name="screen" />
+          screen <a name="screen"></a>
                Textual data arranged for editing.  By convention, a screen
                consists of 16 lines (numbered 0 through 15) of 64
                characters each.  Screens usually contain program source
@@ -403,7 +403,7 @@
 
 
 
-                                          9 <a name=".9" />
+                                          9 <a name=".9"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -413,7 +413,7 @@
 
 </pre></td></tr></table><pre>
 
-          search order <a name="search.order" />
+          search order <a name="search.order"></a>
                A specification of the order in which selected vocabularies
                in the dictionary are searched.  Execution of a vocabulary
                makes it the first vocabulary in the search order.  The
@@ -423,12 +423,12 @@
                last vocabulary executed and ends with FORTH , unless
                altered in a system dependent manner.
 
-          source definition <a name="source.definition" /> <a name="source" />
+          source definition <a name="source.definition"></a> <a name="source"></a>
                Text consisting of word names suitable for compilation or
                execution by the text interpreter.  Such text is usually
                arranged in screens and maintained on a mass storage device.
-<a name="stack" />
-          stack, data <a name="data.stack" />
+<a name="stack"></a>
+          stack, data <a name="data.stack"></a>
                A last in, first out list consisting of 16-bit binary
                values.  This stack is primarily used to hold intermediate
                values during execution of word definitions.  Stack values
@@ -438,7 +438,7 @@
                When the name 'stack' is used alone, it implies the data
                stack.
 
-          stack, return <a name="return.stack" />
+          stack, return <a name="return.stack"></a>
                A last in, first out list which contains the addresses of
                word definitions whose execution has not been completed by
                the address interpreter.  As a word definition passes
@@ -446,8 +446,8 @@
                the return stack.
 
                The return stack may cautiously be used for other values.
-<a name="string" />
-          string, counted <a name="counted.string" />
+<a name="string"></a>
+          string, counted <a name="counted.string"></a>
                A sequence of consecutive 8-bit bytes located in memory by
                their low memory address.  The byte at this address contains
                a count {0..255} of the number of bytes following which are
@@ -455,14 +455,14 @@
                byte itself.  Counted strings usually contain ASCII
                characters.
 
-          string, text <a name="text.string" />
+          string, text <a name="text.string"></a>
                A sequence of consecutive 8-bit bytes located in memory by
                their low memory address and length in bytes.  Strings
                usually, but not exclusively, contain ASCII characters.
                When the term 'string' is used alone or in conjunction with
                other words it refers to text strings.
 
-          structure, control <a name="control.structure" />
+          structure, control <a name="control.structure"></a>
 
 
 
@@ -470,7 +470,7 @@
 
 
 
-                                         10 <a name=".10" />
+                                         10 <a name=".10"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -487,27 +487,27 @@
                UNTIL  IF ... THEN  IF ... ELSE ... THEN
                See:  <a href="fst83-9.htm#9.9">"9.9 Control Structures"</a>
 
-          transportability <a name="transportability" />
+          transportability <a name="transportability"></a>
                This term indicates that equivalent execution results when a
                program is executed on other than the system on which it was
                created.  See:  <a href="#equivalent.execution">"equivalent execution"</a>
 
-          true <a name="true" />
+          true <a name="true"></a>
                A non-zero value represents the true state of a flag.  Any
                non-zero value will be accepted by a standard word as
                'true'; all standard words return a 16-bit value with all
                bits set to one when returning a 'true' flag.
 
-          user area <a name="user.area" />
+          user area <a name="user.area"></a>
                An area in memory which contains the storage for user
                variable.
 
-          variable, user <a name="user.variable" /> <a name="variable" />
+          variable, user <a name="user.variable"></a> <a name="variable"></a>
                A variable whose data storage area is usually located in the
                user area.  Some system variables are maintained in the user
                area so that the words may be re-entrant to different users.
 
-          vocabulary <a name="vocabulary" />
+          vocabulary <a name="vocabulary"></a>
                An ordered list of word definitions.  Vocabularies are an
                advantage in separating different word definitions that may
                have the same name.  More than one definition with the same
@@ -515,21 +515,21 @@
                redefinition.  The most recently created redefinition will
                be found when the vocabulary is searched.
 
-          vocabulary, compilation <a name="compilation.vocabulary" />
+          vocabulary, compilation <a name="compilation.vocabulary"></a>
                The vocabulary into which new word definitions are appended.
 
-          word <a name="word" />
+          word <a name="word"></a>
                A sequence of characters terminated by one blank or the end
                of the input stream.  Leading blanks are ignored.  Words are
                usually obtained via the input stream.
 
-          word definition <a name="word.definition" />
+          word definition <a name="word.definition"></a>
                A named FORTH execution procedure compiled into the
                dictionary.  Its execution may be defined in terms of
                machine code, as a sequence of compilation address, or other
                compiled words.
 
-          word name <a name="word.name" />
+          word name <a name="word.name"></a>
 
 
 
@@ -537,7 +537,7 @@
 
 
 
-                                         11 <a name=".11" />
+                                         11 <a name=".11"></a>
 
 
 </pre><table width="100%"><tr><td bgcolor="#C0C0E0"><pre>
@@ -552,28 +552,28 @@
                definitions have different word names in the same vocabulary
                they must be uniquely findable when this vocabulary is
                searched.  See:  <a href="#vocabulary">"vocabulary"</a>  <a href="fst83-9.htm#9.5.3">"9.5.3 EXPECT"</a>
-<a name="wordset" />
-          word set <a name="word.set" />
+<a name="wordset"></a>
+          word set <a name="word.set"></a>
                A named group of FORTH word definitions in the Standard.
 
-          word set, assembler extension <a name="assembler.ext" />
+          word set, assembler extension <a name="assembler.ext"></a>
                Additional words which facilitate programming in the native
                machine language of the computer which are by nature system
                dependent.
 
-          word set, double number extension <a name="double.number.ext" />
+          word set, double number extension <a name="double.number.ext"></a>
                Additional words which facilitate manipulation of 32-bit
                numbers.
 
-          word set, required <a name="required" />
+          word set, required <a name="required"></a>
                The minimum words needed to compile and execute Standard
                Programs.
 
-          word set, system extension <a name="system.ext" />
+          word set, system extension <a name="system.ext"></a>
                Additional words which facilitate the access to internal
                system characteristics.
 
-          word, standard <a name="standard.word" />
+          word, standard <a name="standard.word"></a>
                A named FORTH procedure definition, in the Required word set
                or any extension word sets, formally reviewed and accepted
                by the Standards Team.
@@ -604,7 +604,7 @@
 
 
 
-                                         12 <a name=".12" />
+                                         12 <a name=".12"></a>
 
 
 </pre></html>
