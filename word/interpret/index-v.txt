@@ -24,3 +24,22 @@ Origin:
 Acceptance:
  Widely used.
 
+Usage-example:
+
+ : a{ ( start interactive assembly mode ) ;
+ : }a ( end interactive assembly mode, execute the code ) ;
+ : /a a{ INTERPRET }a ;
+
+ The word /a is used from the command line as
+
+ /a  spush  mova (a1)+
+
+ which is equivalent to
+
+ a{  spush  mova (a1)+  }a
+
+ The word INTERPRET could be replaced by the phrase
+ SOURCE >IN @ /STRING EVALUATE SOURCE NIP >IN !
+ (note that for block interpretation the word \ is
+ not equivalent to SOURCE NIP >IN ! ).
+
