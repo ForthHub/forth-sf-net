@@ -38,7 +38,7 @@ sub nameguess
     $n =~ s{ \# } {-num-}gsx;
     $n =~ s{ \? } {-q-}gsx;
     $n =~ s{ \= } {-set-}gsx;
-    $n =~ s{ \$ } {-var-}gsx;
+    $n =~ s{ \$ } {-dollar-}gsx;
     $n =~ s{ \% } {-mod-}gsx;
     $n =~ s{ &amp; } {-and-}gsx;
     $n =~ s{ \' } {-tick-}gsx;
@@ -66,7 +66,7 @@ sub nameguess
     $n =~ s{ \| } {-or-}gsx;
     $n =~ s{ \~ } {-about-}gsx;
 
-# the numbers, try to seperate per two digits
+# the numbers, try to separate per two digits
     $n =~ s{ 0(\d) } {-o~$1-}gsx;
     $n =~ s{ 1(\d) } {-ten~$1-}gsx;
     $n =~ s{ 2(\d) } {-twenty~$1-}gsx;
