@@ -30,32 +30,41 @@ by the OS vendor).
 
 <h4> Updating the website </h4>
 
-<pre>
-Logon to sourceforge with your ssh-account. The
-ssh-howto can be found sourceforge too. Get
-the cvs-source unpacked somewhere and copy
-copy <em>./forth/*</em> to <em>/home/groups/forth/htdocs/</em>
-</pre>
-<pre>
-Then go to that directory <em>cd /home/groups/forth/htdocs</em>
-and <em>make index</em> followed by <em>make links</em>.
-Voila, ca y est. The mirror/ subdirectory is currently the
-only one to have a seperate makefile (which understands
-"make mirror"), the others just use mk/M-subdir.mk for
-operation.
-</pre>
-<pre>
-In reality, I remake the website on my local disk and test
-the site with a local webserver (e.g. apache or pws), the
-local website is then zipped and copied to sourceforge's
-forth/htdocs directory.
+<pre><em>new style:</em>
+There is a new style now - running `make install` in the
+toplevel of your CVS copy will actually install the files
+in /usr/doc/forth, and it will implicitly `make index`
+there, and not in your CVS copy. This is different from
+earlier update policies where you would `make index`
+and upload your copy. However this created problems
+since it did often upload the CVS files too which have
+very restritive file permissions.
 
-     Psssst: have a look at <a href="../pub">/pub/</a> where I
-             store the upload-tarballs...
-</pre>
+Instead you can go now to /usr/doc/forth and execute
+  scp -rC . shell.sourceforge.net:/home/groups/f/fo/forth/htdocs
+or if you need a username
+  scp -rC . user@shell.sourceforge.net:/home/groups/f/fo/forth/htdocs
+which both will just copy <em>all</em> files to the
+forth.sf.net webserver directory - as an identical copy.
+
+Furthermore, you can `make dist` which will override the
+FORTHDOC variable (`make install FORTHDOC=/tmp/xxx`) and
+then create a tarball from the installed files. This is
+good for archiving the website as you made it last.
+
+<em>one last note</em>
+If you create a new file, the upload to sourceforge will
+result the files being not group-writeable and the group
+will be set to users - whereas group "forth" would be
+more apropriate. You can howver login to sourceforge,
+go to the forth/htdocs directory, and run `make perms`
+to fix filepermissions. Please don't forget that or see
+other editors to be unable to modify your files - which
+is usually what you wanted to do - to let others do
+atleast some of your work ;-)
 
 <hr />
-$Id: index.html,v 1.1 2000/10/26 07:41:23 guidod Exp $
+$Id: index.html,v 1.2 2001/08/16 01:44:57 guidod Exp $
 
 
 
