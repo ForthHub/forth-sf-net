@@ -1,0 +1,157 @@
+title: Ambiguous Conditions and Design Quality
+description:
+
+An implementation must not define actions on important
+ambiguous conditions as "unpredictable".
+
+explanation:
+
+In the ANS/ISO Forth standard, there are two kinds of ambiguous
+conditions:
+1) error conditions
+2) circumstances where different systems may behave differently.
+
+An implementor must make a distinction between them. Many language
+extensions fall into the category of ambiguous conditions of
+the 2nd kind. For example, a compiling word like IF encountered
+in interpretation state is classified as an ambiguous condition,
+but Open Firmware defines compiling words so that they work in
+the interpretation state.
+
+The viewpoint that both are ambiguous conditions is adequate
+only for programs that must not have any environmental dependencies.
+In real life, programs use benefits of the system on which they run.
+
+There are important and unimportant ambiguous conditions. Important
+are these that correspond to techniques used in practice.
+All (or almost all) these techniques have been recognized by
+the TC as important and are somehow mentioned in the standard,
+for example, explicitly declared ambiguous.
+
+There's the following design quality issue:
+a system must not define reactions on important ambiguous conditions
+as "unpredictable".
+
+
+Message-1:
+ From: "Michael L.Gassanenko" <m_l_g3@yahoo.com>
+ Newsgroups: comp.lang.forth
+ Subject: Re: Optimising compilers  Re: native code v. threaded?
+ Date: Fri, 26 Apr 2002 00:17:26 +0400
+ Message-ID: <3CC86456.7D6C6ACB@yahoo.com>
+
+[reactions on ambiguous conditions]
+
+> > There's also
+> >
+> > - take other implementation-defined actions;
+> > - take implementation-dependent actions.
+> >
+> > The latter ones are apparently not implementation-defined, so they are
+> > undefined, which is usually a better term than "unpredictable" in the
+> > context of programming language descriptions (after all, with enough
+> > knowledge of the environment you can predict the effect of such
+> > undefined actions).
+>
+> The implication of either of these is that the implementation _does_
+> something, even though you may not know what it is.
+[...]
+So there is a machine whose actions in some
+circumstances are unpredictable.
+
+We have three examples of important ambiguous conditions:
+- return address manipulations
+- division by zero
+- IF encountered in interpretation state
+These are important because some people get some use
+from what happens when they are encountered,
+and ambiguous because different people get different things.
+
+(The fact that with the Open Interpreter extension word set
+people could get compatible results from
+return address manipulations is a different issue)
+
+An an example of an unimportant ambiguous condition I take:
+- passing the address of a counted string to EXECUTE
+This is unimportant because nobody makes any benefit from it.
+
+~~~tag[em]tag~~~ ~~~tag[strong]tag~~~
+My point is that an implementation must not define
+actions on important ambiguous conditions as "unpredictable".
+~~~tag[/strong]tag~~~ ~~~tag[/em]tag~~~
+
+Message-2:
+
+ From: anton@mips.complang.tuwien.ac.at (Anton Ertl)
+ Newsgroups: comp.lang.forth
+ Subject: Re: Optimising compilers  Re: native code v. threaded?
+ Date: Sun, 28 Apr 2002 11:06:07 MET
+ Message-ID: <2002Apr28.110607@a0.complang.tuwien.ac.at>
+
+"Len Zettel" <zettel@acm.org> writes:
+>
+>"Michael L.Gassanenko" <m_l_g3@yahoo.com> wrote in message
+>news:3CC86456.7D6C6ACB@yahoo.com...
+>(snip)
+>>
+>> My point is that an implementation must not define
+>> actions on important ambiguous conditions as "unpredictable".
+...
+>Beyond that, IMHO the sorting out is best left to the marketplace, since
+>what you are complaining about is beyond the scope of the standard anyway.
+
+From what I gather from other newsgroups, other standards have similar
+issues, and your answer is typically condensed into "It's a
+quality-of-implementation issue".
+
+- anton
+--
+M. Anton Ertl  http://www.complang.tuwien.ac.at/anton/home.html
+comp.lang.forth FAQs: http://www.complang.tuwien.ac.at/forth/faq/toc.html
+
+examples:
+
+The general prnciple is that[virtual] machines that implement some
+behaviour consistently are preferrable to those with unpredictable
+behaviour. Of course, some ok behaviours are better than others.
+
+division by zero
+
+- silently returning a meaningless number is ok
+
+- THROWing an exception is ok
+
+- depending on the stack depth, silently returning a meaningless
+  number or THROWing an exception is wrong
+
+access to return addresses that possibly are on the return stack
+
+- giving an error message is ok
+
+- allowing them using the "one call makes one return stack item"
+  rule is ok
+
+- "there is no return addresses on the return stack, they go to
+  a different stack" is ok
+
+- "the definitions in which return address manipulations are used
+  work unless they are followed by a semi-colon" is wrong
+
+
+control structure words in the interpretation state
+
+- "they print error messages" is ok
+
+- "the code enclosed into control structures is compiled to
+  a temporary buffer and then executed" is ok
+
+- "they work as if the state is compilation" is ok
+
+- "unpredictable" is wrong
+
+
+
+
+
+
+
