@@ -1,3 +1,11 @@
+
+Please never redefine an existing word
+to mean a different action: since you
+cannot withdraw the old meaning from
+worldwide circulation, the word would
+become ambiguous ever after.
+
+--------------
 the directory names follow the
 output from ../ng
 or ../mk/forthname.pl
