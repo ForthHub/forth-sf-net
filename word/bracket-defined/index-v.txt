@@ -5,7 +5,8 @@ description:
 discussion:
 	[DEFINED] is part of the => ../../wordset/FPH
 	also in FPH is [UNDEFINED]
-	there are quite a few words that do something similar
+	[DEFINED] and [UNDEFINED] are also in the OTA standard.
+	There are quite a few words that do something similar
 	but are named differently.
 
 > Guido Draheim wrote:
@@ -27,13 +28,16 @@ discussion:
 
 possible-implementations:
 : [DEFINED] ( IN: word -- CS: flag )
-    BL WORD FIND NIP
+    BL WORD FIND NIP		\ incompatible with OTA
 ; IMMEDIATE
 : [DEFINED] ( IN: word -- CS: flag )
-    BL WORD FIND NIP 0<>
+    BL WORD FIND NIP 0<>	\ as in OTA
 ; IMMEDIATE
 : [UNDEFINED] ( IN: word -- CS: flag )
     BL WORD FIND NIP 0=
 ; IMMEDIATE
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+( The difference between the two definitions of [DEFINED] is
+in the value returned for IMMEDIATE words, 1 or -1.
+
+--- $Id: index-v.txt,v 1.2 2001/06/09 07:32:59 mlg Exp $
