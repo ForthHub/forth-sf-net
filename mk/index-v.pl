@@ -12,6 +12,12 @@ s{ (^)title:(.*) }
   $1." <a href=\"..\"> / $where / </a>\n<h1> ".$2." </h1>\n<dl>"
   }mex;
 
+my $html_footer =
+    "\n<hr>\n<small> generated "
+    .(scalar localtime)
+    ." - ".$ENV{USER}
+    ." </small>";
+
 # mark each section start, and some linestarts have also special replaments
 s{ (^)(\.\s) } { $1." <br> ".$2 }gmex;
 s{ (^)(\:\s) } { $1."<spanforth>".$2 }gmex;
@@ -68,7 +74,7 @@ s{ ([\.\/]+)([\w\.\/\~\-]+) }
 }gmex;
 
 # and look for these too...
-s{ (\$Id: index-v.pl,v 1.7 2001/06/09 17:04:52 mlg Exp $]+ \$) }
+s{ (\$Id: index-v.pl,v 1.8 2001/06/11 05:20:06 mlg Exp $]+ \$) }
 { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) }
 { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
@@ -91,4 +97,5 @@ elsif (-f "../forth.css")
 { print "<link rel=\"stylesheet\" media=\"screen\" href=\"../../forth.css\" />\n"; }
 print "</head><body>\n";
 print $text;
+print $html_footer;
 print "</body>\n";
