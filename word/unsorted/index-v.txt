@@ -1,0 +1,15 @@
+title: unsorted words
+description:
+	Here are some words that had been found somewhere on
+	the internet. They are mentioned here for completeness,
+	they have mostly not seen any discussion on comp.lang.forth,
+	but they will give you some hints on the concepts that
+	the author of each page should describe.
+
+the-words:
+    ./locals-star-or.html
+    - LOCALS*| is LOCALS| with an invesed arg list.
+
+--- $Id: index-v.txt,v 1.1 2000/10/27 10:04:49 guidod Exp $
+
+

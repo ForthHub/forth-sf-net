@@ -1,0 +1,55 @@
+title:   LOCALS*|
+description:
+	like LOCALS|, but parameters are in inverted order.
+internet-url:
+	in the SwiftForth FAQ / Tools & Utilities / Snippets
+	http://www.neverslow.com/fom/swiftforth/fom-serve/cache/123.html
+example-implementation:
+	this one is a copy, a bit specific for swiftforth...
+
+>        OPTIONAL REVERSE-LOCALS.F
+>         { ================================================================
+>           LOCALS*|  ( -- )
+>           like LOCALS|, but parameters are in inverted order.
+>         ================================================================== }
+>
+>         : reverse-params|  ( -- )
+>             0 BEGIN >IN @ BL PARSE S" |" COMPARE WHILE SWAP 1+ REPEAT >R
+>             0 ?DO >IN ! BL PARSE PAD APPEND S"  " PAD APPEND LOOP
+>             R> >IN ! BL PARSE PAD APPEND ;
+>
+>         : LOCALS*|  ( -- )
+>             S" LOCALS| " PAD PLACE reverse-params|
+>             PAD COUNT EVALUATE ; IMMEDIATE
+>
+>         \\ ---- Test ----
+>
+>         : a+b-c ( a b c -- res )
+>             LOCALS*| a b c |
+>             a b + c - ;
+>
+>         8 5 2 a+b-c .    \ 11 = 8+5-2
+>
+>         \ eof
+
+comments:
+	../../from/Guido.Draheim
+
+	the normal LOCALS| has the order of params inversed
+	to the traditional stack notation, so every once in
+	a while someone comes up to invent a word that does
+	it how we like it. gforth influenced the usage of the
+	curly braces, but as you can see in the above example,
+	these braces may be used for something else already.
+
+	Using the name LOCALS*| is however very obvious, the
+	only other guess I remember is LOCALS|( ended by ),
+	but you couldn't use the definition above for it, so,
+	this forthname may just as well be a good choice.
+
+status:
+	never seen dedicated discussion on c.l.f.
+
+--- $Id: locals-star-or.txt,v 1.1 2000/10/27 10:04:49 guidod Exp $
+
+
