@@ -25,4 +25,10 @@ an url or like a file-ref, that is here...
 and it does quite a few of other magic.
 
 ---------------------------------------------------------
-$Id: README,v 1.2 2001/09/02 11:11:53 guidod Exp $
+
+The Makefile uses some GNUmake specific features. If on
+your system GNUmake is not installed as the default "make"
+command, use "gmake" instead of "make".
+
+---------------------------------------------------------
+$Id: README,v 1.3 2003/03/01 11:43:04 samtardieu Exp $
