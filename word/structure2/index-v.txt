@@ -1,4 +1,4 @@
-title: [structures, very simple]
+title: STRUCTURES, very simple
 description:
 <forthspan>
  : ^FIELD CREATE , DOES> @ + ; ( offset "name" -- offset )
