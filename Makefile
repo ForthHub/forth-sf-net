@@ -23,9 +23,15 @@ FORTHDOC=$(DOCDIR)/$(HTGROUP)$(SUFFIX)
 SHELL = sh
 mkinstalldirs = $(SHELL) mkinstalldirs
 # ---------------------------------------------------------------------------
-
 default: web
 
+
+direct: # a shortcut for building on shell.sourceforge.net itself.
+	$(MAKE) install perms DOCDIR=/home
+test:   # a shortcut for building on shell.sourceforge.net itself.
+	$(MAKE) install perms DOCDIR=/home SUFFIX=/test/$(USER)
+
+# ---------------------------------------------------------------------------
 web: index links
 
 index:
