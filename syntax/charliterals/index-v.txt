@@ -1,0 +1,53 @@
+title: Character literals
+description:
+
+The ANSI/ISO Forth standard recommends the following syntax for
+character literals:
+[CHAR] c
+within colon definitions and
+CHAR c
+outside colon definitions.
+
+Many Forth systems support the following syntax as well:
+'c'
+
+Supported in:
+Win32Forth, T32Forth
+
+HEX  ok
+'a' . 61  ok
+'a' EMIT a ok
+
+Not supported in:
+MPE VFX Forth 3.40 14 May 2001,
+SwiftForth 2.2.2 09Mar2001,
+SP-Forth 4.006
+
+Differently supported in:
+bigForth and gForth
+HEX  ok
+'a' . 6127  ok
+'A' . 4127  ok
+where 61 is the code of 'a' and 27 is the code of tick.
+To obtain the code of 'a', you have to write: 'a
+
+'a . 61  ok
+'a EMIT a ok
+
+summary:
+
+Which syntax is better, 'c' or 'c , is a subject of an argument.
+
+If you write for portability, you cannot rely on this syntax.
+OTOH, understanding what was meant in such code is usually
+no problem for a human.
+
+note:
+
+You see that 'abcd leaves 'a' in the most significant byte and 'd'
+in the least significant byte. Let us define VARIABLE X .
+What do you think, which character will be in the byte at address X
+after execution of 'abcd X ! ?
+The answer is that this depends on the platform.
+
+
