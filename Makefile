@@ -1,5 +1,5 @@
 
-SUBDIRS = naming people mirror syntax system website word wordset standard
+SUBDIRS = naming people mirror syntax system website word wordset standard techniques reversal-word about
 LINKS = from:people sys:system web:website ws:wordset std:standard
 HTGROUP= groups/f/fo/forth/htdocs
 HTDOCS = /home/$(HTGROUP)
