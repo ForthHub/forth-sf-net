@@ -1,0 +1,10 @@
+title: Open Directory Project
+internet-url:
+	http://dmoz.org/Computers/Programming/Languages/Forth/
+forth:
+	The Open Directory Project is the largest human-edited directory
+	on the web. The Forth category (available in several languages)
+	contains more than 200 links, whose availability is checked
+	regularly and automatically.
+
+--- $Id: index-v.txt,v 1.1 2003/03/01 12:43:02 samtardieu Exp $
