@@ -6,8 +6,8 @@ ambiguous conditions as "unpredictable".
 
 explanation:
 
-In the ANS/ISO Forth standard, there are two kinds of ambiguous
-conditions:
+ In the ANS/ISO Forth standard, there are two kinds of ambiguous
+ conditions:
 1) error conditions
 2) circumstances where different systems may behave differently.
 
@@ -18,15 +18,15 @@ in interpretation state is classified as an ambiguous condition,
 but Open Firmware defines compiling words so that they work in
 the interpretation state.
 
-The viewpoint that both are ambiguous conditions is adequate
+The viewpoint that both kinds are just ambiguous conditions is adequate
 only for programs that must not have any environmental dependencies.
 In real life, programs use benefits of the system on which they run.
 
 There are important and unimportant ambiguous conditions. Important
 are these that correspond to techniques used in practice.
 All (or almost all) these techniques have been recognized by
-the TC as important and are somehow mentioned in the standard,
-for example, explicitly declared ambiguous.
+the TC and somehow mentioned in the standard, for example,
+explicitly declared ambiguous.
 
 There's the following design quality issue:
 a system must not define reactions on important ambiguous conditions
@@ -75,10 +75,8 @@ An an example of an unimportant ambiguous condition I take:
 - passing the address of a counted string to EXECUTE
 This is unimportant because nobody makes any benefit from it.
 
-~~~tag[em]tag~~~ ~~~tag[strong]tag~~~
 My point is that an implementation must not define
 actions on important ambiguous conditions as "unpredictable".
-~~~tag[/strong]tag~~~ ~~~tag[/em]tag~~~
 
 Message-2:
 
