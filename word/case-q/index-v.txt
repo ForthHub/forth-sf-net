@@ -1,0 +1,85 @@
+title: CASE?
+status:
+ We are not trying to persuade you to use CASE? in place of
+ the Eaker's CASE (the CASE..OF.. structure that is now in ANS Forth).
+ But we do recommend you to know the alternative approach.
+ Acceptance of CASE? is unknown.
+
+description:
+
+ CASE? is an elegant alternative to Eaker's CASE..OF..ENDOF..ENDCASE
+
+: CASE? ( x x -- true )
+        ( x y -- x false )
+    OVER =  DUP IF  NIP  THEN
+;
+
+ CASE? is what IF misses to be OF .
+ In other words, CASE? IF is equivalent to OF
+ (here we assume that ENDOF is a synonym of ELSE).
+
+ CASE? IF is equivalent to OVER = IF DROP
+
+
+original-message:
+
+ From: Neil Bawd (neilbawd@earthlink.net)
+ Subject: Re: OT Change of case
+ Newsgroups: comp.lang.forth
+ Message-ID: <B7D5D0B9.1F754%neilbawd@earthlink.net>
+ Date: 2001-09-25 06:12:57 PST
+
+
+ in 3BB0329D.F9689922@yahoo.com, Michael L.Gassanenko at m_l_g3@yahoo.com
+ wrote:
+
+ > How do you use CASE? ?
+
+ As I recall, `CASE?` was introduced by Klaus Schleissiek in the early 80's
+ for Volksforth.  Pinhole optimization of `CASE? IF` should give optimized
+ `OVER = IF DROP`.
+
+ Thus Julian V. Noble's `[put_char]` could be:
+
+    : [put_char]                    ( char -- 0..3 )
+        BL CASE? IF  1  EXIT THEN
+        [char] { CASE? IF  2  EXIT THEN
+        [char] } CASE? IF  3  EXIT THEN
+        DROP 0 ;
+
+ Or:
+
+    : [put_char]                    ( char -- 0..3 )
+        BL CASE? IF  1  ELSE
+        [char] { CASE? IF  2  ELSE
+        [char] } CASE? IF  3  ELSE
+        DROP 0  THEN THEN THEN ;
+
+
+ Or with `COND ... THENS`:
+
+    : [put_char]                    ( char -- 0..3 )
+        COND
+            BL CASE? IF  1  ELSE
+            [char] { CASE? IF  2  ELSE
+            [char] } CASE? IF  3  ELSE
+            DROP 0
+        THENS ;
+
+ `CASE?` can be conjoined with other tests or further `CASE?`s.
+
+     [char] A CASE? ORIF [char] a CASE? THEN IF
+
+ CASE? replaces and extends  CASE  OF  ENDOF  ENDCASE
+
+ For 18 years I have thought that CASE? is better than the Eaker CASE .
+
+
+ (
+ --
+ Wil Baden    Costa Mesa, California   Per neilbawd@earthlink.net
+ )
+
+page-written-by:
+ mlg
+
