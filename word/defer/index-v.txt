@@ -25,11 +25,11 @@ and executing the phrase  TO _name_ . The phrase  TO _name_
 affects only _name_ and not the definition associated with _name_ .
 
 _name_ execution: ( i*x -- j*x )
-Execute the definition currently associated with _name_.
-The stack effect ( i*x -- j*x ) is the stack effect of
-the definition currently associated with _name_.
+ Execute the definition currently associated with _name_.
+ The stack effect ( i*x -- j*x ) is the stack effect of
+ the definition currently associated with _name_.
 
-See: TO BEHAVIOR
+ See: TO BEHAVIOR
 
 Also add the following line to Table 9.2
 
@@ -75,6 +75,10 @@ between the names TO and IS. They are:
 are unlikely to be changed at all), use TO for short-term assignments.
 
 See:
+ ../behavior/index.html BEHAVIOR ,
+ ../to-and-defer/index.html TO ,
+ ../is-aka-to/index.html IS .
+See-also:
 ~~~tag[a href=defer.txt]tag~~~ANSI TC discussion~~~tag[/a]tag~~~
 
 
