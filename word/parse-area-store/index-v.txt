@@ -15,9 +15,12 @@ notes:
     outside of the source refill buffer. REFILL is required to
     set the input buffer back to the source refill buffer.
 
-See: ../parse-area-fetch/index.html PARSE-AREA@
+See:
+ PARSE-AREA@ ../parse-area-fetch/index.html
+ SOURCE! ../source-store/index.html
 
-For definition of the source refill buffer, see SOURCE! ../source-store/index.html
+definition-of-terms:
+    For definition of the source refill buffer, see SOURCE! ../source-store/index.html
 
 
 words-from-the-inventor:
