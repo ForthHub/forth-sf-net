@@ -24,7 +24,17 @@ SHELL = sh
 mkinstalldirs = $(SHELL) mkinstalldirs
 # ---------------------------------------------------------------------------
 default: web
-
+it: # install while being on shell.sf.net
+	$(MAKE) install DOCDIR=/home
+	@ for i in $(HTDOCS)/* ; do : \
+	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then \
+	; echo "chgrp -R forth $$i" \
+	;       chgrp -R forth $$i \
+	; echo "chmod -R g+w $$i" \
+	;       chmod -R g+w $$i \
+	; echo "chmod -R a+r $$i" \
+	;       chmod -R a+r $$i \
+	; fi fi done ; true
 
 direct: # a shortcut for building on shell.sourceforge.net itself.
 	$(MAKE) install perms DOCDIR=/home
@@ -45,13 +55,13 @@ index:
 	perl mk/index.pl $(SUBDIRS) >index.html
 
 links:
-	@ dirname  setting/links         # just testing for
-	@ basename setting/links         # their existance
 	@ for i in $(LINKS) ; do : \
 	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//`
-	; echo ln -s $$FRM $$TGT \
-	;      ln -s $$FRM $$TGT || break \
-	; done
+	; if test ! -e $$TGT ; then \
+	; echo "ln -s $$FRM $$TGT" \
+	;       ln -s $$FRM $$TGT || break \
+	; else echo ": $$FRM --> $$TGT" \
+	; fi ; done
 
 clean:
 	rm -f *~ */*~ */*/*~
@@ -74,15 +84,22 @@ updone:
 
 
 perms:
-	-chgrp -R forth $(HTDOCS)
-	-chmod -R g+w $(HTDOCS)
-	-chmod -R a+r $(HTDOCS)
-	@ for i in `find $(HTDOCS) -name CVS` ; do : \
-	; test ! -f $$i/Entries || rm $$i/Entries \
-	; test ! -f $$i/Repository || rm $$i/Repository \
-	; test ! -f $$i/Root || rm $$i/Root \
-	; rmdir $$i \
-	; done ; true
+	@ for i in $(HTDOCS)/* ; do : \
+	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then \
+	; echo "chgrp -R forth $$i" \
+	;       chgrp -R forth $$i \
+	; echo "chmod -R g+w $$i" \
+	;       chmod -R g+w $$i \
+	; echo "chmod -R a+r $$i" \
+	;       chmod -R a+r $$i \
+	;   for j in `find $$i -name CVS` ; do : \
+	;   test ! -f $$j/Entries || rm $$j/Entries \
+	;   test ! -f $$j/Repository || rm $$j/Repository \
+	;   test ! -f $$j/Root || rm $$j/Root \
+	;   echo "rmdir $$j" \
+	;         rmdir $$j \
+	;   done \
+	; fi fi done ; true
 
 copy:
 	cp -rf . $(HTDOCS)
@@ -171,10 +188,12 @@ install :
 	; echo "(cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl)" \
 	;       (cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl \
 			>$(INDEXFILE) )
-	@ for i in $(LINKS) ; do if test ! -e "$(DESTDIR)$(FORTHDOC)/$$i" \
+	@ for i in $(LINKS) ; do : \
 	; then FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
+	; if test ! -e "$(DESTDIR)$(FORTHDOC)/$$TGT" \
 	; echo "(cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT)" \
 	;       (cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT) \
+	; else echo "(cd $(DESTDIR)$(FORTHDOC) && : $$FRM '-->' $$TGT)" \
 	; fi ; done ; true
 
 DISTNAME=forth-repository
