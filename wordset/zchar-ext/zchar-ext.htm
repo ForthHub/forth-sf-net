@@ -64,6 +64,73 @@ See:
 <p>
 
 <hr>
+<DL><DL><DT><B>backslash string:</B>
+<DD>A backslash string is an encoding of a basic character string
+where each sequence of a backslash followed by one or a number of
+characters does represent one character of the basic character
+encoding. The following table lists the mapping between the two
+encodings where the backslash encoding occupies two characters and
+the the basic encoding one character of memory. For clarification
+the hex values of the ASCII basic char encodings are given.
+  <pre>
+backslash encoding     ascii encoding     meaning
+   \a                  hex 07             BEL - bell
+   \b                  hex 08             BS  - backspace
+   \t                  hex 09             HT  - horizontal tabulator
+   \n                  hex 0A             LF  - line feed / new line
+   \v                  hex 0B             VT  - vertical tabulator
+   \f                  hex 0C             FF  - form feed / new page
+   \r                  hex 0D             CR  - carriage return
+   \\                  hex 5C             a single backslash itself
+   \q                  hex 22             a single doublequote
+   \e                  hex 1B             a terminal escape control
+  </pre>
+The sequences of a backslash followed by a number are called
+octalescapes, the sequence of backslash followed by an [x]
+character are called hexescapes. The transconding of other
+backslash sequences is system dependent.
+</DL>
+
+<p>
+<code>
+See:
+<a href=zchar-extern.htm#A.26.2>A.26.2</a> Additional terms
+</code>
+<p>
+
+<hr>
+<DL><DL><DT><B>backslash octalescapes:</B>
+<DD>A backslash sequence introduces with a number character
+and followed other number characters. The number sequences
+is subject to a number conversion from an octal number
+string representation to the unsigned bit value that is used
+in host character encoding.
+</DL>
+
+<p>
+<code>
+See:
+<a href=zchar-extern.htm#A.26.2>A.26.2</a> Additional terms
+</code>
+<p>
+
+<hr>
+<DL><DL><DT><B>backslash hexescapes:</B>
+<DD>A backslash sequence introduces with an [x] character
+followed by exactly two other non-delimiter characters.
+The two characters are subject to a number conversion from
+an hexadecimal number string representation to the unsigned bit
+value that is used in host character encoding.
+</DL>
+
+<p>
+<code>
+See:
+<a href=zchar-extern.htm#A.26.2>A.26.2</a> Additional terms
+</code>
+<p>
+
+<hr>
 <A name=26.3>
 <H2>26.3 Additional usage requirements</H2>
 </a>
@@ -131,7 +198,19 @@ ZCHAR-EXT         flag             no         zchar extensions word set present
 
 <UL>
 <LI>the compatibility level of backslash sequences in
-    string literals with C and extensions of C.
+    backslash string literals with C string literals.
+    A system may be dependent on features of functions in libc.
+</LI>
+<LI>a system must implement one of these options for
+    backslash string literals.
+    <ul>
+    <li> allow the delimiter char in backslash string literals
+         when escaped with a backslash.
+    <li> implement backslash octalescapes.
+    <li> implement backslash hexescapes.
+    </ul>
+    it is recommended to implement atleast backslash hexescapes.
+</LI>
 </UL>
 <P>
 
@@ -141,9 +220,35 @@ ZCHAR-EXT         flag             no         zchar extensions word set present
 </a>
 
 <UL>
-<LI>whether C literals can span multiple lines using the
-    backslash-newline code from C soures - forth system
-    may throw on any control char in a string.
+<LI>whether backslash string literals can span multiple
+    lines using a similar approach as the  backslash-newline
+    code as seen in C and unixshell sources - a forth system
+    may throw on any control char in a string and a backslash
+    at the of the input line.
+<LI>whether backslash-octalsequences are understood in backslash
+    string literals as in C, or whether the system will throw on
+    any backslash-and-number sequence.
+<LI>whether an extension to backslash-octalsequences is understood
+    to accept a maximum or less than three number characters when
+    other numbers or characters are known to be not convertible
+    to the host character encoding.
+<LI>whether an extension to backslash-hexequences is understood
+    to accept less than two alphanumeric characters when the
+    latter characters are known to be not convertible to the
+    host character encoding.
+<LI>whether the backslash-e and backslash-q sequences
+    are implemented in backslash string literals.
+<LI>whether other backslash-alphachar sequnces are understood in
+    backslash  string literals, including a default mapping of
+    these to control characters instead of throwing an exception.
+<LI>whether some backslash-non-alphanum sequences are not mapped
+    silently to the non-alphanum character in the sequence but
+    to another non-alphanum character. (note: some systems chose
+    to map backslash-singlequote to a doublequote character).
+<LI>whether in backslash string literals the delimiter (usually
+    the doublequote character or space) may occur when escaped as a
+    backslash-delimiterchar sequence, or whether another
+    backslash-sequence must be used to represent the delimiter char.
 </ul>
 
 <hr>
@@ -151,7 +256,8 @@ ZCHAR-EXT         flag             no         zchar extensions word set present
 <h4>26.4.1.3 Other system documentation</h4>
 </a>
 <ul>
-<li>no additional requirements.
+<li>which exception number is used when an unexpected backslash
+    sequence is encountered in backslash string literals.
 </ul>
 
 
@@ -314,15 +420,20 @@ which is the length of the string.
 <code>
 See:
 <A href=../core-ext/core-ext.htm#6.1.0980>6.1.0980</a> COUNT
-<A href=zchar-ext.htm#26.6.1.0003>26.6.1.0003</a> ZSTRLEN
+<A href=zchar-ext.htm#26.6.2.0003>26.6.2.0003</a> ZSTRLEN
 </code>
 
 <P>
 
 <hr>
-<A name=26.6.1.0003>
+<A name=26.6.2>
+<H3>26.6.2 ZChar extension words</H3>
+</a>
+
+<hr>
+<A name=26.6.2.0003>
 <code>
-26.6.1.0003 <b>ZSTRLEN</b>
+26.6.2.0003 <b>ZSTRLEN</b>
 </code>
 </a>
 <BR>
@@ -341,15 +452,15 @@ terminating null charachter from z-addr.
 
 <code>
 See:
-<A href=zchar-ext.htm#26.6.1.0003>26.6.1.0002</a> ZCOUNT
+<A href=zchar-ext.htm#26.6.2.0003>26.6.2.0002</a> ZCOUNT
 </code>
 
 <P>
 
 <hr>
-<A name=26.6.1.0004>
+<A name=26.6.2.0004>
 <code>
-26.6.1.0004 <b>ZMOVE</b>
+26.6.2.0004 <b>ZMOVE</b>
 </code>
 </a>
 <BR>
@@ -375,14 +486,9 @@ See:
 <p>
 
 <hr>
-<A name=26.6.2>
-<H3>26.6.2 ZChar extension words</H3>
-</a>
-
-<hr>
-<A name=26.6.2.0001>
+<A name=26.6.2.0005>
 <code>
-26.6.2.0001 <b>APPENDZ / Z+PLACE</b>
+26.6.2.0005 <b>APPENDZ / Z+PLACE</b>
 </code>
 </a>
 <BR>
@@ -403,15 +509,15 @@ Place a null character in the destination area after copying
 <P>
 <code>
 See:
-<a href=zchar-ext.htm#26.6.1.0004>26.6.1.0004 ZMOVE</a> ,
-<a href=zchar-ext.htm#26.6.2.0002>26.6.1.0002 ZPLACE</a>
+<a href=zchar-ext.htm#26.6.2.0004>26.6.2.0004 ZMOVE</a> ,
+<a href=zchar-ext.htm#26.6.2.0006>26.6.2.0006 ZPLACE</a>
 </code>
 <P>
 
 <hr>
-<A name=26.6.2.0002>
+<A name=26.6.2.0006>
 <code>
-26.6.2.0002 <b>ZPLACE</b>
+26.6.2.0006 <b>ZPLACE</b>
 </code>
 </a>
 <BR>
@@ -432,15 +538,15 @@ the end of the z-addr.
 <P>
 <code>
 See:
-<a href=zchar-ext.htm#26.6.1.0004>26.6.1.0004 ZMOVE</a> ,
-<a href=zchar-ext.htm#26.6.2.0002>26.6.1.0001 Z+PLACE / APPENDZ</a>
+<a href=zchar-ext.htm#26.6.2.0004>26.6.1.0004 ZMOVE</a> ,
+<a href=zchar-ext.htm#26.6.2.0005>26.6.6.0005 Z+PLACE / APPENDZ</a>
 </code>
 <P>
 
 <hr>
-<A name=26.6.2.0003>
+<A name=26.6.2.0007>
 <code>
-26.6.2.0003 <b>C\&quot;</b>
+26.6.2.0007 <b>C\&quot;</b>
 </code>
 </a>
 <BR>
@@ -451,11 +557,11 @@ ZCHAR EXT
 </pre>
 <P>
 <pre>
-        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+        Compilation: ( <B>"backslash-string&lt;quote&gt;"</B> -- )
 </pre>
 <P>
 
-Parse the c-style-string definition up to the final &quot; (double-quote)
+Parse the backslash-string definition up to the final &quot; (double-quote)
 and append the run-time semantics given below to the current definition.
 
 <P>
@@ -465,7 +571,7 @@ and append the run-time semantics given below to the current definition.
 <P>
 
 Return c-addr, a counted string consisting of the characters of
-the c-style-string.
+the backslash-string.
 A program shall not alter the returned string.
 
 <P>
@@ -473,7 +579,7 @@ A program shall not alter the returned string.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
-<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> backslash-string ,
 <a href=zchar-ext.htm#26.2.0005>26.2.005 Z\&quot;</a> ,
 <a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
 <A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
@@ -483,9 +589,9 @@ See:
 <P>
 
 <hr>
-<A name=26.6.2.0004>
+<A name=26.6.2.0008>
 <code>
-26.6.2.0004 <b>S\&quot;</b>
+26.6.2.0008 <b>S\&quot;</b>
 </code>
 </a>
 <BR>
@@ -496,11 +602,11 @@ ZCHAR EXT
 </pre>
 <P>
 <pre>
-        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+        Compilation: ( <B>"backslash-string&lt;quote&gt;"</B> -- )
 </pre>
 <P>
 
-Parse the c-style-string definition up to the final &quot; (double-quote)
+Parse the backslash-string definition up to the final &quot; (double-quote)
 and append the run-time semantics given below to the current definition.
 
 <P>
@@ -517,7 +623,7 @@ ccc. A program shall not alter the returned string.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
-<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> backslash-string ,
 <a href=zchar-ext.htm#26.2.0005>26.2.005 Z\&quot;</a> ,
 <a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
 <A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
@@ -527,9 +633,9 @@ See:
 <P>
 
 <hr>
-<A name=26.6.2.0005>
+<A name=26.6.2.0009>
 <code>
-26.6.2.0005 <b>Z\&quot;</b>
+26.6.2.0009 <b>Z\&quot;</b>
 </code>
 </a>
 <BR>
@@ -540,11 +646,11 @@ ZCHAR EXT
 </pre>
 <P>
 <pre>
-        Compilation: ( <B>"c-style-string&lt;quote&gt;"</B> -- )
+        Compilation: ( <B>"backslash-string&lt;quote&gt;"</B> -- )
 </pre>
 <P>
 
-Parse the c-style-string definition up to the final &quot; (double-quote)
+Parse the backslash-string definition up to the final &quot; (double-quote)
 and append the run-time semantics given below to the current definition.
 
 <P>
@@ -554,7 +660,7 @@ and append the run-time semantics given below to the current definition.
 <P>
 
 Return z-addr, a zchar string consisting of the characters of
-the c-style-string plus the required null character at the end.
+the backslash-string plus the required null character at the end.
 A program shall not alter the returned string.
 
 <P>
@@ -562,7 +668,7 @@ A program shall not alter the returned string.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing ,
-<A href=zchar-ext.htm#26.4.1>26.4.1</a> c-style-string ,
+<A href=zchar-ext.htm#26.4.1>26.4.1</a> backslash-string ,
 <a href=zchar-ext.htm#26.2.0003>26.2.0003 C\&quot;</a> ,
 <a href=zchar-ext.htm#26.2.0004>26.2.0004 S\&quot;</a> ,
 <a href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
