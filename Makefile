@@ -25,7 +25,7 @@ mkinstalldirs = $(SHELL) mkinstalldirs
 # ---------------------------------------------------------------------------
 default: web
 it: # install while being on shell.sf.net
-	$(MAKE) install DOCDIR=/home
+	$(MAKE) install DOCDIR=/home "IGNORED= : "
 	@ for i in $(HTDOCS)/* ; do : \
 	; if test -d $$i ; then if test ! -f $$i/mkinstalldirs ; then : \
 	; echo "chgrp -R forth $$i" \
