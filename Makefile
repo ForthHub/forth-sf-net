@@ -82,6 +82,15 @@ upload:
 updone:
 	ssh $(HTHOST) make perms -C $(HTDOCS)
 
+#
+# rupload allows you to do a "make install", "make upload" (with rsync in
+# order to transmit only the differences) and "make updone".
+#
+rupload:
+	$(MAKE) install
+	-rsync -e ssh -a $(FORTHDOC)/ $(HTHOST):$(HTDOCS)/
+	$(MAKE) updone
+
 
 perms:
 	@ for i in $(HTDOCS)/* ; do : \
