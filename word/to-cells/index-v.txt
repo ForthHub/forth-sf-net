@@ -1,0 +1,47 @@
+title: >CELLS
+description:
+ >CELLS              "to-cells"
+ ( n1 -- n2 )
+
+ Convert n1, the number of bytes, to n2, the corresponding number
+ of cells. If n1 does not correspond to a whole number of cells, the
+ rounding direction is system-defined.
+
+notes:
+ This word is functionally equivalent to the phrase 1 CELLS /
+
+ Sometimes this word is called CELL/ . We prefer the name >CELLS for
+ the same reason why ALLOT is preferred to DP+! : the name must reflect
+ the purpose of the definition rather than how it works.
+
+ This word is needed much more rarely than CELLS. One of the possible
+ cases where it is needed is like following: there is some time-critical
+ code, we have an array of pointers and want to identify its elements
+ by their offsets raher than their numbers. This works fine, but sometimes
+ we do need element numbers. And the phrase 1 CELLS / is at first ugly
+ and at second slow because it requires division.
+
+implementation:
+
+ One of the possible implementations is:
+
+~~~tag[pre]tag~~~
+1 CELLS DUP 1- AND                      [IF]~~~
+                                            ~~~
+: >CELLS                                    ~~~
+    [ 1 CELLS ] LITERAL /                   ~~~
+;                                             ~~~
+                                        [ELSE]~~~
+: >CELLS                                                ~~~
+    [ 1 CELLS                                             ~~~
+    ] 2/ [ 2/ DUP 1 > [IF] 0 >IN ! [THEN] \ do not reformat! ~~~
+    DROP ]                                                   ~~~
+;                                                            ~~~
+                                        [THEN]               ~~~
+~~~tag[/pre]tag~~~
+Please, note that the phrase [IF] 0 >IN ! [THEN] implements
+a loop.
+
+page-written-by:
+ mlg
+
