@@ -1,8 +1,5 @@
 title: HEADER words
-document-status: incomplete
 status: unstandard
-where-usable:
-  mostly in debugging/testing code, for the convenience of porting programmers
 
 description:
 
@@ -67,6 +64,9 @@ H>NEXT>H ( h-id -- h-id' ) "h-to-next-to-h"
  belong to a single chain.
 
 notes:
+
+ These words are usable mostly in debugging/testing code,
+ for the convenience of porting programmers.
 
  These words are user-reusable implementor's words.
  Most applications do not need these words, or need them only at
