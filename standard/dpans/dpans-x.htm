@@ -1,0 +1,431 @@
+<html><head><title>DPANS'94</title>
+<link rel=stylesheet type="text/css" media="screen" href="../../forth.css">
+</head><body>
+
+<h1 align="center">DPANS'94 </h1>
+
+<p><small><b>NOTE:</b>
+<br />This <b>dpans</b> files are provided as a working document of the TC for
+public review and comment as well as documentation uses described above.
+<i>It is not intended as a substitute for the official ANS Forth document
+published by ANSI.</i> In the event of conflict, only the printed document
+X3.215-1994 represents the official ANS Forth.
+</small></p>
+
+<table border="0" cellpadding=0>
+<tr valign="top"><td rowspan="2">
+<a href=dpans1.htm#foreword><b>dpans1</b></a>
+</td><td>           Foreword, <b> Introduction </b>
+</td></tr><tr><td>
+| <a href=dpans1.htm#x3.membership>X3</A> Membership
+| <A href=dpans1.htm#x3j14.membership>X3J14</A> Membership
+| <a href=dpans1.htm#1.1> 1.1</A> Purpose
+| <a href=dpans1.htm#1.2> 1.2</A> Scope
+| <a href=dpans1.htm#1.3> 1.3</A> Document organization
+| <a href=dpans1.htm#1.4> 1.4</A> Future directions
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<a href=dpans2.htm><b>dpans2</b></a>
+</td><td><b>           Terms, notation, </b> and references
+</td></tr><tr><td>
+| <a href=dpans2.htm#2.1> 2.1 </A> Definitions of terms
+| <a href=dpans2.htm#2.2> 2.2 </A> Notation
+| <a href=dpans2.htm#2.2.1> 2.2.1 </A> Numeric notation
+| <a href=dpans2.htm#2.2.2> 2.2.2 </A> Stack notation
+| <a href=dpans2.htm#2.2.3> 2.2.3 </A> Parsed-text notation
+| <a href=dpans2.htm#2.2.4> 2.2.4 </A> Glossary notation
+| <a href=dpans2.htm#2.3> 2.3 </A> References
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans3.htm><b>dpans3</b></a>
+</td><td><b>           Usage requirements </b>
+</td></tr><tr><td>
+| <A href=dpans3.htm#3.1>3.1</a> Data types
+| <a href=dpans3.htm#3.1.1>3.1.1</a> Data-type relationships
+| <a href=dpans3.htm#3.1.2>3.1.2</a> Character types
+| <a href=dpans3.htm#3.1.3>3.1.3</a> Single-cell types
+| <a href=dpans3.htm#3.1.4>3.1.4</a> Cell-pair types
+| <a href=dpans3.htm#3.1.5>3.1.5</a> System types
+| <A href=dpans3.htm#3.2>3.2</a> The implementation environment
+| <A href=dpans3.htm#3.2.1>3.2.1</a> Numbers
+| <A href=dpans3.htm#3.2.2>3.2.2</a> Arithmetic
+| <A href=dpans3.htm#3.2.3>3.2.3</a> Stacks
+| <A href=dpans3.htm#3.2.4>3.2.4</a> Operator terminal
+| <A href=dpans3.htm#3.2.5>3.2.5</a> Mass storage
+| <A href=dpans3.htm#3.2.6>3.2.6</a> Environmental queries
+| <A href=dpans3.htm#3.3>3.3</a> The Forth dictionary
+| <A href=dpans3.htm#3.3.1>3.3.1</a> Name space
+| <A href=dpans3.htm#3.3.2>3.3.2</a> Code space
+| <A href=dpans3.htm#3.3.3>3.3.3</a> Data space
+| <A href=dpans3.htm#3.4>3.4</a> The Forth text interpreter
+| <A href=dpans3.htm#3.4.1>3.4.1</a> Parsing
+| <A href=dpans3.htm#3.4.2>3.4.2</a> Finding definition names
+| <A href=dpans3.htm#3.4.3>3.4.3</a> Semantics
+| <A href=dpans3.htm#3.4.4>3.4.4</a> Possible actions on an ambiguous condition
+| <A href=dpans3.htm#3.4.5>3.4.5</a> Compilation
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans4.htm><b>dpans4</b></a>
+</td><td><b>          Documentation requirements  </b>
+</td></tr><tr><td>
+| <A href=dpans4.htm#4.1>4.1</a> System documentation
+| <A href=dpans4.htm#4.2>4.2</a> Program documentation
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans5.htm><b>dpans5</b></a>
+</td><td><b>          Compliance and labeling </b>
+</td></tr><tr><td>
+| <A href=dpans5.htm#5.1>5.1</a> ANS Forth systems
+| <A href=dpans5.htm#5.2>5.2</a> ANS Forth programs
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans6.htm><b>dpans6</b></a>
+</td><td>           Glossary, The <b> Core word set </b>
+</td></tr><tr><td>
+| <A href=dpans6.htm#6.1>6.1</a> Core words
+| <A href=dpans6.htm#6.2>6.2</a> Core extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans7.htm><b>dpans7</b></a>
+</td><td>           The optional <b> Block word set         </b>
+</td></tr><tr><td>
+| <A href=dpans7.htm#7.1>7.1</a> Introduction
+| <A href=dpans7.htm#7.2>7.2</a> Additional terms
+| <A href=dpans7.htm#7.3>7.3</a> Additional usage requirements
+| <A href=dpans7.htm#7.4>7.4</a> Additional documentation requirements
+| <A href=dpans7.htm#7.5>7.5</a> Compliance and labeling
+| <A href=dpans7.htm#7.6.1>7.6.1</a> Block words
+| <A href=dpans7.htm#7.6.2>7.6.2</a> Block extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans8.htm><b>dpans8</b></a>
+</td><td>           The optional <b> Double-Number word set      </b>
+</td></tr><tr><td>
+| <A href=dpans8.htm#8.1>8.1</a> Introduction
+| <A href=dpans8.htm#8.2>8.2</a> Additional terms and notation
+| <A href=dpans8.htm#8.3>8.3</a> Additional usage requirements
+| <A href=dpans8.htm#8.4>8.4</a> Additional documentation requirements
+| <A href=dpans8.htm#8.5>8.5</a> Compliance and labeling
+| <A href=dpans8.htm#8.6.1>8.6.1</a> Double-Number words
+| <A href=dpans8.htm#8.6.2>8.6.2</a> Double-Number extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans9.htm><b>dpans9</b></a>
+</td><td>       The optional <b> Exception word set   </b>
+</td></tr><tr><td>
+| <A href=dpans9.htm#9.1>9.1</a> Introduction
+| <A href=dpans9.htm#9.2>9.2</a> Additional terms and notation
+| <A href=dpans9.htm#9.3>9.3</a> Additional usage requirements
+| <A href=dpans9.htm#9.4>9.4</a> Additional documentation requirements
+| <A href=dpans9.htm#9.5>9.5</a> Compliance and labeling
+| <A href=dpans9.htm#9.6.1>9.6.1</a> Exception words
+| <A href=dpans9.htm#9.6.2>9.6.2</a> Exception extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans10.htm><b>dpans10</b></a>
+</td><td>       The optional <b> Facility word set   </b>
+</td></tr><tr><td>
+| <A href=dpans10.htm#10.1>10.1</a> Introduction
+| <A href=dpans10.htm#10.2>10.2</a> Additional terms and notation
+| <A href=dpans10.htm#10.3>10.3</a> Additional usage requirements
+| <A href=dpans10.htm#10.4>10.4</a> Additional documentation requirements
+| <A href=dpans10.htm#10.5>10.5</a> Compliance and labeling
+| <A href=dpans10.htm#10.6.1>10.6.1</a> Facility words
+| <A href=dpans10.htm#10.6.2>10.6.2</a> Facility extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans11.htm><b>dpans11</b></a>
+</td><td>       The optional <b> File-Access word set   </b>
+</td></tr><tr><td>
+| <A href=dpans11.htm#11.1>11.1</a> Introduction
+| <A href=dpans11.htm#11.2>11.2</a> Additional terms
+| <A href=dpans11.htm#11.3>11.3</a> Additional usage requirements
+| <A href=dpans11.htm#11.4>11.4</a> Additional documentation requirements
+| <A href=dpans11.htm#11.5>11.5</a> Compliance and labeling
+| <A href=dpans11.htm#11.6.1>11.6.1</a> File-Access words
+| <A href=dpans11.htm#11.6.2>11.6.2</a> File-Access extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans12.htm><b>dpans12</b></a>
+</td><td>       The optional <b> Floating-Point word set   </b>
+</td></tr><tr><td>
+| <A href=dpans12.htm#12.1>12.1</a> Introduction
+| <A href=dpans12.htm#12.2>12.2</a> Additional terms and notation
+| <A href=dpans12.htm#12.3>12.3</a> Additional usage requirements
+| <A href=dpans12.htm#12.4>12.4</a> Additional documentation requirements
+| <A href=dpans12.htm#12.5>12.5</a> Compliance and labeling
+| <A href=dpans12.htm#12.6.1>12.6.1</a> Floating-Point words
+| <A href=dpans12.htm#12.6.2>12.6.2</a> Floating-Point extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans13.htm><b>dpans13</b></a>
+</td><td>       The optional <b> Locals word set   </b>
+</td></tr><tr><td>
+| <A href=dpans13.htm#13.1>13.1</a> Introduction
+| <A href=dpans13.htm#13.2>13.2</a> Additional terms and notation
+| <A href=dpans13.htm#13.3>13.3</a> Additional usage requirements
+| <A href=dpans13.htm#13.4>13.4</a> Additional documentation requirements
+| <A href=dpans13.htm#13.5>13.5</a> Compliance and labeling
+| <A href=dpans13.htm#13.6.1>13.6.1</a> Locals words
+| <A href=dpans13.htm#13.6.2>13.6.2</a> Locals extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans14.htm><b>dpans14</b></a>
+</td><td>       The optional <b> Memory-Allocation word set   </b>
+</td></tr><tr><td>
+| <A href=dpans14.htm#14.1>14.1</a> Introduction
+| <A href=dpans14.htm#14.2>14.2</a> Additional terms and notation
+| <A href=dpans14.htm#14.3>14.3</a> Additional usage requirements
+| <A href=dpans14.htm#14.4>14.4</a> Additional documentation requirements
+| <A href=dpans14.htm#14.5>14.5</a> Compliance and labeling
+| <A href=dpans14.htm#14.6.1>14.6.1</a> Memory-Allocation words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans15.htm><b>dpans15</b></a>
+</td><td>       The optional <b> Programming-Tools word set   </b>
+</td></tr><tr><td>
+| <A href=dpans15.htm#15.1>15.1</a> Introduction
+| <A href=dpans15.htm#15.2>15.2</a> Additional terms and notation
+| <A href=dpans15.htm#15.3>15.3</a> Additional usage requirements
+| <A href=dpans15.htm#15.4>15.4</a> Additional documentation requirements
+| <A href=dpans15.htm#15.5>15.5</a> Compliance and labeling
+| <A href=dpans15.htm#15.6.1>15.6.1</a> Programming-Tools words
+| <A href=dpans15.htm#15.6.2>15.6.2</a> Programming-Tools extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans16.htm><b>dpans16</b></a>
+</td><td>       The optional <b> Search-Order word set   </b>
+</td></tr><tr><td>
+| <A href=dpans16.htm#16.1>16.1</a> Introduction
+| <A href=dpans16.htm#16.2>16.2</a> Additional terms and notation
+| <A href=dpans16.htm#16.3>16.3</a> Additional usage requirements
+| <A href=dpans16.htm#16.4>16.4</a> Additional documentation requirements
+| <A href=dpans16.htm#16.5>16.5</a> Compliance and labeling
+| <A href=dpans16.htm#16.6.1>16.6.1</a> Search-Order words
+| <A href=dpans16.htm#16.6.2>16.6.2</a> Search-Order extension words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpans17.htm><b>dpans17</b></a>
+</td><td>       The optional <b> String word set   </b>
+</td></tr><tr><td>
+| <A href=dpans17.htm#17.1>17.1</a> Introduction
+| <A href=dpans17.htm#17.2>17.2</a> Additional terms and notation
+| <A href=dpans17.htm#17.3>17.3</a> Additional usage requirements
+| <A href=dpans17.htm#17.4>17.4</a> Additional documentation requirements
+| <A href=dpans17.htm#17.5>17.5</a> Compliance and labeling
+| <A href=dpans17.htm#17.6.1>17.6.1</a> String words
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpansa1.htm><b>dpansA</b></a>
+</td><td><b>        Rationale </b> (informative annex)
+</td></tr><tr><td>
+| <A href=dpansa1.htm>A.1</a> Introduction
+| <A href=dpansa2.htm>A.2</a> Terms and notation
+| <A href=dpansa3.htm>A.3</a> Usage requirements
+| <A href=dpansa4.htm>A.4</a> Documentation requirements
+| <A href=dpansa5.htm>A.5</a> Compliance and labeling
+| <A href=dpansa6.htm>A.6</a> Glossary
+| <A href=dpansa7.htm>A.7</a> The optional Block word set
+| <A href=dpansa8.htm>A.8</a> The optional Double-Number word set
+| <A href=dpansa9.htm>A.9</a> The optional Exception word set
+| <A href=dpansa10.htm>A.10</a> The optional Facility word set
+| <A href=dpansa11.htm>A.11</a> The optional File-Access word set
+| <A href=dpansa12.htm>A.12</a> The optional Floating-Point word set
+| <A href=dpansa13.htm>A.13</a> The optional Locals word set
+| <A href=dpansa14.htm>A.14</a> The optional Memory-Allocation word set
+| <A href=dpansa15.htm>A.15</a> The optional Programming-Tools word set
+| <A href=dpansa16.htm>A.16</a> The optional Search-Order word set
+| <A href=dpansa17.htm>A.17</a> The optional String word set
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpansb.htm><b>dpansB</b></a>
+</td><td><b>        Bibliography </b> (informative annex)
+</td></tr><tr><td>
+| <A href=dpansb.htm#Industry.standards>Industry standards</A>
+| <A href=dpansb.htm#Books>Books</A>
+| <A href=dpansb.htm#Journals>Journals, magazines and newsletters</A>
+| <A href=dpansb.htm#Selected.articles>Selected articles</A>
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpansc.htm><b>dpansC</b></a>
+</td><td><b>        Perspective </b> (informative annex)
+</td></tr><tr><td>
+| <A href=dpansc.htm#C.1>C.1</a> Features of Forth
+| <A href=dpansc.htm#C.2>C.2</a> History of Forth
+| <A href=dpansc.htm#C.3>C.3</a> Hardware implementations of Forth
+| <A href=dpansc.htm#C.4>C.4</a> Standardization efforts
+| <A href=dpansc.htm#C.5>C.5</a> Programming in Forth
+| <A href=dpansc.htm#C.6>C.6</a> Multiprogrammed systems
+| <A href=dpansc.htm#C.7>C.7</a> Design and management considerations
+| <A href=dpansc.htm#C.8>C.8</a> Conclusion
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpansd.htm><b>dpansD</b></a>
+</td><td><b>    Compatibility analysis of ANS Forth </b> (informative annex)
+</td></tr><tr><td>
+| <A href=dpansd.htm#D.1>D.1</a> FIG Forth (circa 1978)
+| <A href=dpansd.htm#D.2>D.2</a> Forth-79
+| <A href=dpansd.htm#D.3>D.3</a> Forth-83
+| <A href=dpansd.htm#D.4>D.4</a> Recent developments
+| <A href=dpansd.htm#D.5>D.5</a> ANS Forth approach
+| <A href=dpansd.htm#D.6>D.6</a> Differences from Forth-83
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpanse.htm><b>dpansE</b></a>
+</td><td><b>   ANS Forth portability guide </b> (informative annex)
+</td></tr><tr><td>
+| <A href=dpanse.htm#E.1>E.1</a> Introduction
+| <A href=dpanse.htm#E.2>E.2</a> Hardware peculiarities
+| <A href=dpanse.htm#E.3>E.3</a> Number representation
+| <A href=dpanse.htm#E.4>E.4</a> Forth system implementation
+| <A href=dpanse.htm#E.5>E.5</a> ROMed application disciplines and conventions
+| <A href=dpanse.htm#E.6>E.6</a> Summary
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=dpansf.htm><b>dpansF</b></a>
+</td><td><b>   Alphabetic list of words </b> (informative annex)
+</td></tr><tr><td>
+| list
+| charset
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0001.htm><b>a0001</b></a>
+</td><td><b>   Q0001: </b> <i>
+   regarding the "flag" returned by READ-LINE
+   at end of file boundary conditions. </i>
+</td></tr><tr><td>
+| <a href="a0001.htm#query">query:</a> The original question
+| <a href="a0001.htm#reply">reply:</a> The TC's reply
+| <a href="a0001.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0001.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0002.htm><b>a0002</b></a>
+</td><td><b>   Q0002: </b> <i>
+   regarding the significance of defining search orders
+   in which a given wordlist occurs more than once. </i>
+</td></tr><tr><td>
+| <a href="a0002.htm#query">query:</a> The original question
+| <a href="a0002.htm#reply">reply:</a> The TC's reply
+| <a href="a0002.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0002.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0003.htm><b>a0003</b></a>
+</td><td><b>   Q0003: </b> <i>
+     regarding usage rules for defining words centering
+     on various wordlist actions occurring between CREATE and DOES&gt;. </i>
+</td></tr><tr><td>
+| <a href="a0003.htm#query">query:</a> The original question
+| <a href="a0003.htm#reply">reply:</a> The TC's reply
+| <a href="a0003.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0003.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0004.htm><b>a0004</b></a>
+</td><td><b>   Q0004: </b> <i>
+     regarding standard punctuation for double-cell numbers
+     when occurring in programs. </i>
+</td></tr><tr><td>
+| <a href="a0004.htm#query">query:</a> The original question
+| <a href="a0004.htm#reply">reply:</a> The TC's reply
+| <a href="a0004.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0004.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0005.htm><b>a0005</b></a>
+</td><td><b>   Q0005: </b> <i>
+     regarding the definition of "initiation semantics". </i>
+</td></tr><tr><td>
+| <a href="a0005.htm#query">query:</a> The original question
+| <a href="a0005.htm#reply">reply:</a> The TC's reply
+| <a href="a0005.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0005.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0006.htm><b>a0006</b></a>
+</td><td><b>   Q0006: </b> <i>
+     regarding Writing to Input Buffers. </i>
+</td></tr><tr><td>
+| <a href="a0006.htm#query">query:</a> The original question
+| <a href="a0006.htm#reply">reply:</a> The TC's reply
+| <a href="a0006.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0006.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+<tr valign="top"><td rowspan="2">
+<A href=a0007.htm><b>a0007</b></a>
+</td><td><b>   Q0007: </b> <i>
+     regarding the distinction between "immediacy"
+     and "special compilation semantics". </i>
+</td></tr><tr><td>
+| <a href="a0007.htm#query">query:</a> The original question
+| <a href="a0007.htm#reply">reply:</a> The TC's reply
+| <a href="a0007.htm#ballot">ballot:</a> The Ballot issued
+| <a href="a0007.htm#results">results:</a> Ballot results
+| </td>
+</tr>
+
+
+
+ </table>
+
+</body>
+</html>
