@@ -105,7 +105,12 @@ for $F (sort keys %index)
 } $html_l_pane .= "</ul>\n";
 
 my $html_l_text = "";
-if (-f "index-l.txt")
+if (-f "index-l.htm")
+{
+    $F = "index-l.htm";
+    open F, "<$F" or die "could not open $F: $!";
+    $html_l_text .= join ("",<F>); close F;
+}elsif (-f "index-l.txt")
 {
     $F = "index-l.txt";
     open F, "<$F" or die "could not open $F: $!";
@@ -116,7 +121,12 @@ if (-f "index-l.txt")
 
 # this section should perhaps do a lot more.
 my $html_r_pane = "";
-if (-f "index-r.txt")
+if (-f "index-r.htm")
+{
+    $F = "index-r.htm";
+    open F, "<$F" or die "could not open $F: $!";
+    $html_r_pane .= join ("",<F>); close F;
+}elsif (-f "index-r.txt")
 {
     $F = "index-r.txt";
     open F, "<$F" or die "could not open $F: $!";

@@ -75,7 +75,8 @@ upload-user:
 # different approach: choose "make install" to put the wealth
 # of pages into a directory path of the local system. Then, assemble
 # the files installed into a dist-tarball/rpm, and carry elsewhere.
-DISTFILES= forth.css bg.gif index-l.txt index-r.txt index.header
+DISTFILES= forth.css bg.gif 4ring.gif \
+	index-l.txt index-l.htm index-r.txt index-r.htm index.header
 
 DOCDIR=/usr/doc
 FORTHDOC=$(DOCDIR)/forth
