@@ -16,7 +16,8 @@ $       Hex                 $FE00     ~~~
 ~~~tag[/pre]tag~~~
 
 ----
-notes-1:
+note-1:
+~~tag[small]tag~~~
 Guido Draheim wrote:
 >
 > I see that it refers to OTA and a decimal-prefix
@@ -33,8 +34,9 @@ Guido Draheim wrote:
 > Therefore, while the commercial forthers
 > did settle to "#", in the freeforth world
 > it might look a bit different.
-
+~~~tag[/small]tag~~~
 note-2:
+~~tag[small]tag~~~
 SwiftForth uses a different set of number conversion prefixes:
 >
 > SwiftForth 2.2.2 09Mar2001
@@ -44,7 +46,7 @@ SwiftForth uses a different set of number conversion prefixes:
 > #10 . A  ok
 > $10 . 10  ok
 > &10 . 8  ok
-
+~~~tag[/small]tag~~~
 note-3:
 Among these, only OTA is an official standard.
 
