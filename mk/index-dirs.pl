@@ -60,6 +60,7 @@ my ($F,$D);
 opendir D, "." or die "could not open local dir: $!";
 while ($F = readdir D)
 {
+    next if $F eq "CVS";
     if (-d "$F" and length $F > 2)
     {
 	if (-f "$F/index.html")
