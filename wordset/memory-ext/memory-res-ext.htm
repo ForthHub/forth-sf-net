@@ -1,0 +1,96 @@
+<HTML><HEAD>
+<TITLE>[14] MEMORY-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../locals-ext/locals-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../tools-ext/tools-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.14.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.14>
+<H2>R.14 Memory-Allocation reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.14.6.1.2275>
+<code>
+R.14.6.1.0707 <b>BUFFER:</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+MEMORY RES EXT
+<BR>
+<pre>
+        ( size "name" -- )
+</pre>
+
+<P>
+ Skip leading spaces, parse name and create the name. Get new data memory
+ of the given size and append execution semantics to the name to
+ return the address of the start of that new data buffer.
+<pre>
+        Execution: ( -- addr )
+</pre>
+
+<p>
+ Unlike other words like <a href=../core-ext/core-ext.htm#6.1.1000>CREATE</a>
+ and <a href=../core-ext/core-ext.htm#6.1.2410>VARIABLE</a> the allocated
+ memory does not needfully be part of the forth
+ <a href=../forth-std/defs.htm#3.3.3>data space</a>
+ handled by calls to <a href=../core-ext/core-ext.htm#6.1.0710>ALLOT</a>
+ and similar words that are part of the
+ <a href=../forth-std/defs.htm#3.3.3.2>contiguous regions</a>
+ guarantee. Alternativly it can use memory allocated through
+ <a href=../memory-ext/memory-ext.htm#14.6.1.0707>ALLOCATE</a>
+ or any other means.
+ Successive calls to  <a href=#R.14.6.1.0707>BUFFER:</a> may yield
+ non-adjescant memory areas and no means are provided to enlarge or
+ shrink this memory area after it has been allocated. Accessing addresses
+ outside the range from the address up to address plus size is an error
+ and can yield to an exception.
+
+<p>
+<code>
+See:
+<a href=../forth-std/defs.htm#3.3.3>3.3.3 data space</a>
+<a href=../forth-std/defs.htm#3.3.3.2>3.3.3.2 contiguous regions</a>
+<a href=../core-ext/core-ext.htm#6.1.0710>6.1.0710 ALLOT</a>
+<a href=../memory-ext.htm#14.6.1.0707>14.6.1.0707 ALLOCATE</a>
+<a href=../core-ext/core-ext.htm#6.1.1000>6.1.1000 CREATE</a>
+<a href=../core-ext/core-ext.htm#6.1.2410>6.1.2410 VARIABLE</a>
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../tools-ext/tools-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
