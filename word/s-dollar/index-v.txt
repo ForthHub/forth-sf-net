@@ -1,0 +1,75 @@
+title: S$
+description:
+
+ S$ ( "<delim1>text<delim2>" -- addr len )
+
+ Obtain the first delimiter character, delim1, from the input stream,
+ that is, fetch the next character froom the input stream and advance >IN
+ by one character. If delim1 is one of the characters '(' '[' '{' '<' ,
+ let delim2 be ')' ']' '}' '>' correspondingly, otherwise let delim2
+ be equal to delim1 (delim2 and delim1 may be spaces).
+
+ Parse the text delimited by delim2 and leave its address (within
+ the input buffer) and length.
+
+ If the current state is compilation, compile that string as a string
+ literal.
+
+note:
+ the name for the text-printins analog of S$ is .$ ,
+ the word that returns a counted string should be called C$ .
+
+implementation:
+ \ Match delimiters for string
+ : (S) ( c1 -- c2)
+   CASE
+     [CHAR] < OF [CHAR] > ENDOF
+     [CHAR] { OF [CHAR] } ENDOF
+     [CHAR] [ OF [CHAR] ] ENDOF
+     [CHAR] ( OF [CHAR] ) ENDOF
+     DUP                         \ use same character for all others
+   ENDCASE
+ ;
+ : S$ ( <char1>ccc<char2> -- addr u)
+  SOURCE >IN @ MIN +          \ address of 1st character
+  C@ (S)                      \ determine second delimiter
+    1 >IN +!                  \ bump past first  delimiter
+  PARSE                       \ parse to  second delimiter
+  STATE @ IF ( compiling)
+    POSTPONE SLITERAL      \ include parsed string in definition
+  THEN
+ ; IMMEDIATE
+
+ \ Notes:
+ \ 1. We assume that the character size is 1.
+ \ 2. We assume that PARSE works correctly even when >IN
+ \ exceeds the input text buffer size (the length returned by SOURCE).
+ \ 3. We also assume that we can read the character at the address returned
+ \ by the phrase SOURCE +
+
+authors:
+ The following people contributed to the discussion:
+ Tom Zegub, Jos v.d.Ven, Michael Gassanenko
+
+discussion-archive:
+ brief: http://www.forth.org.ru/~mlg/Misc/String-with-generic-delimiters.txt
+ whole: http://www.forth.org.ru/~mlg/Misc/String-with-generic-delimiters-whole.txt
+
+examples:
+ S$ "any character " TYPE
+ S$ 'may serve ' TYPE
+ S$ <as the delimiter, > TYPE
+ S$ (the "paired" symbols ) TYPE
+ S$ [like ] TYPE
+ S$ |'<', '{', '(', '[' | TYPE
+ S$ #are matched by the corresponding # TYPE
+ S$ {closing symbols: } TYPE
+ S$ `'>', '}', ')', ']', quotes ` TYPE
+ S$ {(" ' `) are matched by quotes} TYPE
+ S$ x and other symbols are matched by the same symbol.x TYPE
+
+page-written-by:
+ mlg
+
+
+
