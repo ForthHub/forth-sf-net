@@ -11,7 +11,8 @@ use "make links" to create a few symbolic links
  int the toplevel directory to make implicit-hrefs
  easier
 
-use "make zip" to create a new snapshot of your sources
+use "make install" to install to .../groups/f/fo/forth
+use "make dist" to create a snapshot tarball
 
 ---------------------------------------------------------
 
@@ -24,4 +25,4 @@ an url or like a file-ref, that is here...
 and it does quite a few of other magic.
 
 ---------------------------------------------------------
-$Id: README,v 1.1 2000/10/26 07:41:16 guidod Exp $
+$Id: README,v 1.2 2001/09/02 11:11:53 guidod Exp $

@@ -1,7 +1,8 @@
 
 SUBDIRS = naming people mirror syntax system website word wordset standard
 LINKS = from:people sys:system web:website ws:wordset std:standard
-HTDOCS = /home/groups/f/fo/forth/htdocs
+HTGROUP= groups/f/fo/forth/htdocs
+HTDOCS = /home/$(HTGROUP)
 HTHOST = shell.sourceforge.net
 
 default: web
@@ -89,14 +90,14 @@ upload-user:
 # of pages into a directory path of the local system. Then, assemble
 # the files installed into a dist-tarball/rpm, and carry elsewhere.
 DISTFILES= forth.css forth2.css bg.gif 4ring.gif Makefile \
-	index-l.txt index-l.htm index-r.txt index-r.htm index.header
+	index-l.txt index-l.htm index-r.txt index-r.htm index.header \
+	mkinstalldirs
 
-DOCDIR=/usr/doc
-FORTHDOC=$(DOCDIR)/forth
+DOCDIR=/usr/share
+FORTHDOC=$(DOCDIR)/$(HTGROUP)
 INDEXFILE=index.html
 install:
-	test -d $(DESTDIR)$(DOCDIR) || mkdir $(DESTDIR)$(DOCDIR)
-	test -d $(DESTDIR)$(FORTHDOC) || mkdir $(DESTDIR)$(FORTHDOC)
+	test -d $(DESTDIR)$(FORTHDOC) || mkinstalldirs $(DESTDIR)$(FORTHDOC)
 	@ if test -n "$(DISTFILES)" ; then : \
 	;    echo cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
 	;         cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
@@ -150,8 +151,8 @@ dist:
 	; echo mkdir $(TEMP)/$$PKG \
 	;      mkdir $(TEMP)/$$PKG
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
-	; echo $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/. DOCDIR=/ \
-	;      $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/. DOCDIR=/
+	; echo $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/.  \
+	;      $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/.
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` ; BUILD=`pwd` \
 	; echo "(cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)" \
 	;       (cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)
