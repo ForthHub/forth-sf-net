@@ -1,5 +1,5 @@
 <HTML><HEAD>
-<TITLE>[10] FILE-RES-EXT</TITLE>
+<TITLE>[11] FILE-RES-EXT</TITLE>
 <link rel=stylesheet type="text/css" media="screen"
             href="../forth-std/forth-std.css"></HEAD>
 
@@ -23,21 +23,21 @@ for public review.
 <td align=right width=70>
 <a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
  width=26 height=26 align=ALIGN border=0></a>
-<br><a name=R.10.>TOC</a>
+<br><a name=R.11.>TOC</a>
 </td>
 </tr>
 </table>
 <p>
 <hr size=4>
 
-<A name=R.10>
-<H2>R.10 File-Access reserved extension words</H2>
+<A name=R.11>
+<H2>R.11 File-Access reserved extension words</H2>
 </a>
 
 <hr>
-<A name=R.10.6.1.1718>
+<A name=R.11.6.1.1718>
 <code>
-R.10.6.1.1718 <b>INCLUDE</b>
+R.11.6.1.1718 <b>INCLUDE</b>
 </code>
 </a>
 <BR>
@@ -50,7 +50,8 @@ FILE RES EXT
 
 <P>
 
-Parse the next word from the input buffer and perform INCLUDED.
+Skip leading space delimiters. Parse name delimited by a space.
+Use the string as the filename argument to INCLUDED.
 
 <pre>
   : INCLUDE PARSE-WORD INCLUDED ;
@@ -59,7 +60,7 @@ Parse the next word from the input buffer and perform INCLUDED.
 <p>
 <code>
 See:
-<a href=../file-ext/file-ext.htm#10.6.1.1718>10.6.1.1718 INCLUDED</a>,
+<a href=../file-ext/file-ext.htm#11.6.1.1718>11.6.1.1718 INCLUDED</a>,
 <a href=../environ-ext/environ-ext.htm#19.6.1.0003>19.6.1.0003 REQUIRED</a>,
 </code>
 
