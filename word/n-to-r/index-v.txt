@@ -19,7 +19,7 @@ Implementation:
 ( Thanks to Coos Haak for posting this high-level code)
 
 \ Push n+1 elements on the return stack.
-: N>R ( S: xn .. x1 n -- ) ( R: -- xn .. x1 n )
+: N>R ( S: xn .. x1 n -- ) ( R: -- x1 .. xn n )
  DUP
  BEGIN DUP
  WHILE ROT R> SWAP >R >R 1-
@@ -34,7 +34,7 @@ just >R .
 BTW, R> SWAP >R >R is the same as R> 2>R , so you may prefer:
 
 \ Push n+1 elements on the return stack.
-: N>R ( S: xn .. x1 n -- ) ( R: -- xn .. x1 n )
+: N>R ( S: xn .. x1 n -- ) ( R: -- x1 .. xn n )
  DUP
  BEGIN DUP
  WHILE ROT R> 2>R 1-
