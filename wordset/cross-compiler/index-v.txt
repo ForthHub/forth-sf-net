@@ -1,5 +1,41 @@
-title: [dp] Cross-compiler EXT
+title: [cc] Cross-Compiler EXT
 description:
  see
  ftp://ftp.forth.com/pub/ANS%20Forth/
+
+some-words:
+>
+> UDATA - set type to be uninitialized data RAM
+> IDATA - set type to be initialized data RAM
+> CDATA - set type to be codespace ROM
+> VARIABLES - say whether next VARIABLEs are UDATA or IDATA or other.
+>
+> SAVE-SECTION / RESTORE-SECTIONS - for the esction layout
+> SECTION ( start end "name" -- ) declare section with a type and range
+>      sections must be declared in INTERPRETER scope, a section becomes
+>      the current section when its name is used. only one section is current.
+> EQU ( value "name" -- )
+>   create a VALUE-like HOST-definition, when compiling the "name"
+>   it will create a LITERAL value in the TARGET definition.
+> ORG ( addr -- )
+>      move HERE of the current SECTION to this address
+> ( note: words like HERE and UNUSED work on the current SECTION )
+>
+> RESERVE ( size -- addr ) get unnmaed udata portion
+> BUFFER: - allot named area, possibly non-contiguous of other ALLOTs
+> CVARIABLE - a single-char variable
+> @C - runtime access to cell in codespace
+> C@C - runtime access to char in codespace
+> CMOVEC - runtime access to area in codespace
+>
+> other reserved words:
+>   HOST TARGET COMPILER INTERPRETER
+>
+> ENVIRONMENT DEFINITIONS:
+>    TRUE CONSTANT CROSS
+>    TRUE CONSTANT CROSS-EXT
+>
+> note: a lot more words are made sectiontype-smart and compilescope-smart
+>
+
 
