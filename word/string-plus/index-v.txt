@@ -16,5 +16,5 @@ description:
         R> +
 ;
 
-eee: STRING+C ../string-plus-c/index.html
+see: STRING+C ../string-plus-c/index.html
 
