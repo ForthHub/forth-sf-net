@@ -88,8 +88,8 @@ updone:
 #
 rupload:
 	$(MAKE) install
-	-rsync -e ssh -a $(FORTHDOC)/ $(HTHOST):$(HTDOCS)/
-	$(MAKE) updone
+	-rsync -e ssh -crlHSz $(FORTHDOC)/ $(HTHOST):$(HTDOCS)/
+	$(MAKE) updone 2> /dev/null
 
 
 perms:
