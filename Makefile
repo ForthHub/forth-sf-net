@@ -1,5 +1,5 @@
 
-SUBDIRS = people mirror system website word wordset
+SUBDIRS = people mirror syntax system website word wordset
 LINKS = from/people sys/system web/website ws/wordset
 
 default: web
