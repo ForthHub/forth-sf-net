@@ -26,8 +26,8 @@ example implementations, and library modules.
 The ISO standardiziation path is a bit slow and there
 are often some reasons to not include a specific
 common usage as it is either not really needed
-or it is problematic in spezialized systems. Still it
-is worth to be know to the forth people.
+or it is problematic in specialized systems. Still it
+is worth to be known to the forth people.
 
 The advantage of sourceforge is that
 everyone can get a developer account
