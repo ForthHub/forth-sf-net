@@ -1,6 +1,17 @@
 
 Welcome to the comp.lang.forth.repository.
 
+The purpose of this site is to document
+existing Forth usage that for some reasons
+cannot become a part of the ANSI/ISO Forth
+Standard. The contents of this site need
+not pass the standardization procedure
+with its advantages and disadvantages.
+OTOH, there is a requirement that the
+proposals may be published here only after
+they are discussed in the comp.lang.forth
+newsgroup. (mlg)
+
 This site is provided as a webspace to be
 used on usenet' comp.lang.forth. It is
 based on the obvervation, that every once
@@ -40,7 +51,6 @@ And remember, it is harder to find someone
 who actually *wants* to have write access
 than there would be a need to be wary about
 who is applying for the job. Just give it
-a try and post to comp.lang.forth today.
-
+a try and post to comp.lang.forth today. (GuidoD)
 
 
