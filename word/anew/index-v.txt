@@ -11,4 +11,41 @@ description:
    (MARKER)
 ;
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:25 guidod Exp $
+see-also:
+  ../from/Wil.Baden (on c.l.f. on 2002-01-05)
+
+
+ From FPH Use
+    http://home.earthlink.net/~neilbawd/
+
+ 0 [IF] ========================================================
+
+ POSSIBLY                       ( "name" -- )
+   Execute _name_ if it exists; otherwise, do nothing. Useful
+   implementation factor of `ANEW`.
+
+ ANEW                           ( "name" -- )
+   Compiler directive used in the form: `ANEW _name_`. If the
+   word _name_ already exists, it and all subsequent words
+   are forgotten from the current dictionary, then a `MARKER`
+   word _name_ is created that does nothing. This is usually
+   placed at the start of a file. When the code is reloaded,
+   any prior version is automatically pruned from the
+   dictionary.
+
+   Executing _name_ will also cause it to be forgotten, since
+   it is a `MARKER` word.
+
+   Useful implementation factor of `EMPTY`.
+
+ -------------------------------------------------------- [THEN]
+
+
+ : POSSIBLY                     ( "name" -- )
+    BL WORD FIND  ?DUP AND IF  EXECUTE  THEN ;
+
+ : ANEW                         ( "name" -- )
+    >IN @  POSSIBLY
+    >IN !  MARKER ;
+
+--- $Id: index-v.txt,v 1.2 2002/01/13 18:33:28 guidod Exp $
