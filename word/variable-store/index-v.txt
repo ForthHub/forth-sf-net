@@ -1,4 +1,8 @@
 title: VARIABLE!
+motivation:
+        Changing all occurences of the word VARIABLE to VARIABLE!
+        is an easy way to make FIG-Forth-ish variables ANS-compatible.
+
 description:
 	The old forth implementations used an initializing
 	value for the word VARIABLE but new ansi standard
@@ -56,6 +60,6 @@ more-notes:
         I always believed that the initializing version of VARIABLE
         is called VAR ( n "name" -- )
 
---- $Id: index-v.txt,v 1.3 2001/10/13 22:18:38 mlg Exp $
+--- $Id: index-v.txt,v 1.4 2001/10/24 23:01:19 mlg-r Exp $
 
 
