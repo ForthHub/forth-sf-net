@@ -1,0 +1,14 @@
+title: PARSE-AREA@
+description:
+    PARSE-AREA@ ( -- c-addr len )       "parse-area-fetch"
+
+    Return the address and length of the current parse area.
+
+: PARSE-AREA@
+    SOURCE >IN @ /STRING
+;
+
+See: PARSE-AREA! http:../parse-area-store/index.html
+
+Proposed-by: J.Brien
+

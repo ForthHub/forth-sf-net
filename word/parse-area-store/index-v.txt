@@ -1,0 +1,49 @@
+title: PARSE-AREA!
+description:
+    PARSE-AREA! ( c-addr len -- )       "parse-area-store"
+
+    Set the parse area to the string specified by (addr,len).
+    If the new parse area is within the current input buffer,
+    adjust >IN appropriately. Else, make (c-addr,len) the input buffer
+    and store 0 to >IN . Do not modify SOURCE-ID.
+
+notes:
+    The system must be aware of this word.
+    It must maintain the input buffer (returned by SOURCE and read by
+    parsing words) and the source refill buffer (written to by REFILL)
+    separately. PARSE-AREA! is allowed to set the input buffer outside
+    of the source refill buffer. REFILL is required to set the input
+    buffer back to the source refill buffer.
+
+See: PARSE-AREA@ http:../parse-area-fetch/index.html
+
+words-from-the-inventor:
+
+J.Brien wrote:
+
+> My aim with PARSE-AREA@  etc. is [...] to unify the use of
+> parsing and pattern-matching words. It's quite useful to
+> treat a data as 'source' - you don't have to worry about
+> reserving buffers and opening and closing files. Just kick
+> off the process with ' xt FILE-PARSE (was that the name we
+> finally settled on - I forget) or  INCLUDE an ascii text
+> file and define the first word in it as a Forth definition -
+> as can be done with XML or HTML files.
+>
+> [...] PARSE and WORD are  often not the tools required.  So,
+> use COMPARE, SEARCH, etc to write general pattern-matching
+> words with the stack diagram
+>
+>                  PatternMatch   \ ca u --  ca1 u1 ca2 u2 ;
+> where
+>    ca1 u1 = string-still-to-match
+> and
+>    ca2 u2 = string-matched
+>
+> and use them in the form:
+>
+> ~~~tag[code]tag~~~
+ PARSE-AREA@  PatternMatch /dosomething/ PARSE-AREA!
+~~tag[/code]tag~~~
+
+
