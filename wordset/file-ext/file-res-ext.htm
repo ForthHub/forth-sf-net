@@ -1,0 +1,75 @@
+<HTML><HEAD>
+<TITLE>[10] FILE-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../facility-ext/facility-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../locals-ext/locals-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.10.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.10>
+<H2>R.10 File-Access reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.10.6.1.1718>
+<code>
+R.10.6.1.1718 <b>INCLUDE</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+FILE RES EXT
+<BR>
+<pre>
+        ( i*x "name" --  j*x )
+</pre>
+
+<P>
+
+Parse the next word from the input buffer and perform INCLUDED.
+
+<pre>
+  : INCLUDE PARSE-WORD INCLUDED ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../file-ext/file-ext.htm#10.6.1.1718>10.6.1.1718 INCLUDED</a>,
+<a href=../environ-ext/environ-ext.htm#19.6.1.0003>19.6.1.0003 REQUIRED</a>,
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../local-res-ext/local-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
