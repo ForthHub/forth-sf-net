@@ -1,0 +1,8 @@
+title: CRC32
+description:
+ Here we present some Forth versions of the CRC32 (a.k.a. CRC-32 ) algorithm.
+
+ ./crc32-16b.txt
+ ./crc32-32b.txt
+
+

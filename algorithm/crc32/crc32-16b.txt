@@ -1,0 +1,114 @@
+CROSS TARGET
+\ CRC-POLYNOMIAL is edb88320
+
+\ The CRC32 (a.k.a. CRC-32 ) algorithm in Forth.
+\ This code worked on a 16-bit big-endian machine
+\ ( HEX 1234 , is the same as HEX 12 C, 34 C, )
+
+\ : U2/ 1 RSHIFT ;
+\ : UD2/ DUP U2/ >R SWAP U2/ SWAP 1 AND IF $8000 OR THEN R> ;
+
+CREATE CRC-32-Table
+(   0 )  $0000.0000 , , $7707.3096 , , $ee0e.612c , , $9909.51ba , ,
+(   4 )  $076d.c419 , , $706a.f48f , , $e963.a535 , , $9e64.95a3 , ,
+(   8 )  $0edb.8832 , , $79dc.b8a4 , , $e0d5.e91e , , $97d2.d988 , ,
+(  12 )  $09b6.4c2b , , $7eb1.7cbd , , $e7b8.2d07 , , $90bf.1d91 , ,
+(  16 )  $1db7.1064 , , $6ab0.20f2 , , $f3b9.7148 , , $84be.41de , ,
+(  20 )  $1ada.d47d , , $6ddd.e4eb , , $f4d4.b551 , , $83d3.85c7 , ,
+(  24 )  $136c.9856 , , $646b.a8c0 , , $fd62.f97a , , $8a65.c9ec , ,
+(  28 )  $1401.5c4f , , $6306.6cd9 , , $fa0f.3d63 , , $8d08.0df5 , ,
+(  32 )  $3b6e.20c8 , , $4c69.105e , , $d560.41e4 , , $a267.7172 , ,
+(  36 )  $3c03.e4d1 , , $4b04.d447 , , $d20d.85fd , , $a50a.b56b , ,
+(  40 )  $35b5.a8fa , , $42b2.986c , , $dbbb.c9d6 , , $acbc.f940 , ,
+(  44 )  $32d8.6ce3 , , $45df.5c75 , , $dcd6.0dcf , , $abd1.3d59 , ,
+(  48 )  $26d9.30ac , , $51de.003a , , $c8d7.5180 , , $bfd0.6116 , ,
+(  52 )  $21b4.f4b5 , , $56b3.c423 , , $cfba.9599 , , $b8bd.a50f , ,
+(  56 )  $2802.b89e , , $5f05.8808 , , $c60c.d9b2 , , $b10b.e924 , ,
+(  60 )  $2f6f.7c87 , , $5868.4c11 , , $c161.1dab , , $b666.2d3d , ,
+(  64 )  $76dc.4190 , , $01db.7106 , , $98d2.20bc , , $efd5.102a , ,
+(  68 )  $71b1.8589 , , $06b6.b51f , , $9fbf.e4a5 , , $e8b8.d433 , ,
+(  72 )  $7807.c9a2 , , $0f00.f934 , , $9609.a88e , , $e10e.9818 , ,
+(  76 )  $7f6a.0dbb , , $086d.3d2d , , $9164.6c97 , , $e663.5c01 , ,
+(  80 )  $6b6b.51f4 , , $1c6c.6162 , , $8565.30d8 , , $f262.004e , ,
+(  84 )  $6c06.95ed , , $1b01.a57b , , $8208.f4c1 , , $f50f.c457 , ,
+(  88 )  $65b0.d9c6 , , $12b7.e950 , , $8bbe.b8ea , , $fcb9.887c , ,
+(  92 )  $62dd.1ddf , , $15da.2d49 , , $8cd3.7cf3 , , $fbd4.4c65 , ,
+(  96 )  $4db2.6158 , , $3ab5.51ce , , $a3bc.0074 , , $d4bb.30e2 , ,
+( 100 )  $4adf.a541 , , $3dd8.95d7 , , $a4d1.c46d , , $d3d6.f4fb , ,
+( 104 )  $4369.e96a , , $346e.d9fc , , $ad67.8846 , , $da60.b8d0 , ,
+( 108 )  $4404.2d73 , , $3303.1de5 , , $aa0a.4c5f , , $dd0d.7cc9 , ,
+( 112 )  $5005.713c , , $2702.41aa , , $be0b.1010 , , $c90c.2086 , ,
+( 116 )  $5768.b525 , , $206f.85b3 , , $b966.d409 , , $ce61.e49f , ,
+( 120 )  $5ede.f90e , , $29d9.c998 , , $b0d0.9822 , , $c7d7.a8b4 , ,
+( 124 )  $59b3.3d17 , , $2eb4.0d81 , , $b7bd.5c3b , , $c0ba.6cad , ,
+( 128 )  $edb8.8320 , , $9abf.b3b6 , , $03b6.e20c , , $74b1.d29a , ,
+( 132 )  $ead5.4739 , , $9dd2.77af , , $04db.2615 , , $73dc.1683 , ,
+( 136 )  $e363.0b12 , , $9464.3b84 , , $0d6d.6a3e , , $7a6a.5aa8 , ,
+( 140 )  $e40e.cf0b , , $9309.ff9d , , $0a00.ae27 , , $7d07.9eb1 , ,
+( 144 )  $f00f.9344 , , $8708.a3d2 , , $1e01.f268 , , $6906.c2fe , ,
+( 148 )  $f762.575d , , $8065.67cb , , $196c.3671 , , $6e6b.06e7 , ,
+( 152 )  $fed4.1b76 , , $89d3.2be0 , , $10da.7a5a , , $67dd.4acc , ,
+( 156 )  $f9b9.df6f , , $8ebe.eff9 , , $17b7.be43 , , $60b0.8ed5 , ,
+( 160 )  $d6d6.a3e8 , , $a1d1.937e , , $38d8.c2c4 , , $4fdf.f252 , ,
+( 164 )  $d1bb.67f1 , , $a6bc.5767 , , $3fb5.06dd , , $48b2.364b , ,
+( 168 )  $d80d.2bda , , $af0a.1b4c , , $3603.4af6 , , $4104.7a60 , ,
+( 172 )  $df60.efc3 , , $a867.df55 , , $316e.8eef , , $4669.be79 , ,
+( 176 )  $cb61.b38c , , $bc66.831a , , $256f.d2a0 , , $5268.e236 , ,
+( 180 )  $cc0c.7795 , , $bb0b.4703 , , $2202.16b9 , , $5505.262f , ,
+( 184 )  $c5ba.3bbe , , $b2bd.0b28 , , $2bb4.5a92 , , $5cb3.6a04 , ,
+( 188 )  $c2d7.ffa7 , , $b5d0.cf31 , , $2cd9.9e8b , , $5bde.ae1d , ,
+( 192 )  $9b64.c2b0 , , $ec63.f226 , , $756a.a39c , , $026d.930a , ,
+( 196 )  $9c09.06a9 , , $eb0e.363f , , $7207.6785 , , $0500.5713 , ,
+( 200 )  $95bf.4a82 , , $e2b8.7a14 , , $7bb1.2bae , , $0cb6.1b38 , ,
+( 204 )  $92d2.8e9b , , $e5d5.be0d , , $7cdc.efb7 , , $0bdb.df21 , ,
+( 208 )  $86d3.d2d4 , , $f1d4.e242 , , $68dd.b3f8 , , $1fda.836e , ,
+( 212 )  $81be.16cd , , $f6b9.265b , , $6fb0.77e1 , , $18b7.4777 , ,
+( 216 )  $8808.5ae6 , , $ff0f.6a70 , , $6606.3bca , , $1101.0b5c , ,
+( 220 )  $8f65.9eff , , $f862.ae69 , , $616b.ffd3 , , $166c.cf45 , ,
+( 224 )  $a00a.e278 , , $d70d.d2ee , , $4e04.8354 , , $3903.b3c2 , ,
+( 228 )  $a767.2661 , , $d060.16f7 , , $4969.474d , , $3e6e.77db , ,
+( 232 )  $aed1.6a4a , , $d9d6.5adc , , $40df.0b66 , , $37d8.3bf0 , ,
+( 236 )  $a9bc.ae53 , , $debb.9ec5 , , $47b2.cf7f , , $30b5.ffe9 , ,
+( 240 )  $bdbd.f21c , , $caba.c28a , , $53b3.9330 , , $24b4.a3a6 , ,
+( 244 )  $bad0.3605 , , $cdd7.0693 , , $54de.5729 , , $23d9.67bf , ,
+( 248 )  $b366.7a2e , , $c461.4ab8 , , $5d68.1b02 , , $2a6f.2b94 , ,
+( 252 )  $b40b.be37 , , $c30c.8ea1 , , $5a05.df1b , , $2d02.ef8d , ,
+DECIMAL
+
+
+: DXOR ( l1 h1 l2 h2 -- l h ) SWAP >R XOR SWAP R> XOR SWAP ;
+: D[]  ( n addr -- ) SWAP 2* CELLS + 2@ ;
+: 8DRSHIFT ( d -- )  UD2/ UD2/ UD2/ UD2/  UD2/ UD2/ UD2/ UD2/ ;
+: DINVERT INVERT SWAP INVERT SWAP ;
+
+\ These two definitions are system-specific
+\ The word >< ( x -- x' ) swaps two bytes in a word
+: little-endian-! ( d addr -- )
+  >R SWAP >< R@ ! >< R> CELL+ !
+;
+: little-endian-@ ( addr -- d )
+  2@ >< SWAP ><
+;
+
+0 [IF] =================================================================
+
+Calculate-CRC-32               ( crc byte -- crc' )
+   Update CRC by a byte.
+
+CRC-32                         ( crc addr u -- crc' )
+   Compute CRC for a file or string.
+
+----------------------------------------------------------------- [THEN]
+
+: Calculate-CRC-32             ( crc.l crc.h byte -- crc.l' crc.h' )
+    PLUCK XOR  $ff AND  CRC-32-Table D[]  2SWAP  8DRSHIFT  DXOR
+    ;
+
+: CRC32                        ( addr u -- crc' )
+    TRUE DUP 2SWAP BOUNDS ?DO ( crc) I C@ Calculate-CRC-32  LOOP  DINVERT ;
+
+: APPEND-CRC32 ( addr u -- addr' u' )
+    2DUP CRC32 2OVER + little-endian-! 4 +
+;
+
+
