@@ -1,5 +1,5 @@
 all:
-	@echo call make index directly
+	@echo call make index or make install directly
 
 index:
 	@ for i in * ; do : \
@@ -11,3 +11,35 @@ index:
 	; fi \
 	; done
 
+IGNORED= echo ' :'
+# IGNORED= :
+install:
+	@ TOPDIR=$(TOPDIR) ; test -z "$$TOPDIR" && TOPDIR=`pwd`"/.." \
+	; for i in * ; do : \
+	; test -d $$i || continue \
+	; test $$i != "CVS" || continue \
+	; test ! -f $$i/IGNORE.DIR || continue \
+	; test ! -f $$i/IGNORE.TXT || continue \
+	; test ! -f %%i/IGNORE.TXT || continue \
+	; echo ======= $$i ========= \
+	; for f in `find $$i` ; do : \
+	; case $$f \
+	in */CVS/*|*/CVS|*~|*.bak) $(IGNORED) $$f \
+	;; *) if test -d $$f ; then : \
+	; echo mkdir $(DESTDIR)$(FORTHDOC)/$$f \
+	;      mkdir $(DESTDIR)$(FORTHDOC)/$$f \
+	; else : \
+	; echo cp $$f $(DESTDIR)$(FORTHDOC)/$$f \
+	;      cp $$f $(DESTDIR)$(FORTHDOC)/$$f \
+	; fi \
+	;; esac \
+	; done \
+	; if test -f $(DESTDIR)$(FORTHDOC)/$$i/Makefile  \
+	; then echo $(MAKE) -C $(DESTDIR)$(FORTHDOC)/$$i index \
+	;   $(MAKE) -C $(DESTDIR)$(FORTHDOC)/$$i index TOPDIR=$$TOPDIR \
+	; elif test -f $(DESTDIR)$(FORTHDOC)/$$i/index-v.txt  \
+	; then echo $$i/index-v.txt '->' $(DESTDIR)$(FORTHDOC)/$$i/index.html \
+	; (cd $(DESTDIR)$(FORTHDOC)/$$i \
+	&& perl $(TOPDIR)/mk/index-v.pl index-v.txt >index.html) \
+	; fi \
+	; done

@@ -1,6 +1,6 @@
 
 SUBDIRS = naming people mirror syntax system website word wordset standard
-LINKS = from/people sys/system web/website ws/wordset std/standard
+LINKS = from:people sys:system web:website ws:wordset std:standard
 HTDOCS = /home/groups/f/fo/forth/htdocs
 HTHOST = shell.sourceforge.net
 
@@ -21,10 +21,10 @@ index:
 links:
 	@ dirname  setting/links         # just testing for
 	@ basename setting/links         # their existance
-	@ for i in $(LINKS) \
-	; do : \
-	; echo ln -s `basename $$i` `dirname $$i` \
-	;      ln -s `basename $$i` `dirname $$i` \
+	@ for i in $(LINKS) ; do : \
+	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//`
+	; echo ln -s $$FRM $$TGT \
+	;      ln -s $$FRM $$TGT || break \
 	; done
 
 clean:
@@ -71,3 +71,76 @@ upload-user:
 
 
 
+# -------------------------------------------------------------------
+# different approach: choose "make install" to put the wealth
+# of pages into a directory path of the local system. Then, assemble
+# the files installed into a dist-tarball/rpm, and carry elsewhere.
+DISTFILES= forth.css bg.gif index-l.txt index-r.txt index.header
+
+DOCDIR=/usr/doc
+FORTHDOC=$(DOCDIR)/forth
+INDEXFILE=index.html
+install:
+	test -d $(DESTDIR)$(DOCDIR) || mkdir $(DESTDIR)$(DOCDIR)
+	test -d $(DESTDIR)$(FORTHDOC) || mkdir $(DESTDIR)$(FORTHDOC)
+	@ if test -n "$(DISTFILES)" ; then : \
+	;    echo cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
+	;         cp $(DISTFILES) $(DESTDIR)$(FORTHDOC) \
+	; fi
+	@ TOPDIR="$(TOPDIR)" ; test -z "$$TOPDIR" && TOPDIR=`pwd` \
+	; for i in $(SUBDIRS) ; do : \
+	; echo mkdir $(DESTDIR)$(FORTHDOC)/$$i \
+	;      mkdir $(DESTDIR)$(FORTHDOC)/$$i \
+	; if test -f $$i/Makefile  \
+	; then echo $(MAKE) -C $$i install \
+          FORTHDOC=$(FORTHDOC)/$$i UPINDEX=../$(INDEXFILE) TOPDIR=$$TOPDIR \
+	;           $(MAKE) -C $$i install \
+          FORTHDOC=$(FORTHDOC)/$$i UPINDEX=../$(INDEXFILE) TOPDIR=$$TOPDIR \
+	; else echo $(MAKE) -C $$i -f TOPDIR/mk/M-subdir.mk install \
+          FORTHDOC=$(FORTHDOC)/$$i UPINDEX=../$(INDEXFILE) TOPDIR=$$TOPDIR \
+	;           $(MAKE) -C $$i -f $$TOPDIR/mk/M-subdir.mk install \
+          FORTHDOC=$(FORTHDOC)/$$i UPINDEX=../$(INDEXFILE) TOPDIR=$$TOPDIR \
+	; fi \
+	; for k in bg.gif ; do : \
+	; if test ! -f $(DESTDIR)$(FORTHDOC)/$$i/bg.gif \
+	; then echo cp bg.gif $(DESTDIR)$(FORTHDOC)/$$i/ \
+	;           cp bg.gif $(DESTDIR)$(FORTHDOC)/$$i/ \
+	; fi ; done \
+	; echo "(cd $(DESTDIR)$(FORTHDOC)/$$i" \
+               " && perl **TOPDIR/mk/index-dirs.pl >$(INDEXFILE) )" \
+	;       (cd $(DESTDIR)$(FORTHDOC)/$$i \
+	         && perl $$TOPDIR/mk/index-dirs.pl >$(INDEXFILE) ) \
+	; done \
+	; echo "(cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl)" \
+	;       (cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl \
+			>$(INDEXFILE) )
+
+DISTNAME=forth-repository
+DATECODE=%Y%m%d
+TEMP=/tmp
+dist:
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
+	; if test -d /tmp/$$DISTNAME-$$DATE \
+	; then echo rm -rf $(TEMP)/$$PKG \
+	;           rm -rf $(TEMP)/$$PKG \
+	; else true ; fi
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
+	; echo mkdir $(TEMP)/$$PKG \
+	;      mkdir $(TEMP)/$$PKG
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
+	; echo $(MAKE) install DESTDIR=$(TEMP)/$$PKG \
+	       $(MAKE) install DESTDIR=$(TEMP)/$$PKG
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` ; BUILD=`pwd` \
+	; echo "(cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)" \
+	;       (cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)
+	@ for i in $(LINKS) ; do : \
+	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//`
+	; echo ln -s $$FRM $$TGT \
+	;      ln -s $$FRM $$TGT || break \
+	; done
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` ; BUILD=`pwd` \
+	; echo "(cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)" \
+	;       (cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)
+	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
+	; echo "bzip2 -9k $$BUILD/$$PKG.tar ; gzip -9 $$BUILD/$$PKG.tar" \
+	; bzip2 -9 --keep $$BUILD/$$PKG.tar ; gzip -9 $$BUILD/$$PKG.tar

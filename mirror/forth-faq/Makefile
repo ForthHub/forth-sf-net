@@ -10,4 +10,6 @@ mirror:
 
 index:
 	-cp -f $x/* .
-	perl ../../mk/index-v.pl index-v.txt >index.html
+	@ TOPDIR=$(TOPDIR) ; test -z "$$TOPDIR" && TOPDIR="../.." \
+	; echo perl "*TOPDIR/mk/index-v.pl index-v.txt >index.html" \
+	;      perl $$TOPDIR/mk/index-v.pl index-v.txt >index.html
