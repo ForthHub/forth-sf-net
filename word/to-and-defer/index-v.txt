@@ -1,0 +1,95 @@
+title: TO
+description:
+
+TO is allowed to work on children of DEFER .
+
+Proposal:
+              Change the current definition of
+              6.2.2295 TO,
+              13.6.1.2295 TO,
+              modify 4.1.2 "Ambiguous conditions",
+              Table 9.2 "THROW code assignments",
+              to say the following:
+
+----
+
+6.2.2295   TO                               CORE EXT
+
+Interpretation: ( x "<spaces>name" -- )
+
+ Skip leading spaces and parse _name_ delimited by a space.
+
+ If _name_ is a deferred word or a value, set _name_ to _x_.
+ If _name_ is a deferred word, an ambiguous condition exists
+ if _x_ is not a valid execution token.
+
+ An ambiguous condition exists if _name_ is of type not recognized by TO.
+
+Compilation: ( "<spaces>name" -- )
+
+ Skip leading spaces and parse _name_ delimited by a space.
+ If _name_ is a deferred word or a value, append the
+ run-time semantics given below to the current definition.
+
+ An ambiguous condition exists if _name_ is of type not recognized by TO.
+
+Run-time: ( x -- )
+
+ Set _name_ to _x_.
+ If _name_ is a deferred word, an ambiguous condition exists
+ if _x_ is not a valid execution token.
+
+ Note: An ambiguous condition exists if either POSTPONE or [COMPILE]
+ is applied to TO.
+
+See: 6.2.2405 VALUE, ?.?.???? DEFER, 13.6.1.2295 TO, ?.?.???? IS.
+
+----
+
+13.6.1.2295   TO                                            LOCAL
+ Extend the compilation semantics of 6.2.2295 TO to include:
+
+Compilation: ( "<spaces>name" -- )
+
+ If _name_ was defined by (LOCAL), append the
+ run-time semantics given below to the current definition.
+
+ Note: Due to the locals' privileged position in the search order,
+ naming conflicts are resolved in favour of locals.
+
+Run-time: ( x -- )
+
+ Set _name_ to _x_.
+
+ Note: An ambiguous condition exists if either POSTPONE or [COMPILE]
+ is applied to TO.
+
+ See: 3.4.1 Parsing, 6.2.2295 TO, 6.2.2405 VALUE, ?.?.???? DEFER,
+ 13.6.1.0086 (LOCAL).
+
+----
+4.1.2 Ambiguous conditions
+
+Remove:
+  - name not defined by 6.2.2405 VALUE used by 6.2.2295 TO;
+
+Add:
+  - name of type not recognized by 6.2.2295 TO used with TO;
+
+  - storing an invalid execution token into a deferred
+  word (6.2.2295 TO)
+
+----
+Table 9.2 - THROW code assignments
+
+  -60 execution of a deferred word associated with an invalid execution token
+
+Experience:
+   Many years of use in OpenBoot and OpenFirmware systems.
+
+Comments:
+     See PROPOSALS for DEFER, BEHAVIOR.
+See:
+~~~tag[a href=to.txt]tag~~~ANSI TC discussion~~~tag[/a]tag~~~
+
+
