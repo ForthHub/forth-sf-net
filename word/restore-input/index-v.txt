@@ -32,8 +32,8 @@ in memory.
 In other words, a program that switches the input source shall not
 return control to the system until the input source is switched back,
 unless both input sources are strings.
-(Note the difference between the input source and the input source
-specification: the first specifies the device, the second specifies
+(Note the difference between the input source and the input
+source specification: the first specifies the device, the second specifies
 the device and its state. Changing the state of the current input source
 is not ambiguous.)
 
