@@ -1,0 +1,7 @@
+title: OTA [Open Terminal Architecture]
+description:
+ till better times, there's a link to a review of OTA words
+ that are not in the ANS/ISO Forth:
+
+ http://www.forth.org.ru/~mlg/std/ota-about/otawords.html
+
