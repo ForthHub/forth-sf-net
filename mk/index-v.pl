@@ -57,20 +57,23 @@ s{ (</dt>) ((?:.(?!</?(?:dt|hr|dl)\b))*.) }
     }gsex;
 
 # make file references hot...
-s{ ((?:http|ftp|mailto):/*) ([\w\.\/\~\-]+) }
+# mlg: I do not remember what chars are allowed after #'s (\x23),
+#      but it seems alphanum and - and . are ok.
+#      Correct me if you have time.
+s{ ((?:http|ftp|mailto):/*) ([\w\.\/\~\-]+) (\x23[0-9a-zA-Z\-\.]+)? }
 {
-    my ($a,$b) = ($1,$2);
+    my ($a,$b,$d) = ($1,$2,$3);
     my $c = $b; $c =~ s/^www\.//;
-    " <a href=\"$a$b\"> ".$c." </a> "
+    " <a href=\"$a$b$d\"> ".$c." </a> "
     }gmex;
-s{ ([\.\/]+)([\w\.\/\~\-]+) }
+s{ ([\.\/]+)([\w\.\/\~\-]+) (\x23[0-9a-zA-Z\-\.]+)? }
 { -f "$1$2"
-? "<a href=\"$1$2\"> ".$2." </a> "
+? "<a href=\"$1$2$3\"> ".$2." </a> "
 : -f "../$1$2"
-? "<a href=\"../$1$2\"> ".$2." </a> "
+? "<a href=\"../$1$2$3\"> ".$2." </a> "
 : length $1 > 3
-? "<a href=\"$1$2\"> ".$2." </a> "
-: $1.$2
+? "<a href=\"$1$2$3\"> ".$2." </a> "
+: $1.$2.$3
 }gmex;
 
 # and look for these too...
