@@ -60,13 +60,13 @@ s{ (</dt>) ((?:.(?!</?(?:dt|hr|dl)\b))*.) }
 # mlg: I do not remember what chars are allowed after #'s (\x23),
 #      but it seems alphanum and - and . are ok.
 #      Correct me if you have time.
-s{ ((?:http|ftp|mailto):/*) ([\w\.\/\~\-]+) (\x23[0-9a-zA-Z\-\.]+)? }
+s{ ((?:http|ftp|mailto):/*) ([\w\.\/\~\-\%]+) (\x23[0-9a-zA-Z\-\.]+)? }
 {
     my ($a,$b,$d) = ($1,$2,$3);
     my $c = $b; $c =~ s/^www\.//;
     " <a href=\"$a$b$d\"> ".$c." </a> "
     }gmex;
-s{ ([\.\/]+)([\w\.\/\~\-]+) (\x23[0-9a-zA-Z\-\.]+)? }
+s{ ([\.\/]+)([\w\.\/\~\-\%]+) (\x23[0-9a-zA-Z\-\.]+)? }
 { -f "$1$2"
 ? "<a href=\"$1$2$3\"> ".$2." </a> "
 : -f "../$1$2"
