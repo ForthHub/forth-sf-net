@@ -1,0 +1,8 @@
+title: sign-extend a character/word
+description:
+ To sign-extend a 16-bit value to a 32-bit value on a 32-bit system,
+ with 2-complement arithmetics, the following phrase may be used:
+
+ ( u16 ) DUP $8000 AND NEGATE OR ( u32 )
+
+
