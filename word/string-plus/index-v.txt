@@ -1,0 +1,20 @@
+title: STRING+
+status:
+ we recommend to reserve the name STRING+ for the functionality given below.
+
+description:
+
+\ ( addr1 len1 addr2 len2 -- addr1 len3 )
+\ append the text specified by addr2 and len2 to the text of length len2
+\ in the buffer at addr1. Return address and length of the resulting text.
+\ An ambiguous condition exists if the resulting text is larger
+\ than the size of buffer at addr1.
+: STRING+ ( bufaddr buftextlen addr len -- bufaddr buftextlen+len )
+        2OVER +         ( ba btl a l bta+btl )
+        SWAP DUP >R     ( ba btl a bta+btl l ) ( r: l )
+        MOVE
+        R> +
+;
+
+eee: STRING+C ../string-plus-c/index.html
+

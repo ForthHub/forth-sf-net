@@ -1,0 +1,17 @@
+title: STRING+C
+status:
+ we recommend to reserve the name STRING+C for the functionality given below.
+
+description:
+
+\ ( addr1 len1 c -- addr1 len2 )
+\ append c to the text of length len2 in the buffer at addr1.
+\ Return address and length of the resulting text.
+\ An ambiguous condition exists if the resulting text is larger
+\ than the size of buffer at addr1.
+: STRING+C ( addr len c -- addr len+1 )
+   DUP 2OVER + C! DROP 1+
+;
+
+see: STRING+ ../string-plus/index.html
+
