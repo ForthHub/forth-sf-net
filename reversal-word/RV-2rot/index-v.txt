@@ -1,0 +1,12 @@
+title: reversal for 2ROT , CS-ROT , etc.
+introduction:
+ The widely accepted name for the reversal operation for ROT is -ROT .
+description:
+ If you really need such terrible words as mentioned in the title,
+ the best known names for them are -2ROT and -CS-ROT .
+
+ : -2ROT 2ROT 2ROT ;
+
+ : -CS-ROT CS-ROT CS-ROT ;
+
+
