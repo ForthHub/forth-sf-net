@@ -368,7 +368,7 @@ of the initial search-order.
 ENVIRON
 <BR>
 <pre>
-       ( i*x c-addr u -- j*x )
+       ( i*x c-addr u -- i*x )
 </pre>
 <P>
 
@@ -382,24 +382,33 @@ only the first is forwarded to
 <a href="../file-ext/file-ext.htm#11.6.1.1718">INCLUDED</a> while other calls
 do nothing.
 <P>
-It is an implementation defined option whether multiple
-environment path prefixes are tested for source files,
-including the option to check for a source file without
-the environment path prefix.
+ It is an implementation defined option whether multiple
+ environment path prefixes are tested for source files,
+ including the option to check for a source file without
+ the environment path prefix.
 <P>
-It is an implementation defined option whether the
-check for multiple includes by REQUIRED can react
-to indepent executions of INCLUDED.
+ It is an implementation defined option whether the
+ check for multiple includes by REQUIRED can react
+ to indepent executions of INCLUDED.
 
 <P>
-Apart from the ambigous conditions set by
+ Apart from the ambigous conditions set by
+ <a href="../file-ext/file-ext.htm#11.6.1.1718">INCLUDED</a>
+ there is an additional implementation defined behaviour
+ when the call to
 <a href="../file-ext/file-ext.htm#11.6.1.1718">INCLUDED</a>
-there is an additional implementation defined behaviour
-when the call to
-<a href="../file-ext/file-ext.htm#11.6.1.1718">INCLUDED</a>
-would modify the parameter stack. It shall throw a condition or
-it may drop additional items left by the inclusion or it may
-ignore any changes to the parameter stack.
+ would modify the parameter stack - which may even include
+ changes in stack depth. An implementation <b>shall</b> check the
+ stack depth and throw a condition which the self-parsing variant
+<a href="../environ-ext/environ-ext.htm#19.6.2.3">REQUIRES</a>
+ can catch - otherwise stack changes are ignored rendering the
+ definition as ultimately (outside of catch blocks) being
+ <code><nobr> ( i*x c-addr u -- j*x ) </nobr></code>.
+<P>
+ An implementation without catch domains <b>may</b> print
+ a warning message that otherwise
+<a href="../environ-ext/environ-ext.htm#19.6.2.3">REQUIRES</a>
+ would emit or that could be caught by other uses of this word.
 <P>
 
 <hr>
@@ -496,6 +505,13 @@ ENVIRON EXT
 Skip leading space delimiters. Parse name delimited by a space.
 Submit the string to
 <a href=environ-ext.htm#19.6.1.0003>REQUIRED</a>
+
+<P>
+If the underlying
+<a href=environ-ext.htm#19.6.1.0003>REQUIRED</a>
+call did detect a stack depth change from including a source
+file, this word <b>must</b> catch the corresponding exception
+and it may print a warning on doing so.
 
 <P>
 
