@@ -1,0 +1,38 @@
+title: BEHAVIOR
+description:
+
+?.?.???? BEHAVIOR                       CORE EXT
+      ( xt1 -- xt2 )
+
+Retrieve _xt2_, the execution token of the word currently associated
+with the deferred word whose execution token is _xt1_.
+
+An ambiguous condition exists if the word identified by _xt1_
+is not a deferred word.
+
+Rationale.
+
+A.??.?.???? BEHAVIOR
+
+This command is used to obtain the execution contents of a deferred
+word. A typical use would be to retrieve and save the execution
+behavior of the deferred word, set the deferred word to a new behavior,
+and then later restore the old behavior.
+
+If the deferred word identified by _xt1_ is associated with some
+other deferred word, _xt2_ is the execution token of that other
+deferred word. To retrieve the execution token of the word currently
+associated with that other deferred word, use the phrase BEHAVIOR BEHAVIOR .
+
+Experience:
+  Many years of use in OpenBoot and OpenFirmware systems.
+
+See:
+TO DEFER
+
+Notes:
+Proposed for inclusion into the 2001 version of ANS Forth.
+
+
+~~~tag[a href=behavior.txt]tag~~~see TC discussion~~~tag[/a]tag~~~
+

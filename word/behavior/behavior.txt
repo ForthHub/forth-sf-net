@@ -1,0 +1,118 @@
+Message-ID: <394DD1B8.9635C9AB@forth.org>
+Date: Mon, 19 Jun 2000 10:54:32 +0300
+From: Michael Gassanenko <mlg@forth.org>
+To: ansforth-real@minerva.com
+Subject: BEHAVIOR -- rephrase 1
+
+I try to rephrase M.Milendorf's proposal about BEHAVIOR so that it would
+be in ANS style and ready-to-copy-and-paste.
+
+*Any* comments would be appreciated.
+If you do not want to create noise in ansforth-real@minerva.com ,
+use personal mail ( mlg@forth.org ).
+
+Best regards, Michael Gassanenko
+
+-- changes ---
+
+  Removed the brief summary line.
+
+  Added the description, including the ambiguous condition.
+
+  Moved the typical use description to rationale.
+
+  Explained in the rationale what happens if a deferred word is
+  assigned to a deferred word ( BEHAVIOR does not look for the
+  end of chain).
+
+--- questions ---
+
+Do we need a special exception number or
+> -12   argument type mismatch
+is ok?
+
+
+-------------- rephrase 1 ------------
+
+Title:        Add BEHAVIOR to the CORE EXT wordset
+
+Justification:
+  This word provides a read access to deferred words.
+
+Problem:
+  Without BEHAVIOR, we have only write and execute access to deferred words.
+
+Proposal:
+
+?.?.???? BEHAVIOR                       CORE EXT
+      ( xt1 -- xt2 )
+
+Retrieve _xt2_, the execution token of the word currently associated
+with the deferred word whose execution token is _xt1_.
+
+An ambiguous condition exists if the word identified by _xt1_
+is not a deferred word.
+
+Rationale.
+
+A.??.?.???? BEHAVIOR
+
+This command is used to obtain the execution contents of a deferred
+word. A typical use would be to retrieve and save the execution
+behavior of the deferred word, set the deferred word to a new behavior,
+and then later restore the old behavior.
+
+If the deferred word identified by _xt1_ is associated with some
+other deferred word, _xt2_ is the execution token of that other
+deferred word. To retrieve the execution token of the word currently
+associated with that other deferred word, use the phrase BEHAVIOR BEHAVIOR .
+
+Experience:
+  Many years of use in OpenBoot and OpenFirmware systems.
+
+Comments:
+  See PROPOSALS for TO, DEFER.
+
+  Michael Gassanenko: I began to use it in practice only after
+  M.Milendorf's proposal in 1999, and found this word very useful.
+  I especially appreciate that one can, as a last resort,
+  use the xt's that may be stored into a deferred word
+  as an enum type (unaesthetic, but cheap, safe and practical).
+
+=== the original proposal =================================
+
+Title:        Add BEHAVIOR word to the CORE EXT wordset
+
+Justification:BEHAVIOR word along with DEFER and TO constitute a wordset to
+              support run-time modifying words in the Forth Programming Language.
+
+Problem:      If DEFER is included in the standard, BEHAVIOR shall be included
+              as well.
+
+Proposal:     BEHAVIOR      ( defer-xt -- contents-xt )
+
+              Retrieve execution behavior of a defer word.
+
+              This command is used to obtain the execution contents of a DEFER
+              word. A typical use would be to retrieve and save the execution
+              behavior of the defer word, set the defer word to a new behavior,
+              and then later restore the old behavior.
+
+              Used as: ['] defer-name behavior ( contents-xt -- )
+
+Examples:     ok defer foo
+              ok ' 1 to foo
+              ok ' foo behavior >r
+              ok ' 2 to foo
+              ok foo .
+              2
+              ok r> to foo
+              ok foo .
+              1
+              ok
+
+Remarks:      The current wording is an exact copy of IEEE 1275-1994 definition.
+
+Experience:   Many years of use in OpenBoot and OpenFirmware systems.
+
+Comments:     See PROPOSALS for TO, DEFER.
