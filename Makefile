@@ -189,8 +189,8 @@ install :
 	;       (cd $(DESTDIR)$(FORTHDOC) && perl $$TOPDIR/mk/index-dirs.pl \
 			>$(INDEXFILE) )
 	@ for i in $(LINKS) ; do : \
-	; then FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
-	; if test ! -e "$(DESTDIR)$(FORTHDOC)/$$TGT" \
+	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
+	; if test ! -e "$(DESTDIR)$(FORTHDOC)/$$TGT" ; then : \
 	; echo "(cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT)" \
 	;       (cd $(DESTDIR)$(FORTHDOC) && ln -s $$FRM $$TGT) \
 	; else echo "(cd $(DESTDIR)$(FORTHDOC) && : $$FRM '-->' $$TGT)" \
