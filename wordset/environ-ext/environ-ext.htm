@@ -324,9 +324,10 @@ ENVIRON
 
 Extend the semantics of <a href="../core-ext/core-ext.htm#6.1.1345">ENVIRONMENT?</a>
 to search the <a href="#6.1.0003">ENVIRONMENT-WORDLIST</a> for hints.
-When <a href="../search-ext/search-ext.htm#16.6.1.2192">SEARCH-WORDLIST</a> finds
-an environment hint then it returns the execution value and a
-TRUE flag, otherwise return just a FALSE flag.
+When the call to <a href="../search-ext/search-ext.htm#16.6.1.2192">SEARCH-WORDLIST</a>
+finds an environment hint then the EXECUTE of the returned execution token
+will push parameters on the stack, and a TRUE flag is added,
+otherwise return just a FALSE flag.
 
 <P>
 

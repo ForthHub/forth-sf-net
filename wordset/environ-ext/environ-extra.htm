@@ -136,6 +136,38 @@ GET-CURRENT ENVIRONMENT-WORDLIST SET-CURRENT
 ( previous ) SET-CURRENT
 </pre>
 <P>
+<dl><dt>example:</dt>
+<dd>
+  a call of <nobr><code> S" /HOLD" ENVIRONMENT?" </code></nobr> will
+  have a general stack effect of
+  <nobr><code>( -- false | size true )</code></nobr>
+  depending on the result of the SEARCH-WORDLIST. If a definition
+  is not found, a FALSE flag is pushed on to the parameter stack,
+  but if it finds the name in the ENVIRONMENT-WORDLIST then the call
+  to SEARCH-WORDLIST returns its execution token. For the case of
+  /HOLD it is a CONSTANT xt - calling the execution-token via EXECUTE
+  will leave the value of the constant on the parameter stack, and
+  the ENVIRONMENT? definition will add a TRUE flag on top.
+</p><p>
+  A word calling ENVIRONMENT? is supposed to use an IF statement
+  that consumes the true/false flag, and in the true case to
+  handle the additional values returned through execution of the
+  symbol found in the ENVIRONMENT-WORDLIST. When an implementation
+  of this wordsets implements the extension of the ENVIRONEMENT
+  word, the following two code fragmant are almost identical.
+<pre>
+  : .HOLD S" /HOLD" ENVIRONMENT? IF . ELSE ." unknown" THEN ;
+  \ and
+  S" /HOLD" ENVIRONMENT? [IF] DROP
+  : .HOLD [ ALSO ENVIRONMENT ] /HOLD [ PREVIOUS ] . ;
+  [ELSE]
+  : .HOLD ." unknown" ;
+  [THEN]
+</pre>
+  The difference is that the latter is faster while the
+  earlier will allow later compiling to add a definition of
+  /HOLD to the ENVIRONMENT-WORDLIST to be found during
+  execution of the word.
 
 <hr>
 <A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
