@@ -41,30 +41,33 @@ original-message:
 
  Thus Julian V. Noble's `[put_char]` could be:
 
-    : [put_char]                    ( char -- 0..3 )
+: [put_char]                    ( char -- 0..3 )
         BL CASE? IF  1  EXIT THEN
         [char] { CASE? IF  2  EXIT THEN
         [char] } CASE? IF  3  EXIT THEN
-        DROP 0 ;
+        DROP 0
+;
 
  Or:
 
-    : [put_char]                    ( char -- 0..3 )
+: [put_char]                    ( char -- 0..3 )
         BL CASE? IF  1  ELSE
         [char] { CASE? IF  2  ELSE
         [char] } CASE? IF  3  ELSE
-        DROP 0  THEN THEN THEN ;
+        DROP 0  THEN THEN THEN
+;
 
 
  Or with `COND ... THENS`:
 
-    : [put_char]                    ( char -- 0..3 )
+: [put_char]                    ( char -- 0..3 )
         COND
             BL CASE? IF  1  ELSE
             [char] { CASE? IF  2  ELSE
             [char] } CASE? IF  3  ELSE
             DROP 0
-        THENS ;
+        THENS
+;
 
  `CASE?` can be conjoined with other tests or further `CASE?`s.
 
