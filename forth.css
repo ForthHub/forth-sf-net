@@ -1,5 +1,5 @@
 
-body { background-color : #F0F0E0 ; background-image: url(/bg.gif) ; }
+body { background-color : #F0F0E0 ; background-image: url("/bg.gif") ; }
 
 a:link     { color: #0000FF ; text-decoration: none ; }
 a:visited  { color: #000080 ; text-decoration: none ; }
