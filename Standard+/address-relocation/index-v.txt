@@ -1,0 +1,5 @@
+title: Address Relocation
+description:
+ Address relocation has been left outside the scope of the standard.
+ See ../rof/
+

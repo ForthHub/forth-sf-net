@@ -1,0 +1,40 @@
+title: null pointer
+description:
+ Many Forth programs use 0 as the null pointer.
+
+ Nevertheless, the standard neither recommends nor prohibits it.
+
+ The word ALLOCATE is allowed to allocate memory at 0 and return 0
+ as the address of the alocated memory area.
+
+ In practice, the word ALLOT may allocate memory at 0 only at the
+ first invocation, because addresses are unsigned. OTOH, a really
+ terrific system may begin to allocate memory at 0 at any moment
+ when contiguity of allocated space is allowed to break
+ (See 3.3.3.2 Contiguous regions).
+
+ On most platforms, the memory at 0 has some specific purpose and
+ is never allocated by ALLOT or ALLOCATE.
+ It is easy to define an unique value that may be used as the
+ end-of-chain marker, for example,
+ CREATE END-OF-CHAIN
+ but if two or more packages define two or more end-of-chain markers,
+ maintaining will become a nightmare.
+
+ Another advice have been to leave NULL for code that interacts
+ with Win32, and use a different name, say, NIL.
+ OTOH, having both NULL and NIL in the same system is no good either.
+
+ The overal impression is that if this issue was resolved, this would
+ create more problems than there is now.
+
+ So the only recommendation is:
+
+Recommendation:
+ ALLOCATE must never return zero as the address of allocated
+ memory. The reason is that many existing programs use 0
+ as the end-of-chain mark.
+
+Page-written-by:
+ mlg
+
