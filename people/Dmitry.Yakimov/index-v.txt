@@ -1,4 +1,9 @@
-title: Rob Chapman
+title: Dmitry Yakimov
+Palm OS FORTH, Scientific Forth programming,
+Delosoft, Inc
 internet-url:
-	http://www.compusmart.ab.ca/rc
---- $Id: index-v.txt,v 1.1 2001/06/15 21:56:27 mlg-r Exp $
+	http://www.delosoft.com
+internet-url:
+	http://www.forth.org.ru/~day (mostly in Russian)
+
+--- $Id: index-v.txt,v 1.2 2001/06/15 22:07:54 mlg-r Exp $
