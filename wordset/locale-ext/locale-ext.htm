@@ -211,6 +211,7 @@ See:
 <hr>
 <a name="macro-name">
 <DL><DT><B>macro-names / references</B>
+</DT><DD>
 The macro names and expansions are usually created in a seperated
 wordlist as it is done with the ENVIRONMENT-WORDLIST to implement
 ENVIRONMENT?-queries - if an entry exists it is executed, so that
@@ -221,8 +222,8 @@ of ISO WD2 15435 (or later) be used where appropriate.
 </p><p>
 The implementation with a LOCALE-WORDLIST can not be specifically
 recommended as a SEARCH-WORDLIST would run in ACS on the target
-system and in crosscompile environments that may be different than
-the wordlists on the development system.
+system for using lstrings in SUBSTIUTE, and in crosscompile environments
+the ACS may be different than the wordlists DCS on the development system.
 </DL></a>
 
 <p>
@@ -591,7 +592,7 @@ LOCALE EXT
 </pre>
 <P>
 <pre>
-        Compilation: ( <B>"backslash-string&lt;quote&gt;"</B> -- )
+        Compilation: ( <B>"original-string&lt;quote&gt;"</B> -- )
 </pre>
 <P>
 
