@@ -1,3 +1,4 @@
-the directory names follow the
+the directory names start from "RV-"
+and then follow the
 output from ../ng
 or ../mk/forthname.pl
