@@ -1,0 +1,187 @@
+<HTML><HEAD>
+<TITLE>[06] CORE-RES-EXT</TITLE>
+</HEAD>
+<link rel=stylesheet type="text/css" media="screen"
+      href="../forth-std/forth-std.css">
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=core-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../block-ext/block-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=6.>TOC</a>
+</td>
+</tr>
+</table>
+<hr size=4>
+
+<!-- / HEADER -->
+
+<!-- <hr> -->
+<a name=6.3>
+<H2>R.6 Core reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.6.1.2008>
+<code>
+R.6.1.2008 <b>PARSE-WORD</b>
+</code>
+</a>
+<BR>
+CORE RES EXT
+<BR>
+<pre>
+        ( <B>"<spaces>ccc"</B> -- c-addr u )
+</pre>
+
+<P>
+
+Skip leading spaces and parse name delimited by space.
+
+<P>
+
+c-addr is the address (within the input buffer) and u is the length of
+the parsed string. If the parse area was empty, the resulting string
+has a zero length.
+
+<P>
+
+<code>
+See:
+<A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
+<a href=../core-ext/core-ext.htm#6.2.2008>6.2.2008 PARSE</a>,
+<a href=../core-ext/core-extra.htm#A.6.2.2008>A.6.2.2008 PARSE</a>,
+<a href=../core-ext/core-ext.htm#6.1.2450>6.1.2450 WORD</a>,
+</code>
+
+<P>
+
+<hr>
+<A name=R.6.1.2160>
+<code>
+R.6.1.2160 <b>-ROT</b>
+</code>
+</a>
+<BR>
+<B>dash-rote</B>
+CORE RES EXT
+<BR>
+<pre>
+        ( x1 x2 x3 -- x3 x1 x2 )
+</pre>
+
+<P>
+
+Rotate the
+top three stack entries.
+
+
+<P>
+<code>
+See:
+<A href=core-ext.htm#6.1.2160>6.1.2160 ROT</a>
+</code>
+
+<p><hr>
+<A name=R.6.2.2440>
+<code>
+R.6.2.2440 <b>BETWEEN</b>
+</code>
+</a>
+<BR>
+CORE RES EXT
+<BR>
+<pre>
+        ( n1|u1 n2|u2 n3|u3 -- flag )
+</pre>
+
+<P>
+
+Perform a comparison of a test value n1|u1 with a lower limit n2|u2 and
+an upper limit n3|u3, returning true if either (n2|u2 &lt;= n3|u3 and
+(n2|u2 &lt;= n1|u1 and n1|u1 &lt;= n3|u3)) or (n2|u2 &gt; n3|u3 and
+(n2|u2 &lt;= n1|u1 or n1|u1 &lt;= n3|u3)) is true, returning false
+otherwise. An ambiguous condition exists if n1|u1, n2|u2, and n3|u3 are
+not all the same type.
+
+<P>
+<code>
+See:
+<a href=core-ext.htm#6.2.2440>6.2.2440 WITHIN</a>
+<a href=core-extra.htm#A.6.2.2440>A.6.2.2440 WITHIN</a>
+</code>
+<p>
+
+<hr>
+<A name=R.6.1.0290>
+<code>
+R.6.1.0290 <B>2+</B>
+</code>
+</a>
+<BR>
+<B>two-plus</B>
+CORE RES EXT
+<BR>
+<pre>
+        ( n1|u1 -- n2|u2 )
+</pre>
+
+<P>
+
+Add two (2)
+to n1|u1 giving the sum n2|u2.
+
+<P><code>
+See:
+<a href=core-ext.htm#6.1.0290>6.1.0290 1+</a>
+</code>
+
+<p><hr>
+<A name=R.6.1.0300>
+<code>
+R.6.1.0300 <B>2-</B>
+</code>
+</a>
+<BR>
+<B>two-minus</B>
+CORE RES EXT
+<BR>
+<pre>
+        ( n1|u1 -- n2|u2 )
+</pre>
+
+<P>
+
+Subtract two (2)
+from n1|u1 giving the difference n2|u2.
+
+<P><code>
+See:
+<a href=core-ext.htm#6.1.0300>6.1.0300 1-</a>
+</code>
+
+<P><hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../block-ext/block-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
+

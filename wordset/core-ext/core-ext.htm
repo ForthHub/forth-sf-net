@@ -14,6 +14,11 @@
 <td>
  This is a page from <a href="../../standard/dpans/dpans.htm">DPANS'94</a>,
  the Draft Proposal on ANS Forth 1994.
+<br>
+ There are just additional cross-references to
+ <a href="core-res-ext.htm">reserved words</a>
+ on a
+ <a href="core-res-ext.htm">seperate page</a>.
 </td>
 <td align=right width=70>
 <a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
@@ -524,7 +529,7 @@ See:
 <hr>
 <A name=6.1.0190>
 <code>
-6.1.0190 <B>."</B>
+6.1.0190 <B>.&quot;</B>
 </code>
 </a>
 <BR>
@@ -541,7 +546,7 @@ See:
 </pre>
 <P>
 
-Parse ccc delimited by " (double-quote). Append the run-time semantics
+Parse ccc delimited by &quot; (double-quote). Append the run-time semantics
 given below to the current definition.
 
 
@@ -560,7 +565,7 @@ ccc.
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
 <A href=../core-ext/core-ext.htm#6.2.0200>6.2.0200 .(</a> ,
-<a href=../core-ext/core-extra.htm#A.6.1.0190>A.6.1.0190 ."</a>
+<a href=../core-ext/core-extra.htm#A.6.1.0190>A.6.1.0190 .&quot;</a>
 </code>
 
 <P>
@@ -695,6 +700,10 @@ true if and only if x is equal to zero.
 Add one (1)
 to n1|u1 giving the sum n2|u2.
 
+<P><code>
+See:
+<a href=core-res-ext.htm#R.6.1.0290>R.6.1.0290</a> 2+
+</code>
 <P>
 
 <hr>
@@ -715,6 +724,10 @@ to n1|u1 giving the sum n2|u2.
 Subtract one (1)
 from n1|u1 giving the difference n2|u2.
 
+<P><code>
+See:
+<a href=core-res-ext.htm#R.6.1.0300>R.6.1.0300</a> 1-
+</code>
 <P>
 
 <hr>
@@ -1319,7 +1332,7 @@ See:
 <hr>
 <A name=6.1.0680>
 <code>
-6.1.0680 <B>ABORT"</B>
+6.1.0680 <B>ABORT&quot;</B>
 </code>
 </a>
 <BR>
@@ -1336,7 +1349,7 @@ See:
 </pre>
 <P>
 
-Parse ccc delimited by a " (double-quote). Append the run-time semantics
+Parse ccc delimited by a &quot; (double-quote). Append the run-time semantics
 given below to the current definition.
 
 <p>
@@ -1356,7 +1369,7 @@ function of
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
 <A href=../exception-ext/exception-ext.htm#9.6.2.0680>9.6.2.0680 ABORT"</a> ,
-<a href=../core-ext/core-extra.htm#A.6.1.0680>A.6.1.0680 ABORT"</a>
+<a href=../core-ext/core-extra.htm#A.6.1.0680>A.6.1.0680 ABORT&quot;</a>
 </code>
 
 <P>
@@ -3327,6 +3340,12 @@ top three stack entries.
 
 <P>
 
+<code>
+See:
+<a href=../core-ext/core-res-ext.htm#R.6.1.2140>R.6.1.2140 -ROT</a>
+</code>
+<P>
+
 <hr>
 <A name=6.1.2162>
 <code>
@@ -3352,7 +3371,7 @@ of bits in a cell.
 <hr>
 <A name=6.1.2165>
 <code>
-6.1.2165 <b>S"</b>
+6.1.2165 <b>S&quot;</b>
 </code>
 </a>
 <BR>
@@ -3369,7 +3388,7 @@ of bits in a cell.
 </pre>
 <P>
 
-Parse ccc delimited by " (double-quote). Append the run-time semantics
+Parse ccc delimited by &quot; (double-quote). Append the run-time semantics
 given below to the current definition.
 
 
@@ -3387,9 +3406,9 @@ ccc. A program shall not alter the returned string.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
-<A href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C"</a> ,
-<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S"</a> ,
-<a href=../core-ext/core-extra.htm#A.6.1.2165>A.6.1.2165 S"</a>
+<A href=../core-ext/core-ext.htm#6.2.0855>6.2.0855 C&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+<a href=../core-ext/core-extra.htm#A.6.1.2165>A.6.1.2165 S&quot;</a>
 </code>
 
 <P>
@@ -3987,7 +4006,8 @@ See:
 <A href=../forth-std/defs.htm#3.3.3.6>3.3.3.6</a> Other transient regions,
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
 <a href=../core-ext/core-ext.htm#6.2.2008>6.2.2008 PARSE</a> ,
-<a href=../core-ext/core-extra.htm#A.6.1.2450>A.6.1.2450 WORD</a>
+<a href=../core-ext/core-extra.htm#A.6.1.2450>A.6.1.2450 WORD</a>,
+<a href=../core-ext/core-res-ext.htm#R.6.2.2008>R.6.2.2008 PARSE-WORD</a>
 </code>
 
 <P>
@@ -4248,7 +4268,7 @@ immediate word.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
-<A href=../core-ext/core-ext.htm#6.1.0190>6.1.0190 ."</a> ,
+<A href=../core-ext/core-ext.htm#6.1.0190>6.1.0190 .&quot;</a> ,
 <a href=../core-ext/core-extra.htm#A.6.2.0200>A.6.2.0200 .(</a>
 </code>
 
@@ -4616,7 +4636,7 @@ See:
 <hr>
 <A name=6.2.0855>
 <code>
-6.2.0855 <b>C"</b>
+6.2.0855 <b>C&quot;</b>
 </code>
 </a>
 <BR>
@@ -4633,7 +4653,7 @@ See:
 </pre>
 <P>
 
-Parse ccc delimited by " (double-quote) and append the run-time
+Parse ccc delimited by &quot; (double-quote) and append the run-time
 semantics given below to the current definition.
 
 <P>
@@ -4650,9 +4670,9 @@ program shall not alter the returned string.
 <code>
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
-<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S"</a> ,
-<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S"</a> ,
-<a href=../core-ext/core-extra.htm#A.6.2.0855>A.6.2.0855 C"</a>
+<A href=../core-ext/core-ext.htm#6.1.2165>6.1.2165 S&quot;</a> ,
+<A href=../file-ext/file-ext.htm#11.6.1.2165>11.6.1.2165 S&quot;</a> ,
+<a href=../core-ext/core-extra.htm#A.6.2.0855>A.6.2.0855 C&quot;</a>
 </code>
 
 <P>
@@ -5155,6 +5175,7 @@ has a zero length.
 See:
 <A href=../forth-std/defs.htm#3.4.1>3.4.1</a> Parsing,
 <a href=../core-ext/core-extra.htm#A.6.2.2008>A.6.2.2008 PARSE</a>
+<a href=../core-ext/core-res-ext.htm#R.6.2.2008>R.6.2.2008 PARSE-WORD</a>
 </code>
 
 
@@ -5696,6 +5717,7 @@ not all the same type.
 <code>
 See:
 <a href=../core-ext/core-extra.htm#A.6.2.2440>A.6.2.2440 WITHIN</a>
+<a href=../core-ext/core-res-ext.htm#R.6.2.2440>R.6.2.2440 BETWEEN</a>
 </code>
 <p>
 
