@@ -17,7 +17,7 @@ $       Hex                 $FE00     ~~~
 
 ----
 note-1:
-~~tag[small]tag~~~
+~~~tag[small]tag~~~
 Guido Draheim wrote:
 >
 > I see that it refers to OTA and a decimal-prefix
@@ -36,7 +36,7 @@ Guido Draheim wrote:
 > it might look a bit different.
 ~~~tag[/small]tag~~~
 note-2:
-~~tag[small]tag~~~
+~~~tag[small]tag~~~
 SwiftForth uses a different set of number conversion prefixes:
 >
 > SwiftForth 2.2.2 09Mar2001
