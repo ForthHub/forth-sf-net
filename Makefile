@@ -1,6 +1,8 @@
 
 SUBDIRS = naming people mirror syntax system website word wordset standard
 LINKS = from/people sys/system web/website ws/wordset std/standard
+HTDOCS = /home/groups/f/fo/forth/htdocs
+HTHOST = shell.sourceforge.net
 
 default: web
 
@@ -35,17 +37,22 @@ zip:
 upload-zip:
 	zip -9r forth.zip $(SUBDIRS) mk/ *.* Makefile
 	scp -prvC forth.zip \
-		$(USER)@shell.sourceforge.net:/home/groups/forth/htdocs
+		$(USER)@$(HTHOST):$(HTDOCS)
 	rm forth.zip
 #	ssh && cd /home/groups/forth/htdocs && unzip forth.zip
 
 upload:
-	scp -prvC . shell.sourceforge.net:/home/groups/forth/htdocs
+	scp -prvC . $(HTHOST):$(HTDOCS)
 
 copy:
-	cp -rf . /home/groups/f/fo/forth/htdocs
-	chmod -R --quiet a+rw  /home/groups/f/fo/forth/htdocs
+	cp -rf . $(HTDOCS)
+	chmod -R --quiet a+rw  $(HTDOCS)
 # mlg -- 09.06.2001 -- it seems that now it's on the same server
 
+perms:
+	chgrp -R forth $(HTDOCS)
+	chmod g+w $(HTDOCS)
+	chmod a+r $(HTDOCS)
+
 upload-user:
-	scp -prvC . $(USER)@shell.sourceforge.net:/home/groups/forth/htdocs
+	scp -prvC . $(USER)@$(HTHOST):$(HTDOCS)
