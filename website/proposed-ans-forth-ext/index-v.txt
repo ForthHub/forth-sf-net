@@ -1,0 +1,14 @@
+title: Proposed ANS Forth Ext. (@bournemouth/forth)
+internet-url: http://dec.bournemouth.ac.uk/forth/ans/extentions/index.html
+forth:
+      quoted from the header there:
+
+      This is a collection of proposed extensions to
+      Forth, provided here for public review and
+      comment. It is hoped that people will implement
+      these extensions, thus providing a consensuses
+      for the next standard review, currently scheduled
+      to take place in 2004.
+
+--- $Id: index-v.txt,v 1.1 2001/08/17 14:38:54 guidod Exp $
+
