@@ -45,6 +45,21 @@ or [THEN] delimited by ~~~tag[em]tag~~~spaces~~~tag[/em]tag~~~ and ~~~tag[em]tag
 And the Technical Committee will not be responsible in bugs of
 your system. This behaviour will be ~~~tag[em]tag~~~your~~~tag[/em]tag~~~ design error. So watch out!
 
+additional-comment:
+ Len Zettel wrote on Fri, 26 Jul 2002 18:56:13 GMT
+ in the message <hXg09.297873$iB1.15267200@bin4.nnrp.aus1.giganews.com>:
+>
+[...]
+> There is also
+> --------------------------------------------------------------
+> 11.3.6 Parsing
+> When parsing from a text file using a space delimiter, control characters
+> shall be treated the same as a space character.
+> -----------------------------------------------------
+> Mitch was quite firm about having that language.
+>   -LenZ-
+>
+
 page-written-by:
  mlg
 
