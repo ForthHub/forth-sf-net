@@ -1,0 +1,55 @@
+title: RESTORE-INPUT (extended)
+description:
+RESTORE-INPUT is a standard word: see http://forth.sourceforge.net/standard/dpans/dpans6.htm#6.2.2148
+
+The standard says that "an ambiguous condition exists
+if the input source represented by the arguments is
+not the same as the current input source".
+This means that, for example, the use of RESTORE-INPUT to
+stop interpretation of the text in a string and continue
+interpretation of a file is not portable.
+
+It is meaningful to extend the semantics of RESTORE-INPUT and
+read this definition as follows:
+
+RESTORE-INPUT
+
+( xn ... x1 n -- flag )
+
+Attempt to restore the input source specification to the state described
+by x1 through xn. flag is true if the input source specification cannot
+be so restored.
+
+An ambiguous condition exists if the arguments specify an input source
+whose state has been irreversibly changed by the system, for example,
+a closed file or the user input device after accepting a new line.
+
+An ambiguous condition exists if the program returns control to the system
+with the input source different from the one that was current when
+the system invoked the program, unless both input sources are strings
+in memory.
+
+In other words, a program that switches the input source shall not
+return control to the system until the input source is switched back,
+unless both input sources are strings.
+(Note the difference between the input source and the input source
+specification: the first specifies the device, the second specifies
+the device and its state. Changing the state of the current input source
+is not ambiguous.)
+
+From the practical point of view, this means that if you write
+system-dependent code that switches the input sources, e.g.
+the word EVALUATE-WITH (q.v.), you may use SAVE-INPUT ... RESTORE-INPUT
+to nest input sources.
+
+Note the definition in 2.1:
+
+input source specification:
+  A set of information describing a particular state of the input source,
+  input buffer, and parse area. This information is sufficient, when saved
+  and restored properly, to enable the nesting of parsing operations
+  on the same or different input sources.
+
+
+
+
