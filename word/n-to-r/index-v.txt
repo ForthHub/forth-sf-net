@@ -1,0 +1,18 @@
+title: N>R
+description:
+N>R                                     "n-to-r"    CORE EXT
+
+     ( xn ... x1 n -- ) ( R: -- x1 ... xn n )
+
+Take n off the data stack. Repeat n times: move the top
+data stack item to the return stack. After that, place n
+onto the return stack.
+
+note:
+This word is a means to store the information returned by words
+like SAVE-INPUT to the return stack and thus unblock the data stack.
+
+see:
+NR> ../n-r-from/index.html
+
+
