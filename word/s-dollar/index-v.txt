@@ -1,7 +1,12 @@
 title: S$
 description:
 
- S$ ( "<delim1>text<delim2>" -- addr len )         "s-dollar"
+ S$                                                   "s-dollar"
+
+ Interpreting: ( "<delim1>text<delim2>" -- addr len )
+
+ Compiling: ( "<delim1>text<delim2>" -- )
+ Run-time: ( -- addr len )
 
  Obtain the first delimiter character, delim1, from the input stream,
  that is, fetch the next character froom the input stream and advance >IN
@@ -13,7 +18,10 @@ description:
  the input buffer) and length.
 
  If the current state is compilation, compile that string as a string
- literal.
+ literal. (In the ANSI/ISO language, we would write:
+ "append the run-time semantics to  the current definition, and the
+ run-time semantics is to return (~~~tag[i]tag~~~addr len~~~tag[/i]tag~~~),  the address and length
+ of the string ~~~tag[i]tag~~~text~~~tag[/i]tag~~~. A program shall not alter the returned string.")
 
 note:
  The name for the text-printins analog of S$ is .$ ,
