@@ -1,0 +1,48 @@
+title: VARIABLE!
+description:
+	The old forth implementations used an initializing
+	value for the word VARIABLE but new ansi standard
+	has left it out. This is often inconvenient for
+	programmers, but the newer ansi form has some
+	benefits for ROM-able forth system (where the
+	VARIABLE goes into some kind of BSS section).
+
+	In a discussion on c.l.f. it turned out that it
+	is not quite easy to attach an initializing
+	value after its declaration, the ansi words of
+	SEARCH-WORDLIST and their kind are just not
+	enough (even CURRENT is not in the standard).
+
+	Otherwise, it turned out that the spelling VARIABLE!
+	is the intuitive form that had been in use in
+	quite some systems around. The implementation
+	does usually take the same internal words as
+	IMMEDIATE uses to attach its flag to the LAST
+	compiled word, but these internals may be
+	totally different either.
+
+	Here I will just present the definition on
+	the basis of LAST or LATEST, which had been
+	in use in pre-ansi systems, and which can be
+	found widely.
+
+	: VARIABLE! VARIABLE LATEST NAME> >BODY ! ;
+	: VARIABLE! VARIABLE LAST @ NAME> >BODY ! ;
+
+possible-wrapper:
+	../../from/Guido.Draheim
+	REQUIRES| [DEFINED] [UNDEFINED] NAME> >BODY |
+	> [UNDEFINED] VARIABLE! [IF]
+	>   [DEFINED] LASTEST [IF]
+	>   : VARIABLE! LATEST NAME> >BODY ! ;
+	>   [ELSE]
+	>   [DEFINED] LAST [IF]
+	>   : VARIABLE! LAST @ NAME> >BODY ! ;
+	>   [ELSE]
+	>   .( can not implement VARIABLE! )
+	>   [THEN] [THEN]
+	> [THEN]
+
+--- $Id: index-v.txt,v 1.1 2000/10/26 14:07:32 guidod Exp $
+
+
