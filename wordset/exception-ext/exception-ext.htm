@@ -14,6 +14,11 @@
 <td>
  This is a page from <a href="../../standard/dpans/dpans.htm">DPANS'94</a>,
  the Draft Proposal on ANS Forth 1994.
+<br>
+ There are just additional cross-references to
+ <a href="exception-res-ext.htm">reserved words</a>
+ on a
+ <a href="exception-res-ext.htm">seperate page</a>.
 </td>
 <td align=right width=70>
 <a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
@@ -170,7 +175,7 @@ Table 9.2 - THROW code assignments
        Code     Reserved for
        ----     ------------
         -1      <a href=../core-ext/core-ext.htm#6.1.0670>ABORT</a>
-        -2      <a href=../core-ext/core-ext.htm#6.1.0680>ABORT"</a>
+        -2      <a href=../core-ext/core-ext.htm#6.1.0680>ABORT&quot;</a>
         -3      stack overflow
         -4      stack underflow
         -5      return stack overflow
@@ -455,9 +460,9 @@ version of ABORT in the Core word set), displaying no message.
 <P>
 
 If n is minus-two, perform the function of
-<a href=../core-ext/core-ext.htm#6.1.0680>6.1.0680</a> ABORT" (the version
-of ABORT" in the Core word set), displaying the characters ccc
-associated with the ABORT" that generated the THROW.
+<a href=../core-ext/core-ext.htm#6.1.0680>6.1.0680</a> ABORT&quot; (the version
+of ABORT&quot; in the Core word set), displaying the characters ccc
+associated with the ABORT&quot; that generated the THROW.
 <P>
 
 Otherwise, the system may display an implementation-dependent message
@@ -471,6 +476,7 @@ Subsequently, the system shall perform the function of
 <code>
 See:
 <a href=../exception-ext/exception-extra.htm#A.9.6.1.2275>A.9.6.1.2275 THROW</a>
+<a href=../exception-res-ext/exception-res-ext.htm#R.9.6.1.2275>R.9.6.1.2275 EXCEPTION</a>
 </code>
 <p>
 
@@ -506,14 +512,14 @@ Perform the function of -1
 <hr>
 <A name=9.6.2.0680>
 <code>
-9.6.2.0680 <b>ABORT"</b>
+9.6.2.0680 <b>ABORT&quot;</b>
 </code>
 </a>
 <br>
 <B>abort-quote</B>   EXCEPTION EXT
 <P>
 Extend the semantics of
-<a href=../core-ext/core-ext.htm#6.1.0680>6.1.0680</a> ABORT" to be:
+<a href=../core-ext/core-ext.htm#6.1.0680>6.1.0680</a> ABORT&quot; to be:
 <P>
 <pre>
         Interpretation: Interpretation semantics for this word are undefined.
@@ -524,7 +530,7 @@ Extend the semantics of
 </pre>
 <P>
 
-Parse ccc delimited by a " (double-quote).  Append the run-time semantics
+Parse ccc delimited by a &quot; (double-quote).  Append the run-time semantics
 given below to the current definition.
 <P>
 

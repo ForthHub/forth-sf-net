@@ -1,0 +1,88 @@
+<HTML><HEAD>
+<TITLE>[09] EXCEPTION-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../double-ext/double-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../facility-ext/facility-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.9.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.9>
+<H2>R.9 Exception reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.9.6.1.2275>
+<code>
+R.9.6.1.2275 <b>EXCEPTION</b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+EXCEPTION RES EXT
+<BR>
+<pre>
+        ( c-addr u -- n )
+</pre>
+
+<P>
+
+Each call to this word shall return a different number. A system
+may use the string denoted by c-addr u when reporting an exception
+(if it is not caught). Many systems start with -256 and return
+consecutive decreasing numbers down to -4095.
+
+<pre> \ default implementation:
+   VARIABLE NEXT-EXCEPTION  -1024 NEXT-EXCEPTION !
+   : EXCEPTION ( c-addr u -- n )
+      2DROP   NEXT-EXCEPTION @ DUP 1+ NEXT-EXCEPTION ! ;
+   \ using a system link-list
+   : EXCEPTION ( c-addr u -- n )
+       EXCEPTION-LINK LINK, NEXT-EXCEPTION @ , STRING, ALIGN
+       NEXT-EXCEPTION @ DUP 1+ NEXT-EXCEPTION ! ;
+   \ example use
+   s" Package Error" EXCEPTION VALUE PACKAGE-ERROR
+   : ?THROW SWAP IF THROW THEN ;
+   : when-run check-state PACKAGE-ERROR ?THROW ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../exception-ext/exception-ext.htm#9.6.1.943>9.6.1.2275 THROW</a>,
+<a href=../string-ext/string-ext.htm#17.6.1.0006>9.6.1.0006 STRING,</a>,
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../facility-ext/facility-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
