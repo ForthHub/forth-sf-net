@@ -44,7 +44,7 @@ upload:
 
 copy:
 	cp -rf . /home/groups/f/fo/forth/htdocs
-	chmod -R --quet a+rw  /home/groups/f/fo/forth/htdocs
+	chmod -R --quiet a+rw  /home/groups/f/fo/forth/htdocs
 # mlg -- 09.06.2001 -- it seems that now it's on the same server
 
 upload-user:
