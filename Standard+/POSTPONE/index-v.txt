@@ -1,0 +1,31 @@
+title: POSTPONE
+description:
+
+ It is unclear how the POSTPONEd word bahaves in the interpretation state.
+
+ Let us define "state-sensitive semantics" as the steps b.1) and b.2)
+ from 3.4 "The Forth text interpreter":
+
+>    1) if interpreting, perform the interpretation semantics
+>       of the definition (see 3.4.3.2), and continue at a);
+>    2) if compiling, perform the compilation semantics of
+>       the definition (see 3.4.3.3), and continue at a).
+
+The mentioned item a) is
+>  a) Skip leading spaces and parse a name (see 3.4.1);
+but it is not a part of the "state-sensitive semantics".
+
+POSTPONE is allowed to compile either compilation or
+state-sensitive semantics of name. Both will work in compilation state.
+But standard programs are not allowed to perform POSTPONEd things
+in interpretation state.
+
+But there is one exception. There are immediate words (such
+as '(' "paren") whose behavior does not depend on STATE.
+For such words, the state-sensitive semantics is the same
+as compilation semantics (and the same as both interpretation
+and execution semantics). POSTPONE is not ambiguous for such words.
+
+page-written-by:
+ mlg
+
