@@ -4,6 +4,21 @@ LINKS = from:people sys:system web:website ws:wordset std:standard
 HTGROUP= groups/f/fo/forth/htdocs
 HTDOCS = /home/$(HTGROUP)
 HTHOST = shell.sourceforge.net
+
+# * DOCDIR is the prefix path to "make install" the webserver files into and
+#   on a real unix system it shall go into /usr/share - on shell.sf.net the
+#   prefix would be /home i.e. you could use `make install DOCDIR=/home` to
+#   install directly to the webserver while being ssh'd to shell.sf.net
+# * the top index.html will end up in /usr/share/groups/f/fo/forth/htdocs
+#   but you can override it using `make install FORTHDOC=$HOME/forth-r` to
+#   let it end up as ~/forth-r/index.html
+# * you can try a test-install in a subdirectory of the normal webserver
+#   place by overriding SUFFIX, e.g `make install SUFFIX=/test` and the
+#   toplevel index.html should end up in xxx/forth/htdocs/test/
+DOCDIR=/usr/share
+SUFFIX=
+FORTHDOC=$(DOCDIR)/$(HTGROUP)$(SUFFIX)
+
 # ---------------------------------------------------------------------------
 SHELL = sh
 mkinstalldirs = $(SHELL) mkinstalldirs
@@ -97,8 +112,6 @@ DISTFILES= forth.css forth2.css bg.gif 4ring.gif Makefile \
 	index-l.txt index-l.htm index-r.txt index-r.htm index.header \
 	mkinstalldirs
 
-DOCDIR=/usr/share
-FORTHDOC=$(DOCDIR)/$(HTGROUP)
 INDEXFILE=index.html
 
 install-dir installdir :
