@@ -17,7 +17,7 @@ $       Hex                 $FE00     ~~~
 
 ----
 note-1:
-~~~tag[small]tag~~~
+<small>
 Guido Draheim wrote:
 >
 > I see that it refers to OTA and a decimal-prefix
@@ -34,7 +34,7 @@ Guido Draheim wrote:
 > Therefore, while the commercial forthers
 > did settle to "#", in the freeforth world
 > it might look a bit different.
-~~~tag[/small]tag~~~
+</small>
 note-2:
 ~~~tag[small]tag~~~
 SwiftForth uses a different set of number conversion prefixes:
