@@ -1,0 +1,86 @@
+<HTML><HEAD>
+<TITLE>[10] FACILITY-RES-EXT</TITLE>
+<link rel=stylesheet type="text/css" media="screen"
+            href="../forth-std/forth-std.css"></HEAD>
+
+<BODY>
+<table width=100%><tr valign=top>
+<td align=left width=70>
+<a href=../exception-ext/exception-res-ext.htm><img src=../forth-std/left.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<a href=../file-ext/file-res-ext.htm><img src=../forth-std/right.gif
+ width=26 height=26 align=ALIGN border=0></a>
+</td>
+<td>
+<p>
+The following page contains reserved words. These are not part of
+the ANS Forth Standard. They are just proposed by various people
+and published here at
+<a href="http://forth.sf.net">FORTH.SF.NET</a>
+for public review.
+</p>
+</td>
+<td align=right width=70>
+<a href=../forth-std/index.htm#toc><img src=../forth-std/up.gif
+ width=26 height=26 align=ALIGN border=0></a>
+<br><a name=R.10.>TOC</a>
+</td>
+</tr>
+</table>
+<p>
+<hr size=4>
+
+<A name=R.10>
+<H2>R.10 Facility reserved extension words</H2>
+</a>
+
+<hr>
+<A name=R.10.6.2.1905>
+<code>
+R.10.6.2.1905 <b>GETTIME / MS@ </b>
+</code>
+</a>
+<BR>
+<!-- B>current</B -->
+FACILITY RES EXT
+<BR>
+<pre>
+        ( -- u )
+</pre>
+
+<P>
+
+Two consecutive calls to this word shall return an approximation
+of milliseconds of the time that has passed between the two calls.
+The unsigned number may wrap over, the number does not need to
+have any relation to the real time clock of the system, the
+system clock ticks do not need to have millisecond resolution.
+
+<p>
+This word has its name from the win32 syscall GetTime(),
+it is closely related to the forth MS word
+that could loop around GETTIME calls.
+
+<pre>
+  : MS GETTIME BEGIN 2DUP GETTIME - U< UNTIL 2DROP ;
+  : MS MS@ BEGIN 2DUP MS@ - U< UNTIL 2DROP ;
+</pre>
+
+<p>
+<code>
+See:
+<a href=../facility-ext/facility-ext.htm#10.6.2.1905>10.6.2.1905 MS</a>,
+<a href=../facility-extra/facility-extra.htm#10.6.2.1905>10.6.2.1905 MS</a>,
+<a href=../facility-ext/facility-ext.htm#10.6.2.2292>10.6.2.2292 TIME&amp;DATE</a>,
+</code>
+
+<p>
+<hr>
+<A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
+    Table of Contents
+<BR>
+<A href=../file-res-ext/file-res-ext.htm><IMG src="../forth-std/right.gif" ></A>
+Next Section
+<P>
+</BODY>
+</HTML>
