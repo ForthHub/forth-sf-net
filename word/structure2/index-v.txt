@@ -68,9 +68,58 @@ Page-written-by:
 
 Notes:
  GuidoD most likely would say that ^FIELD should be called +FIELD
- and that the field selectors must be of the form structname->fieldname
+ and that the field selectors must be of the form ->structname.fieldname
  rather than structname[operation]fieldname . It's a matter of taste.
 
  Anyway, to add structures to Forth you need one line of auxiliary code.
 
+guidod-comment:
+ to give you an idea of the look with using +FIELD to declare an
+ offset-constant, here is an example
+
+<forthspan>
+ 0
+ +field my.x+ cell+
+ +field my.y+ cell+
+ +field my.a+ char+
+ +field my.a+ char+
+ aligned
+ +field my.z+ cell+
+ +field my+ drop
+
+ 0 my+ buffer: my.buf
+ 42 my.buf my.z+ !
+
+ 0 my+ \ extends
+ +field other.w+ cell+
+ +field other+ drop
+</forthspan>
+
+ note that only a single word +FIELD is needed to build a complete
+ series of structure accessors and declarators. Since the words CHAR+
+ and CELL+ are part of the ANS Forth standard, no other word is needed
+ unlike the case of /FIELD where the usual but not-required words
+ /CELL and /CHAR would be needed, as this:
+
+<forthspan>
+ 0
+ /cell /field ->my.x
+ /cell /field ->my.y
+ /char /field ->my.a
+ /char /field ->my.b
+ aligned
+ /cell /field ->my.z
+ constant /my
+
+ /my buffer: my.buf
+ 42 my.buf ->my.z !
+
+ /my \ extends
+ /cell /field ->other.w
+ constant /other
+</forthspan>
+
+however the latter is a bit more readable and has references in
+the openboot standard where the simplefield declarator was just
+called FIELD (which some forth system tooks for another meaning).
 
