@@ -53,7 +53,7 @@ my $html_footer =
     "\n<p align=right><small>"
     ."<i>generated </i>"
     .(scalar localtime)
-    ."<sup><s>".$ENV{USER}."</s></sup>"
+    ."<sup><u>".$ENV{USER}."</u></sup>"
     ."\n</small></p>";
 
 my %index = ( );
