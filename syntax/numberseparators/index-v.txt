@@ -1,0 +1,68 @@
+title: Number Separator Characters
+description:
+
+ DP-CHAR ( -- a-addr )
+ A variable, stores ASCII value of double number separator.
+ Default: '.'
+
+ FP-CHAR ( -- a-addr )
+ A variable, stores ASCII value of float number separator.
+ Default: '.'
+
+ NU-CHAR ( -- a-addr )
+ A variable, stores ASCII value of the separator that is ignored.
+ 'NU' stands for 'not used'.
+ Default: '_'
+
+original-messages:
+ From: sfp@mpeltd.demon.co.uk (Stephen Pelc)
+ Message-ID: <3bd6b8e2.394732224@192.168.0.1>
+
+ [...]
+
+ There is a ... strategy which MPE has used for several
+ years, and which satisfies most international users.
+ Define two system variables DP-CHAR and FP-CHAR to hold the
+ double number and floating point number separators. Use these
+ variables instead of constants in your text scanning routines.
+
+ For ANS use set both of these to '.'
+
+ For some countries use:
+   char , dp-char !
+   char . fp-char !
+ For others use:
+   char . dp-char !
+   char , fp-char !
+ and so on.
+
+ I am also considering adding a character which can be ignored
+ during scanning for numbers. This is useful for masks and literal
+ addresses, especially for embedded systems, e.g.
+   $BF00:0040
+ for a 32 bit address. I suggest the use of ':' as the default, and
+ the system variable will be called NU-CHAR for not-used.
+
+ Stephen
+
+ From: Keith Wootten <Keith@wootten.demon.co.uk>
+ Message-ID: <gT+1NEAIEu17EwYs@wootten.demon.co.uk>
+
+ >I am also considering adding a character which can be ignored
+ >during scanning for numbers.
+ [...]
+
+ Can I suggest _ as a default instead?  I use this a lot for binary
+ particularly when bits are grouped for different purposes in a
+ configuration register.  I tried a few, but _ is IMO the clearest.
+
+ eg
+
+ %1011:0000:101010:001000:111010001000
+
+ or
+
+ %1011_0000_101010_001000_111010001000
+
+page-added-by: mlg
+
