@@ -46,16 +46,28 @@ upload:
 
 copy:
 	cp -rf . $(HTDOCS)
-	chmod -R --quiet g+rw  $(HTDOCS)
-	chmod -R --quiet a+r $(HTDOCS)
-	chgrp -R --quiet forth $(HTDOCS)
+	-chmod -R --quiet g+rw  $(HTDOCS)
+	-chmod -R --quiet a+r $(HTDOCS)
+	-chgrp -R --quiet forth $(HTDOCS)
 
 # mlg -- 09.06.2001 -- it seems that now it's on the same server
 
 perms:
-	chgrp -R forth $(HTDOCS)
-	chmod g+w $(HTDOCS)
-	chmod a+r $(HTDOCS)
+	-chgrp -R forth $(HTDOCS)
+	-chmod -R g+w $(HTDOCS)
+	-chmod -R a+r $(HTDOCS)
+
+uploads:
+	zip -9r forth-$(USER).zip $(SUBDIRS) mk/ *.* Makefile
+	scp -prvC forth-$(USER).zip \
+		$(USER)@$(HTHOST):$(HTDOCS)
+	rm forth-$(USER).zip
+	ssh $(USER)@$(HTDOCS) \
+	"cd $(HTDDOCS) && unzip forth-$(USER).zip && make perms"
 
 upload-user:
 	scp -prvC . $(USER)@$(HTHOST):$(HTDOCS)
+
+
+
+
