@@ -1,9 +1,9 @@
 title: CASE?
 status:
  We are not trying to persuade you to use CASE? in place of
- the Eaker's CASE (the CASE..OF.. structure that is now in ANS Forth).
+ the Eaker's CASE (the CASE..OF.. structure that is now ANS Forth).
  But we do recommend you to know the alternative approach.
- Acceptance of CASE? is unknown.
+ Today's acceptance of CASE? is unknown.
 
 description:
 
