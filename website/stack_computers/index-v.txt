@@ -1,0 +1,24 @@
+title: Koopman' "Stack Computers"
+internet-url:
+	http://www.cs.cmu.edu/~koopman/stack_computers
+description:
+	quoted from the website:
+
+	The ENTIRE BOOK is available to read on-line or to
+	download for off-line reading!
+
+	NOTE: this book is still protected by copyright even if you
+	download it! You do not have the right to share this downloaded copy
+	with anyone else -- it is for your own private use only!
+	If someone else wants a copy, please have them download
+	it from this site so that I can keep track of the readership volume.
+
+	This web edition is essentially unchanged from the 1989 book.
+	While some of the material is obviously dated and new work has
+	been done in this area, I believe that the book remains the
+	principal reference work on Forth-style stack computers. My Stack
+	Computer web page serves as a starting point to exploring
+	recent developments in the area.
+
+--- $Id: index-v.txt,v 1.1 2000/11/01 09:36:50 guidod Exp $
+

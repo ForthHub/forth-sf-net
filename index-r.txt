@@ -1,1 +1,46 @@
 
+Welcome to the comp.lang.forth.repository.
+
+This site is provided as a webspace to be
+used on usenet' comp.lang.forth. It is
+based on the obvervation, that every once
+in a while someone creates a webpage with
+proposals, informations, examples,
+forthtexts or just hypertext links - and
+unlike other languages, forth has the
+tendency to be implemented again and again.
+
+A lot of these private webpages and systems
+are scattered around the web, and it is
+often not easy to find them unless
+they are mentioned again on comp.lang.forth.
+That does not make life easy for a developer
+who wishes to get an overview of what there
+is about contemporary forth, and even more
+some interesting ideas that may soon be
+forgotten if not referenced from a central place.
+
+So, the site is dedicated towards improving portability
+between forth implementations, providing surveys,
+example implementations, and library modules.
+The ISO standardiziation path is a bit slow and there
+are often some reasons to not include a specific
+common usage as it is either not really needed
+or it is problematic in spezialized systems. Still it
+is worth to be know to the forth people.
+
+The advantage of sourceforge is that
+everyone can get a developer account
+here. Just make yourself heard on the usenet' group
+if you want to get write access here, atleast
+some of the current admins will listen and
+quite probably you can add pages shortly thereafter.
+
+And remember, it is harder to find someone
+who actually *wants* to have write access
+than there would be a need to be wary about
+who is applying for the job. Just give it
+a try and post to comp.lang.forth today.
+
+
+
