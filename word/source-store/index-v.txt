@@ -56,8 +56,8 @@ source words so that execution of REFILL or SAVE-INPUT after SOURCE!
 does not break the system. This may be achieved by maintaining
 a separate pointer to the refill buffer: REFILL writes to the refill
 buffer and sets the input buffer pointer to the refill buffer;
-the parsing words use the input buffer pointer and never use the
-refill buffer one.
+the parsing words use the input buffer pointer and never access the
+refill buffer directly.
 
 
 
