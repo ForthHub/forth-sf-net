@@ -34,6 +34,170 @@ for public review.
 <H2>R.7 Block reserved extension words</H2>
 </a>
 
+<blockquote><span class=justify>
+ A forth system must include the
+  <a href="../block-ext/block-ext.htm">block word set</a>
+  if it implements
+  <a href="../file-ext/file-ext.htm">file word set</a>.
+ The mapping between blocks to a file is system dependent, a simple
+ way is to map <em>one</em> fileid and have block number 0 be at
+ the start of the file and the maximum block number to be an equivalent
+ of
+<pre> : #blocks blockhandle file-size drop b/buf um/mod nip ; </pre>
+ The following names stem from win32forth and its predecessors,
+ implementors are advised to use these names to create the feature
+ of mapping a single file as the current block file - or otherwise
+ ignore these word names for user implemenations on top of a more complex one.
+</span></blockquote>
+
+<P><hr>
+<A name=R.7.001>
+<code>
+R.7.001 <b>BLOCKHANDLE</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( -- fileid )
+</pre>
+
+<P>
+
+Returns the current block file handle
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.2>11.3.2</a> Blocks in files
+<a href=../file-ext/file-ext.htm#11.3.1.1>11.3.1.1</a> File identifiers
+</code>
+
+
+<P><hr>
+<A name=R.7.002>
+<code>
+R.7.002 <b>B/BUF</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( -- u )
+</pre>
+
+<P>
+
+Returns the length of each block. Traditionally 1024.
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.2>11.3.2</a> Blocks in files
+</code>
+
+<P><hr>
+<A name=R.7.003>
+<code>
+R.7.003 <b>SET-BLOCKFILE</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( fileid -- )
+</pre>
+
+<P>
+
+Set the block file handle. May need to handle cached blocks.
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.1.1>11.3.1.1</a> File identifiers
+<a href=../block-ext/block-ext.htm#7.6.1.2400>7.6.1.2400  UPDATE</a>
+<a href=../block-ext/block-res-ext.htm#R.7.001>R.7.001  BLOCKHANDLE</a>
+</code>
+
+<P><hr>
+<A name=R.7.004>
+<code>
+R.7.004 <b>OPEN-BLOCKFILE</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( "filename" -- )
+</pre>
+
+<P>
+
+Open the filename, usually in r/w mode. If successful then
+set it as the current block file, otherwise abort.
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.1.1>11.3.1.1</a> File identifiers
+<a href=../file-ext/file-ext.htm#11.6.1.1970>11.6.1.1970 OPEN-FILE</a>,
+<a href=../file-ext/file-ext.htm#11.6.1.2056>11.6.1.2056 R/W</a>,
+<a href=../block-ext/block-res-ext.htm#R.7.003>R.7.003 SET-BLOCKFILE</a>
+</code>
+
+<P><hr>
+<A name=R.7.005>
+<code>
+R.7.005 <b>CLOSE-BLOCKFILE</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( -- )
+</pre>
+
+<P>
+
+Flush and close the current block file.
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.1.1>11.3.1.1</a> File identifiers
+<a href=../block-ext/block-ext.htm#7.6.1.1559>7.6.1.1559 FLUSH</a>,
+<a href=../file-ext/file-ext.htm#11.6.1.0900>11.6.1.0900 CLOSE-FILE</a>,
+<a href=../block-ext/block-res-ext.htm#R.7.001>R.7.001 BLOCKHANDLE</a>
+<a href=../block-ext/block-res-ext.htm#R.7.003>R.7.003 SET-BLOCKFILE</a>
+</code>
+
+<P><hr>
+<A name=R.7.006>
+<code>
+R.7.006 <b>CREATE-BLOCKFILE</b>
+</code>
+</a>
+<BR>
+BLOCK RES EXT
+<BR>
+<pre>
+        ( u1 "filename" -- )
+</pre>
+
+<P>
+
+create a blank file of u1 block long.
+
+<P><code>
+See:
+<a href=../file-ext/file-ext.htm#11.3.1.1>11.3.1.1</a> File identifiers
+<a href=../file-ext/file-ext.htm#11.6.1.1010>11.6.1.1010 CREATE-FILE</a>,
+<a href=../file-ext/file-ext.htm#11.6.1.2147>11.6.1.2147 RESIZE-FILE</a>,
+<a href=../block-ext/block-res-ext.htm#R.7.003>R.7.003 SET-BLOCKFILE</a>
+<a href=../block-ext/block-ext.htm#7.6.2.1330>7.6.2.1330 EMPTY-BUFFERS</a>;
+<a href=../block-ext/block-ext.htm#7.6.1.1559>7.6.1.1559 FLUSH</a>,
+</code>
 
 <hr>
 <A href=../forth-std/index.htm#toc><IMG src="../forth-std/up.gif" ></A>
