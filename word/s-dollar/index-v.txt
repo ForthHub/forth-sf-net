@@ -1,7 +1,7 @@
 title: S$
 description:
 
- S$ ( "<delim1>text<delim2>" -- addr len )
+ S$ ( "<delim1>text<delim2>" -- addr len )         "s-dollar"
 
  Obtain the first delimiter character, delim1, from the input stream,
  that is, fetch the next character froom the input stream and advance >IN
@@ -21,7 +21,7 @@ note:
 
 implementation:
  \ Match delimiters for string
- : (S) ( c1 -- c2)
+ : (S-DELIM) ( c1 -- c2)
    CASE
      [CHAR] < OF [CHAR] > ENDOF
      [CHAR] { OF [CHAR] } ENDOF
@@ -32,7 +32,7 @@ implementation:
  ;
  : S$ ( <char1>ccc<char2> -- addr u)
   SOURCE >IN @ MIN +          \ address of 1st character
-  C@ (S)                      \ determine second delimiter
+  C@ (S-DELIM)                \ determine second delimiter
     1 >IN +!                  \ bump past first  delimiter
   PARSE                       \ parse to  second delimiter
   STATE @ IF ( compiling)
