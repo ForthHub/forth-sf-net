@@ -120,7 +120,7 @@ DATECODE=%Y%m%d
 TEMP=/tmp
 dist:
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
-	; if test -d /tmp/$$DISTNAME-$$DATE \
+	; if test -d $(TEMP)/$$PKG \
 	; then echo rm -rf $(TEMP)/$$PKG \
 	;           rm -rf $(TEMP)/$$PKG \
 	; else true ; fi
@@ -128,13 +128,13 @@ dist:
 	; echo mkdir $(TEMP)/$$PKG \
 	;      mkdir $(TEMP)/$$PKG
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
-	; echo $(MAKE) install DESTDIR=$(TEMP)/$$PKG \
-	       $(MAKE) install DESTDIR=$(TEMP)/$$PKG
+	; echo $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/. DOCDIR=/ \
+	;      $(MAKE) install DESTDIR=$(TEMP)/$$PKG FORTHDOC=/. DOCDIR=/
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` ; BUILD=`pwd` \
 	; echo "(cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)" \
 	;       (cd $(TEMP)/$$PKG && zip -9r $$BUILD/$$PKG.zip .)
 	@ for i in $(LINKS) ; do : \
-	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//`
+	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
 	; echo ln -s $$FRM $$TGT \
 	;      ln -s $$FRM $$TGT || break \
 	; done
@@ -142,5 +142,5 @@ dist:
 	; echo "(cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)" \
 	;       (cd $(TEMP) && tar cvf $$BUILD/$$PKG.tar $$PKG)
 	@ PKG="$(DISTNAME)-"`date +$(DATECODE)` \
-	; echo "bzip2 -9k $$BUILD/$$PKG.tar ; gzip -9 $$BUILD/$$PKG.tar" \
-	; bzip2 -9 --keep $$BUILD/$$PKG.tar ; gzip -9 $$BUILD/$$PKG.tar
+	; echo "bzip2 -9k $$PKG.tar ; gzip -9 $$PKG.tar" \
+	; bzip2 -9 --keep $$PKG.tar ; gzip -9 $$PKG.tar
