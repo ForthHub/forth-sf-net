@@ -1,0 +1,28 @@
+title: S-SOURCE!
+description:
+
+SOURCE!
+
+    ( addr len -- )
+
+Make the string described by c-addr and u the current input buffer.
+Set >IN to zero.
+
+A program is allowed to refill the input buffer without
+restoring the original input source; upon a refill, the
+system shall accept the new portion of text to the current
+refill buffer and make it the input buffer.
+
+Related-words: 6.2.2148 RESTORE-INPUT, 6.2.2182 SAVE-INPUT,
+6.2.2218 SOURCE-ID, 7.6.1.0790 BLK, 15.6.2.2148 RESTORE-INPUT,
+6.2.2125 REFILL, 7.6.2.2125 REFILL, 11.6.2.2125 REFILL,
+unstandard PARSE-AREA!.
+
+Definition-of-terms:
+the refill buffer: a region of memory that may be associated with
+the current input source and be used by the system to obtain a
+new portion of text from the input source.
+
+
+
+
