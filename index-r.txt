@@ -11,11 +11,10 @@ a requirement that the proposals may be
 published here only after they are discussed
 in the comp.lang.forth newsgroup.
 
-This project does not serve a purpose defined
-in terms of source code but you may find some
-example sources since that supports the real
-goal to release specifications of Forth words
-and assemble Forth-related meta information.
+This project does not release code. Instead,
+it releases specifications of Forth words.
+It also can contain other kinds of
+specifications and Forth-related information.
 
 In theory, this project can become a complement
 or an alternative to the ANS Forth standard,
