@@ -43,6 +43,16 @@ possible-wrapper:
 	>   [THEN] [THEN]
 	> [THEN]
 
---- $Id: index-v.txt,v 1.1 2000/10/26 14:07:32 guidod Exp $
+more-notes:
+
+	Philip Preston wrote:
+	> Why not ...
+	>
+	> : VARIABLE! ( x "<spaces>name" --  ) CREATE , ;
+	>
+	> ?
+
+
+--- $Id: index-v.txt,v 1.2 2001/06/10 00:09:29 mlg Exp $
 
 
