@@ -1,6 +1,6 @@
 title: [DEFINED] name
 description:
-	precompiler-like test if a word ist defined. The result
+	precompiler-like test if a word is defined. The result
 	is tested with => [IF]
 discussion:
 	[DEFINED] is part of the => ../../wordset/FPH
@@ -40,4 +40,4 @@ possible-implementations:
 ( The difference between the two definitions of [DEFINED] is
 in the value returned for IMMEDIATE words, 1 or -1.
 
---- $Id: index-v.txt,v 1.2 2001/06/09 07:32:59 mlg Exp $
+--- $Id: index-v.txt,v 1.3 2002/05/21 19:17:54 mlg Exp $
