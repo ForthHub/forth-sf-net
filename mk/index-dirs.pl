@@ -61,8 +61,10 @@ my ($F,$D);
 opendir D, "." or die "could not open local dir: $!";
 while ($F = readdir D)
 {
-    next if $F eq "CVS";
-    next if -l $F;
+    next if $F eq "CVS"; # you run it inside a cvs-tree itself? bad boy...
+    next if -l $F; # the symlinks are already there, so this is an update run..
+    next if -f "$F/mkinstalldirs"; # a cvs-tree on the webserver? that's okay..
+
     if (-d "$F" and length $F > 2)
     {
 	if (-f "$F/index.html")
