@@ -1,0 +1,36 @@
+title: Square Root [SQRT]
+algorithm-1:
+
+>From: Wil Baden <neilbawd@earthlink.net>
+>Exhumed.
+
+\          SQUARE ROOT
+\
+\  This corresponds to the paper-and-pencil method of taking the
+\  square root.  It is based on the equation:
+\
+\      (x+1)^2 = x^2 + 2*x + 1
+\
+\  `D2* D2*` corresponds to considering the radicand two digits
+\  at a time.  `2DUP 2* U>` is a comparison with 2*x in the
+\  algebra.
+
+ADDRESS-UNIT-BITS CELLS CONSTANT Bits/Cell
+
+: SQROOT                          ( radicand -- root )
+    0 0                             ( radicand . root)
+    Bits/Cell 2/ 0 DO
+        >R D2* D2* R>
+        2*
+        2dup 2* U> IF
+            dup >R 2* - 1- R>
+            1+
+        THEN
+    LOOP
+    NIP NIP ( root)
+;
+
+algorithm-2:
+[under construction]
+
+
