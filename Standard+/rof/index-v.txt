@@ -1,0 +1,110 @@
+title: Restrictions on Functionality
+definition:
+
+  ~~~tag[b]tag~~~Restriction on Functionality:~~~tag[/b]tag~~~
+  anything that prevents an ANS Forth program to run as
+  expected on a Standard System (Subset) that provides
+  all words used by the program.
+
+abbreviation:
+
+ RoF = Restriction on Functionality
+
+description:
+
+ An ANS Forth System may have extensions beyond the Standard.
+ These extensions may impose additional Restrictions on Functionality.
+
+ These Restrictions on Functionality may prevent ANS Forth code
+ from running on ANS Forth systems.
+
+Recommendation:
+
+ It is recommended for system implementors to document all
+ Restricions on Functionality and the circumstances when they
+ apply, for example:
+
+ - No access to the user device (only for background tasks)
+
+Examples-of-Restrictions-on-Functionality:
+
+ ~~~tag[b]tag~~~Example 1~~~tag[/b]tag~~~
+
+ The code that executes in background tasks usually
+ cannot output to the user device.
+
+ That is, some ANS programs must be modified if we
+ want them to run in background tasks.
+ That is, the execution environment within background tasks
+ has restrictions on functionality.
+
+ ~~~tag[b]tag~~~Example 2~~~tag[/b]tag~~~
+
+ Many systems support a variant of the word SAVE
+ (or TURNKEY ) that saves the Forth dictionary
+ in a file for subsequent running.
+
+ On some systems, address relocation is not done
+ during this process. In consequence of this,
+ all ANS Forth programs that store absolute
+ addresses of data structures into variables
+ (and other data structures) must be rewritten.
+
+ Note that we have an ANS Forth Program and
+ an ANS Forth System, but the reason why the
+ ANS Forth Program cannot run on the ANS Forth System
+ is beyond the scope of the current standard:
+ the word SAVE (whose use is inevitable for
+ some kinds of applications) imposes significant
+ Restrictions on Functionality.
+
+ ~~~tag[b]tag~~~Example 3~~~tag[/b]tag~~~
+
+ Implementations of standard words may also
+ impose Restrictions on Functionality.
+
+ Consider an embedded processor whose return stack is
+ 8 cells deep, and the following definition of PICK
+
+: PICK ( xn .. x0 n -- xn .. x0 xn )
+  DUP
+  IF   1- SWAP >R RECURSE R> SWAP
+  ELSE DROP DUP
+  THEN
+;
+
+ Note that n PICK requires 2*n+1 free cells on the
+ return stack. That is, 2 PICK requires 5 cells
+ on the return stack and therefore cannot be called
+ when there are more than 3 return addresses on the
+ return stack. And 3 PICK may be called only from
+ the main word.
+
+ The standard does not include any requiremens about
+ the depth of stacks.
+
+discussion:
+
+ It is the subject of an argument whether a system
+ whose Restrictions on Functionality inevitably apply
+ to all programs run on that system is standard-compliant.
+
+ Why inevitably? For example, creation of Windows applications
+ implies using SAVE or TURNKEY (else you would distribute the
+ compiler, and this would require a different license),
+ and therefore any code is useful only if it is SAVE-compatible.
+
+ The Standard says in 3. Usage requirements:
+
+> A system may contain non-standard extensions, provided that they
+> are consistent with the requirements of this Standard.
+
+ but the word "consistent" still may be read in two ways.
+
+page-written-by:
+ Michael Gassanenko
+
+acknowledgements:
+ I thank Elizabeth Rather and Andrew Haley
+
+
