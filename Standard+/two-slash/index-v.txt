@@ -54,7 +54,7 @@ in the message <b5ecdf44.0205310049.79efa6c3@posting.google.com>:
 
  The 3rd realistic example of a system that uses an unusual number
  representation is a Forth system implemented on a virtual machine
- with big numbers (each number is represented with as many bits as
- is needed).
+ that supports big numbers (each number is represented with as many
+ bits as is needed), e.g. Forth on top of Scheme.
 
 
