@@ -1,12 +1,22 @@
 title: ?EXIT
 description:
-  ?EXIT
+  ?EXIT     "question-exit"
   ( true -- ) ( I: ra ip -- ra )
   ( false -- ) ( I: ra ip -- ra ip )
 
-  (Notation note: "I:" is the interpretation stack label,
-  the return stack and the interpretation pointer (IP) on top.)
+  If the value at the stack top is non-zero, perform EXIT.
 
   ?EXIT is quivalent to IF EXIT THEN . Very common.
+
+notation-note:
+  "I:" is the interpretation stack label, the interpretation stack
+  is he return stack plus the interpretation pointer (IP) on top.
+
+  For example, EXIT may be described by the following diagram:
+
+  EXIT ( I: ra ip -- ra ) \ remove the top interpretation stack item
+
+page-written-by:
+  mlg
 
 
