@@ -675,6 +675,13 @@ addr2/len2, or macro text cannot be found, or if the <em>lstring</em>
 at addr2/len2 overlaps the <em>lstring</em> at addr1/len1. Macros
 may take parameters from the Forth data stack.
 (<font color="red">why?</font>)
+(<font color="red">mlg: if the macros take parameters from the data stack,
+the order in which the parameters appear becomes important.
+If macros take parameters, then the grammar of the human language
+and the code that invokes SUBSTITUTE may require the macros be in
+different order. (What's worse, in inflective languages the values
+returned by maros may determine the word forms in the surrounding text.)
+</font>)
 <P>
 When a macro name delimited by escape characters (see <code>SET-ESCAPE</code>)
 is encountered by <code>SUBSTITUTE</code>, the following action occurs:
