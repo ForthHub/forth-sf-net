@@ -18,11 +18,46 @@ Related-words: 6.2.2148 RESTORE-INPUT, 6.2.2182 SAVE-INPUT,
 6.2.2125 REFILL, 7.6.2.2125 REFILL, 11.6.2.2125 REFILL,
 unstandard PARSE-AREA!.
 
+See:
+PARSE-AREA! ../parse-area-store
+
 Definition-of-terms:
 the refill buffer: a region of memory that may be associated with
 the current input source and be used by the system to obtain a
 new portion of text from the input source.
 
+Implementation:
+
+One of the possible implementations is:
+
+: SOURCE! ( c-addr len -- )
+    #TIB ! 'TIB !  0 >IN !
+;
+
+This implementation is system-dependent in that it assumes that
+the input buffer location and length are stored into the variables
+'TIB and #TIB correspondingly.
+
+In addition, the challenge is not to define SOURCE! , but to
+redefine REFILL , SAVE-INPUT and RESTORE-INPUT so that the system
+would not break if REFILL or SAVE-SOURCE are executed when
+the current input source parameters are modified by SOURCE! .
+
+Portability-note:
+
+This is an experimental proposal. Many existing systems do support
+SOURCE!, but they require restoration of the input source parameters
+before performing REFILL or SAVE-INPUT . So programs written for
+portability should restore the input source specification themselves
+before executing REFILL or SAVE-INPUT.
+
+On the other hand, the implementors are advised to implement the input
+source words so that execution of REFILL or SAVE-INPUT after SOURCE!
+does not break the system. This may be achieved by maintaining
+a separate pointer to the refill buffer: REFILL writes to the refill
+buffer and sets the input buffer pointer to the refill buffer;
+the parsing words use the input buffer pointer and never use the
+refill buffer one.
 
 
 
