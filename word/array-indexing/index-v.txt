@@ -1,0 +1,8 @@
+title: Arrays and Indexing
+see:
+ ../../techniques/index.html
+
+  There are multiple Forth approaches to arrays and indexing;
+  therefore, this topic is classified as "techniques".
+
+
