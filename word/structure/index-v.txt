@@ -206,9 +206,9 @@ mpe-forth:
 williams-variant:
 	There is another implementation ../../from/David.N.Williams
 	that does only rely on offsetword definitions, see
-	./qdstruct.fs and ./dlist.fs for an example.
+	./qdstruct.fs and ./dlists.fs for an example.
 
---- $Id: index-v.txt,v 1.3 2000/10/27 04:21:28 guidod Exp $
+--- $Id: index-v.txt,v 1.4 2000/10/27 04:23:23 guidod Exp $
 
 
 

@@ -6,7 +6,7 @@ description:
 	recommended practice". It defines a 16-color terminal
 	interface based on iso-6429-1983 escape sequences.
 reference:
-	././16colord1_2.pdf to be found at
+	./16colord1_2.pdf to be found at
 	http://playground.sun.com/1275/practice
 
 fcodes:
@@ -88,7 +88,7 @@ additional-note:
 	could be expressed as
 >       0xAA 0x00 0x00 14 color!
 
---- $Id: index-v.txt,v 1.1 2000/10/26 07:41:34 guidod Exp $
+--- $Id: index-v.txt,v 1.2 2000/10/27 04:21:28 guidod Exp $
 
 
 
