@@ -1,0 +1,81 @@
+title: DEFER
+description:
+This word is de-facto standard. The fact that it has not been
+included into the 1994 version of the standard should be
+considered as a bureaucratic mistake (IIRC the proposal was
+submitted too late).
+
+proposal:
+DEFER                                   CORE EXT
+        ( "<spaces>name" -- )
+
+Skip leading space delimiters. Parse _name_ delimited by a space.
+Create a definition for _name_ with the execution semantics defined
+below.
+
+_name_ is referred to as a "deferred word".
+
+_name_ is initially associated with a definition that performs
+a system-defined action indicating execution of an uninitialized
+deferred word.
+
+_name_ can be later associated with any other definition by
+placing the execution token of that other definition on the stack
+and executing the phrase  TO _name_ . The phrase  TO _name_
+affects only _name_ and not the definition associated with _name_ .
+
+_name_ execution: ( i*x -- j*x )
+Execute the definition currently associated with _name_.
+The stack effect ( i*x -- j*x ) is the stack effect of
+the definition currently associated with _name_.
+
+See: TO BEHAVIOR
+
+Also add the following line to Table 9.2
+
+-59 execution of an uninitialized deferred word
+
+Rationale.
+
+A.?.?.???? DEFER
+
+We are aware that there are as many implementations
+that use the word IS for changing the behavior of deferred words
+as there are implementations that define IS as a synonym of TO.
+
+Considering that
+
+1) the typical problem when porting working code from a system
+where TO and IS are synonyms to a system with type-dumb TO and IS
+is that when used with a wrong word, TO and IS silently generate
+incorrect code that later crashes without any understandable message;
+
+2) the requirement that TO reports an error when used on a deferred
+word would break much existing code;
+
+3) implementation of error diagnostics in TO and IS is equally
+complex as implementation of a type-smart TO;
+
+4) systems whose implementations of TO and IS
+alter deferred words and values in the same way,
+may continue to use type-dumb TO and IS;
+
+it is reasonable to require that TO must work correctly on both
+deferred words and values. IS may be implemented as a synonym of TO.
+
+We are aware of at least three approaches to choosing
+between the names TO and IS. They are:
+
+1) use TO with values and IS with deferred words;
+
+2) always use IS to avoid confusion between words like
+>NUMBER and identically pronounced phrases like TO NUMBER ;
+
+3) use IS for long-term assignments (including those that
+are unlikely to be changed at all), use TO for short-term assignments.
+
+See:
+~~~tag[a href=defer.txt]tag~~~ANSI TC discussion~~~tag[/a]tag~~~
+
+
+

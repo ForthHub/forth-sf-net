@@ -1,0 +1,196 @@
+Message-ID: <394208DF.6AA28D20@forth.org>
+Date: Sat, 10 Jun 2000 12:22:39 +0300
+From: Michael Gassanenko <mlg@forth.org>
+To: ansforth-real@minerva.com
+CC: ark-gvb-x@minerva.com
+Subject: DEFER's spec rephrase 3
+References: <200006080713.JAA20888@a0.complang.tuwien.ac.at> <393FF97D.BFE21D77@forth.org>
+
+First of all, I thank everybody for feedback (both those whose
+messages are cited and those whose messages are not cited here).
+
+Now, the next iteration.
+
+------- changes in v.3
+proposal reads:
+>The definition associated with _name_ can be changed later [...]
+Oh my God! This is an invitation for RFI's. (Reread: which
+definition is changed? the deferred one or the assigned one?)
+
+"Greg Bailey" <greg@minerva.com>:
+> <verb> <noun> may not be used where a <noun> is permitted.
+&
+"Stephen Pelc" <sfp@mpeltd.demon.co.uk>:
+>"a deferred word" reads much better than "a defer word"
+
+ok;
+if the defining word is a verb, it must be put into
+the past tense or the continuous form.
+
+Heribert Dahms <heribert_dahms@icon-gmbh.de>
+>>incorrect code that silently crashes on execution;
+>what is a "silent crash", please?
+incorrect code that later crashes without any understandable message.
+
+"Greg Bailey" <greg@minerva.com>:
+>In sum, the requirement about TO method for words defined
+>with DEFER is needed to respect existing code, but we
+>strongly recommend that new designs use IS for that class.
+
+I think nobody will disagree that a discipline reglamenting
+the use of TO and IS could be valuable, but I can remember
+3 (three!) such disciplines. While it is a good idea to
+mention them, I do not think that TC should argue or could agree
+on which one is better.
+
+Mitch Bradley <wmb@FirmWorks.COM>:
+>The correct translation of an Open Firmware glossary entry
+>into ANS Forth normal form includes the deletion of the
+>one-sentence summary.
+ok
+
+"Greg Bailey" <greg@minerva.com>:
+>The argument for requiring that the TO method for words
+>defined with DEFER is the same as their IS method would
+>be to avoid breaking existing code, and that
+>is an argument which is compelling.
+
+Very well said. For the same reason, we must include IS
+into the standard. IS is in common practice and a lot
+of code uses IS.
+
+>The argument for providing the IS method for words defined
+>with DEFER is that the resulting code is clearer and less
+>prone to misreading and/or insertion of future bugs.
+>I feel that this is also a compelling argument.  It is
+>possible to recognize and adopt both arguments.
+
+I am inclined to mention the existing disciplines
+and recommend nothing. In the next five years
+the 4th (unmentioned in the proposed rationale,
+below) discipline
+: 4) use TO with DEFERred words because TO is in the
+: standard while IS is not
+must disappear. After that, we will be able to say
+which disciplines have survived and which have appeared,
+an begin arguing about whether a/the language standard
+must, or allowed to, or must not recommend one of
+the disciplines.
+
+> [...] the language must make it absolutely clear that
+> [...] if the deferred word's behavior is set to that
+> of a class for which TO is defined, TO prefixing the
+> deferred word evokes a method of the DEFER class, not
+> of the target class.
+ok
+
+>the burden is entirely on those [systems] that
+>currently produce diagnostics when TO is used
+>on a colon definition, or whose implementations
+>of TO and IS methods would require altering
+>the object in different ways.
+valuable
+
+------------- changes in v.2
+mlg:
+>Anton Ertl <anton@a0.complang.tuwien.ac.at>
+>>I prefer THROWing a value [...]
+>
+>"Stephen Pelc" <sfp@mpeltd.demon.co.uk>
+>>in the spirit of handling
+>>exceptions through CATCH and THROW, [...]
+>>let us make the default action perform a
+>>specified THROW rather than a vague handwaving
+>
+>Ok, one more rephrase. Those willing to report errors
+>via led blinking, are allowed to do that.
+
+>Anton Ertl <anton@a0.complang.tuwien.ac.at>
+>>I also support using IS
+yes, IS also is important.
+To respect existing code, we must include IS into
+the standard.
+
+----
+DEFER proposal, rephrase  3
+====================================================
+
+DEFER                                   CORE EXT
+        ( "<spaces>name" -- )
+
+Skip leading space delimiters. Parse _name_ delimited by a space.
+Create a definition for _name_ with the execution semantics defined
+below.
+
+_name_ is referred to as a "deferred word".
+
+_name_ is initially associated with a definition that performs
+a system-defined action indicating execution of an uninitialized
+deferred word.
+
+_name_ can be later associated with any other definition by
+placing the execution token of that other definition on the stack
+and executing the phrase  TO _name_ . The phrase  TO _name_
+affects only _name_ and not the definition associated with _name_ .
+
+_name_ execution: ( i*x -- j*x )
+Execute the definition currently associated with _name_.
+The stack effect ( i*x -- j*x ) is the stack effect of
+the definition currently associated with _name_.
+
+See: TO BEHAVIOR
+
+Also add the following line to Table 9.2
+
+-59 execution of an uninitialized deferred word
+
+Rationale.
+
+A.?.?.???? DEFER
+
+The TC is aware that there are as many implementations
+that use the word IS for changing the behavior of deferred words
+as there are implementations that define IS as a synonym of TO.
+
+Considering that
+
+1) the typical problem when porting working code from a system
+where TO and IS are synonyms to a system with type-dumb TO and IS
+is that when used with a wrong word, TO and IS silently generate
+incorrect code that later crashes without any understandable message;
+
+2) the requirement that TO reports an error when used on a deferred
+word would break much existing code;
+
+3) implementation of error diagnostics in TO and IS is equally
+complex as implementation of a type-smart TO;
+
+4) systems whose implementations of TO and IS
+alter deferred words and values in the same way,
+may continue to use type-dumb TO and IS;
+
+the TC has decided to require that TO must work correctly on both
+deferred words and values. IS may be implemented as a synonym of TO.
+
+The TC is aware of at least three approaches to choosing
+between the names TO and IS. They are:
+
+1) use TO with values and IS with deferred words;
+
+2) always use IS to avoid confusion between words like
+>NUMBER and identically pronounced phrases like TO NUMBER ;
+
+3) use IS for long-term assignments (including those that
+are unlikely to be changed at all), use TO for short-term assignments.
+
+=============================================================
+end of DEFER proposal, rephrase  3
+----
+
+regards, Michael
+
+[[DISCLAIMER. It is possible that the brief out-of-context
+citations given above do not represent the original intent
+of their authors accurately. Please, refer to the original
+mail that you must have in your mailbox in the case of
+any questions. END-DISCLAIMER]]
