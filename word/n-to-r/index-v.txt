@@ -1,4 +1,4 @@
-title: N>R
+title: N&gt;R
 description:
 N>R                                     "n-to-r"
 
@@ -12,7 +12,6 @@ note:
 The words N>R and NR> are a means to store the information returned by words
 like SAVE-INPUT to the return stack and thus unblock the data stack
 
-see:
-NR> ../n-r-from/index.html
+See: NR> ../n-r-from/index.html
 
 
