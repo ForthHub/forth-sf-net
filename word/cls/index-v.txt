@@ -1,0 +1,28 @@
+title: CLS / CLRSCR
+description:
+        CLS is the shorthand for CLRSCR or CLEARSCREEN.
+        Some implementation had even chosen to add a dot
+        before to flag that they do in fact output sth.,
+        probably an escape sequence.
+
+        The term CLS is used in MPE/ProForth, pfe and win32for.
+        gforth/bigforth uses PAGE to clear the screen and set
+        the cursor to the homeposition.
+
+example-implementation:
+        gforth does...
+        : PAGE ESC[ ." 2J" 0 0 at-xy ;
+
+standard-note:
+	PAGE is an ANS94 standard word - it implies somewhat like
+        a \f = formfeed character being printed to a hardcopy
+        terminal. Programs should probably use this word.
+
+cls-note:
+        CLS happens to be more intuitive and easier to remember.
+        The term PAGE could mean to just emit a few lines to
+        come to the next PAGE while CLS does make it explicit
+        that previous lines are erased rather than scrolled up.
+        (guidod)
+
+--- $Id: index-v.txt,v 1.1 2001/08/14 17:58:59 guidod Exp $

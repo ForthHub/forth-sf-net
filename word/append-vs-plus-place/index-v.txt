@@ -1,0 +1,59 @@
+title: APPEND vs +PLACE
+description:
+
+  APPEND / +PLACE
+
+  ( str-ptr str-len dst-bstring-ptr -- )
+
+  Append the stringspan to the counted string. This word has
+  the same synopsis as PLACE which does build a counted string
+  from the stringspan at the destination
+
+  On 12-Aug-2001, ../../person/Guido.Draheim did ask which
+  name would be better, and the most prominent answer came
+  from Neil Bawd which does slightly recommend to use +PLACE
+  instead of the old (and more common) APPEND.
+
+Neil Bawd wrote:
+>In 1983 I introduced PLACE into F83 as the inverse of COUNT:
+>PLACE is to COUNT as ! is to @.  From this pattern came +PLACE
+>and C+PLACE:  +PLACE is to PLACE as +! is to !; C+PLACE is to
+>+PLACE as C+! is to +!.
+>
+>So these are the historical names.
+>
+>APPEND is a natural language form of +PLACE.
+>
+>I am gathering my Forth writings of 22 years into a library of
+>source files.
+>
+>Since I did originate it, I'll use +PLACE, with APPEND as an
+>alias.
+
+Guido Draheim wrote:
+>However, using `append` in programs is still good
+>and first of all, readable. It was not until I did investigate
+>into different kinds of strings (zstrings!) that I had to dump
+>the last argument. `appendz` does not read nicely, nor would be
+>`appendw` - these names would be intuitivly mean adding-a-wchar
+>or adding-a-zchar, and not a string of them. And `zappend` is
+>simply unreadable at first glance (does it zap forth to another
+>channel? [1]).
+
+Coos Haak wrote:
+>> [1] zappend - bad to read esp. for German-speakers. The language
+>> has overtaken `zap` as a word to switch tv channels, or between
+>> other channelized/categorized areas. The "-end" suffix is often
+>> a continuuous form like "-ing" in English, and therefore `zappend`
+>> is an actual valid word in word in German that would translate
+>>
+>Same problem here in Dutch (not Duits, that our word for German)
+>I like DROP in the form of licorice.
+
+
+  Therefore, use +PLACE, Z+PLACE, W+PLACE - and keep APPEND just
+  for historical reasons and backward compatibility. The term
+  APPEND was listed in both ../../mirror/comus and
+  ../../mirror/toolbelt.
+
+--- $Id: index-v.txt,v 1.1 2001/08/14 17:58:59 guidod Exp $

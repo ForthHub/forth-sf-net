@@ -238,7 +238,24 @@ gforth-variant:
 	and some self-aligning words can be easily derived
 	: %CELLS: SWAP ALIGNED SWAP CELLS: ;
 
---- $Id: index-v.txt,v 1.5 2000/10/27 05:54:18 guidod Exp $
+openboot-variant:
+        the common idiom is
+>       STRUCT
+>       CELL FIELD ->A
+>       DCELL FIELD ->B
+>       ENDSTRUCT /MYSTRUCT
+        which is exactly equivalent to
+>       0
+>       CELL FIELD ->A
+>       DCELL FIELD ->B
+>       CONSTANT /MYSTRUCT
+
+        Therefore, the term FIELD should be reserved - it has
+        the simple definition as NEWFILED above. However som
+        implemenations (esp. gforth) have a different bevahiour
+        for FIELD including some alignment info.
+
+--- $Id: index-v.txt,v 1.6 2001/08/14 17:58:59 guidod Exp $
 
 
 
