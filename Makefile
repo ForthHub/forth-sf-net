@@ -47,6 +47,8 @@ upload:
 copy:
 	cp -rf . $(HTDOCS)
 	chmod -R --quiet g+rw  $(HTDOCS)
+	chmod -R --quiet a+r $(HTDOCS)
+
 # mlg -- 09.06.2001 -- it seems that now it's on the same server
 
 perms:
