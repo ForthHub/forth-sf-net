@@ -41,10 +41,11 @@ s{ (<spanforth>) ((?:.(?!</?spanforth>))*.) (</spanforth>)}
 s{ (</dt>) ((?:.(?!</?(?:dt|hr|dl)\b))*.) }
 {
     my ($a,$b,$c) = ($1,$2,$3);
-    $b =~ s{^<[a-z].*> *$} { my $v = $&;
+    $b =~ s{^<[a-z/].*> *$} { my $v = $&;
 		    $v =~ s{\"} {\~\~\~quote!}gs;
 		    $v =~ s{<} {\~\~\~tag[}gs;
-                    $v =~ s{>} {]tag\~\~\~}gs; }gme;
+                    $v =~ s{>} {]tag\~\~\~}gs;
+		    $v }gme;
     $b =~ s{\&} {\&amp;}gs;
     $b =~ s{\<} {\&lt;}gs;
     $b =~ s{\>} {\&gt;}gs;
@@ -79,7 +80,7 @@ s{ ([\.\/]+)([\w\.\/\~\-]+) }
 }gmex;
 
 # and look for these too...
-s{ (\$Id: index-v.pl,v 1.10 2001/06/28 13:32:43 guidod Exp $]+ \$) }
+s{ (\$Id: index-v.pl,v 1.11 2001/06/28 14:15:19 guidod Exp $]+ \$) }
 { "<small><tt>".$1."</small></tt>" }gmex;
 s{ \(\( ([^\(\)]+) \)\) }
 { " &nbsp;<small><small>(".$1.")</small></small>&nbsp; " }gmex;
