@@ -1,0 +1,116 @@
+title: Arrays by JVN
+description:
+Well, as I am sure everyone knows to the point of hurling (regurgitating)
+by now, I chose a format that looks somewhat like Fortran. I could not
+use the right parenthesis, ) , because it was taken as the closure for
+a parenthesized comment. Could not use the [  ]'s because they also have
+a definite meaning (turn compiler off and on by switching STATE).
+So I was left with what I could do using curly braces { and }.
+
+Now why did I want an array notation that looks like Fortran? There were
+several reasons:
+
+        1. I wanted (at that time) to sell Forth to the Fortran community.
+           (Silly me! But I was young then.)
+
+        2. I wanted a notation that unequivocally said "I am an array!"
+           I had already written a number of linear equations and other
+           matrix ops programs and kept running into the problems of
+
+                a. different constructors for each data type;
+                b. reading the program when it was done.
+
+        3. I wanted something that would be completely transparent, would
+           permit address arithmetic, and would not require tons of comments
+           to be maintainable.
+
+Eventually I hit on the Forthish solution of defining an array with a
+header that contained its size and its data size. Then I wrote a de-
+referencing operator that would dig into the header and calculate the
+address of the datum being indexed. The notatin for this was
+
+        v{ I }          ( -- adr of v[I] )
+
+The left curly brace in an array's name was simply syntactic sugar.
+But at some point I realized that by naming 2-dimensional arrays
+something like M{{ (2 curly braces) I could have the name say
+"I am a 2-dimensional array." Then one dereferences such by saying
+
+        M{{ I J }}
+
+--that is, the 2-dim dereferencing operator expects a base address and
+two indices and produces the correct address of the I,Jth element.
+
+For those who want it, go to my home page (under construction) then to
+the link "Computational Methods in the Physical Sciences", and thence
+to "Forth system and example programs". There you can find the file
+arrays.f that does all of this stuff. I have bounds checking in that
+version because it was intended for student use. Experts can delete
+that stuff.
+
+implementation:
+<forthspan>
+ \ Toolset for one- and two-dimensional arrays in ANS Forth
+
+ \ ---------------------------------------------------
+ \     (c) Copyright 2001  Julian V. Noble.          \
+ \       Permission is granted by the author to      \
+ \       use this software for any application pro-  \
+ \       vided this copyright notice is preserved.   \
+ \ ---------------------------------------------------
+
+ \ Requires CORE and CORE EXT wordsets
+
+ : [undefined]   BL WORD  FIND  NIP  0=  ;
+
+ \ non-Standard word:
+ [undefined]  CELL-  [IF]  : cell-    [ -1 CELLS ] LITERAL  +  ;  [THEN]
+
+
+ \ words for 1-dimensional arrays
+     : long   ;
+     : 1array    ( len #bytes/datum --)      \ ( #b len data ...)
+             CREATE  2DUP  ,  ,  *  ALLOT   ;
+     : _len      ( base_addr -- len)  \ determine length of an array
+             CELL+  @  ;
+
+     : }         ( base_adr indx -- adr[indx] )
+             OVER  _len  OVER  <=  OVER  0<  OR  ABORT" Index out of range"
+             OVER  @   *  +  CELL+  CELL+  ;
+
+ \ words for 2-dimensional arrays
+     : wide    ;
+
+     : 2array    ( hgt wid data_size --)     \ ( wid #b len data ...)
+             CREATE   >R  TUCK  ,            ( wid hgt)
+             R@  ,   *  DUP  ,   R>  *  ALLOT   ;
+
+
+     : }}        ( base_adr m n -- adr[m,n] )    \ data stored row-wise
+             2>R  CELL+  DUP cell-  @
+             R> *   R> +                ( base_adr+cell m+n*w)
+             }   ;
+
+ FALSE [IF]
+ Usage examples:
+
+     20 long 2 FLOATS 1array a{              \ complex vector
+     20 long 20 wide  1 FLOATS 2array M{{    \ real matrix
+     20 long 1 CELLS  1array Irow{           \ single-length, integer-
+                                             \   valued vector
+     say
+
+         M{{ I J }}  ( --  adr[m_ij] )
+
+     to dereference.
+ [THEN]
+
+</forthspan>
+
+page-composed-from:
+
+ Message-ID: <3EF64F99.669AB670@virginia.edu> by Julian V. Noble
+ http://www.phys.virginia.edu/classes/551.jvn.fall01/arrays.f
+
+
+
