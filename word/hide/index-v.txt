@@ -1,0 +1,15 @@
+title: HIDE
+description:
+
+( -- )
+
+If the last definition is findable in the dictionary, make the last definition not findable. Do nothing if the last definition is not findable or has no name.
+
+Ambiguous conditions:
+
+- no definition has been created before execution of HIDE
+
+- the compilation wordlist has changed after creation of the last definition
+
+See: REVEAL ../reveal/index.html
+
