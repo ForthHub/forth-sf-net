@@ -56,9 +56,9 @@ index:
 
 links:
 	@ for i in $(LINKS) ; do : \
-	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//`
-	; if test ! -e $$TGT ; then \
-	; echo "ln -s $$FRM $$TGT" \
+	; FRM=`echo $$i | sed s/.*://` ; TGT=`echo $$i | sed s/:.*//` \
+	; if test ! -e $$TGT \
+	; then echo "ln -s $$FRM $$TGT" \
 	;       ln -s $$FRM $$TGT || break \
 	; else echo ": $$FRM --> $$TGT" \
 	; fi ; done
