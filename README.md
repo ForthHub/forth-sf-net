@@ -7,6 +7,9 @@ platform was to document
 existing Forth usage that
 were discussed in the `comp.lang.forth` newsgroup.
 
+Now a mirror is available at https://forthhub.github.io/forth-sf-net/
+(as the original website is not available).
+
 This Git repository was imported from the CVS repository
 at https://sourceforge.net/p/forth/code/
 with normalization of line endings.
