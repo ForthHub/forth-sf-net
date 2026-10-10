@@ -17,8 +17,8 @@ jobs:
 
     steps:
       # Checks-out the repository under $GITHUB_WORKSPACE
-      - uses: actions/checkout@v6
-        name: Fetch repository on depth 1 and checkout files
+      - name: Fetch repository on depth 1 and checkout files
+        uses: actions/checkout@v6
 
       - name: Run make
         run: make web
@@ -30,7 +30,7 @@ jobs:
           path: ./
 
   deploy:
-    # Add a dependency to the build job
+    # Add a dependency to the "build" job
     needs: build
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
